@@ -1,0 +1,94 @@
+/* app.mcpmarket.com design tokens (its :root), scoped to the auth pages so the marketing theme stays untouched. */
+.theme {
+  --bg-canvas: #fafafa;
+  --bg-surface: #fff;
+  --bg-sunken: #f5f5f5;
+  --bg-hover: #f0f0f0;
+  --border-strong: #c7c7c7;
+  --text: #0a0a0a;
+  --text-muted: #737373;
+  --text-faint: #a3a3a3;
+  --accent-brand: #0e7490;
+  --accent-soft: #d5eef5;
+  --rose-deep: #b88f8f;
+  --background: var(--bg-canvas);
+  --foreground: var(--text);
+  --card: var(--bg-surface);
+  --muted: var(--bg-sunken);
+  --muted-foreground: var(--text-muted);
+  --primary: var(--text);
+  --primary-foreground: var(--bg-canvas);
+  --destructive: var(--rose-deep);
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --bevel-highlight: #ffffff2e;
+  --bevel-shade: #00000080;
+  --bevel-drop: #0000002e;
+  --bevel-rim-hover: #ffffffd9;
+  --bevel-highlight-soft: #fff;
+  --bevel-shade-soft: #0000000a;
+  --bevel-grad-from: color-mix(in oklab, #0a0a0a, white 10%);
+  --bevel-grad-to: color-mix(in oklab, #0a0a0a, black 12%);
+  --bevel-grad-active-from: color-mix(in oklab, #0a0a0a, black 12%);
+  --bevel-grad-active-to: color-mix(in oklab, #0a0a0a, black 4%);
+  min-height: 100vh;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+/* Unlayered on the source too, so the ring beats the bevel shadows. */
+.theme :where([data-slot="input"], [data-slot="button"]):focus-visible {
+  box-shadow: 0 0 0 3px var(--accent-soft);
+  border-color: var(--accent-brand);
+  outline: 0;
+}
+
+@layer components {
+  .bevel {
+    background-color: var(--primary);
+    background-image: linear-gradient(180deg, var(--bevel-grad-from) 0%, var(--bevel-grad-to) 100%);
+    color: var(--primary-foreground);
+    border: 1px solid var(--primary);
+    box-shadow: inset 0 1px 0 var(--bevel-highlight), inset 0 -1px 0 var(--bevel-shade), 0 1px 2px var(--bevel-drop);
+  }
+  .bevel:hover {
+    box-shadow: inset 0 1px 0 var(--bevel-highlight), inset 0 -1px 0 var(--bevel-rim-hover), 0 2px 4px var(--bevel-drop), 0 1px 1px var(--bevel-drop);
+  }
+  .bevel:active {
+    background-image: linear-gradient(180deg, var(--bevel-grad-active-from) 0%, var(--bevel-grad-active-to) 100%);
+    box-shadow: inset 0 1px 0 var(--bevel-highlight), inset 0 1px 3px var(--bevel-shade);
+  }
+  .bevel:disabled {
+    background-image: none;
+    background-color: color-mix(in oklab, var(--primary), var(--bg-canvas) 55%);
+    color: color-mix(in oklab, var(--primary-foreground), transparent 40%);
+    border-color: color-mix(in oklab, var(--primary), var(--bg-canvas) 55%);
+    box-shadow: inset 0 1px 0 var(--bevel-highlight), inset 0 -1px 0 var(--bevel-shade);
+  }
+
+  .bevelLite {
+    background-color: var(--bg-surface);
+    background-image: linear-gradient(180deg, var(--bg-surface) 0%, color-mix(in oklab, var(--bg-surface), var(--bg-hover) 50%) 100%);
+    color: var(--text);
+    box-shadow: inset 0 1px 0 var(--bevel-highlight-soft), inset 0 -1px 0 var(--bevel-shade-soft);
+  }
+  .bevelLite:hover {
+    background-image: linear-gradient(180deg, color-mix(in oklab, var(--bg-surface), var(--bg-hover) 50%) 0%, var(--bg-hover) 100%);
+  }
+  .bevelLite:active {
+    background-image: linear-gradient(180deg, var(--bg-hover) 0%, color-mix(in oklab, var(--bg-surface), var(--bg-hover) 50%) 100%);
+    box-shadow: inset 0 1px 1px var(--bevel-shade-soft);
+  }
+  .bevelLite:disabled {
+    background-image: none;
+    background-color: var(--bg-sunken);
+    box-shadow: none;
+  }
+
+  .gridPattern {
+    background-size: 40px 40px;
+    background-image: radial-gradient(circle, color-mix(in oklab, var(--text) 35%, transparent) 1px, transparent 1px);
+  }
+}
