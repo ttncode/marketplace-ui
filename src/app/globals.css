@@ -1,0 +1,177 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--design-font-body);
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, "Roboto Mono", Menlo, Monaco, "Liberation Mono", "DejaVu Sans Mono", "Courier New", monospace;
+  --font-geist-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, "Roboto Mono", Menlo, Monaco, "Liberation Mono", "DejaVu Sans Mono", "Courier New", monospace;
+  --font-display: var(--design-font-display);
+  --font-heading: var(--design-font-display);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  /* Source is Tailwind v3: rounded-xl keeps the v3 default (0.75rem), rounded-2xl 1rem. */
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+}
+
+/* Values measured on mcpmarket.com (light theme, the only theme it ships on /). */
+:root {
+  --design-canvas: #fbfbfb;
+  --design-surface: #ffffff;
+  --design-surface-muted: #f5f5f5;
+  --design-surface-subtle: #f7f7f7;
+  --design-ink: #0a0a0a;
+  --design-ink-secondary: #444444;
+  --design-ink-muted: #626262;
+  --design-line: rgb(10 10 10 / 0.14);
+  --design-line-strong: rgb(10 10 10 / 0.28);
+  --design-glass: rgb(255 255 255 / 0.78);
+  --design-glass-focus: rgb(255 255 255 / 0.9);
+  --design-surface-glass: rgb(255 255 255 / 0.72);
+  --design-surface-glass-hover: rgb(255 255 255 / 0.88);
+  --design-surface-glass-line: rgb(0 0 0 / 0.08);
+  --design-surface-glass-line-hover: rgb(0 0 0 / 0.14);
+  --design-shadow-glass-card: 0 16px 38px -28px rgb(15 23 42 / 0.48);
+  --design-shadow-glass-card-hover: 0 22px 46px -30px rgb(15 23 42 / 0.55);
+  --design-navigation-glass: linear-gradient(180deg, rgb(255 255 255 / 0.82), rgb(250 250 250 / 0.64));
+  --design-navigation-panel: linear-gradient(180deg, #ffffff, #fafafa);
+  --design-navigation-line: rgb(10 10 10 / 0.12);
+  --design-font-display: "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", Meiryo, "Noto Sans CJK JP", sans-serif;
+  --design-font-body: var(--font-inter), "Helvetica Neue", Helvetica, Arial, system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", Meiryo, "Noto Sans CJK JP", sans-serif;
+  --design-radius-md: 0.75rem;
+  --design-radius-lg: 1.5rem;
+  --design-radius-pill: 999px;
+  --design-shadow-card: 0 12px 34px rgb(10 10 10 / 0.04);
+  --design-shadow-inset: inset 0 1px 0 rgb(255 255 255 / 0.9);
+  --design-shadow-field: 0 18px 42px rgb(10 10 10 / 0.1), inset 0 1px 0 rgb(255 255 255 / 0.64);
+  --design-shadow-floating: 0 0 0 1px rgb(10 10 10 / 0.035), 0 0 24px rgb(10 10 10 / 0.09), 0 18px 40px rgb(10 10 10 / 0.11), 0 38px 72px rgb(10 10 10 / 0.07), inset 0 1px 0 rgb(255 255 255 / 0.9);
+  --design-shadow-navigation: 0 1px 2px rgb(10 10 10 / 0.08), 0 5px 12px -3px rgb(10 10 10 / 0.16), 0 18px 42px -12px rgb(10 10 10 / 0.18), 0 36px 72px -28px rgb(10 10 10 / 0.14), inset 0 1px 0 rgb(255 255 255 / 0.98), inset 0 -1px 0 rgb(10 10 10 / 0.075);
+
+  --background: #fbfbfb;
+  --foreground: #0a0a0a;
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
+  --popover: #ffffff;
+  --popover-foreground: #0a0a0a;
+  --primary: #0a0a0a;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #0a0a0a;
+  --muted: #f5f5f5;
+  --muted-foreground: #616161;
+  --accent: #f2f2f2;
+  --accent-foreground: #0a0a0a;
+  --destructive: hsl(0 84.2% 60.2%);
+  --border: #dbdbdb;
+  --input: #d6d6d6;
+  --ring: #0a0a0a;
+  --radius: var(--design-radius-md);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@layer components {
+  /* Static dot-dither backdrop behind the homepage hero. */
+  .design-dither-static {
+    overflow: hidden;
+    background-color: var(--design-surface-muted);
+    background-image: radial-gradient(circle, rgba(42, 42, 42, 0.2) 0px, rgba(42, 42, 42, 0.2) 0.65px, transparent 0.9px);
+    background-position: 0 0;
+    background-size: 4px 4px;
+  }
+  .design-dither-static::before,
+  .design-dither-static::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+  }
+  .design-dither-static::before {
+    background-image: radial-gradient(circle, rgba(35, 35, 35, 0.2) 0px, rgba(35, 35, 35, 0.2) 0.7px, transparent 0.95px);
+    background-position: 2px 1px;
+    background-size: 5px 5px;
+    mask-image: radial-gradient(48% 42% at 18% 58%, black 0px, transparent 78%), radial-gradient(54% 46% at 78% 36%, black 0px, transparent 82%), radial-gradient(60% 38% at 54% 86%, black 0px, transparent 84%);
+  }
+  .design-dither-static::after {
+    background: linear-gradient(112deg, rgba(255, 255, 255, 0.24), transparent 28%, rgba(255, 255, 255, 0.1) 54%, transparent 78%);
+  }
+
+  .design-navigation-surface {
+    backdrop-filter: blur(24px) saturate(0.9);
+    border: 1px solid var(--design-navigation-line) !important;
+    background: var(--design-navigation-glass) !important;
+    box-shadow: var(--design-shadow-navigation) !important;
+  }
+  .design-navigation-panel {
+    background: var(--design-navigation-panel) !important;
+  }
+
+  /* The hero slides up under the floating header; the ::before restores its space. */
+  .design-hero-under-navigation {
+    margin-top: -96px;
+  }
+  .design-hero-under-navigation::before {
+    display: block;
+    height: 96px;
+    content: "";
+  }
+
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
