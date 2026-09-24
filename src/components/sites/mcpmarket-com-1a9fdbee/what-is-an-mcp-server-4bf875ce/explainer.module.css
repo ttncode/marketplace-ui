@@ -1,0 +1,29 @@
+/*
+ * Port of the source's `homepage_explainerContent` module. Like the source, these
+ * descendant rules beat the heading utilities (font-semibold, text-primary-foreground…)
+ * written on the elements, so the markup keeps the source's class lists.
+ */
+.content {
+  background: var(--design-canvas);
+  color: var(--design-ink);
+  font-family: var(--design-font-body);
+}
+
+.content h2 {
+  color: var(--design-ink);
+  font-family: var(--design-font-display);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+
+.content h3 {
+  color: var(--design-ink);
+  font-family: var(--design-font-display);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+.content p {
+  font-family: var(--design-font-body);
+  letter-spacing: -0.012em;
+}
