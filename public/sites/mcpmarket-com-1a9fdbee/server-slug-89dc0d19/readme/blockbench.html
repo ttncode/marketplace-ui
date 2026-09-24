@@ -1,0 +1,79 @@
+<div class="markdown-heading" dir="auto"><h1 dir="auto">Blockbench MCP</h1></div>
+<a href="/not-found"><img width="2000" height="1088" alt="Blockbench MCP Plugin screenshot" src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/7a21ae98e2baaada.webp"></a>
+<p dir="auto"><a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/735bd19c1d8e2fcf.svg" alt="skills.sh"></a></p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Plugin Installation</h2></div>
+<p dir="auto">Open the desktop version of Blockbench, go to File &gt; Plugins and click the "Load Plugin from URL" and paste in this URL:</p>
+<p dir="auto"><strong><a href="/not-found">https://jasonjgardner.github.io/blockbench-mcp-plugin/mcp.js</a></strong></p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Model Context Protocol Server</h2></div>
+<p dir="auto">Configure the MCP server under Blockbench settings: <strong>Settings</strong> &gt; <strong>General</strong> &gt; <strong>MCP Server Port</strong> and <strong>MCP Server Endpoint</strong>. The same section holds <strong>Enable AI Scratchpad</strong> (adds an <code>ai_scratchpad</code> mode that lifts the format's cube size, rotation, and integer-size guardrails while selected) and <strong>Disclose AI Usage</strong> (stamps <code>ai_used</code> and <code>ai_agents</code> onto projects that MCP tools modify or create).</p>
+<p dir="auto">The following examples use the default values of <code>:3000/bb-mcp</code></p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Installation</h3></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">General</h4></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre>npx mcp-add --type http --url <span class="pl-s"><span class="pl-pds">"</span>http://localhost:3000/bb-mcp<span class="pl-pds">"</span></span> --scope project</pre></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">VS Code</h4></div>
+<p dir="auto"><strong><code>.vscode/mcp.json</code></strong></p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"servers"</span>: {
+    <span class="pl-ent">"blockbench"</span>: {
+      <span class="pl-ent">"url"</span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:3000/bb-mcp<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"type"</span>: <span class="pl-s"><span class="pl-pds">"</span>http<span class="pl-pds">"</span></span>
+    }
+  }
+}</pre></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Claude Desktop</h4></div>
+<p dir="auto"><strong><code>claude_desktop_config.json</code></strong> (macOS/Linux)</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"blockbench"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>npx<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"args"</span>: [<span class="pl-s"><span class="pl-pds">"</span>-y<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>mcp-remote<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>http://localhost:3000/bb-mcp<span class="pl-pds">"</span></span>]
+    }
+  }
+}</pre></div>
+<p dir="auto"><strong><code>claude_desktop_config.json</code></strong> (Windows)</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"blockbench"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>cmd<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"args"</span>: [<span class="pl-s"><span class="pl-pds">"</span>/c<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>npx<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>-y<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>mcp-remote<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>http://localhost:3000/bb-mcp<span class="pl-pds">"</span></span>]
+    }
+  }
+}</pre></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Claude Code</h4></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre>claude mcp add blockbench --transport http http://localhost:3000/bb-mcp</pre></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Codex</h4></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre>codex plugin marketplace add jasonjgardner/blockbench-mcp-project --ref codex
+codex plugin add blockbench-mcp@blockbench-mcp-project</pre></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto"><a href="/not-found">Antigravity</a></h4></div>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"blockbench"</span>: {
+      <span class="pl-ent">"serverUrl"</span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:3000/bb-mcp<span class="pl-pds">"</span></span>
+    }
+  }
+}</pre></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Cline</h4></div>
+<a href="/not-found"><img width="674" height="486" alt="Connecting to Blockbench MCP plugin through Cline" src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/97611c60e4cb460a.png"></a>
+<p dir="auto"><strong><code>cline_mcp_settings.json</code></strong></p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"blockbench"</span>: {
+      <span class="pl-ent">"url"</span>: <span class="pl-s"><span class="pl-pds">"</span>http://localhost:3000/bb-mcp<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"type"</span>: <span class="pl-s"><span class="pl-pds">"</span>streamableHttp<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"disabled"</span>: <span class="pl-c1">false</span>,
+      <span class="pl-ent">"autoApprove"</span>: []
+    }
+  }
+}</pre></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Ollama</h4></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre>uvx ollmcp -u http://localhost:3000/bb-mcp</pre></div>
+<p dir="auto">Recommended: <a href="/not-found">jonigl/mcp-client-for-ollama</a></p>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">OpenCode</h4></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre>opencode mcp add</pre></div>
+<a href="/not-found"><img width="504" height="300" alt="Connecting to Blockbench MCP plugin through OpenCode." src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/de2cf6529870b739.webp"></a>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Usage</h2></div>
+<p dir="auto"><a href="/not-found">See sample project</a> for prompt examples.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><a href="/not-found">Skills</a></h3></div>
+<p dir="auto">Use Agent Skills to orchestrate tool usage.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Plugin Development</h2></div>
+<p dir="auto">See <a href="/not-found">CONTRIBUTING.md</a> for detailed instructions on setting up the development environment and how to add new tools, resources, and prompts.</p>

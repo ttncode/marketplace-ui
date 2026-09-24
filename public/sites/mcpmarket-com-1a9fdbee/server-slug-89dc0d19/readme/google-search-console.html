@@ -1,0 +1,137 @@
+<div class="markdown-heading" dir="auto"><h1 dir="auto">Google Search Console MCP Server</h1></div>
+<p dir="auto">A Model Context Protocol (MCP) server providing comprehensive access to Google Search Console data with enhanced analytics capabilities.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Features</h2></div>
+<ul dir="auto">
+<li><strong>Enhanced Search Analytics</strong>: Retrieve up to 25,000 rows of performance data</li>
+<li><strong>Advanced Filtering</strong>: Support for regex patterns and multiple filter operators</li>
+<li><strong>Quick Wins Detection</strong>: Automatically identify optimization opportunities</li>
+<li><strong>Rich Dimensions</strong>: Query, page, country, device, and search appearance analysis</li>
+<li><strong>Flexible Date Ranges</strong>: Customizable reporting periods with historical data access</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Sponsored by</h3></div>
+<a href="/not-found">
+    <img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/68eced9eb9c05702.png" width="200" alt="macuse.app">
+</a>
+<p dir="auto"><a href="/not-found">macuse.app</a> is a native macOS application that gives your AI superpowers by integrating AI assistants with macOS apps like Calendar, Mail, and Notes, plus universal UI control for any application. Supports Claude Desktop, Cursor, and Raycast with one-click setup. Privacy-first, runs locally.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Prerequisites</h2></div>
+<ul dir="auto">
+<li>Node.js 18 or later</li>
+<li>Google Cloud Project with Search Console API enabled</li>
+<li>Service Account credentials with Search Console access</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Installation</h2></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre>npm install mcp-server-gsc</pre></div>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Authentication Setup</h2></div>
+<p dir="auto">To obtain Google Search Console API credentials:</p>
+<ol dir="auto">
+<li>Visit the <a href="/not-found">Google Cloud Console</a></li>
+<li>Create a new project or select an existing one</li>
+<li>Enable the API:</li>
+</ol>
+<ul dir="auto">
+<li>Go to "APIs &amp; Services" &gt; "Library"</li>
+<li>Search for and enable <a href="/not-found">"Search Console API"</a></li>
+</ul>
+<ol start="4" dir="auto">
+<li>Create credentials:</li>
+</ol>
+<ul dir="auto">
+<li>Navigate to <a href="/not-found">"APIs &amp; Services" &gt; "Credentials"</a></li>
+<li>Click "Create Credentials" &gt; "Service Account"</li>
+<li>Fill in the service account details</li>
+<li>Create a new key in JSON format</li>
+<li>The credentials file (.json) will download automatically</li>
+</ul>
+<ol start="5" dir="auto">
+<li>Grant access:</li>
+</ol>
+<ul dir="auto">
+<li>Open Search Console</li>
+<li>Add the service account email (format: <a href="mailto:name@project.iam.gserviceaccount.com">name@project.iam.gserviceaccount.com</a>) as a property administrator</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Usage</h2></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Claude Desktop Configuration</h3></div>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"gsc"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>npx<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"args"</span>: [<span class="pl-s"><span class="pl-pds">"</span>-y<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>mcp-server-gsc<span class="pl-pds">"</span></span>],
+      <span class="pl-ent">"env"</span>: {
+        <span class="pl-ent">"GOOGLE_APPLICATION_CREDENTIALS"</span>: <span class="pl-s"><span class="pl-pds">"</span>/path/to/credentials.json<span class="pl-pds">"</span></span>
+      }
+    }
+  }
+}</pre></div>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Available Tools</h2></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">search_analytics</h3></div>
+<p dir="auto">Get comprehensive search performance data from Google Search Console with enhanced analytics capabilities.</p>
+<p dir="auto"><strong>Required Parameters:</strong></p>
+<ul dir="auto">
+<li><code>siteUrl</code>: Site URL (format: <code>http://www.example.com/</code> or <code>sc-domain:example.com</code>)</li>
+<li><code>startDate</code>: Start date (YYYY-MM-DD)</li>
+<li><code>endDate</code>: End date (YYYY-MM-DD)</li>
+</ul>
+<p dir="auto"><strong>Optional Parameters:</strong></p>
+<ul dir="auto">
+<li><code>dimensions</code>: Comma-separated list (<code>query</code>, <code>page</code>, <code>country</code>, <code>device</code>, <code>searchAppearance</code>, <code>date</code>)</li>
+<li><code>type</code>: Search type (<code>web</code>, <code>image</code>, <code>video</code>, <code>news</code>, <code>discover</code>, <code>googleNews</code>)</li>
+<li><code>aggregationType</code>: Aggregation method (<code>auto</code>, <code>byNewsShowcasePanel</code>, <code>byProperty</code>, <code>byPage</code>)</li>
+<li><code>rowLimit</code>: Maximum rows to return (default: 1000, max: 25000)</li>
+<li><code>dataState</code>: Data freshness (<code>all</code> or <code>final</code>, default: <code>final</code>)</li>
+</ul>
+<p dir="auto"><strong>Filter Parameters:</strong></p>
+<ul dir="auto">
+<li><code>pageFilter</code>: Filter by page URL (supports regex with <code>regex:</code> prefix)</li>
+<li><code>queryFilter</code>: Filter by search query (supports regex with <code>regex:</code> prefix)</li>
+<li><code>countryFilter</code>: Filter by country ISO 3166-1 alpha-3 code (e.g., <code>USA</code>, <code>CHN</code>)</li>
+<li><code>deviceFilter</code>: Filter by device type (<code>DESKTOP</code>, <code>MOBILE</code>, <code>TABLET</code>)</li>
+<li><code>searchAppearanceFilter</code>: Filter by search feature (e.g., <code>AMP_BLUE_LINK</code>, <code>AMP_TOP_STORIES</code>)</li>
+<li><code>filterOperator</code>: Operator for filters (<code>equals</code>, <code>contains</code>, <code>notEquals</code>, <code>notContains</code>, <code>includingRegex</code>, <code>excludingRegex</code>)</li>
+</ul>
+<p dir="auto"><strong>Quick Wins Detection:</strong></p>
+<ul dir="auto">
+<li><code>detectQuickWins</code>: Enable automatic detection of optimization opportunities (default: <code>false</code>)</li>
+<li><code>quickWinsConfig</code>: Configuration for quick wins detection:
+<ul dir="auto">
+<li><code>positionRange</code>: Position range to consider (default: <code>[4, 20]</code>)</li>
+<li><code>minImpressions</code>: Minimum impressions threshold (default: <code>100</code>)</li>
+<li><code>minCtr</code>: Minimum CTR percentage (default: <code>1</code>)</li>
+</ul>
+</li>
+</ul>
+<p dir="auto"><strong>Example - Basic Query:</strong></p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"siteUrl"</span>: <span class="pl-s"><span class="pl-pds">"</span>https://example.com<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"startDate"</span>: <span class="pl-s"><span class="pl-pds">"</span>2024-01-01<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"endDate"</span>: <span class="pl-s"><span class="pl-pds">"</span>2024-01-31<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"dimensions"</span>: <span class="pl-s"><span class="pl-pds">"</span>query,page<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"rowLimit"</span>: <span class="pl-c1">5000</span>
+}</pre></div>
+<p dir="auto"><strong>Example - Advanced Filtering with Regex:</strong></p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"siteUrl"</span>: <span class="pl-s"><span class="pl-pds">"</span>https://example.com<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"startDate"</span>: <span class="pl-s"><span class="pl-pds">"</span>2024-01-01<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"endDate"</span>: <span class="pl-s"><span class="pl-pds">"</span>2024-01-31<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"dimensions"</span>: <span class="pl-s"><span class="pl-pds">"</span>page,query<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"queryFilter"</span>: <span class="pl-s"><span class="pl-pds">"</span>regex:(AI|machine learning|ML)<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"filterOperator"</span>: <span class="pl-s"><span class="pl-pds">"</span>includingRegex<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"deviceFilter"</span>: <span class="pl-s"><span class="pl-pds">"</span>MOBILE<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"rowLimit"</span>: <span class="pl-c1">10000</span>
+}</pre></div>
+<p dir="auto"><strong>Example - Quick Wins Detection:</strong></p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"siteUrl"</span>: <span class="pl-s"><span class="pl-pds">"</span>https://example.com<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"startDate"</span>: <span class="pl-s"><span class="pl-pds">"</span>2024-01-01<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"endDate"</span>: <span class="pl-s"><span class="pl-pds">"</span>2024-01-31<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"dimensions"</span>: <span class="pl-s"><span class="pl-pds">"</span>query,page<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"detectQuickWins"</span>: <span class="pl-c1">true</span>,
+  <span class="pl-ent">"quickWinsConfig"</span>: {
+    <span class="pl-ent">"positionRange"</span>: [<span class="pl-c1">4</span>, <span class="pl-c1">15</span>],
+    <span class="pl-ent">"minImpressions"</span>: <span class="pl-c1">500</span>,
+    <span class="pl-ent">"minCtr"</span>: <span class="pl-c1">2</span>
+  }
+}</pre></div>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">License</h2></div>
+<p dir="auto">MIT</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Contributing</h2></div>
+<p dir="auto">Contributions are welcome! Please read our contributing guidelines before submitting pull requests.</p>

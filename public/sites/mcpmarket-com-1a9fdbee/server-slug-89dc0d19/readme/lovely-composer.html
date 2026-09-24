@@ -1,0 +1,435 @@
+<div class="markdown-heading" dir="auto"><h1 dir="auto">Lovely Composer MCP</h1></div>
+<p dir="auto"><a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/e177bcd31acf3989.svg" alt="CI"></a>
+<a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/5df3c99b71bd0f18.svg" alt="License: MIT"></a>
+<a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/ed46e9a2bf405047.svg" alt="Node"></a></p>
+<p dir="auto">An <a href="/not-found">MCP</a> server that lets an AI agent <strong>compose
+chiptune music in <a href="/not-found">Lovely Composer</a></strong>
+on your own machine.</p>
+<p dir="auto">It is a zero-dependency Node.js server speaking the stdio transport. It works by
+reading and writing Lovely Composer's <code>.jsonl</code> project files, so an agent can
+create songs, write melodies / bass / drums / chords, change tempo and loop
+points — and you just open the folder in Lovely Composer to listen to it, edit
+it, or export it.</p>
+<p dir="auto"><em><a href="/not-found">中文说明见 README.zh-CN.md</a></em></p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Why this approach</h2></div>
+<p dir="auto">Driving a GUI is brittle: window focus, timing, and whatever else you are doing
+on the computer all get in the way. Lovely Composer stores a song as a plain
+two-line JSON file, so this server edits the data directly. That means:</p>
+<ul dir="auto">
+<li>no GUI automation, no window focus, no interference with your desktop;</li>
+<li>the agent gets a precise, inspectable data model instead of pixels;</li>
+<li>the files it writes are the exact files Lovely Composer itself writes — see
+<a href="#verification">Verification</a> for how that is proven.</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Requirements</h2></div>
+<ul dir="auto">
+<li>Node.js 18 or newer (for <code>TextDecoder</code> with CJK codecs).</li>
+<li>Lovely Composer installed. It is auto-detected in the usual Steam locations
+and in <code>Documents\LovelyComposer</code>; override with <code>LC_MUSIC_ROOT</code>.</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Install</h2></div>
+<p dir="auto">Clone it anywhere and point your MCP client at <code>src/server.js</code>.</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>git clone https://github.com/baichuan4167-lang/lovely-composer-mcp.git
+<span class="pl-c1">cd</span> lovely-composer-mcp
+node test/smoke.js     <span class="pl-c"><span class="pl-c">#</span> optional: prove it works on your machine</span></pre></div>
+<p dir="auto">There is nothing to <code>npm install</code> — the server has no dependencies.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Generic MCP client configuration</h3></div>
+<p dir="auto">Most clients take the same stdio server block:</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"lovelycomposer"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>node<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"args"</span>: [<span class="pl-s"><span class="pl-pds">"</span>/absolute/path/to/lovely-composer-mcp/src/server.js<span class="pl-pds">"</span></span>]
+    }
+  }
+}</pre></div>
+<p dir="auto">For Claude Desktop that goes in <code>claude_desktop_config.json</code>. Some hosts add a
+<code>cwd</code> and a <code>failOnStartupError</code> flag; both are harmless here.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Environment variables</h3></div>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Used by</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LC_MUSIC_ROOT</code></td>
+<td>server</td>
+<td>Force the music library root instead of auto-detecting it.</td>
+</tr>
+<tr>
+<td><code>LC_MCP_PROTOCOL_VERSION</code></td>
+<td>server</td>
+<td>Pin the negotiated MCP protocol revision (default <code>2025-06-18</code>).</td>
+</tr>
+<tr>
+<td><code>LC_SAMPLE_PATH</code></td>
+<td><code>test/smoke.js</code></td>
+<td>Path to a real <code>.jsonl</code> song for the integration checks.</td>
+</tr>
+<tr>
+<td><code>LC_APP_DIR</code></td>
+<td><code>tools/*.py</code></td>
+<td>Path to <code>&lt;LovelyComposer&gt;/app</code>, for the validators below.</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto">Then just talk to your agent:</p>
+<blockquote>
+<p dir="auto">Use Lovely Composer to write me a 16-bar 8-bit loop in A minor with a melody,
+a bass line and drums.</p>
+</blockquote>
+<blockquote>
+<p dir="auto">Read song 00 in the DSH folder and raise page 2's melody by an octave.</p>
+</blockquote>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Tools</h2></div>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lc_status</code></td>
+<td>Reports the install path, music root, writability and the data model. Call this first.</td>
+</tr>
+<tr>
+<td><code>lc_list_folders</code></td>
+<td>Lists the song folders in the music library.</td>
+</tr>
+<tr>
+<td><code>lc_list_songs</code></td>
+<td>Lists songs in a folder (title / speed / pages / notes per channel).</td>
+</tr>
+<tr>
+<td><code>lc_read_song</code></td>
+<td>Reads a song and prints each channel as compact per-page patterns.</td>
+</tr>
+<tr>
+<td><code>lc_create_song</code></td>
+<td>Creates an empty song (and the <code>lcdata.jsonl</code> a new folder needs).</td>
+</tr>
+<tr>
+<td><code>lc_write_page</code></td>
+<td><strong>The main composing tool.</strong> Writes one page of one channel from a pattern string.</td>
+</tr>
+<tr>
+<td><code>lc_set_notes</code></td>
+<td>Places notes at exact <code>(channel, page, tick)</code>, including chord-track chords.</td>
+</tr>
+<tr>
+<td><code>lc_clear_pages</code></td>
+<td>Erases the given channels and pages.</td>
+</tr>
+<tr>
+<td><code>lc_set_song_options</code></td>
+<td>Title, author, speed, page count, ticks per page, loop points, scale.</td>
+</tr>
+<tr>
+<td><code>lc_list_instruments</code></td>
+<td>Every instrument preset, effect letter and scale.</td>
+</tr>
+<tr>
+<td><code>lc_copy_song</code></td>
+<td>Copies a song (handy to start from an existing tune).</td>
+</tr>
+<tr>
+<td><code>lc_delete_song</code></td>
+<td>Deletes a song file; requires <code>force=true</code>.</td>
+</tr>
+</tbody>
+</table>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Pattern string syntax</h3></div>
+<p dir="auto"><code>lc_write_page</code> takes one whitespace-separated token per tick, starting at tick
+0, up to 32 ticks per page:</p>
+<div><pre><code>C5@25 . . E5 . G5@25 . . - . . .     C5 with preset 25; "." empty; "-" hold
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.</code> / <code>R</code></td>
+<td>empty tick</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>hold: extend the previous note</td>
+</tr>
+<tr>
+<td><code>&lt;</code> / <code>&gt;</code></td>
+<td>hold with fade-in / fade-out</td>
+</tr>
+<tr>
+<td><code>C4</code></td>
+<td>note using the page's default instrument</td>
+</tr>
+<tr>
+<td><code>C4@25</code></td>
+<td>note with instrument preset 25</td>
+</tr>
+<tr>
+<td><code>C4@flute</code></td>
+<td>instrument by name</td>
+</tr>
+<tr>
+<td><code>C4@16*7+D^A~8%3</code></td>
+<td>plus volume <code>*</code>0-7, effect <code>+</code>, expression <code>^</code>0-F, pan <code>~</code>0-F, envelope <code>%</code>0-F</td>
+</tr>
+<tr>
+<td><code>C4:S4NC00::2</code></td>
+<td>a raw Lovely Composer voice string, used verbatim</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"><strong>Common presets</strong> (full list via <code>lc_list_instruments</code>):
+<code>0</code> pulse · <code>1</code> triangle · <code>2</code> square · <code>3</code> noise · <code>4</code> piano · <code>7</code> drum ·
+<code>16</code> sawtooth · <code>25</code> flute · <code>30</code> stomp (kick) · <code>33</code> punch (snare) ·
+<code>35</code> short-freq noise (hat) · <code>47</code> low-reso triangle (bass) · <code>56</code> bell ·
+<code>68</code> fast arpeggio.</p>
+<p dir="auto"><strong>Effect letters:</strong> <code>N</code> none · <code>S</code> slur/slide · <code>V</code> vibrato · <code>F</code> fade out ·
+<code>I</code> fade in · <code>D</code> drop · <code>H</code> hop · <code>A</code> fast arpeggio · <code>P</code> phaser, and more.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Data model</h2></div>
+<p dir="auto">A song is one folder entry, <code>&lt;music&gt;/&lt;FOLDER&gt;/&lt;NN&gt;.jsonl</code> (<code>NN</code> = <code>00</code>..<code>99</code>):</p>
+<ul dir="auto">
+<li><strong>5 channels</strong>: 0–3 melodic, 4 = the chord track.</li>
+<li>Each song has <code>pages</code> pages, each page up to <strong>32 ticks</strong>.</li>
+<li>Every page carries its own length (<code>ticksPerPage</code>) and speed.</li>
+<li>Default <code>barsPerPage=4</code>: 4 bars per page, 8 ticks per bar.</li>
+<li>Scientific pitch notation: <code>C4</code> is middle C, range A0–C8.</li>
+<li>Tempo: <code>bpm = 900 × barsPerPage / speed</code>, so <strong>lower <code>speed</code> means a faster
+song</strong>. <code>speed=30, bars=4</code> gives 120 BPM.</li>
+</ul>
+<p dir="auto">Chord-track notes use Lovely Composer's chord encoding:
+<code>id = ((type + velocity&lt;&lt;4 + seventh&lt;&lt;6 + ninth&lt;&lt;8) &lt;&lt; 16) + 65536</code>, where type
+is 1=major, 2=minor, 3=sus4, 4=aug, 5=dim. With <code>lc_set_notes</code> you just write
+<code>chord: "minor"</code>.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">⚠️ Lovely Composer rewrites the whole folder on save</h2></div>
+<p dir="auto">This matters more than anything else in this README:</p>
+<ul dir="auto">
+<li>Lovely Composer reads the entire folder when it opens it and <strong>rewrites all 100
+song files</strong> when it saves. Reload the folder (or restart LC) to see what the
+agent wrote.</li>
+<li>If LC currently has the folder open, <strong>do not press save in LC</strong> before
+reloading, or it will overwrite what the agent just wrote.</li>
+<li>Songs LC marks as write-protected (<code>write_protected_flag</code>; all the bundled
+sample songs are) are refused by default. Pass <code>force=true</code> to override.</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">The file format</h2></div>
+<p dir="auto">The serialization is a straight <code>obj.__dict__</code> dump tagged with the class name:</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{<span class="pl-ent">"__LCVoice__"</span>: <span class="pl-c1">true</span>, <span class="pl-ent">"n"</span>: <span class="pl-c1">60</span>, <span class="pl-ent">"t"</span>: <span class="pl-c1">1</span>, <span class="pl-ent">"v"</span>: <span class="pl-c1">4</span>, <span class="pl-ent">"f"</span>: <span class="pl-c1">0</span>, <span class="pl-ent">"id"</span>: <span class="pl-c1">2</span>, <span class="pl-ent">"x"</span>: <span class="pl-c1">12</span>, <span class="pl-ent">"p"</span>: <span class="pl-c1">0</span>, <span class="pl-ent">"e"</span>: <span class="pl-c1">0</span>}</pre></div>
+<p dir="auto"><code>n</code> pitch (<code>null</code> empty, <code>-1</code> rest) · <code>t</code> oscillator · <code>v</code> volume 0-7 ·
+<code>f</code> effect · <code>id</code> instrument preset · <code>x</code> expression · <code>p</code> pan · <code>e</code> envelope.</p>
+<p dir="auto"><strong>The <code>__LCVoice__</code> tag has to be the first key.</strong> LC's <code>json_loader_hook</code> walks
+the dict and rebuilds a real object from the first key that names a class it
+knows; without the tag the voice degrades to a plain dict and LC then breaks on
+attribute access.</p>
+<p dir="auto">A song file is exactly two lines (CRLF-separated, no trailing newline after the
+second — matching what LC writes):</p>
+<div><pre><code>{"__LCMusicDataHeader__": true, ...}
+{"__LCMusic__": true, "speed":…, "channels":{…}, "rhythms":{…}, …}
+</code></pre></div>
+<p dir="auto">LC builds a default instance and merges the loaded dict over it, so <strong>omitted
+keys keep LC's own defaults</strong>. This implementation writes only the keys it
+actually needs and lets LC supply wave memory, sampling modulators and the rest.</p>
+<p dir="auto">Container hierarchy: <code>LCMusic</code> → <code>LCChannelList.channels[5]</code> →
+<code>LCSoundList.sl[pages]</code> → <code>LCSound.vl[32]</code> → <code>LCVoice</code>.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">⚠️ Encoding: LC reads files with the system ANSI code page, not UTF-8</h3></div>
+<p dir="auto">LC reads and writes project files with Python's <code>open(path)</code> and <strong>no explicit
+encoding</strong>, so it uses the locale default — <strong>GBK/cp936</strong> on a Chinese Windows,
+cp932 on a Japanese one.</p>
+<p dir="auto">A UTF-8 file with a non-ASCII title makes LC raise <code>UnicodeDecodeError</code>, so
+<code>load_music()</code> fails and <strong>the song simply will not open</strong>. The trap is subtle
+because LC's own sample songs have pure-ASCII titles.</p>
+<p dir="auto">How this project handles it:</p>
+<ul dir="auto">
+<li><strong>Writing</strong> — every non-ASCII character is escaped to <code>\uXXXX</code>, so the file is
+<strong>pure ASCII</strong> on disk. Pure ASCII decodes identically under GBK and UTF-8, so
+it works on any locale.</li>
+<li><strong>Reading</strong> — try strict UTF-8 first, then fall back through GB18030 / GBK /
+Big5 / Shift_JIS, taking the first result that <code>JSON.parse</code> accepts (LC stores
+non-ASCII as raw GBK bytes when it saves).</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Tempo and grid: <code>barsPerPage</code> drives both BPM and resolution</h3></div>
+<p dir="auto"><code>bpm = 900 × barsPerPage / speed</code>, and a page always plays <code>ticksPerPage</code> ticks,
+so <strong>changing <code>barsPerPage</code> changes both the tempo and the editable resolution</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>barsPerPage</th>
+<th>ticksPerPage</th>
+<th>ticks per bar</th>
+<th>finest note</th>
+<th>for 180 BPM use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4 (default)</td>
+<td>32</td>
+<td>8</td>
+<td>eighth note</td>
+<td>speed 30 → 120 BPM</td>
+</tr>
+<tr>
+<td>2</td>
+<td>32</td>
+<td>16</td>
+<td>sixteenth note</td>
+<td>speed 10</td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td>32</td>
+<td>32</td>
+<td><strong>thirty-second note</strong></td>
+<td><strong>speed 5</strong></td>
+</tr>
+</tbody>
+</table>
+<p dir="auto">For J-core / denpa sixteenth-note runs, use <code>barsPerPage=1, ticksPerPage=32</code>:
+one page is then one bar, and 1 tick = a 32nd note.</p>
+<p dir="auto">Instrument preset parameters come from the game's <code>app/lcl/common.py</code>
+(<code>VOICE_STR_LIST</code>, after LC's own expression/pan post-processing) and were
+checked entry by entry against real project files.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Verification</h2></div>
+<p dir="auto">The claim "the files it writes are real Lovely Composer files" is tested with the
+game's own code, not just with this project's parser:</p>
+<div class="highlight highlight-source-powershell" dir="auto"><pre><span class="pl-smi">$py</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>&lt;LovelyComposer&gt;\app\python\python.exe<span class="pl-pds">"</span></span>
+
+<span class="pl-c"><span class="pl-c">#</span> Full validation: model types, containers, and an LCJSONEncoder round trip</span>
+<span class="pl-k">&amp;</span> <span class="pl-smi">$py</span> <span class="pl-k">-</span>u tools<span class="pl-k">/</span>validate_with_lc.py <span class="pl-s"><span class="pl-pds">"</span>&lt;music&gt;\DSH\01.jsonl<span class="pl-pds">"</span></span>
+
+<span class="pl-c"><span class="pl-c">#</span> Replay lcl.load_music() stage by stage, next to an LC sample song</span>
+<span class="pl-k">&amp;</span> <span class="pl-smi">$py</span> <span class="pl-k">-</span>u tools<span class="pl-k">/</span>diagnose_load.py <span class="pl-s"><span class="pl-pds">"</span>&lt;music&gt;\DSH\01.jsonl<span class="pl-pds">"</span></span></pre></div>
+<p dir="auto">With <code>LC_APP_DIR</code> unset these search the usual Steam locations; set it to
+<code>&lt;LovelyComposer&gt;\app</code> if your install lives somewhere unusual.</p>
+<p dir="auto"><code>diagnose_load.py</code> prints every stage of LC opening a song. A generated song
+reaches exactly the same stages as an LC sample:</p>
+<div><pre><code>[1] read+parse            OK  header=LCMusicDataHeader music=LCMusic title='…'
+[2] trim channels         OK  5 remain
+[3] version check         OK  16 &lt;= 16
+[4] _old_lcmusic_data_updater  OK
+[5] model usable          OK  pages=48 speed=5 bpm=181 notes=2158
+[6] set_wave_memory_from_lcmusic_settings ... (doxel audio layer, needs a writable game dir)
+</code></pre></div>
+<blockquote>
+<p dir="auto">Stage 6 aborts the process: doxel insists on writing its log inside the game
+install directory and calls <code>os._exit()</code> when that is denied, e.g. under a
+restricted sandbox. That is unrelated to the data format — LC's own sample
+songs stop at the same point in the same environment.</p>
+</blockquote>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Included demos</h2></div>
+<p dir="auto">Two songs were written with this server and live in the <code>DSH</code> folder of the
+author's library:</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Title</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>00</code></td>
+<td>Neon Loop</td>
+<td>8-bar beginner loop, A minor, melody / bass / drums / chords.</td>
+</tr>
+<tr>
+<td><code>01</code></td>
+<td>配信中毒 - STREAM OVERDOSE</td>
+<td>48-bar piece, 180 BPM, F# minor, denpa / J-core, 2158 notes.</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"><code>compositions/stream-overdose.js</code> regenerates the second one.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Development</h2></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre>node test/smoke.js            <span class="pl-c"><span class="pl-c">#</span> 36 self-checks: round trips, encoding fallback, DSL</span>
+node test/demo-song.js        <span class="pl-c"><span class="pl-c">#</span> compose a demo song into .tmp-test/DEMO</span>
+node test/demo-song.js DSH 1  <span class="pl-c"><span class="pl-c">#</span> write straight into a real library folder</span>
+node src/server.js <span class="pl-k">&lt;</span> test/protocol-probe.jsonl   <span class="pl-c"><span class="pl-c">#</span> exercise the JSON-RPC layer</span></pre></div>
+<p dir="auto">The self-test covers note-name conversion, the instrument table, chord encoding,
+the pattern DSL, full song round trips, write protection and the GBK fallback.
+When a real Lovely Composer install is present it also round-trips a song the
+game wrote — and silently skips that part when there is none, so CI stays green.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Files</h2></div>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/lc.js</code></td>
+<td>Format engine: constants, note/instrument/chord conversion, pattern parsing, project file I/O and encoding.</td>
+</tr>
+<tr>
+<td><code>src/tools.js</code></td>
+<td>The 12 MCP tool definitions and their implementations.</td>
+</tr>
+<tr>
+<td><code>src/server.js</code></td>
+<td>stdio JSON-RPC MCP server (zero dependencies, hand-written protocol layer).</td>
+</tr>
+<tr>
+<td><code>compositions/stream-overdose.js</code></td>
+<td>Full composition generator (denpa / J-core, 48 bars, 2158 notes).</td>
+</tr>
+<tr>
+<td><code>test/smoke.js</code></td>
+<td>Self-test suite.</td>
+</tr>
+<tr>
+<td><code>test/demo-song.js</code></td>
+<td>Demo composer that goes through the tool handlers.</td>
+</tr>
+<tr>
+<td><code>test/protocol-probe.jsonl</code></td>
+<td>JSON-RPC probe requests.</td>
+</tr>
+<tr>
+<td><code>tools/validate_with_lc.py</code></td>
+<td>Validates a file with the game's own <code>lcl</code> module.</td>
+</tr>
+<tr>
+<td><code>tools/diagnose_load.py</code></td>
+<td>Replays LC's <code>load_music()</code> step by step.</td>
+</tr>
+<tr>
+<td><code>tools/lcenv.py</code></td>
+<td>Finds the game install so the validators can import <code>lcl</code>.</td>
+</tr>
+<tr>
+<td><code>tools/check-encoding.js</code></td>
+<td>Flags song files containing non-ASCII bytes.</td>
+</tr>
+<tr>
+<td><code>tools/analyze_lc.py</code></td>
+<td>Structural analyzer used during reverse engineering.</td>
+</tr>
+</tbody>
+</table>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Known limitations</h2></div>
+<ul dir="auto">
+<li><strong>It can only write project files; it cannot trigger an export.</strong> Export to
+WAV/MIDI from Lovely Composer itself, or set up an LC addon to do it.</li>
+<li>It does not drive LC's GUI, so it never depends on window focus.</li>
+<li>Wave memory and sampling modulator parameters are left to LC's defaults and
+are not editable here.</li>
+<li>The rhythm track (<code>rhythms</code>) uses LC's new-song defaults; there is no editing
+interface for it yet.</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">License</h2></div>
+<p dir="auto"><a href="/not-found">MIT</a></p>

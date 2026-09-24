@@ -1,0 +1,69 @@
+<div class="markdown-heading" dir="auto"><h1 dir="auto">flstudio MCP</h1></div>
+<div class="markdown-heading" dir="auto"><h1 dir="auto">This is an MCP server that connects Claude to FL Studio.</h1></div>
+<p dir="auto">Made this in 3 days. We're open sourcing it to see what we can actually get out of it. The possibilities are endless.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">If you're running to any issues, join our discord and we can setup it for you.</h2></div>
+<p dir="auto">(also join if you interested in the future of music and AI or want to request features. we're building this with you)</p>
+<p dir="auto"><a href="/not-found">https://discord.gg/ZjG9TaEhvy</a></p>
+<p dir="auto">Check out our AI-Powered DAW for musicians at <a href="/not-found">www.veena.studio</a></p>
+<p dir="auto">All in browser. All for free.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Step 1: Download the Files</h2></div>
+<p dir="auto">You should see two main items.</p>
+<ul dir="auto">
+<li>A folder called Test Controller</li>
+<li>A python file called trigger.py
+The Test Controller folder has a file called device_test.py that receives information from the MCP server.
+trigger.py is the MCP server.</li>
+</ul>
+<p dir="auto">Place the Test Controller folder in Image-Line/FL Studio/Settings/Hardware (Don't change the name of this file or folder)</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Step 2: Set up MCP for Claude</h2></div>
+<p dir="auto">Follow this tutorial to see how to setup MCP servers in Claude by edyting the claude_desktop_config files.</p>
+<p dir="auto"><a href="/not-found">https://modelcontextprotocol.io/quickstart/server</a></p>
+<p dir="auto">If you followed this process, make sure to change whatever mentions of weather.py to trigger.py</p>
+<p dir="auto">If the Hammer icon doesn't show up, open Task Manager and force close the Claude process.</p>
+<p dir="auto">It should then show up.</p>
+<p dir="auto">This is what my config file looks like</p>
+<p dir="auto"><a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/e2411d4cbde114f0.png" alt="mcp"></a></p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Step 3: Set Up Virtual MIDI Ports</h2></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">For Windows</h3></div>
+<p dir="auto">For Windows, download LoopMIDI from here.</p>
+<p dir="auto"><a href="/not-found">https://www.tobias-erichsen.de/software/loopmidi.html</a></p>
+<p dir="auto">Install LoopMIDI and add a port using the + button.</p>
+<p dir="auto">This is what mine looks like:
+<a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/f2d3c21f533c2b4d.png" alt="loopmidi2"></a></p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">For Mac</h3></div>
+<p dir="auto">Your MIDI Ports would be automatically setup to receive data.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Step 4: Setup MIDI Controller</h2></div>
+<p dir="auto">Open FL Studio.</p>
+<p dir="auto">Go To Options &gt; MIDI Settings.</p>
+<p dir="auto">In the Input Tab, click the MIDI Input you just created with LoopMIDI.</p>
+<p dir="auto">Change controller type from (generic controller) to Test Controller.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Step 5: Download Packages</h2></div>
+<p dir="auto">Go to the folder with the trigger.py file. (This is the MCP Server file)</p>
+<p dir="auto">Activate the conda environment (like you learned in the Claude MCP Setup Tutorial)</p>
+<p dir="auto">Run this command to download the necessary packages: uv pip install httpx mido python-rtmidi typing fastmcp FL-Studio-API-Stubs
+(uv should be installed from the Claude MCP setup)</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Step 6: Verify MCP Connection</h2></div>
+<p dir="auto">Tell Claude to get available MIDI ports.</p>
+<p dir="auto">This should use the MCP to get the ports from FL Studio.</p>
+<p dir="auto">If Windows, copy the port you created with LoopMIDI and the number in front of it.</p>
+<p dir="auto">If Mac, copy the default port.</p>
+<p dir="auto"><a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/dbb2f84a4f4bedf9.webp" alt="loopmidi"></a></p>
+<p dir="auto">In my case, I copy loopMIDI Port 2</p>
+<p dir="auto">Open trigger.py in a text editor and replace the default port with the name of the port you just copied.
+output_port = mido.open_output('loopMIDI Port 2')</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Step 7: Make Music</h2></div>
+<p dir="auto">Use the MCP to send melodies, chords, drums, etc.</p>
+<p dir="auto">Click on the instrument you want to record to and it will live record to the piano roll of that instrument.</p>
+<p dir="auto">I tend to use this prompt when I start a new chat: Here is format for notes: note(0-127),velocity(0-100),length in beats(decimal),position in beats(decimal)</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Step 8: Share what you made</h2></div>
+<p dir="auto">Share what you made on our Discord: <a href="/not-found">https://discord.gg/ZjG9TaEhvy</a></p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Credits</h2></div>
+<p dir="auto">FL Studio API Stubs: <a href="/not-found">https://github.com/IL-Group/FL-Studio-API-Stubs</a>
+Ableton MCP: <a href="/not-found">https://github.com/ahujasid/ableton-mcp</a></p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Nerd Stuff</h2></div>
+<p dir="auto">If you want to contribute please go ahead.</p>
+<p dir="auto">The way this works is that device_test.py behaves as a virtual MIDI Controller.
+The MCP server (trigger.py) communicates with this MIDI Controller by opening a Virtual Port and sending MIDI messages through a library called MIDO.</p>
+<p dir="auto">The issue with MIDI messages is that its only 7 bits so we can only send in number from 0-127.</p>
+<p dir="auto">So we encrypt all of our MIDI data like note position, etc in multiple MIDI notes that the device knows how to read.</p>
+<p dir="auto">Hopefully, Image Line can give us more access to their DAW via their API so we don't have to do this MIDI nonsense.</p>

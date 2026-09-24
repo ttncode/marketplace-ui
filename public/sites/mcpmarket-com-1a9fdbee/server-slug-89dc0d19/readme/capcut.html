@@ -1,0 +1,325 @@
+<div><pre lang="text"><code>  ____    _    ____   ____ _   _ _____   __  __  ____ ____  
+ / ___|  / \  |  _ \ / ___| | | |_   _| |  \/  |/ ___|  _ \ 
+| |     / _ \ | |_) | |   | | | | | |   | |\/| | |   | |_) |
+| |___ / ___ \|  __/| |___| |_| | | |   | |  | | |___|  __/ 
+ \____/_/   \_\_|    \____|\___/  |_|   |_|  |_|\____|_|    
+</code></pre></div>
+<p dir="auto">An <a href="/not-found">MCP (Model Context Protocol)</a> server for CapCut, written in Elixir. Lets Claude read and edit CapCut projects directly -- no CapCut API needed. Works by reading and writing CapCut's local JSON project files.</p>
+<p dir="auto">Built just for fun in a "crazy" language. Elixir/OTP with GenServers, supervision trees, pattern matching and pipes everywhere.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">What it does</h2></div>
+<p dir="auto">Claude gets 15 tools to work with your CapCut projects:</p>
+<p dir="auto"><strong>Read &amp; Inspect</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What Claude can do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>list_projects</code></td>
+<td>Show all your CapCut drafts</td>
+</tr>
+<tr>
+<td><code>get_project</code></td>
+<td>Inspect canvas size, FPS, duration, track count</td>
+</tr>
+<tr>
+<td><code>get_timeline</code></td>
+<td>See all tracks, clips, and their timecodes</td>
+</tr>
+<tr>
+<td><code>read_draft_json</code></td>
+<td>Return the full raw project JSON for debugging</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"><strong>Create &amp; Add</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What Claude can do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>create_project</code></td>
+<td>Create a new empty draft (custom size/FPS)</td>
+</tr>
+<tr>
+<td><code>add_text</code></td>
+<td>Add a text overlay at a specific time</td>
+</tr>
+<tr>
+<td><code>add_clip</code></td>
+<td>Add a video or audio file to the timeline (validates file exists)</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"><strong>Modify Clips</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What Claude can do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>set_clip_transform</code></td>
+<td>Position, scale, and rotate a clip</td>
+</tr>
+<tr>
+<td><code>set_clip_opacity</code></td>
+<td>Set clip transparency (0.0 -- 1.0)</td>
+</tr>
+<tr>
+<td><code>set_clip_volume</code></td>
+<td>Mute, normalize, or boost clip audio</td>
+</tr>
+<tr>
+<td><code>set_clip_loop</code></td>
+<td>Enable/disable clip looping</td>
+</tr>
+<tr>
+<td><code>set_clip_blend_mode</code></td>
+<td>Apply blend modes (Screen, Soft Light, Multiply, ...) from your local CapCut install</td>
+</tr>
+<tr>
+<td><code>move_clip</code></td>
+<td>Reposition a clip on the timeline</td>
+</tr>
+<tr>
+<td><code>trim_clip</code></td>
+<td>Set source in/out points and timeline duration</td>
+</tr>
+<tr>
+<td><code>remove_clip</code></td>
+<td>Remove a clip by its segment ID</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto">Example prompts once connected:</p>
+<ul dir="auto">
+<li>"List my CapCut projects"</li>
+<li>"Add the text 'Intro' to project X at 0ms for 3 seconds"</li>
+<li>"Show me the timeline of my latest project"</li>
+<li>"Create a new 1080x1920 vertical project called 'Reel'"</li>
+<li>"Set the screen recording clip to Screen blend mode"</li>
+<li>"Move clip X to 5 seconds and set its opacity to 0.8"</li>
+<li>"Mute the video on track 2 and loop the mascot clip"</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Requirements</h2></div>
+<ul dir="auto">
+<li>Windows (CapCut stores projects in <code>%LOCALAPPDATA%\CapCut\</code>)</li>
+<li><a href="/not-found">Erlang/OTP 28</a> installed</li>
+<li>Elixir 1.19+ (see <a href="#installation">Installation</a>)</li>
+<li>CapCut desktop app installed</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Installation</h2></div>
+<p dir="auto"><strong>1. Install Erlang OTP</strong> (if not already installed):</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>winget install Erlang.ErlangOTP</pre></div>
+<p dir="auto"><strong>2. Install Elixir</strong> (no winget package -- download the zip):</p>
+<div class="highlight highlight-source-powershell" dir="auto"><pre>(<span class="pl-c1">New-Object</span> Net.WebClient).DownloadFile(
+  <span class="pl-s"><span class="pl-pds">'</span>https://github.com/elixir-lang/elixir/releases/download/v1.19.5/elixir-otp-28.zip<span class="pl-pds">'</span></span><span class="pl-k">,</span>
+  <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$<span class="pl-c1">env:</span>USERPROFILE</span>\elixir.zip<span class="pl-pds">"</span></span>
+)
+<span class="pl-c1">Expand-Archive</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$<span class="pl-c1">env:</span>USERPROFILE</span>\elixir.zip<span class="pl-pds">"</span></span> <span class="pl-k">-</span>DestinationPath <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$<span class="pl-c1">env:</span>USERPROFILE</span>\elixir<span class="pl-pds">"</span></span>
+[<span class="pl-k">Environment</span>]::SetEnvironmentVariable(
+  <span class="pl-s"><span class="pl-pds">'</span>PATH<span class="pl-pds">'</span></span><span class="pl-k">,</span>
+  [<span class="pl-k">Environment</span>]::GetEnvironmentVariable(<span class="pl-s"><span class="pl-pds">'</span>PATH<span class="pl-pds">'</span></span><span class="pl-k">,</span><span class="pl-s"><span class="pl-pds">'</span>User<span class="pl-pds">'</span></span>) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">"</span>;<span class="pl-smi">$<span class="pl-c1">env:</span>USERPROFILE</span>\elixir\bin<span class="pl-pds">"</span></span><span class="pl-k">,</span>
+  <span class="pl-s"><span class="pl-pds">'</span>User<span class="pl-pds">'</span></span>
+)</pre></div>
+<p dir="auto"><strong>3. Clone and build:</strong></p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>git clone https://github.com/burnshall-ui/capcut-mcp.git
+<span class="pl-c1">cd</span> capcut-mcp
+mix deps.get
+mix compile</pre></div>
+<p dir="auto"><strong>4. Smoke test:</strong></p>
+<div class="highlight highlight-source-shell" dir="auto"><pre><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">'</span>{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"clientInfo":{"name":"test","version":"1.0"}}}<span class="pl-pds">'</span></span> <span class="pl-k">|</span> mix run --no-halt</pre></div>
+<p dir="auto">Expected: a JSON response with <code>"name":"capcut-mcp"</code>.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Connecting to Claude</h2></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Claude Code</h3></div>
+<p dir="auto">Create (or edit) <code>.claude/settings.json</code> in the project root:</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"capcut"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>mix<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"args"</span>: [<span class="pl-s"><span class="pl-pds">"</span>run<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>--no-halt<span class="pl-pds">"</span></span>],
+      <span class="pl-ent">"cwd"</span>: <span class="pl-s"><span class="pl-pds">"</span>C:/Users/&lt;you&gt;/Desktop/kram/capcut-mcp<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"env"</span>: {
+        <span class="pl-ent">"PATH"</span>: <span class="pl-s"><span class="pl-pds">"</span>C:<span class="pl-cce">\\</span>Program Files<span class="pl-cce">\\</span>Erlang OTP<span class="pl-cce">\\</span>bin;C:<span class="pl-cce">\\</span>Users<span class="pl-cce">\\</span>&lt;you&gt;<span class="pl-cce">\\</span>elixir<span class="pl-cce">\\</span>bin<span class="pl-pds">"</span></span>
+      }
+    }
+  }
+}</pre></div>
+<p dir="auto">Restart Claude Code -- the <code>capcut</code> tools appear automatically.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Claude Desktop</h3></div>
+<p dir="auto">Claude Desktop ignores the <code>cwd</code> config field on Windows, so <code>mix run</code> wouldn't find <code>mix.exs</code>. The fix is a small wrapper script that changes into the project directory first.</p>
+<p dir="auto">The repo ships a <code>start-mcp.bat</code> that does exactly that. Edit it to point at your Elixir installation if it differs from the default:</p>
+<div class="highlight highlight-source-batchfile" dir="auto"><pre><span class="pl-k">@</span><span class="pl-k">echo</span> <span class="pl-k">off</span>
+<span class="pl-k">cd</span> /d <span class="pl-s"><span class="pl-pds">"</span>C:\Users\&lt;you&gt;\Desktop\kram\capcut-mcp<span class="pl-pds">"</span></span>
+<span class="pl-s"><span class="pl-pds">"</span>C:\Users\&lt;you&gt;\elixir\bin\mix.bat<span class="pl-pds">"</span></span> run --no-halt</pre></div>
+<p dir="auto">Then add it to <code>%APPDATA%\Claude\claude_desktop_config.json</code>:</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"capcut"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>C:<span class="pl-cce">\\</span>Users<span class="pl-cce">\\</span>&lt;you&gt;<span class="pl-cce">\\</span>Desktop<span class="pl-cce">\\</span>kram<span class="pl-cce">\\</span>capcut-mcp<span class="pl-cce">\\</span>start-mcp.bat<span class="pl-pds">"</span></span>
+    }
+  }
+}</pre></div>
+<p dir="auto">Restart Claude Desktop.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Configuration</h2></div>
+<p dir="auto"><code>CapcutMcp.CapCut.PathDiscovery</code> auto-discovers the CapCut projects folder on boot. It checks, in order:</p>
+<ol dir="auto">
+<li>The <code>CAPCUT_PATH</code> environment variable</li>
+<li><code>%LOCALAPPDATA%\CapCut\User Data\Projects\com.lveditor.draft</code> — the standard Windows install path</li>
+</ol>
+<p dir="auto">If neither resolves to an existing directory, the server still boots. The first tool call that needs disk access returns a descriptive error listing what was tried, so Claude can relay it back to you verbatim.</p>
+<p dir="auto">Override the discovered path (e.g. for a portable install) with <code>CAPCUT_PATH</code>:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>CAPCUT_PATH=<span class="pl-s"><span class="pl-pds">"</span>D:\CapCut\Projects\com.lveditor.draft<span class="pl-pds">"</span></span> mix run --no-halt</pre></div>
+<p dir="auto">Blend mode discovery reads CapCut's local app resources from:</p>
+<div><pre lang="text"><code>C:\Users\&lt;you&gt;\AppData\Local\CapCut\Apps
+</code></pre></div>
+<p dir="auto">Usually you do not need to configure this manually on Windows because it is derived from <code>%LOCALAPPDATA%</code>.
+If your CapCut installation lives elsewhere, override it with <code>CAPCUT_APPS_PATH</code>:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>CAPCUT_APPS_PATH=<span class="pl-s"><span class="pl-pds">"</span>D:\PortableApps\CapCut\Apps<span class="pl-pds">"</span></span> mix run --no-halt</pre></div>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Architecture</h2></div>
+<div><pre lang="text"><code>Claude (stdin/stdout JSON-RPC 2.0)
+  └── MCP.Server          GenServer -- stdin loop, dispatches messages
+        └── MCP.Dispatcher  Pure -- routes tool calls by name
+              └── Tools.*       Pure -- one module per tool (15 tools)
+                    ├── TimelineHelper   Shared -- segment lookup, validation, UUID
+                    ├── BlendModes       ETS-cached -- discovers CapCut MixMode resources
+                    └── ProjectStore     GenServer -- project cache + disk I/O
+                          ├── PathDiscovery  Pure -- resolves projects root (env / LOCALAPPDATA)
+                          ├── Reader         Pure -- reads JSON files
+                          └── Writer         Pure -- writes JSON files (atomic + backup)
+</code></pre></div>
+<p dir="auto">OTP supervision tree:</p>
+<div><pre lang="text"><code>CapcutMcp.Application
+  ├── CapCut.ProjectStore  (permanent)
+  └── MCP.Server           (permanent)
+</code></pre></div>
+<p dir="auto">If either process crashes, the supervisor restarts it automatically. The <code>ProjectStore</code> caches parsed project JSON in memory with read-through loading -- both reads and writes auto-populate the cache on miss, so a GenServer restart is transparent. <code>BlendModes</code> caches <code>MixMode.json</code> in an ETS table after the first read.</p>
+<p dir="auto">Every write to <code>draft_content.json</code> creates a <code>.bak</code> backup and uses an atomic rename (write <code>.tmp</code> -&gt; rename) to prevent corruption if the process is killed mid-write.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Observability</h2></div>
+<p dir="auto">Every <code>tools/call</code> goes through <code>:telemetry.span/3</code> in <code>CapcutMcp.MCP.Dispatcher</code>, so duration and outcome are exposed as structured events — no custom logging plumbing in individual tools. The two core subsystems (<code>ProjectStore</code> cache and <code>BlendModes</code> loader) emit their own events too, and the boundary-hardening pass (Reader path-trust check) emits its own rejection event, so a single telemetry handler can answer "which tool was slow, was it cache-bound or disk-bound, and did any corrupt metadata get filtered on the way in?".</p>
+<p dir="auto">Emitted events:</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Measurements</th>
+<th>Metadata</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[:capcut_mcp, :tool, :execute, :start]</code></td>
+<td><code>:system_time</code>, <code>:monotonic_time</code></td>
+<td><code>:tool</code>, <code>:request_id</code></td>
+</tr>
+<tr>
+<td><code>[:capcut_mcp, :tool, :execute, :stop]</code></td>
+<td><code>:duration</code>, <code>:monotonic_time</code></td>
+<td><code>:tool</code>, <code>:request_id</code>, <code>:result</code>, <code>:reason?</code></td>
+</tr>
+<tr>
+<td><code>[:capcut_mcp, :tool, :execute, :exception]</code></td>
+<td><code>:duration</code>, <code>:monotonic_time</code></td>
+<td><code>:tool</code>, <code>:request_id</code>, <code>:kind</code>, <code>:reason</code>, <code>:stacktrace</code></td>
+</tr>
+<tr>
+<td><code>[:capcut_mcp, :cache, :hit]</code></td>
+<td><code>:count</code> (always <code>1</code>)</td>
+<td><code>:id</code></td>
+</tr>
+<tr>
+<td><code>[:capcut_mcp, :cache, :miss]</code></td>
+<td><code>:count</code> (always <code>1</code>)</td>
+<td><code>:id</code></td>
+</tr>
+<tr>
+<td><code>[:capcut_mcp, :cache, :write]</code></td>
+<td><code>:count</code> (always <code>1</code>)</td>
+<td><code>:id</code>, <code>:reason</code> (<code>:load</code> | <code>:update</code> | <code>:create</code>)</td>
+</tr>
+<tr>
+<td><code>[:capcut_mcp, :blend_modes, :load]</code></td>
+<td><code>:duration</code></td>
+<td><code>:result</code> (<code>:ok</code> | <code>:error</code>), <code>:count?</code>, <code>:path?</code>, <code>:reason?</code></td>
+</tr>
+<tr>
+<td><code>[:capcut_mcp, :draft, :schema_version]</code></td>
+<td><code>:count</code> (always <code>1</code>)</td>
+<td><code>:version</code> (<code>String.t()</code> | <code>nil</code>), <code>:supported</code> (<code>boolean</code>)</td>
+</tr>
+<tr>
+<td><code>[:capcut_mcp, :meta, :rejected]</code></td>
+<td><code>:count</code> (always <code>1</code>)</td>
+<td><code>:reason</code> (<code>:path_outside_root</code>), <code>:path</code> (<code>String.t()</code>)</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto">A default log handler in <code>CapcutMcp.Telemetry</code> is attached on boot and prints one line per tool call, e.g.:</p>
+<div><pre lang="text"><code>12:34:56.789 [info] tool=add_text request_id=42 result=ok duration=8.24ms
+</code></pre></div>
+<p dir="auto"><code>Logger.metadata</code> is populated early in the pipeline (<code>mcp_request_id</code>, <code>mcp_method</code>, <code>tool</code>, <code>request_id</code>), so every log line further down the stack — including inside individual tools — is filterable by request.</p>
+<p dir="auto"><code>[:capcut_mcp, :draft, :schema_version]</code> fires on every successful <code>read_draft</code> and additionally triggers a <code>Logger.warning</code> when the draft's <code>new_version</code> field is missing or not in <code>CapcutMcp.CapCut.Reader.supported_versions/0</code> — the server still reads the draft, it just flags that the on-disk schema is untested.</p>
+<p dir="auto"><code>[:capcut_mcp, :meta, :rejected]</code> fires when <code>list_projects</code> encounters a <code>root_meta_info.json</code> entry whose <code>draft_fold_path</code> resolves outside the configured <code>CAPCUT_PATH</code>. The entry is dropped from the response (so tool callers can't be tricked into reading or writing arbitrary files through a corrupt/malicious meta file), and a <code>Logger.warning</code> is emitted alongside the telemetry event.</p>
+<p dir="auto">The cache and blend-modes events are emitted but <em>not</em> logged by default (they're chatty on hit paths). Attach your own handler if you want a running hit-rate or a disk-load audit trail:</p>
+<div class="highlight highlight-source-elixir" dir="auto"><pre><span class="pl-v">:telemetry</span><span class="pl-c1">.</span><span class="pl-en">attach_many</span><span class="pl-kos">(</span>
+  <span class="pl-s">"my-cache-counter"</span><span class="pl-kos">,</span>
+  <span class="pl-kos">[</span>
+    <span class="pl-kos">[</span><span class="pl-pds">:capcut_mcp</span><span class="pl-kos">,</span> <span class="pl-pds">:cache</span><span class="pl-kos">,</span> <span class="pl-pds">:hit</span><span class="pl-kos">]</span><span class="pl-kos">,</span>
+    <span class="pl-kos">[</span><span class="pl-pds">:capcut_mcp</span><span class="pl-kos">,</span> <span class="pl-pds">:cache</span><span class="pl-kos">,</span> <span class="pl-pds">:miss</span><span class="pl-kos">]</span>
+  <span class="pl-kos">]</span><span class="pl-kos">,</span>
+  <span class="pl-k">fn</span> <span class="pl-kos">[</span><span class="pl-c">_</span><span class="pl-kos">,</span> <span class="pl-c">_</span><span class="pl-kos">,</span> <span class="pl-s1">kind</span><span class="pl-kos">]</span><span class="pl-kos">,</span> <span class="pl-c">_measurements</span><span class="pl-kos">,</span> <span class="pl-c">_metadata</span><span class="pl-kos">,</span> <span class="pl-c">_cfg</span> <span class="pl-c1">-&gt;</span>
+    <span class="pl-v">:counters</span><span class="pl-c1">.</span><span class="pl-en">add</span><span class="pl-kos">(</span><span class="pl-s1">my_counter_ref</span><span class="pl-kos">,</span> <span class="pl-en">kind_to_idx</span><span class="pl-kos">(</span><span class="pl-s1">kind</span><span class="pl-kos">)</span><span class="pl-kos">,</span> <span class="pl-c1">1</span><span class="pl-kos">)</span>
+  <span class="pl-k">end</span><span class="pl-kos">,</span>
+  <span class="pl-c1">nil</span>
+<span class="pl-kos">)</span></pre></div>
+<p dir="auto">To pipe events into Prometheus, OpenTelemetry, Datadog, etc., attach your own handler; the application code does not need to change.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Development</h2></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre><span class="pl-c"><span class="pl-c">#</span> Run tests</span>
+mix <span class="pl-c1">test</span>
+
+<span class="pl-c"><span class="pl-c">#</span> Code style (strict)</span>
+mix credo --strict
+
+<span class="pl-c"><span class="pl-c">#</span> Static analysis (first run builds PLT, ~1-2 min)</span>
+mix dialyzer
+
+<span class="pl-c"><span class="pl-c">#</span> Coverage (HTML report at cover/excoveralls.html)</span>
+mix coveralls          <span class="pl-c"><span class="pl-c">#</span> console summary</span>
+mix coveralls.html     <span class="pl-c"><span class="pl-c">#</span> full HTML report</span>
+
+<span class="pl-c"><span class="pl-c">#</span> Format check</span>
+mix format --check-formatted
+
+<span class="pl-c"><span class="pl-c">#</span> Run with a custom CapCut path</span>
+CAPCUT_PATH=<span class="pl-s"><span class="pl-pds">"</span>C:/path/to/projects<span class="pl-pds">"</span></span> mix run --no-halt
+
+<span class="pl-c"><span class="pl-c">#</span> Interactive Elixir shell with the app running</span>
+iex -S mix run --no-halt</pre></div>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Known Limitations</h2></div>
+<ul dir="auto">
+<li><strong>Export/render</strong> -- not possible via this server (CapCut has no CLI for export; only UI automation could do it)</li>
+<li><strong>Cloud projects</strong> -- only local drafts are accessible</li>
+<li><strong>Effects and templates</strong> -- can reference CapCut's built-in effect IDs but can't create new ones; the exact IDs vary by CapCut version</li>
+<li><strong>CapCut format changes</strong> -- CapCut updates may change the JSON schema; tested against v8.3.0</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Tech Stack</h2></div>
+<ul dir="auto">
+<li><strong>Elixir 1.19 / OTP 28</strong> -- because why not</li>
+<li><strong>Jason</strong> -- JSON encode/decode</li>
+<li><strong>:telemetry</strong> -- structured events for every tool call</li>
+<li><strong>Credo</strong> (<code>--strict</code>) -- zero issues</li>
+<li><strong>Dialyzer</strong> (<code>:underspecs</code>, <code>:error_handling</code>, <code>:unknown</code>) -- zero warnings</li>
+<li><strong>ExUnit</strong> -- 164 tests + 12 <code>stream_data</code> property tests + 6 doctests (incl. JSON-RPC integration tests with telemetry assertions on tools + cache + blend-modes + schema-version + meta-rejected events, path-discovery fallbacks, a boundary fuzz test that hammers every registered tool with random <code>StreamData.term()</code> arguments, and timeline-mutation invariants like <code>update_segment</code> roundtrip, <code>ensure_timerange</code> idempotency and <code>insert_segment</code> count preservation)</li>
+<li><strong>StreamData</strong> -- property-based tests for <code>TimelineHelper</code> (UUID format, segment roundtrip, track insertion invariants, <code>validate_timing</code> domain) and for the <code>tools/call</code> request boundary (no random payload may crash the dispatcher)</li>
+<li><strong>ExCoveralls</strong> -- ~88% line coverage on application code (remaining gaps are the stdin-loop I/O layer and a few lazy disk helpers)</li>
+</ul>

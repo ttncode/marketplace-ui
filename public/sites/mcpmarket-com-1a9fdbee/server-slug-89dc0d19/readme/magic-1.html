@@ -1,0 +1,92 @@
+<div class="markdown-heading" dir="auto"><h1 dir="auto">Magic MCP → 21st MCP</h1></div>
+<blockquote>
+<p dir="auto"><strong>Magic MCP is now the 21st MCP.</strong> The Magic MCP server (<code>@21st-dev/magic</code>) has been replaced by the unified <strong>21st MCP</strong>, installed via the <strong>21st CLI</strong> — setup at <a href="/not-found">21st.dev/mcp</a>. This package remains published as a thin compatibility proxy so old configs keep working.</p>
+</blockquote>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Install the 21st MCP (recommended)</h2></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre>npx @21st-dev/cli@latest init --client cursor   <span class="pl-c"><span class="pl-c">#</span> or: claude | vscode | windsurf | codex</span></pre></div>
+<p dir="auto">Or add it manually — it is a plain HTTP MCP server:</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"21st"</span>: {
+      <span class="pl-ent">"url"</span>: <span class="pl-s"><span class="pl-pds">"</span>https://21st.dev/api/mcp<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"headers"</span>: { <span class="pl-ent">"x-api-key"</span>: <span class="pl-s"><span class="pl-pds">"</span>YOUR_21ST_API_KEY<span class="pl-pds">"</span></span> }
+    }
+  }
+}</pre></div>
+<p dir="auto">Get an API key at <a href="/not-found">21st.dev/mcp</a>.</p>
+<blockquote>
+<p dir="auto"><strong>Old Magic API keys were reset.</strong> Keys issued by the old Magic console no longer work anywhere. Generate a fresh key at <a href="/not-found">21st.dev/mcp</a>.</p>
+</blockquote>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">What this package does now (v0.2.0+)</h2></div>
+<p dir="auto"><code>npx -y @21st-dev/magic@latest API_KEY="..."</code> still works: since v0.2.0 it is a small stdio proxy that forwards every MCP message to the 21st MCP server. Existing <code>mcp.json</code> entries that reference <code>@21st-dev/magic</code> keep functioning — but they now speak to the same server as the 21st CLI, with the tools available to the authenticated account.</p>
+<p dir="auto">The API key is accepted in all the historical forms: positional <code>API_KEY="..."</code>, <code>--API_KEY=...</code>, <code>/API_KEY:...</code>, <code>-API_KEY ...</code>, or the <code>TWENTY_FIRST_API_KEY</code> / <code>API_KEY_21ST</code> environment variables.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">AI access</h2></div>
+<p dir="auto">Builder component access does not enable hosted 21st AI. The server lists
+<code>generate</code> and <code>iterate_generation</code> only when AI access is enabled. Check
+<code>get_usage.aiGenerationEnabled</code>; this reports access, not the remaining AI
+credit balance. With AI off, use <code>search</code> and <code>get_component</code>, then adapt the
+code with your own coding agent. Existing drafts remain readable.</p>
+<p dir="auto">A cached or legacy generation call can return <code>ai_subscription_required</code>. Do
+not retry until AI is enabled. Refresh the client tool list or reconnect after
+enabling AI. The proxy forwards discovery to the server, so existing proxy
+versions receive this behavior without an npm update.</p>
+<p dir="auto"><code>server.json</code> mirrors the official <code>dev.21st/mcp</code> registry listing. The registry
+version is independent of this compatibility package version.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Old tool names → new tool names</h2></div>
+<p dir="auto">The 21st MCP still accepts the legacy Magic tool names and translates them, so agents that remember the old names keep working. Prefer the new names:</p>
+<table>
+<thead>
+<tr>
+<th>Legacy Magic tool</th>
+<th>21st MCP tool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>21st_magic_component_builder</code></td>
+<td><code>generate</code></td>
+</tr>
+<tr>
+<td><code>21st_magic_component_inspiration</code></td>
+<td><code>get_inspiration</code></td>
+</tr>
+<tr>
+<td><code>21st_magic_component_refiner</code></td>
+<td><code>generate</code> (new generation from the refinement prompt)</td>
+</tr>
+<tr>
+<td><code>logo_search</code></td>
+<td><code>search_logo</code> (one query per call)</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto">The current server exposes much more than the old four tools: catalog search across components/themes/templates, paid code retrieval, bookmarks, team libraries, UI generation with variants, profile management, and more. Connect and call <code>tools/list</code> to see the tools available to your account.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Install as a plugin</h2></div>
+<p dir="auto">This repository is also packaged as an agent plugin (MCP server + a UI skill). You don't need to wait for any store — this repo IS a marketplace, add it directly:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre><span class="pl-c"><span class="pl-c">#</span> Claude Code</span>
+claude plugin marketplace add 21st-dev/magic-mcp   <span class="pl-c"><span class="pl-c">#</span> then: /plugin install 21st</span>
+
+<span class="pl-c"><span class="pl-c">#</span> Grok Build</span>
+grok plugin marketplace add 21st-dev/magic-mcp <span class="pl-k">&amp;&amp;</span> grok plugin install 21st --trust
+
+<span class="pl-c"><span class="pl-c">#</span> Codex CLI</span>
+codex plugin marketplace add 21st-dev/magic-mcp    <span class="pl-c"><span class="pl-c">#</span> then install "21st" from /plugins</span></pre></div>
+<p dir="auto">Set your API key in the <code>API_KEY_21ST</code> variable (free key at <a href="/not-found">21st.dev/mcp</a>).</p>
+<p dir="auto">Store listings:</p>
+<ul dir="auto">
+<li><strong>Cursor / Grok Bot</strong> — install "21st" from the <a href="/not-found">Cursor Marketplace</a>, then set your <code>API_KEY_21ST</code> under <strong>Plugins → Configure</strong>. Get a key at <a href="/not-found">21st.dev/mcp</a>.</li>
+<li><strong>Grok Build</strong> — <code>grok plugin install 21st --trust</code> (from the official <a href="/not-found">xAI marketplace</a>), then export <code>API_KEY_21ST</code>.</li>
+<li><strong>Claude Code</strong> — the repo carries a <code>.claude-plugin/</code> manifest: <code>/plugin install</code> it from any marketplace that lists this repo, or load locally with <code>claude --plugin-dir .</code> and export <code>API_KEY_21ST</code>.</li>
+</ul>
+<p dir="auto">The plugin config expects the API key in the <code>API_KEY_21ST</code> variable in every client.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Links</h2></div>
+<ul dir="auto">
+<li>21st MCP setup &amp; API keys: <a href="/not-found">https://21st.dev/mcp</a></li>
+<li>21st CLI on npm: <a href="/not-found">https://www.npmjs.com/package/@21st-dev/cli</a></li>
+<li>21st.dev — discover, publish, and generate UI components: <a href="/not-found">https://21st.dev</a></li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">FAQ</h2></div>
+<p dir="auto"><strong>Why did my old Magic MCP stop working?</strong>
+The Magic backend (<code>magic.21st.dev</code>) was superseded by the unified 21st MCP, and all old API keys were reset for security. Update to a fresh key from <a href="/not-found">21st.dev/mcp</a> — your existing <code>@21st-dev/magic</code> config will then work again through this compatibility proxy, though we recommend switching to <code>npx @21st-dev/cli@latest init</code>.</p>
+<p dir="auto"><strong>Is <code>/ui</code> still a thing?</strong>
+Use natural language: ask your agent to search 21st for components (<code>search</code>), or use hosted UI generation (<code>generate</code>) when AI is enabled. The old <code>/ui</code>, <code>/21</code> trigger phrases were a convention of the legacy tools' descriptions, not the protocol.</p>

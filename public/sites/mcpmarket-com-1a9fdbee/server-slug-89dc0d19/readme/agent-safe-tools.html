@@ -1,0 +1,84 @@
+<div class="markdown-heading" dir="auto"><h1 dir="auto">agent-safe-tools</h1></div>
+<p dir="auto"><a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/db9b5be5c3fb98ab.svg" alt="CI"></a>
+<a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/6ffbd06557ed93f1.svg" alt="License: MIT"></a>
+<a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/94dee3ebc6790084.svg" alt="Python"></a></p>
+<p dir="auto">Ask your AI coding agent, in natural language, to search production logs or
+inspect a database — safely. Works with any MCP-capable host (Codex, Claude
+Code, OpenCode, Cursor, ...).</p>
+<p dir="auto"><strong>Core idea: keep the safety red lines in code, not in a prompt.</strong> Instead of
+trusting the model to obey instructions, the limits are enforced by validation
+and covered by unit tests.</p>
+<p dir="auto"><a href="/not-found">English</a> | <a href="/not-found">简体中文</a></p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Packages</h2></div>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Description</th>
+<th>Install</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/not-found"><code>safe-mysql-mcp</code></a></td>
+<td>Read-only-by-default MySQL MCP server with SQL guardrails</td>
+<td><code>pip install -e ./safe-mysql-mcp</code></td>
+</tr>
+<tr>
+<td><a href="/not-found"><code>ssh-logs-mcp</code></a></td>
+<td>Read-only remote log inspection MCP server with a code-enforced command allowlist</td>
+<td><code>pip install -e ./ssh-logs-mcp</code></td>
+</tr>
+</tbody>
+</table>
+<p dir="auto">The two packages are independent and can also be published as separate repositories.</p>
+<p dir="auto">Each package's core is an <strong>MCP server</strong>; it also ships a <code>skill/</code> layer that is
+<strong>recommended</strong> to install on skill-capable hosts (Codex / Claude Code), so the
+model knows when and how to call the tools.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Quick start</h2></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre>git clone https://github.com/wangke-112/agent-safe-tools.git
+<span class="pl-c1">cd</span> agent-safe-tools
+
+<span class="pl-c"><span class="pl-c">#</span> MySQL (read-only)</span>
+pip install -e ./safe-mysql-mcp
+<span class="pl-k">export</span> MYSQL_HOST=127.0.0.1 MYSQL_USER=readonly_user MYSQL_PASSWORD=<span class="pl-k">******</span> MYSQL_DATABASE=app
+safe-mysql-mcp
+
+<span class="pl-c"><span class="pl-c">#</span> Remote logs (read-only)</span>
+pip install -e ./ssh-logs-mcp
+<span class="pl-k">export</span> SSH_LOGS_CONFIG=<span class="pl-k">~</span>/.config/ssh-logs-mcp/servers.json
+ssh-logs-mcp</pre></div>
+<p dir="auto">Host integration snippets (Codex / Claude Code / OpenCode / Cursor) are in each
+package README.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Repository layout</h2></div>
+<div><pre lang="text"><code>agent-safe-tools/
+├── safe-mysql-mcp/
+│   ├── src/safe_mysql_mcp/     # guard / config / db / server
+│   ├── examples/               # profiles and MCP config templates
+│   └── tests/                  # SQL guardrail tests (pure functions, no DB)
+├── ssh-logs-mcp/
+│   ├── src/ssh_logs_mcp/       # policy / config / transport / server
+│   ├── examples/               # servers.json template
+│   └── tests/                  # command policy tests (no SSH)
+└── .github/workflows/ci.yml    # CI across multiple Python versions
+</code></pre></div>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Why "safe"</h2></div>
+<p dir="auto">Letting an agent connect straight to production databases or run remote shell
+commands is risky. Most existing MCP servers only handle "connecting" and leave
+safety to the model's prompt. This project encodes the limits:</p>
+<ul dir="auto">
+<li><strong>Read-only by default</strong>, DDL / dangerous statements blocked, <code>LIMIT</code> injected
+automatically, writes must carry a <code>WHERE</code> clause;</li>
+<li><strong>Command allowlist</strong>, no <code>;</code> / <code>&amp;&amp;</code> / redirects / backticks / <code>$()</code>, no path
+traversal;</li>
+<li><strong>Production disabled by default</strong> and must be enabled explicitly;</li>
+<li><strong>Credentials only via environment variables or local config files</strong>, never
+committed.</li>
+</ul>
+<p dir="auto">All of these rules are pure functions with unit tests.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Tests</h2></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre><span class="pl-c"><span class="pl-c">#</span> Run each package separately (they are independent)</span>
+<span class="pl-c1">cd</span> safe-mysql-mcp <span class="pl-k">&amp;&amp;</span> pip install -e <span class="pl-s"><span class="pl-pds">"</span>.[dev]<span class="pl-pds">"</span></span> <span class="pl-k">&amp;&amp;</span> pytest
+<span class="pl-c1">cd</span> ../ssh-logs-mcp <span class="pl-k">&amp;&amp;</span> pip install -e <span class="pl-s"><span class="pl-pds">"</span>.[dev]<span class="pl-pds">"</span></span> <span class="pl-k">&amp;&amp;</span> pytest</pre></div>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">License</h2></div>
+<p dir="auto"><a href="/not-found">MIT</a></p>

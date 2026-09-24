@@ -1,0 +1,146 @@
+<div class="markdown-heading" dir="auto"><h1 dir="auto">Research Dossier Synthesizer MCP</h1></div>
+<p dir="auto">An MCP server for consultants: decompose research briefs into parallel search queries, synthesize raw findings into a structured dossier with citations, and export it for delivery.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Setup</h2></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre>npm install
+npm run build
+npm run dev</pre></div>
+<p dir="auto">The server needs at least one LLM provider configured via environment variables (see below) — it will fail to start without one.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Configuration</h2></div>
+<p dir="auto">Set these as environment variables (e.g. in a local <code>.env</code> file, or in the <code>env</code> block of your MCP client config):</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ANTHROPIC_API_KEY</code></td>
+<td>one of these</td>
+<td>Anthropic API key. Takes priority over Gemini if both are set.</td>
+</tr>
+<tr>
+<td><code>GEMINI_API_KEY</code></td>
+<td>one of these</td>
+<td>Google Gemini API key.</td>
+</tr>
+<tr>
+<td><code>LLM_PROVIDER</code></td>
+<td>no</td>
+<td><code>anthropic</code> or <code>gemini</code> — forces a provider instead of auto-detecting from which key is present.</td>
+</tr>
+<tr>
+<td><code>ANTHROPIC_MODEL</code></td>
+<td>no</td>
+<td>Defaults to <code>claude-sonnet-5</code>.</td>
+</tr>
+<tr>
+<td><code>GEMINI_MODEL</code></td>
+<td>no</td>
+<td>Defaults to <code>gemini-flash-latest</code>.</td>
+</tr>
+<tr>
+<td><code>ANTHROPIC_WORKSPACE_ID</code></td>
+<td>no</td>
+<td>Required only if your Anthropic API key is workspace-scoped (sends the <code>anthropic-workspace-id</code> header).</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto">Gemini's free tier has a low daily request quota per model — if you hit <code>429 RESOURCE_EXHAUSTED</code>, the server retries with backoff automatically, but a model-wide daily cap needs either waiting for it to reset, switching <code>GEMINI_MODEL</code> to one with separate quota, or enabling billing on the Google Cloud project.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Tools</h2></div>
+<p dir="auto"><strong>decompose_research_brief</strong></p>
+<ul dir="auto">
+<li>Input: Research topic, depth level (surface/intermediate/deep)</li>
+<li>Output: 5-7 focused research queries (JSON)</li>
+<li>Use: Break down complex briefs into parallel search tasks</li>
+</ul>
+<p dir="auto"><strong>synthesize_research</strong></p>
+<ul dir="auto">
+<li>Input: Raw research findings (web_search output), original brief</li>
+<li>Output: Structured dossier (markdown/JSON/outline)</li>
+<li>Use: Transform findings into exec summary + detailed sections + citations</li>
+</ul>
+<p dir="auto"><strong>run_research_workflow</strong></p>
+<ul dir="auto">
+<li>Input: <code>brief</code>, <code>depth</code> (surface/intermediate/deep), <code>format</code> (markdown/json/outline), <code>max_results_per_query</code> (1-10, default 6)</li>
+<li>Output: The synthesized dossier, followed by a <code>---</code> and a workflow-notes line</li>
+<li>Use: One-shot version of decompose → search → synthesize. Runs <code>decompose_research_brief</code>, then fires a provider-native web search for every resulting query <strong>in parallel</strong> (Claude's server-side <code>web_search</code> tool, or Gemini's <code>google_search</code> grounding tool — whichever provider is configured), deduplicates sources across all queries by normalized URL, and feeds the aggregated findings into <code>synthesize_research</code>.</li>
+<li>A search failure on one query doesn't fail the whole run — that query's findings become <code>"Search failed: &lt;reason&gt;"</code> and it's counted separately, listed by name in the workflow-notes line.</li>
+<li>The workflow-notes line reports: queries run, unique sources gathered, any queries that returned zero sources, and a citation count (<code>N/M valid</code>) — see <strong>Citation validation</strong> below.</li>
+</ul>
+<p dir="auto"><strong>export_dossier</strong></p>
+<ul dir="auto">
+<li>Input: <code>dossier</code> (markdown), <code>format</code> (markdown/pdf-outline/slide-outline)</li>
+<li>Output:
+<ul dir="auto">
+<li><code>markdown</code>: the dossier text, unchanged, as a <code>text</code> content block.</li>
+<li><code>pdf-outline</code>: a rendered PDF (headings, bold/italic, links, bullet/numbered lists incl. one level of nesting, tables, code blocks, blockquotes, horizontal rules), returned as an MCP <code>resource</code> content block — <code>{ type: "resource", resource: { uri: "dossier://export.pdf", mimeType: "application/pdf", blob: "&lt;base64&gt;" } }</code>.</li>
+<li><code>slide-outline</code>: <code>{ "slides": [{ "title": string, "content": string[], "notes": string }] }</code> as a <code>text</code> content block (pretty-printed JSON). Each H1 in the markdown starts a new slide; each H2 is pushed onto <code>content</code> as a <code>"## heading"</code> marker; every other block (paragraphs, lists, tables, code, blockquotes) becomes one <code>content</code> entry, in document order. <code>notes</code> is currently always <code>""</code> — the dossier format has no dedicated speaker-notes convention.</li>
+</ul>
+</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Citation validation</h3></div>
+<p dir="auto"><code>run_research_workflow</code> cross-checks every <code>[Source: URL]</code> in the final dossier against the pool of URLs actually returned by the underlying web searches (<code>sourcesGathered</code>, deduplicated with trailing-slash/fragment-insensitive normalization). A citation counts as valid only if it's a well-formed <code>http(s)</code> URL <em>and</em> matches a gathered source. The workflow-notes footer reports the tally and lists up to 5 unmatched citations, so you can spot fabricated or malformed URLs at a glance. <code>synthesize_research</code> on its own has no source pool to check against — if you're calling it directly with your own findings, verify citations manually.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Integration with Claude Desktop</h2></div>
+<p dir="auto">Add to <code>~/Library/Application Support/Claude/claude_desktop_config.json</code> (macOS) or <code>%APPDATA%\Claude\claude_desktop_config.json</code> (Windows):</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"research-dossier"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>node<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"args"</span>: [<span class="pl-s"><span class="pl-pds">"</span>/path/to/research-dossier-mcp/dist/index.js<span class="pl-pds">"</span></span>],
+      <span class="pl-ent">"env"</span>: {
+        <span class="pl-ent">"ANTHROPIC_API_KEY"</span>: <span class="pl-s"><span class="pl-pds">"</span>sk-ant-...<span class="pl-pds">"</span></span>
+      }
+    }
+  }
+}</pre></div>
+<p dir="auto">Run <code>npm run build</code> first so <code>dist/index.js</code> exists. Fully quit and reopen Claude Desktop (not just close the window) to pick up config changes.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Typical Workflow</h2></div>
+<p dir="auto"><strong>One-shot (recommended):</strong></p>
+<ol dir="auto">
+<li><strong>User</strong> (you): "Research SaaS consolidation trends in APAC"</li>
+<li><strong>run_research_workflow</strong>: Decomposes the brief, searches every query in parallel, synthesizes the results, and returns the finished dossier plus a workflow-notes summary in one call.</li>
+<li><strong>export_dossier</strong>: Output as markdown, PDF, or a slide outline for delivery.</li>
+</ol>
+<p dir="auto"><strong>Manual (more control over each step):</strong></p>
+<ol dir="auto">
+<li><strong>decompose_research_brief</strong>: Generates 6 queries:
+<ul dir="auto">
+<li>SaaS consolidation metrics 2024-2026</li>
+<li>APAC adoption rates by vertical</li>
+<li>Cost savings benchmarks</li>
+<li>Integration &amp; vendor lock-in concerns</li>
+<li>Regulatory drivers (India, Singapore, etc.)</li>
+<li>Competitive landscape (Gartner, Forrester reports)</li>
+</ul>
+</li>
+<li><strong>Claude</strong> (with its own web_search, or by calling this server's queries individually): Runs queries in parallel, collects findings</li>
+<li><strong>synthesize_research</strong>: Compiles findings into dossier:
+<ul dir="auto">
+<li>Exec summary (200 words)</li>
+<li>Key findings (3-5 points with citations)</li>
+<li>Trends by region/vertical</li>
+<li>Implications for consulting clients</li>
+</ul>
+</li>
+<li><strong>export_dossier</strong>: Output as markdown → PDF/slides, or send to client</li>
+</ol>
+<p dir="auto">Use the manual path when you want to substitute your own search results (e.g. from a client's proprietary database) instead of the provider's built-in web search, or want to inspect/edit findings between steps.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Troubleshooting</h2></div>
+<ul dir="auto">
+<li><strong><code>No LLM configured</code> at startup</strong>: neither <code>ANTHROPIC_API_KEY</code> nor <code>GEMINI_API_KEY</code> is set in the environment the server actually runs in (a local <code>.env</code> file is <em>not</em> auto-loaded — export the vars or pass them via your MCP client's <code>env</code> block).</li>
+<li><strong><code>Gemini API error (429): ...RESOURCE_EXHAUSTED</code></strong>: daily free-tier quota hit for <code>GEMINI_MODEL</code>. The server retries transient 429/503s with backoff automatically; a hard daily cap needs waiting for reset, switching models, or enabling billing.</li>
+<li><strong><code>Gemini API error (400)</code> mentioning <code>thinkingConfig</code></strong>: some Gemini model variants reject <code>thinkingConfig</code> outright — the server detects this and retries without it automatically. If you still see this bubble up as a final error, the underlying request itself is likely malformed (check <code>GEMINI_MODEL</code> is a real model name).</li>
+<li><strong><code>decompose_research_brief did not return valid JSON</code></strong> (from <code>run_research_workflow</code>): the model wrapped its JSON in prose or markdown fences despite the system prompt. Retrying usually resolves it; if it's persistent for a given provider/model, tighten the system prompt in <code>decomposeResearchBrief</code> (<code>src/research.ts</code>).</li>
+<li><strong>Citations flagged as unmatched in the workflow-notes footer</strong>: <code>synthesize_research</code> restated a claim without carrying over its <code>[Source: URL]</code> verbatim, or invented one. Check <code>src/research.ts</code>'s <code>synthesizeResearch</code> system prompt first — it's instructed to preserve URLs exactly and drop unsourced claims, but small/fast models sometimes ignore that.</li>
+<li><strong>A query in <code>run_research_workflow</code> comes back empty</strong>: normal and handled gracefully — that query's findings become a "no results" note, it's excluded from the source pool, and it's called out by name in the workflow-notes footer. If <em>every</em> query comes back empty, suspect an API-level issue (auth, quota, or the model not invoking its search tool) rather than the topic itself.</li>
+<li><strong>PDF export looks off for very unusual markdown</strong>: the renderer (<code>src/export.ts</code>) handles headings, bold/italic/links/inline code, one level of nested bullet/numbered lists, tables, fenced code blocks, blockquotes, and horizontal rules. Anything else (e.g. deeply nested lists, HTML blocks, footnotes) falls back to plain text rather than failing the export.</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Notes</h2></div>
+<ul dir="auto">
+<li>Synthesis quality depends on prompt tuning — see <code>synthesizeResearch</code> in <code>src/research.ts</code>.</li>
+<li>Citations are requested inline as <code>[Source: URL]</code>; <code>run_research_workflow</code> validates them automatically (see above), but if you call <code>synthesize_research</code> directly with your own findings, verify citations manually.</li>
+<li><code>export_dossier</code> does no LLM call (it's pure markdown parsing + PDF/JSON rendering), so it needs no provider key by itself — but the server as a whole still requires one configured to start.</li>
+</ul>

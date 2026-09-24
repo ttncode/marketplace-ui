@@ -1,0 +1,183 @@
+<p align="center" dir="auto">
+  <a href="/not-found">
+    <picture>
+      
+      <img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/01e555ec7e82c417.png" alt="OpenSpec logo">
+    </picture>
+  </a>
+</p>
+<p align="center" dir="auto">
+  <a href="/not-found"><img alt="CI" src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/cbdca0b89e8f8466.svg"></a>
+  <a href="/not-found"><img alt="npm version" src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/6ded51ed5aeff601.svg"></a>
+  <a href="/not-found"><img alt="License: MIT" src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/420db1feb83ece10.svg"></a>
+  <a href="/not-found"><img alt="Discord" src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/cd1144666080d63b.svg"></a>
+</p>
+<details>
+<summary><strong>The most loved spec framework.</strong></summary>
+<p dir="auto"><a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/056daaccea44231e.svg" alt="Stars"></a>
+<a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/f76eb5e4f7c1b979.svg" alt="Downloads"></a>
+<a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/2ca53c435de9d3d2.svg" alt="Contributors"></a></p>
+</details>
+<p dir="auto"></p>
+Our philosophy:
+<div><pre lang="text"><code>→ fluid not rigid
+→ iterative not waterfall
+→ easy not complex
+→ built for brownfield not just greenfield
+→ scalable from personal projects to enterprises
+</code></pre></div>
+<div class="markdown-alert markdown-alert-tip" dir="auto"><p dir="auto">Tip</p><p dir="auto"><strong>New workflow now available!</strong> We've rebuilt OpenSpec with a new artifact-guided workflow.</p>
+<p dir="auto">Run <code>/opsx:propose "your idea"</code> to get started. → <a href="/not-found">Learn more here</a></p>
+</div>
+<p align="center" dir="auto">
+  Follow <a href="/not-found">@0xTab on X</a> for updates · Join the <a href="/not-found">OpenSpec Discord</a> for help and questions.
+</p>
+
+<div class="markdown-heading" dir="auto"><h2 dir="auto">See it in action</h2></div>
+<div><pre lang="text"><code>You: /opsx:explore
+AI:  What would you like to explore?
+You: I want dark mode but I'm not sure how to do it cleanly.
+AI:  Let me look at your styling setup...
+     Cleanest path here: CSS variables + a small theme context,
+     with system-preference detection. No new dependencies. Scope it?
+You: Yes, let's do it.
+
+You: /opsx:propose add-dark-mode
+AI:  Created openspec/changes/add-dark-mode/
+     ✓ proposal.md — why we're doing this, what's changing
+     ✓ specs/       — requirements and scenarios
+     ✓ design.md    — technical approach
+     ✓ tasks.md     — implementation checklist
+     Ready for implementation!
+
+You: /opsx:apply
+AI:  Implementing tasks...
+     ✓ 1.1 Add theme context provider
+     ✓ 1.2 Create toggle component
+     ✓ 2.1 Add CSS variables
+     ✓ 2.2 Wire up localStorage
+     All tasks complete!
+
+You: /opsx:archive
+AI:  Archived to openspec/changes/archive/2025-01-23-add-dark-mode/
+     Specs updated. Ready for the next feature.
+</code></pre></div>
+<details>
+<summary><strong>What do the specs actually look like?</strong></summary>
+<p dir="auto">Plain Markdown — requirements with concrete scenarios, no special syntax to learn. Here's what goes in the <code>specs/</code> folder created above:</p>
+<div class="highlight highlight-text-md" dir="auto"><pre><span class="pl-mh">## <span class="pl-en">ADDED Requirements</span></span>
+
+<span class="pl-mh">### <span class="pl-en">Requirement: Theme selection</span></span>
+The app SHALL let users switch between light and dark themes,
+defaulting to the system preference.
+
+<span class="pl-mh">#### <span class="pl-en">Scenario: User toggles dark mode</span></span>
+<span class="pl-v">-</span> <span class="pl-s">**</span>WHEN<span class="pl-s">**</span> the user clicks the theme toggle
+<span class="pl-v">-</span> <span class="pl-s">**</span>THEN<span class="pl-s">**</span> the app switches to dark mode and persists the choice</pre></div>
+<p dir="auto">Your AI writes these; you review the plan before any code is written.</p>
+<p dir="auto">OpenSpec is built with OpenSpec — browse this repo's live <a href="/not-found">specs</a> and in-flight <a href="/not-found">changes</a> for real examples at scale.</p>
+</details>
+<details>
+<summary><strong>OpenSpec Dashboard</strong></summary>
+<p align="center" dir="auto">
+  <a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/88ba8bb685bceee4.webp" alt="OpenSpec dashboard preview" width="90%"></a>
+</p>
+</details>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Why teams adopt OpenSpec</h2></div>
+<p dir="auto">Solo, OpenSpec keeps you and your AI honest on a single repo. On a team, the hard part moves: a feature spans the API server, the web app, and a shared library; requirements are owned by one team and consumed by others; planning starts before any code exists.</p>
+<p dir="auto"><strong><a href="/not-found">Stores</a></strong> are the answer — planning in a repo of its own. The same <code>openspec/</code> shape you already know (specs and changes), shared by <code>git push</code> like anything else. One source of truth your whole team and every coding agent can read, across every repo.</p>
+<ul dir="auto">
+<li><strong>Cross-repo features</strong> — one change, one plan, even when the code lands in three repos.</li>
+<li><strong>Shared requirements</strong> — a platform team owns the specs; product teams reference them read-only, right where their coding agent can read them. No drifting wiki.</li>
+<li><strong>Plan before code</strong> — capture the plan in the store now; the code repos catch up later.</li>
+</ul>
+<blockquote>
+<p dir="auto">Stores are in <strong>beta</strong>. Start with the <a href="/not-found">Stores User Guide</a>.</p>
+</blockquote>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Quick Start</h2></div>
+<p dir="auto"><strong>Requires Node.js 20.19.0 or higher.</strong> Homebrew installs it as a dependency.</p>
+<p dir="auto">Install OpenSpec globally:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>npm install -g @fission-ai/openspec@latest</pre></div>
+<p dir="auto">Or install the official <a href="/not-found">Homebrew formula</a> on macOS or Linux:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>brew install openspec</pre></div>
+<p dir="auto">Then navigate to your project directory and initialize:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre><span class="pl-c1">cd</span> your-project
+openspec init</pre></div>
+<blockquote>
+<p dir="auto"><strong>Want your AI to do it?</strong> Paste the <a href="/not-found">setup prompt</a> into your coding assistant — it installs the CLI, runs <code>openspec init</code>, and verifies the result.</p>
+</blockquote>
+<p dir="auto">Now talk to your AI:</p>
+<ul dir="auto">
+<li><strong>Not sure what to build yet?</strong> Start with <code>/opsx:explore</code>, a no-stakes thinking partner that reads your code, weighs options, and shapes a plan before any code gets written. (<a href="/not-found">Explore guide</a>)</li>
+<li><strong>Already know what you want?</strong> Go straight to <code>/opsx:propose &lt;what-you-want-to-build&gt;</code>.</li>
+</ul>
+<p dir="auto">Both are in the default profile. If you want the expanded workflow (<code>/opsx:new</code>, <code>/opsx:continue</code>, <code>/opsx:ff</code>, <code>/opsx:verify</code>, <code>/opsx:bulk-archive</code>, <code>/opsx:onboard</code>), select it with <code>openspec config profile</code> and apply with <code>openspec update</code>.</p>
+<p dir="auto"><code>/opsx:propose</code> is the canonical name; your tool may spell it <code>/opsx-propose</code> (Cursor, GitHub Copilot), <code>@opsx-propose</code> (Amazon Q) or <code>$openspec-propose</code> (Codex). <code>openspec init</code> prints the right form for the tools you picked — see <a href="/not-found">How To Invoke</a>.</p>
+<div class="markdown-alert markdown-alert-note" dir="auto"><p dir="auto">Note</p><p dir="auto">Not sure if your tool is supported? <a href="/not-found">View the full list</a> – we support 30+ tools and growing.</p>
+<p dir="auto">Also works with Homebrew, pnpm, yarn, bun, and Nix. <a href="/not-found">See installation options</a>.</p>
+</div>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Docs</h2></div>
+<p dir="auto"><strong>Start here:</strong> the <strong><a href="/not-found">Documentation Home</a></strong> maps everything. New to OpenSpec? Read <a href="/not-found">Getting Started</a>, then <a href="/not-found">How Commands Work</a> (where you actually type <code>/opsx:propose</code>).</p>
+<p dir="auto">→ <strong><a href="/not-found">Getting Started</a></strong>: first steps<br>
+→ <strong><a href="/not-found">Explore First</a></strong>: think it through with <code>/opsx:explore</code> before you commit<br>
+→ <strong><a href="/not-found">How Commands Work</a></strong>: where slash commands run vs the CLI<br>
+→ <strong><a href="/not-found">Core Concepts at a Glance</a></strong>: the whole mental model, one page<br>
+→ <strong><a href="/not-found">Examples &amp; Recipes</a></strong>: real changes, start to finish<br>
+→ <strong><a href="/not-found">Workflows</a></strong>: combos and patterns<br>
+→ <strong><a href="/not-found">Existing Projects</a></strong>: adopt OpenSpec on a brownfield codebase<br>
+→ <strong><a href="/not-found">Editing a Change</a></strong>: update artifacts, go back, reconcile manual edits<br>
+→ <strong><a href="/not-found">Commands</a></strong>: slash commands &amp; skills<br>
+→ <strong><a href="/not-found">CLI</a></strong>: terminal reference<br>
+→ <strong><a href="/not-found">Stores</a></strong>: plan in a separate repo, shared across your team (beta)<br>
+→ <strong><a href="/not-found">Supported Tools</a></strong>: tool integrations &amp; install paths<br>
+→ <strong><a href="/not-found">Concepts</a></strong>: how it all fits<br>
+→ <strong><a href="/not-found">Multi-Language</a></strong>: multi-language support<br>
+→ <strong><a href="/not-found">Customization</a></strong>: make it yours<br>
+→ <strong><a href="/not-found">Community Showcase</a></strong>: projects and resources built with and for OpenSpec<br>
+→ <strong><a href="/not-found">FAQ</a></strong> · <strong><a href="/not-found">Troubleshooting</a></strong> · <strong><a href="/not-found">Glossary</a></strong>: quick help</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Community schemas</h2></div>
+<p dir="auto">Third-party schema bundles distributed via standalone repositories — these provide opinionated workflows that integrate OpenSpec with other tools, similar to how <a href="/not-found">github/spec-kit's community extension catalog</a> handles tool integrations.</p>
+<p dir="auto">→ <strong><a href="/not-found">Browse the catalog</a></strong> in the customization docs.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Why OpenSpec?</h2></div>
+<p dir="auto">AI coding assistants are powerful but unpredictable when requirements live only in chat history. OpenSpec adds a lightweight spec layer so you agree on what to build before any code is written.</p>
+<ul dir="auto">
+<li><strong>Agree before you build</strong> — human and AI align on specs before code gets written</li>
+<li><strong>Stay organized</strong> — each change gets its own folder with proposal, specs, design, and tasks</li>
+<li><strong>Work fluidly</strong> — update any artifact anytime, no rigid phase gates</li>
+<li><strong>Use your tools</strong> — works with 30+ AI assistants via slash commands</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">How we compare</h3></div>
+<p dir="auto"><strong>vs. <a href="/not-found">Spec Kit</a></strong> (GitHub) — Thorough but heavyweight. Rigid phase gates, lots of Markdown, Python setup. OpenSpec is lighter and lets you iterate freely.</p>
+<p dir="auto"><strong>vs. <a href="/not-found">Kiro</a></strong> (AWS) — Powerful but you're locked into their IDE and limited to Claude models. OpenSpec works with the tools you already use.</p>
+<p dir="auto"><strong>vs. nothing</strong> — AI coding without specs means vague prompts and unpredictable results. OpenSpec brings predictability without the ceremony.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Updating OpenSpec</h2></div>
+<p dir="auto"><strong>Upgrade the package</strong></p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>npm install -g @fission-ai/openspec@latest</pre></div>
+<p dir="auto">If you installed OpenSpec with Homebrew:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>brew upgrade openspec</pre></div>
+<p dir="auto"><strong>Refresh agent instructions</strong></p>
+<p dir="auto">Run this inside each project to regenerate AI guidance and ensure the latest slash commands are active:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>openspec update</pre></div>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Usage Notes</h2></div>
+<p dir="auto"><strong>Model selection</strong>: OpenSpec works best with high-reasoning models. We recommend Codex 5.5 and Opus 4.7 for both planning and implementation.</p>
+<p dir="auto"><strong>Context hygiene</strong>: OpenSpec benefits from a clean context window. Clear your context before starting implementation and maintain good context hygiene throughout your session.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Contributing</h2></div>
+<p dir="auto">Open a discussion (for core design changes) or an issue before you open a PR, and link the issue or discussion from the PR. New features, significant refactors, and architectural changes need an OpenSpec change proposal first.</p>
+<p dir="auto">→ <strong><a href="/not-found">CONTRIBUTING.md</a></strong>: the full process, from first issue to merged PR</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Other</h2></div>
+<details>
+<summary><strong>Telemetry</strong></summary>
+<p dir="auto">OpenSpec collects anonymous usage stats.</p>
+<p dir="auto">We collect only command names and version to understand usage patterns. No arguments, paths, content, or PII. Automatically disabled in CI.</p>
+<p dir="auto"><strong>Opt-out (any one is enough):</strong></p>
+<ul dir="auto">
+<li><code>openspec config set telemetry.enabled false</code> (global config; unset means on)</li>
+<li><code>export OPENSPEC_TELEMETRY=0</code> or <code>export DO_NOT_TRACK=1</code> (env overrides config)</li>
+</ul>
+</details>
+<details>
+<summary><strong>Maintainers &amp; Advisors</strong></summary>
+<p dir="auto">See <a href="/not-found">MAINTAINERS.md</a> for the list of core maintainers and advisors who help guide the project.</p>
+</details>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">License</h2></div>
+<p dir="auto">MIT</p>

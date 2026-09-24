@@ -1,0 +1,878 @@
+<p dir="auto"><a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/456ed0767dcf6c69.png" alt="MseeP.ai Security Assessment Badge"></a></p>
+<div class="markdown-heading" dir="auto"><h1 dir="auto">Garmin MCP Server</h1></div>
+<p dir="auto">This Model Context Protocol (MCP) server connects to Garmin Connect and exposes your fitness and health data to Claude and other MCP-compatible clients.</p>
+<p dir="auto">Garmin's API is accessed via the awesome <a href="/not-found">python-garminconnect</a> library.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Features</h2></div>
+<ul dir="auto">
+<li>List recent activities with pagination support</li>
+<li>Get detailed activity information</li>
+<li>Edit activities: name, type, description/notes, event type, perceived effort (RPE), and feel</li>
+<li>Access health metrics (steps, heart rate, sleep, stress, respiration)</li>
+<li>View body composition data</li>
+<li>Track training status and readiness</li>
+<li>Access cycling FTP and lactate threshold metrics</li>
+<li>Manage gear and equipment, including free-text notes returned by <code>get_gear</code></li>
+<li>Access workouts and training plans</li>
+<li>Inspect detailed workout step structures, including repeat groups and swim pace targets</li>
+<li>Weekly health aggregates (steps, stress, intensity minutes)</li>
+<li>Advanced cycling analytics: power zones, FIT file analysis, DI2 electronic shift intelligence</li>
+<li>Training load trend (CTL/ATL/TSB), HRV trend, VO2 max trend, respiration rate trend</li>
+<li>Power Duration Curve, climb detection with VAM, cardiac drift (aerobic decoupling), W/kg calculations</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Tool Coverage</h3></div>
+<p dir="auto">This MCP server implements <strong>110+ tools</strong> covering ~90% of the <a href="/not-found">python-garminconnect</a> library (v0.3.2):</p>
+<ul dir="auto">
+<li>✅ Activity Management (20 tools) - includes write tools for type, description, event type, perceived effort, and feel</li>
+<li>✅ Health &amp; Wellness (34 tools) - includes custom lightweight summary tools</li>
+<li>✅ Training &amp; Performance (13 tools) - includes CTL/ATL/TSB, HRV, VO2 max, and respiration trends</li>
+<li>✅ Workouts (8 tools)</li>
+<li>✅ Devices (7 tools)</li>
+<li>✅ Gear Management (5 tools)</li>
+<li>✅ Weight Tracking (5 tools)</li>
+<li>✅ Challenges &amp; Badges (10 tools)</li>
+<li>✅ Nutrition (9 tools) - food logs, meals, custom foods, food logging, and multi-day intake summaries</li>
+<li>✅ Women's Health (3 tools)</li>
+<li>✅ User Profile (3 tools)</li>
+<li>✅ High-Level Workout Builders (4 tools) - create and schedule workouts without writing JSON</li>
+<li>✅ Courses (5 tools) - list / get details / upload GPX as course / download GPX / delete course</li>
+<li>✅ Activity Analysis (2 tools) - FIT file parsing, Power Duration Curve; requires power meter and/or Di2</li>
+<li>✅ Activity File Downloads (2 tools) - download activity files in FIT, GPX, TCX, or CSV format</li>
+</ul>
+<blockquote>
+<p dir="auto"><strong>Note:</strong> Activity Analysis tools require a compatible power meter (e.g., Garmin Rally, Favero Assioma, PowerTap P1) and/or Shimano Di2 / SRAM eTap electronic shifting. The <code>fitparse</code> dependency is installed automatically.</p>
+</blockquote>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Gear Notes</h3></div>
+<p dir="auto">Each item in the <code>gear</code> array returned by <code>get_gear</code> includes a <code>notes</code> field
+containing the free-text Notes value shown in Garmin Connect. Gear without a
+Notes value returns <code>null</code>; all existing gear fields remain unchanged.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Activity File Downloads</h3></div>
+<p dir="auto">Two tools let you download a raw activity file to disk:</p>
+<ul dir="auto">
+<li><strong><code>download_activity_file(activity_id, format="fit", output_dir=None)</code></strong> — downloads the activity and saves it to the configured directory. <code>format</code> accepts <code>fit</code> (default), <code>gpx</code>, <code>tcx</code>, or <code>csv</code>.</li>
+<li><strong><code>set_fit_download_dir(path)</code></strong> — sets and persists the default download directory (written to the config file).</li>
+</ul>
+<p dir="auto"><strong>Where files are saved (precedence):</strong></p>
+<ol dir="auto">
+<li><code>output_dir</code> argument — one-off override, not persisted.</li>
+<li><code>GARMIN_FIT_DOWNLOAD_DIR</code> environment variable.</li>
+<li>Persisted config set via <code>set_fit_download_dir</code>.</li>
+</ol>
+<p dir="auto"><strong>First-run behavior:</strong> if no directory is configured, <code>download_activity_file</code> returns <code>status: "needs_setup"</code>. The assistant will ask where you want to save files (suggesting the current directory as default), call <code>set_fit_download_dir</code> to persist your choice, and then retry the download automatically.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Intentionally Skipped Endpoints</h3></div>
+<p dir="auto">Some endpoints are not implemented due to performance or complexity considerations:</p>
+<p dir="auto"><strong>High Data Volume:</strong></p>
+<ul dir="auto">
+<li><code>get_activity_details()</code> - Returns large GPS tracks and chart data (50KB-500KB). Use <code>get_activity()</code> for summaries instead.</li>
+</ul>
+<p dir="auto"><strong>Specialized Workout Formats:</strong></p>
+<ul dir="auto">
+<li><code>upload_running_workout()</code>, <code>upload_cycling_workout()</code>, <code>upload_swimming_workout()</code> - Sport-specific workout uploads. Use <code>upload_workout()</code> for general workouts.</li>
+</ul>
+<p dir="auto"><strong>Maintenance &amp; Destructive Operations:</strong></p>
+<ul dir="auto">
+<li><code>delete_activity()</code>, <code>delete_blood_pressure()</code> - Destructive operations require careful consideration.</li>
+<li>Internal/Auth methods: <code>login()</code>, <code>resume_login()</code>, <code>connectapi()</code>, <code>download()</code> - Handled automatically by the library.</li>
+</ul>
+<p dir="auto">If you need any of these endpoints, please <a href="/not-found">open an issue</a>.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Tool Filtering</h2></div>
+<p dir="auto">This server registers 110+ tools by default, which can be a lot of context for
+an LLM to carry in every session. You can expose only the tools you need with
+two optional environment variables:</p>
+<table>
+<thead>
+<tr>
+<th>Env var</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GARMIN_ENABLED_TOOLS</code></td>
+<td>Comma-separated <strong>allowlist</strong> — if set, <em>only</em> these tools are registered.</td>
+</tr>
+<tr>
+<td><code>GARMIN_DISABLED_TOOLS</code></td>
+<td>Comma-separated <strong>denylist</strong> — listed tools are skipped. Ignored if an allowlist is set.</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto">Tool names are case-insensitive. With neither variable set, all tools register
+(unchanged default behaviour). Names that match no tool are ignored with a
+warning on stderr, which makes typos easy to spot.</p>
+<p dir="auto">Example — expose only sleep, stress, and recent activities:</p>
+<div class="highlight highlight-source-json" dir="auto"><pre><span class="pl-ent">"env"</span>: {
+  <span class="pl-ent">"GARMIN_ENABLED_TOOLS"</span>: <span class="pl-s"><span class="pl-pds">"</span>get_sleep_data,get_stress_summary,get_activities<span class="pl-pds">"</span></span>
+}</pre></div>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">High-level workout tools</h2></div>
+<p dir="auto">These builder tools let an LLM create and schedule workouts without writing raw Garmin JSON.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>create_walk_run_workout</code></h3></div>
+<p dir="auto">Creates a walk/run interval workout with optional heart-rate zone target.</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"name"</span>: <span class="pl-s"><span class="pl-pds">"</span>W3 Mié 2:2<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"run_seconds"</span>: <span class="pl-c1">120</span>,
+  <span class="pl-ent">"walk_seconds"</span>: <span class="pl-c1">120</span>,
+  <span class="pl-ent">"repeats"</span>: <span class="pl-c1">9</span>,
+  <span class="pl-ent">"warmup_min"</span>: <span class="pl-c1">10</span>,
+  <span class="pl-ent">"cooldown_min"</span>: <span class="pl-c1">8</span>,
+  <span class="pl-ent">"hr_zone"</span>: <span class="pl-s"><span class="pl-pds">"</span>Z3<span class="pl-pds">"</span></span>
+}</pre></div>
+<p dir="auto">Returns: <code>{"status": "success", "workout_id": 1234567890, ...}</code></p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>create_z2_walk_workout</code></h3></div>
+<p dir="auto">Creates a steady Z2 walking workout.</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"name"</span>: <span class="pl-s"><span class="pl-pds">"</span>Z2 Walk 45m<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"duration_min"</span>: <span class="pl-c1">45</span>,
+  <span class="pl-ent">"hr_min"</span>: <span class="pl-c1">110</span>,
+  <span class="pl-ent">"hr_max"</span>: <span class="pl-c1">130</span>
+}</pre></div>
+<p dir="auto">Returns: <code>{"status": "success", "workout_id": 1234567890, ...}</code></p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>create_strength_workout</code></h3></div>
+<p dir="auto">Creates a strength workout from a list of exercises. Each becomes a reps-based step, with the
+name kept in the step description. The name is also sent as <code>exerciseName</code>, but Garmin only
+retains that when it matches one of its own exercise keys (e.g. <code>FARMERS_CARRY</code>) — any other
+value is accepted and then stored empty.</p>
+<p dir="auto"><code>category</code> is optional and passed straight through. Omit it and the key is left out of the
+payload entirely, which Garmin accepts. Supply it and it must be one of Garmin's exercise
+categories — anything else, including <code>OTHER</code> and <code>UNASSIGNED</code>, is rejected with
+<code>400 - Invalid category</code>. The full list is published at
+<a href="/not-found"><code>Exercises.json</code></a>.</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"name"</span>: <span class="pl-s"><span class="pl-pds">"</span>Full Body A<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"exercises"</span>: [
+    {<span class="pl-ent">"name"</span>: <span class="pl-s"><span class="pl-pds">"</span>Sentadillas<span class="pl-pds">"</span></span>, <span class="pl-ent">"sets"</span>: <span class="pl-c1">3</span>, <span class="pl-ent">"reps"</span>: <span class="pl-c1">12</span>, <span class="pl-ent">"rest_seconds"</span>: <span class="pl-c1">90</span>},
+    {<span class="pl-ent">"name"</span>: <span class="pl-s"><span class="pl-pds">"</span>Flexiones<span class="pl-pds">"</span></span>,   <span class="pl-ent">"sets"</span>: <span class="pl-c1">3</span>, <span class="pl-ent">"reps"</span>: <span class="pl-c1">15</span>, <span class="pl-ent">"rest_seconds"</span>: <span class="pl-c1">60</span>},
+    {<span class="pl-ent">"name"</span>: <span class="pl-s"><span class="pl-pds">"</span>Peso muerto<span class="pl-pds">"</span></span>, <span class="pl-ent">"sets"</span>: <span class="pl-c1">3</span>, <span class="pl-ent">"reps"</span>: <span class="pl-c1">10</span>, <span class="pl-ent">"rest_seconds"</span>: <span class="pl-c1">90</span>},
+    {<span class="pl-ent">"name"</span>: <span class="pl-s"><span class="pl-pds">"</span>Farmers Carry 40m<span class="pl-pds">"</span></span>, <span class="pl-ent">"sets"</span>: <span class="pl-c1">3</span>, <span class="pl-ent">"reps"</span>: <span class="pl-c1">1</span>, <span class="pl-ent">"rest_seconds"</span>: <span class="pl-c1">90</span>, <span class="pl-ent">"category"</span>: <span class="pl-s"><span class="pl-pds">"</span>CARRY<span class="pl-pds">"</span></span>}
+  ]
+}</pre></div>
+<p dir="auto">Returns: <code>{"status": "success", "workout_id": 1234567890, ...}</code></p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>schedule_week</code></h3></div>
+<p dir="auto">Schedules multiple workouts in one call.</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"week"</span>: [
+    {<span class="pl-ent">"date"</span>: <span class="pl-s"><span class="pl-pds">"</span>2026-05-12<span class="pl-pds">"</span></span>, <span class="pl-ent">"workout_id"</span>: <span class="pl-c1">1234567890</span>},
+    {<span class="pl-ent">"date"</span>: <span class="pl-s"><span class="pl-pds">"</span>2026-05-14<span class="pl-pds">"</span></span>, <span class="pl-ent">"workout_id"</span>: <span class="pl-c1">1234567891</span>}
+  ]
+}</pre></div>
+<p dir="auto">Returns: <code>{"status": "complete", "scheduled": [...]}</code></p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Full flow example</h3></div>
+<div><pre lang="text"><code>create_walk_run_workout(name="W3 Mié 2:2", run_seconds=120, walk_seconds=120,
+                        repeats=9, warmup_min=10, cooldown_min=8)
+  → workout_id = 1560092011
+
+schedule_workout(workout_id=1560092011, date="2026-05-06")
+  → OK
+</code></pre></div>
+<p dir="auto">After syncing your watch, the workout appears on the Forerunner 965 calendar.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Raw <code>upload_workout</code> end conditions</h3></div>
+<p dir="auto">When building custom workout JSON for <code>upload_workout</code> or <code>upload_workouts</code>, the
+<code>endCondition.conditionTypeId</code> and <code>endCondition.conditionTypeKey</code> must match
+Garmin's canonical mapping. Garmin treats the numeric <code>conditionTypeId</code> as the
+source of truth; if the key and ID conflict, Garmin stores the condition that
+matches the ID.</p>
+<p dir="auto">For example, this is invalid for a heart-rate end condition because ID <code>4</code> is
+<code>calories</code>, not <code>heart.rate</code>:</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"endCondition"</span>: {
+    <span class="pl-ent">"conditionTypeId"</span>: <span class="pl-c1">4</span>,
+    <span class="pl-ent">"conditionTypeKey"</span>: <span class="pl-s"><span class="pl-pds">"</span>heart.rate<span class="pl-pds">"</span></span>
+  },
+  <span class="pl-ent">"endConditionValue"</span>: <span class="pl-c1">145</span>
+}</pre></div>
+<p dir="auto">Use ID <code>6</code> for heart rate:</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"endCondition"</span>: {
+    <span class="pl-ent">"conditionTypeId"</span>: <span class="pl-c1">6</span>,
+    <span class="pl-ent">"conditionTypeKey"</span>: <span class="pl-s"><span class="pl-pds">"</span>heart.rate<span class="pl-pds">"</span></span>
+  },
+  <span class="pl-ent">"endConditionValue"</span>: <span class="pl-c1">145</span>
+}</pre></div>
+<p dir="auto">For a zone-based heart-rate end condition, use <code>endConditionZone</code> (1-5) on the
+same <code>endCondition</code> object and omit <code>endConditionValue</code>. If both are sent,
+Garmin keeps the zone and drops the value (verified against the production API
+on 2026-09-01):</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"endCondition"</span>: {
+    <span class="pl-ent">"conditionTypeId"</span>: <span class="pl-c1">6</span>,
+    <span class="pl-ent">"conditionTypeKey"</span>: <span class="pl-s"><span class="pl-pds">"</span>heart.rate<span class="pl-pds">"</span></span>,
+    <span class="pl-ent">"endConditionZone"</span>: <span class="pl-c1">2</span>
+  }
+}</pre></div>
+<p dir="auto">Common end-condition IDs:</p>
+<table>
+<thead>
+<tr>
+<th align="right">ID</th>
+<th>Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">1</td>
+<td><code>lap.button</code></td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td><code>time</code></td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td><code>distance</code></td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td><code>calories</code></td>
+</tr>
+<tr>
+<td align="right">5</td>
+<td><code>power</code></td>
+</tr>
+<tr>
+<td align="right">6</td>
+<td><code>heart.rate</code></td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td><code>iterations</code></td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td><code>fixed.rest</code></td>
+</tr>
+<tr>
+<td align="right">9</td>
+<td><code>fixed.repetition</code></td>
+</tr>
+<tr>
+<td align="right">10</td>
+<td><code>reps</code></td>
+</tr>
+<tr>
+<td align="right">11</td>
+<td><code>training.peaks.tss</code></td>
+</tr>
+</tbody>
+</table>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Raw <code>upload_workout</code> target types</h3></div>
+<p dir="auto">When building raw Garmin workout JSON, <code>targetType.workoutTargetTypeId</code> and
+<code>targetType.workoutTargetTypeKey</code> must use Garmin's canonical mapping. Garmin
+treats the numeric ID as authoritative: a mismatched payload such as
+<code>{"workoutTargetTypeId": 6, "workoutTargetTypeKey": "heart.rate"}</code> is stored as
+<code>pace.zone</code>, because ID <code>6</code> means <code>pace.zone</code>.</p>
+<p dir="auto">For a custom heart-rate range, use target type ID <code>4</code> with <code>heart.rate.zone</code> and
+put the bpm range in <code>targetValueOne</code> / <code>targetValueTwo</code>. These value fields
+belong on the workout step, alongside <code>targetType</code>; do not nest them inside the
+<code>targetType</code> object:</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"targetType"</span>: {
+    <span class="pl-ent">"workoutTargetTypeId"</span>: <span class="pl-c1">4</span>,
+    <span class="pl-ent">"workoutTargetTypeKey"</span>: <span class="pl-s"><span class="pl-pds">"</span>heart.rate.zone<span class="pl-pds">"</span></span>
+  },
+  <span class="pl-ent">"targetValueOne"</span>: <span class="pl-c1">143</span>,
+  <span class="pl-ent">"targetValueTwo"</span>: <span class="pl-c1">157</span>
+}</pre></div>
+<p dir="auto">The same shape applies to a custom running pace range. Pace bounds use meters
+per second:</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"targetType"</span>: {
+    <span class="pl-ent">"workoutTargetTypeId"</span>: <span class="pl-c1">6</span>,
+    <span class="pl-ent">"workoutTargetTypeKey"</span>: <span class="pl-s"><span class="pl-pds">"</span>pace.zone<span class="pl-pds">"</span></span>
+  },
+  <span class="pl-ent">"targetValueOne"</span>: <span class="pl-c1">1.9607843</span>,
+  <span class="pl-ent">"targetValueTwo"</span>: <span class="pl-c1">2.0833333</span>
+}</pre></div>
+<p dir="auto">That example represents <code>8:00–8:30 min/km</code>. The lower numeric bound is listed
+first for consistency with the heart-rate example; Garmin normalizes either
+bound order. Garmin silently discards values nested inside <code>targetType</code>, leaving
+a pace target with no active range. The upload tools repair that unambiguous
+nesting mistake, but reject the request if nested and step-level values conflict.</p>
+<p dir="auto">For a named Garmin HR zone, use the same target type with <code>zoneNumber</code> instead:</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"targetType"</span>: {
+    <span class="pl-ent">"workoutTargetTypeId"</span>: <span class="pl-c1">4</span>,
+    <span class="pl-ent">"workoutTargetTypeKey"</span>: <span class="pl-s"><span class="pl-pds">"</span>heart.rate.zone<span class="pl-pds">"</span></span>
+  },
+  <span class="pl-ent">"zoneNumber"</span>: <span class="pl-c1">3</span>
+}</pre></div>
+<p dir="auto">Use either <code>zoneNumber</code> or <code>targetValueOne</code> / <code>targetValueTwo</code> on a target, not
+both. Garmin treats the named zone as authoritative and silently discards a
+coexisting custom range, so the upload tools reject that ambiguous shape.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">One-click Install (Claude Desktop)</h2></div>
+<p dir="auto">The easiest way to add this server to Claude Desktop is via the <code>.dxt</code> Desktop Extension file — no JSON editing required.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Download and install</h3></div>
+<ol dir="auto">
+<li>Download the latest <code>garmin-mcp.dxt</code> from the <a href="/not-found">Releases page</a>.</li>
+<li>Drag the <code>.dxt</code> file into the Claude Desktop window, <strong>or</strong> double-click it, <strong>or</strong> go to <strong>Settings → Extensions → Install Extension</strong> and select the file.</li>
+<li>Claude Desktop will prompt you for optional configuration (token path, email, password).</li>
+</ol>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">First-time authentication</h3></div>
+<p dir="auto">The extension installs and runs the server automatically, but you must authenticate with Garmin once before data can be fetched:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>uvx --python 3.12 --from git+https://github.com/Taxuspt/garmin_mcp garmin-mcp-auth</pre></div>
+<p dir="auto">This saves OAuth tokens to <code>~/.garminconnect</code>. After that the server works without any credentials in the config.</p>
+<blockquote>
+<p dir="auto"><strong>Note:</strong> Tokens are valid for approximately 6 months. Re-run <code>garmin-mcp-auth</code> when they expire.</p>
+</blockquote>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Build the <code>.dxt</code> yourself</h3></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre>bash scripts/build_dxt.sh   <span class="pl-c"><span class="pl-c">#</span> produces garmin-mcp.dxt in the repo root</span></pre></div>
+<hr>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Setup</h2></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Quick Start for MCP Clients</h3></div>
+<p dir="auto">The easiest way to use this MCP server with Claude Desktop, <a href="/not-found">Codex</a>, or another MCP client is to authenticate once before adding the server to your configuration.</p>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Prerequisites</h4></div>
+<ul dir="auto">
+<li>Python 3.12+</li>
+<li>Garmin Connect account</li>
+<li>MFA may be required if enabled on your account</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Step 1: Pre-authenticate (One-time)</h4></div>
+<p dir="auto">Before adding the server to your MCP client, authenticate once in your terminal:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre><span class="pl-c"><span class="pl-c">#</span> Install and run authentication tool</span>
+uvx --python 3.12 --from git+https://github.com/Taxuspt/garmin_mcp garmin-mcp-auth
+
+<span class="pl-c"><span class="pl-c">#</span> You'll be prompted for:</span>
+<span class="pl-c"><span class="pl-c">#</span> - Email (or set GARMIN_EMAIL env var)</span>
+<span class="pl-c"><span class="pl-c">#</span> - Password (or set GARMIN_PASSWORD env var)</span>
+<span class="pl-c"><span class="pl-c">#</span> - MFA code (if enabled on your account)</span>
+
+<span class="pl-c"><span class="pl-c">#</span> OAuth tokens will be saved to ~/.garminconnect</span></pre></div>
+<p dir="auto">You can verify your credentials at any time with</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>uv run garmin-mcp-auth --verify</pre></div>
+<p dir="auto"><strong>Note:</strong> You can also set credentials via environment variables:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>GARMIN_EMAIL=your@email.com GARMIN_PASSWORD=secret garmin-mcp-auth</pre></div>
+<p dir="auto">If you don't have MFA enabled you can also skip <code>garmin-mcp-auth</code> and pass <code>GARMIN_EMAIL</code> and <code>GARMIN_PASSWORD</code> as env variables directly to your MCP client, if supported. For better security, prefer the pre-authentication flow above and keep credentials out of MCP client configuration.</p>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Step 2: Configure Claude Desktop</h4></div>
+<p dir="auto">Add to your Claude Desktop MCP settings <strong>WITHOUT</strong> credentials:</p>
+<p dir="auto"><strong>macOS:</strong> <code>~/Library/Application Support/Claude/claude_desktop_config.json</code>
+<strong>Windows:</strong> <code>%APPDATA%\Claude\claude_desktop_config.json</code></p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"garmin"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>uvx<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"args"</span>: [
+        <span class="pl-s"><span class="pl-pds">"</span>--python<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>3.12<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>--from<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>git+https://github.com/Taxuspt/garmin_mcp<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>garmin-mcp<span class="pl-pds">"</span></span>
+      ]
+    }
+  }
+}</pre></div>
+<p dir="auto"><strong>Important:</strong> No <code>GARMIN_EMAIL</code> or <code>GARMIN_PASSWORD</code> needed in config! The server uses your saved tokens.</p>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Step 3: Restart your MCP client</h4></div>
+<p dir="auto">Your Garmin data is now available to your MCP client.</p>
+<p dir="auto">For Codex and other clients, see the examples below.</p>
+<hr>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Using more than one Garmin account</h3></div>
+<p dir="auto">A single server process is bound to one Garmin account. To use several accounts
+at once, run <strong>one server instance per account</strong>, each with its own token
+directory, selected with the <code>GARMINTOKENS</code> environment variable.</p>
+<p dir="auto"><code>GARMINTOKENS</code> defaults to <code>~/.garminconnect</code>. Point it somewhere else and the
+server reads and writes tokens there instead, leaving the default store
+untouched.</p>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Step 1: Authenticate each account into its own directory</h4></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre>garmin-mcp-auth --token-path <span class="pl-k">~</span>/.garminconnect-alice
+garmin-mcp-auth --token-path <span class="pl-k">~</span>/.garminconnect-bob</pre></div>
+<p dir="auto"><code>--token-path</code> also accepts <code>$GARMINTOKENS</code>, so <code>GARMINTOKENS=~/.garminconnect-alice garmin-mcp-auth</code>
+is equivalent.</p>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Step 2: Declare one server per account</h4></div>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"garmin-alice"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>uvx<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"args"</span>: [<span class="pl-s"><span class="pl-pds">"</span>--python<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>3.12<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>--from<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>git+https://github.com/Taxuspt/garmin_mcp<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>garmin-mcp<span class="pl-pds">"</span></span>],
+      <span class="pl-ent">"env"</span>: {
+        <span class="pl-ent">"GARMINTOKENS"</span>: <span class="pl-s"><span class="pl-pds">"</span>${HOME}/.garminconnect-alice<span class="pl-pds">"</span></span>
+      }
+    },
+    <span class="pl-ent">"garmin-bob"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>uvx<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"args"</span>: [<span class="pl-s"><span class="pl-pds">"</span>--python<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>3.12<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>--from<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>git+https://github.com/Taxuspt/garmin_mcp<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>garmin-mcp<span class="pl-pds">"</span></span>],
+      <span class="pl-ent">"env"</span>: {
+        <span class="pl-ent">"GARMINTOKENS"</span>: <span class="pl-s"><span class="pl-pds">"</span>${HOME}/.garminconnect-bob<span class="pl-pds">"</span></span>
+      }
+    }
+  }
+}</pre></div>
+<p dir="auto">Each server logs the directory it authenticates from on startup, so you can
+confirm the wiring:</p>
+<div><pre><code>Trying to login to Garmin Connect using token data from directory '/home/you/.garminconnect-alice'...
+</code></pre></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Notes</h4></div>
+<ul dir="auto">
+<li>
+<p dir="auto"><strong>No silent fallback.</strong> If <code>GARMINTOKENS</code> points at a directory with no valid
+tokens, startup fails with <code>GarminConnectAuthenticationError</code> rather than
+falling back to the default store. A misconfigured second server cannot
+silently reuse the first account's session.</p>
+</li>
+<li>
+<p dir="auto"><strong><code>${HOME}</code> is expanded</strong> even when an MCP client passes it through
+unresolved, and <code>~</code> works on Windows via <code>USERPROFILE</code>.</p>
+</li>
+<li>
+<p dir="auto"><strong>Restrict write tools on secondary accounts.</strong> Tools such as
+<code>upload_workout</code> and <code>schedule_workout</code> write to whichever account the server
+is bound to. Pair <code>GARMINTOKENS</code> with <code>GARMIN_ENABLED_TOOLS</code> (see
+<a href="#tool-filtering">Tool Filtering</a>) to make an account read-only:</p>
+<div class="highlight highlight-source-json" dir="auto"><pre><span class="pl-ent">"env"</span>: {
+  <span class="pl-ent">"GARMINTOKENS"</span>: <span class="pl-s"><span class="pl-pds">"</span>${HOME}/.garminconnect-bob<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"GARMIN_ENABLED_TOOLS"</span>: <span class="pl-s"><span class="pl-pds">"</span>get_activities,get_activities_by_date,get_activity,get_activity_splits<span class="pl-pds">"</span></span>
+}</pre></div>
+</li>
+<li>
+<p dir="auto"><strong>Token directories hold long-lived credentials.</strong> They are created with
+owner-only permissions; keep them out of shared or synced folders.</p>
+</li>
+</ul>
+<hr>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Development Setup</h3></div>
+<ol dir="auto">
+<li>Install the required packages on a new environment:</li>
+</ol>
+<div class="highlight highlight-source-shell" dir="auto"><pre>uv sync</pre></div>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Running the Server</h2></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Configuration</h3></div>
+<p dir="auto">Your Garmin Connect credentials are read from environment variables:</p>
+<ul dir="auto">
+<li><code>GARMIN_EMAIL</code>: Your Garmin Connect email address</li>
+<li><code>GARMIN_EMAIL_FILE</code>: Path to a file containing your Garmin Connect email address</li>
+<li><code>GARMIN_PASSWORD</code>: Your Garmin Connect password</li>
+<li><code>GARMIN_PASSWORD_FILE</code>: Path to a file containing your Garmin Connect password</li>
+<li><code>GARMIN_IS_CN</code>: Set to <code>true</code> to use Garmin Connect China (garmin.cn) instead of the international version (default: <code>false</code>)</li>
+<li><code>GARMIN_FIT_DOWNLOAD_DIR</code>: Default directory for downloaded activity files. When set, skips the first-run setup prompt in <code>download_activity_file</code>.</li>
+<li><code>GARMIN_FIT_CONFIG</code>: Path to the persisted download-directory config file (default: <code>~/.garminconnect_fit_config.json</code>).</li>
+</ul>
+<p dir="auto">File-based secrets are useful in certain environments, such as inside a Docker container. Note that you cannot set both <code>GARMIN_EMAIL</code> and <code>GARMIN_EMAIL_FILE</code>, similarly you cannot set both <code>GARMIN_PASSWORD</code> and <code>GARMIN_PASSWORD_FILE</code>.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Transport</h3></div>
+<p dir="auto">By default the server communicates over <strong>stdio</strong>, which is what Claude Desktop, the MCP Inspector, and most local clients expect. To serve over <strong>HTTP</strong> instead (e.g. when running in a container or Kubernetes), set the transport via environment variables:</p>
+<ul dir="auto">
+<li><code>GARMIN_MCP_TRANSPORT</code>: <code>stdio</code> (default), <code>streamable-http</code>, or <code>sse</code></li>
+<li><code>GARMIN_MCP_HOST</code>: bind address for HTTP transports (default <code>127.0.0.1</code>; set to <code>0.0.0.0</code> only when the endpoint is fronted by an authenticating reverse proxy)</li>
+<li><code>GARMIN_MCP_PORT</code>: bind port for HTTP transports (default <code>8000</code>)</li>
+<li><code>GARMIN_MCP_CALL_TIMEOUT</code>: per-request timeout in seconds for calls to Garmin (default <code>90</code>). Garmin's API occasionally stalls a single request indefinitely; without this bound the call hangs until the MCP client's own timeout fires and reports the whole server as unresponsive. On timeout the tool returns a clear, retry-able error instead. Set to <code>0</code> to disable the bound.</li>
+</ul>
+<div class="highlight highlight-source-shell" dir="auto"><pre>GARMIN_MCP_TRANSPORT=streamable-http garmin-mcp</pre></div>
+<p dir="auto">When an HTTP transport is selected:</p>
+<ul dir="auto">
+<li>MCP clients connect to the <strong><code>/mcp</code></strong> path (e.g. <code>http://localhost:8000/mcp</code>).</li>
+<li>A plain <strong><code>GET /healthz</code></strong> endpoint is exposed for liveness/readiness probes.</li>
+</ul>
+<p dir="auto">The server itself performs <strong>no authentication</strong> on the HTTP endpoint — put it behind a reverse proxy (nginx, Traefik, Authelia, etc.) if it is reachable beyond localhost.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Garmin Connect China (garmin.cn)</h3></div>
+<p dir="auto">If you use Garmin Connect China (garmin.cn) instead of the international version, set the <code>GARMIN_IS_CN</code> environment variable to <code>true</code>:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre><span class="pl-c"><span class="pl-c">#</span> Pre-authenticate with Garmin Connect China</span>
+GARMIN_IS_CN=true garmin-mcp-auth
+
+<span class="pl-c"><span class="pl-c">#</span> Or use the CLI flag</span>
+garmin-mcp-auth --is-cn</pre></div>
+<p dir="auto">For Claude Desktop, add <code>GARMIN_IS_CN</code> to the <code>env</code> section:</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"garmin"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>uvx<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"args"</span>: [
+        <span class="pl-s"><span class="pl-pds">"</span>--python<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>3.12<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>--from<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>git+https://github.com/Taxuspt/garmin_mcp<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>garmin-mcp<span class="pl-pds">"</span></span>
+      ],
+      <span class="pl-ent">"env"</span>: {
+        <span class="pl-ent">"GARMIN_IS_CN"</span>: <span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span>
+      }
+    }
+  }
+}</pre></div>
+<p dir="auto">For Docker, add <code>GARMIN_IS_CN=true</code> to your <code>.env</code> file or uncomment it in <code>docker-compose.yml</code>.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Testing the server locally with MCP Inspector</h3></div>
+<p dir="auto">The Inspector runs directly through npx without requiring installation. Run from the project root:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>npx @modelcontextprotocol/inspector uv run garmin-mcp</pre></div>
+<p dir="auto">You'll be able to inspect and test the tools.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">With Claude Desktop</h3></div>
+<ol dir="auto">
+<li>Create a configuration in Claude Desktop:</li>
+</ol>
+<p dir="auto">Edit your Claude Desktop configuration file:</p>
+<ul dir="auto">
+<li>macOS: <code>~/Library/Application Support/Claude/claude_desktop_config.json</code></li>
+<li>Windows: <code>%APPDATA%\Claude\claude_desktop_config.json</code></li>
+</ul>
+<p dir="auto">You have two options to run the MCP locally with Claude.</p>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Directly from github without cloning the repo:</h4></div>
+<ol dir="auto">
+<li>Add this server configuration:</li>
+</ol>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"garmin"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>uvx<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"args"</span>: [
+        <span class="pl-s"><span class="pl-pds">"</span>--python<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>3.12<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>--from<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>git+https://github.com/Taxuspt/garmin_mcp<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>garmin-mcp<span class="pl-pds">"</span></span>
+      ],
+      <span class="pl-ent">"env"</span>: {
+        <span class="pl-ent">"GARMIN_EMAIL"</span>: <span class="pl-s"><span class="pl-pds">"</span>YOUR_GARMIN_EMAIL<span class="pl-pds">"</span></span>,
+        <span class="pl-ent">"GARMIN_PASSWORD"</span>: <span class="pl-s"><span class="pl-pds">"</span>YOUR_GARMIN_PASSWORD<span class="pl-pds">"</span></span>
+      }
+    }
+  }
+}</pre></div>
+<p dir="auto">You might have to add the full path to <code>uvx</code> you can check the full path with <code>which uvx</code></p>
+<ol start="2" dir="auto">
+<li>Restart Claude Desktop</li>
+</ol>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Directly from your local copy of the repository:</h4></div>
+<ol dir="auto">
+<li>Add this server configuration:</li>
+</ol>
+<div><pre><code>{
+  "mcpServers": {
+    "garmin-local": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "&lt;full path to your local repository&gt;/garmin_mcp",
+        "run",
+        "garmin-mcp"
+      ]
+    }
+  }
+}
+</code></pre></div>
+<ol start="2" dir="auto">
+<li>Restart Claude Desktop</li>
+</ol>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">With Codex</h3></div>
+<p dir="auto">Codex uses TOML for MCP server configuration. Add one of the following entries to <code>~/.codex/config.toml</code> after authenticating with <code>garmin-mcp-auth</code>.</p>
+<p dir="auto">You can also ask your MCP-capable client to set this up for you. For example:</p>
+<div><pre lang="text"><code>Install the Garmin MCP server from https://github.com/Taxuspt/garmin_mcp, authenticate with garmin-mcp-auth, and add it to my MCP configuration without storing my Garmin email or password.
+</code></pre></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Directly from GitHub without cloning the repo</h4></div>
+<div class="highlight highlight-source-toml" dir="auto"><pre>[<span class="pl-en">mcp_servers</span>.<span class="pl-en">garmin</span>]
+<span class="pl-smi">command</span> = <span class="pl-s"><span class="pl-pds">"</span>uvx<span class="pl-pds">"</span></span>
+<span class="pl-smi">args</span> = [
+  <span class="pl-s"><span class="pl-pds">"</span>--python<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>3.12<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>--from<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>git+https://github.com/Taxuspt/garmin_mcp<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>garmin-mcp<span class="pl-pds">"</span></span>
+]</pre></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Directly from your local copy of the repository</h4></div>
+<div class="highlight highlight-source-toml" dir="auto"><pre>[<span class="pl-en">mcp_servers</span>.<span class="pl-en">garmin-local</span>]
+<span class="pl-smi">command</span> = <span class="pl-s"><span class="pl-pds">"</span>uv<span class="pl-pds">"</span></span>
+<span class="pl-smi">args</span> = [
+  <span class="pl-s"><span class="pl-pds">"</span>--directory<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>/full/path/to/garmin_mcp<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>run<span class="pl-pds">"</span></span>,
+  <span class="pl-s"><span class="pl-pds">"</span>garmin-mcp<span class="pl-pds">"</span></span>
+]</pre></div>
+<p dir="auto">Restart your MCP client after saving the file.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">With opencode</h3></div>
+<p dir="auto"><a href="/not-found">opencode</a> auto-loads a project-level <code>opencode.json</code> when launched from a repository root, so contributors who clone this repo get the Garmin MCP wired up against the local source with no extra config.</p>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">From a clone of this repository (recommended for development)</h4></div>
+<p dir="auto">This repo ships an <a href="/not-found"><code>opencode.json</code></a> that runs the MCP via <code>uv run garmin-mcp</code>, so it always tracks the working tree.</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>git clone https://github.com/Taxuspt/garmin_mcp.git
+<span class="pl-c1">cd</span> garmin_mcp
+uv sync                <span class="pl-c"><span class="pl-c">#</span> install dependencies</span>
+garmin-mcp-auth        <span class="pl-c"><span class="pl-c">#</span> one-time Garmin login (skip if ~/.garminconnect already exists)</span>
+opencode               <span class="pl-c"><span class="pl-c">#</span> launches with the garmin MCP attached</span></pre></div>
+<p dir="auto">Verify the server is connected:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>opencode mcp list
+<span class="pl-c"><span class="pl-c">#</span> ●  ✓ garmin   connected</span>
+<span class="pl-c"><span class="pl-c">#</span>       uv run garmin-mcp</span></pre></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">From any other directory (GitHub install)</h4></div>
+<p dir="auto">Add the server to your global opencode config at <code>~/.config/opencode/opencode.json</code> after running <code>garmin-mcp-auth</code>:</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"$schema"</span>: <span class="pl-s"><span class="pl-pds">"</span>https://opencode.ai/config.json<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"mcp"</span>: {
+    <span class="pl-ent">"garmin"</span>: {
+      <span class="pl-ent">"type"</span>: <span class="pl-s"><span class="pl-pds">"</span>local<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"command"</span>: [
+        <span class="pl-s"><span class="pl-pds">"</span>uvx<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>--python<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>3.12<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>--from<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>git+https://github.com/Taxuspt/garmin_mcp<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>garmin-mcp<span class="pl-pds">"</span></span>
+      ],
+      <span class="pl-ent">"enabled"</span>: <span class="pl-c1">true</span>,
+      <span class="pl-ent">"timeout"</span>: <span class="pl-c1">30000</span>
+    }
+  }
+}</pre></div>
+<p dir="auto">Restart opencode after saving the file. The first <code>uvx</code> invocation downloads and caches the package, so the initial startup may take a few seconds.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">With Docker</h3></div>
+<p dir="auto">Docker provides an isolated and consistent environment for running the MCP server.</p>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Quick Start with Docker Compose (Recommended)</h4></div>
+<ol dir="auto">
+<li>Create a <code>.env</code> file with your credentials:</li>
+</ol>
+<div class="highlight highlight-source-shell" dir="auto"><pre><span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>GARMIN_EMAIL=your_email@example.com<span class="pl-pds">"</span></span> <span class="pl-k">&gt;</span> .env
+<span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>GARMIN_PASSWORD=your_password<span class="pl-pds">"</span></span> <span class="pl-k">&gt;&gt;</span> .env</pre></div>
+<ol start="2" dir="auto">
+<li>Start the container:</li>
+</ol>
+<div class="highlight highlight-source-shell" dir="auto"><pre>docker compose up -d</pre></div>
+<ol start="3" dir="auto">
+<li>View logs to monitor the server:</li>
+</ol>
+<div class="highlight highlight-source-shell" dir="auto"><pre>docker compose logs -f garmin-mcp</pre></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Using Docker Directly</h4></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre><span class="pl-c"><span class="pl-c">#</span> Build the image</span>
+docker build -t garmin-mcp <span class="pl-c1">.</span>
+
+<span class="pl-c"><span class="pl-c">#</span> Run the container</span>
+docker run -it \
+  -e GARMIN_EMAIL=<span class="pl-s"><span class="pl-pds">"</span>your_email@example.com<span class="pl-pds">"</span></span> \
+  -e GARMIN_PASSWORD=<span class="pl-s"><span class="pl-pds">"</span>your_password<span class="pl-pds">"</span></span> \
+  -v garmin-tokens:/root/.garminconnect \
+  garmin-mcp</pre></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Using File-Based Secrets (More Secure)</h4></div>
+<p dir="auto">For enhanced security, especially in production environments, use file-based secrets instead of environment variables:</p>
+<ol dir="auto">
+<li>Create a secrets directory and add your credentials:</li>
+</ol>
+<div class="highlight highlight-source-shell" dir="auto"><pre>mkdir -p secrets
+<span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>your_email@example.com<span class="pl-pds">"</span></span> <span class="pl-k">&gt;</span> secrets/garmin_email.txt
+<span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>your_password<span class="pl-pds">"</span></span> <span class="pl-k">&gt;</span> secrets/garmin_password.txt
+chmod 600 secrets/<span class="pl-k">*</span>.txt</pre></div>
+<ol start="2" dir="auto">
+<li>Edit <a href="/not-found">docker-compose.yml</a> and uncomment the secrets section:</li>
+</ol>
+<div class="highlight highlight-source-yaml" dir="auto"><pre><span class="pl-ent">services</span>:
+  <span class="pl-ent">garmin-mcp</span>:
+    <span class="pl-ent">environment</span>:
+      - <span class="pl-s">GARMIN_EMAIL_FILE=/run/secrets/garmin_email</span>
+      - <span class="pl-s">GARMIN_PASSWORD_FILE=/run/secrets/garmin_password</span>
+    <span class="pl-ent">secrets</span>:
+      - <span class="pl-s">garmin_email</span>
+      - <span class="pl-s">garmin_password</span>
+
+<span class="pl-ent">secrets</span>:
+  <span class="pl-ent">garmin_email</span>:
+    <span class="pl-ent">file</span>: <span class="pl-s">./secrets/garmin_email.txt</span>
+  <span class="pl-ent">garmin_password</span>:
+    <span class="pl-ent">file</span>: <span class="pl-s">./secrets/garmin_password.txt</span></pre></div>
+<ol start="3" dir="auto">
+<li>Start the container:</li>
+</ol>
+<div class="highlight highlight-source-shell" dir="auto"><pre>docker compose up -d</pre></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Handling MFA with Docker</h4></div>
+<p dir="auto">If you have multi-factor authentication (MFA) enabled on your Garmin account:</p>
+<ol dir="auto">
+<li>Run the container in interactive mode:</li>
+</ol>
+<div class="highlight highlight-source-shell" dir="auto"><pre>docker compose run --rm garmin-mcp</pre></div>
+<ol start="2" dir="auto">
+<li>When prompted, enter your MFA code:</li>
+</ol>
+<div><pre><code>Garmin Connect MFA required. Please check your email/phone for the code.
+Enter MFA code: 123456
+</code></pre></div>
+<ol start="3" dir="auto">
+<li>
+<p dir="auto">The OAuth tokens will be saved to the Docker volume (<code>garmin-tokens</code>), so you won't need to re-authenticate on subsequent runs.</p>
+</li>
+<li>
+<p dir="auto">After MFA setup, you can run the container normally:</p>
+</li>
+</ol>
+<div class="highlight highlight-source-shell" dir="auto"><pre>docker compose up -d</pre></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Docker Volume Management</h4></div>
+<p dir="auto">The OAuth tokens are stored in a persistent Docker volume to avoid re-authentication:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre><span class="pl-c"><span class="pl-c">#</span> List volumes</span>
+docker volume ls
+
+<span class="pl-c"><span class="pl-c">#</span> Inspect the tokens volume</span>
+docker volume inspect garmin_mcp_garmin-tokens
+
+<span class="pl-c"><span class="pl-c">#</span> Remove the volume (will require re-authentication)</span>
+docker volume rm garmin_mcp_garmin-tokens</pre></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Using with Claude Desktop via Docker</h4></div>
+<p dir="auto">To use the Dockerized MCP server with Claude Desktop, you can configure it to communicate with the container. However, note that MCP servers typically communicate via stdio, which works best with direct process execution. For Docker-based deployments, consider using the standard <code>uvx</code> method shown in the <a href="#with-claude-desktop">With Claude Desktop</a> section instead.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Usage Examples</h2></div>
+<p dir="auto">Once connected in Claude, you can ask questions like:</p>
+<ul dir="auto">
+<li>"Show me my recent activities"</li>
+<li>"What was my sleep like last night?"</li>
+<li>"How many steps did I take yesterday?"</li>
+<li>"Show me the details of my latest run"</li>
+<li>"Analyze my last ride's power zones and compare to my training zones"</li>
+<li>"Show me my CTL, ATL, and TSB trend for the last 6 weeks"</li>
+<li>"What was my power duration curve from yesterday's ride? Estimate my FTP."</li>
+<li>"Analyze the FIT data from my last cycling activity — how was my shifting quality on the climbs?"</li>
+<li>"Show me my HRV trend for the last 2 weeks and flag any recovery concerns"</li>
+<li>"What's my season best 20-minute power and when did I set it?"</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Troubleshooting</h2></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>get_training_effect</code> returns HTTP 403 for a valid activity</h3></div>
+<p dir="auto">Garmin's activity-details endpoint (<code>/activity-service/activity/{id}</code>) can
+return <strong>403 Forbidden</strong> even when the same activity is visible in list tools.
+<code>get_training_effect</code> now falls back to activity list search, which still
+includes aerobic/anaerobic training effect for recent activities.</p>
+<p dir="auto">If the activity is older than the recent-search window, list the activity with
+<code>get_activities</code> / <code>get_activities_by_date</code> and retry, or use those list fields
+directly.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>get_goals</code> returns no goals that exist in Garmin Connect</h3></div>
+<p dir="auto">Garmin's goal-service only returns goals created in Connect's current Goals UI
+(named distance/time targets such as a monthly cycling goal) when the request
+sends <code>Sec-Fetch-Site: same-origin</code> and uses a 1-based <code>start</code>. With
+<code>start=0</code>, it returns an empty list. python-garminconnect's <code>get_goals()</code> does not do both
+(through 0.3.16), so <code>get_goals</code> here calls <code>/goal-service/goal/goals</code>
+directly the way Connect's Goals page does, and uses the library call only as
+a fallback.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">"Failed to spawn process: No such file or directory"</h3></div>
+<p dir="auto">If Claude Desktop can't find <code>uvx</code>, it's because <code>uvx</code> is not in the PATH that Claude Desktop uses. To fix this:</p>
+<ol dir="auto">
+<li>Find where <code>uvx</code> is installed:</li>
+</ol>
+<div class="highlight highlight-source-shell" dir="auto"><pre>which uvx</pre></div>
+<ol start="2" dir="auto">
+<li>Use the full path in your configuration. For example, if <code>uvx</code> is at <code>/Users/username/.cargo/bin/uvx</code>:</li>
+</ol>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"garmin"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>/Users/username/.cargo/bin/uvx<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"args"</span>: [
+        <span class="pl-s"><span class="pl-pds">"</span>--python<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>3.12<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>--from<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>git+https://github.com/Taxuspt/garmin_mcp<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>garmin-mcp<span class="pl-pds">"</span></span>
+      ]
+    }
+  }
+}</pre></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Windows: Smart App Control blocks <code>uv</code> / <code>uvx</code></h3></div>
+<p dir="auto">On Windows 11 with <strong>Smart App Control</strong> enabled, <code>uv.exe</code> / <code>uvx.exe</code> may be blocked when launching Garmin_MCP — including when <code>uv</code> tries to load an unsigned <code>garmin-mcp.exe</code> from a local <code>.venv</code>.</p>
+<p dir="auto">This is <strong>not</strong> the same as Microsoft Defender Antivirus quarantine. Smart App Control is under:</p>
+<p dir="auto"><strong>Windows Security → App &amp; browser control → Smart App Control</strong></p>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Symptoms</h4></div>
+<ul dir="auto">
+<li>Smart App Control notification when running <code>uv</code>, <code>uvx</code>, or Claude Desktop with <code>command: "uvx"</code></li>
+<li>Claude Desktop fails to spawn the server even though <code>uvx</code> appears installed</li>
+<li>Event Viewer → <em>Applications and Services Logs</em> → <em>Microsoft</em> → <em>Windows</em> → <em>CodeIntegrity</em> → <em>Operational</em> shows <strong>CodeIntegrity Error 3077</strong> mentioning <code>uv.exe</code> and <code>garmin-mcp.exe</code> (policy / Enterprise signing level)</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Confirm</h4></div>
+<ol dir="auto">
+<li>Smart App Control is <strong>On</strong> (Evaluation or Enforcement).</li>
+<li>Check the CodeIntegrity Operational log for event <strong>3077</strong> around the failed launch.</li>
+<li>Defender “Virus &amp; threat protection” history may be empty — that does not rule SAC out.</li>
+</ol>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Recoveries (prefer keeping Smart App Control on)</h4></div>
+<ol dir="auto">
+<li>Install or reinstall <code>uv</code> via a packaged channel, then verify in PowerShell:
+<div class="highlight highlight-source-powershell" dir="auto"><pre>winget install <span class="pl-k">--</span>id<span class="pl-k">=</span>astral<span class="pl-k">-</span>sh.uv <span class="pl-k">-</span>e
+<span class="pl-c"><span class="pl-c">#</span> or: scoop install main/uv</span>
+uvx <span class="pl-k">--</span>version</pre></div>
+</li>
+<li>Point Claude Desktop at the full path to <code>uvx.exe</code> (same idea as the PATH troubleshooting above), for example:
+<div class="highlight highlight-source-json" dir="auto"><pre><span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>C:<span class="pl-cce">\\</span>Users<span class="pl-cce">\\</span>&lt;you&gt;<span class="pl-cce">\\</span>.local<span class="pl-cce">\\</span>bin<span class="pl-cce">\\</span>uvx.exe<span class="pl-pds">"</span></span></pre></div>
+</li>
+<li>If Enforcement still blocks loading <code>garmin-mcp.exe</code>, you may need an admin/policy exception for that binary path. Turning Smart App Control off globally is a last resort, not the default advice.</li>
+<li>If local uvx remains blocked, use the Docker Compose install path instead.</li>
+</ol>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Login Issues</h3></div>
+<p dir="auto">If you encounter login issues:</p>
+<ol dir="auto">
+<li>Verify your credentials are correct</li>
+<li>Check if Garmin Connect requires additional verification</li>
+<li>Ensure the garminconnect package is up to date</li>
+</ol>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Logs</h3></div>
+<p dir="auto">For other issues, check the Claude Desktop logs at:</p>
+<ul dir="auto">
+<li>macOS: <code>~/Library/Logs/Claude/mcp-server-garmin.log</code></li>
+<li>Windows: <code>%APPDATA%\Claude\logs\mcp-server-garmin.log</code></li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Garmin Connect Multi-Factor Authentication (MFA)</h3></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Understanding MFA with MCP Servers</h4></div>
+<p dir="auto">MCP servers run as background processes without direct terminal access. If your Garmin account has MFA enabled, you must authenticate once using the pre-authentication tool before the server can run.</p>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Recommended: Pre-Authentication Tool</h4></div>
+<p dir="auto">The easiest way to handle MFA is using the dedicated authentication tool:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>garmin-mcp-auth</pre></div>
+<p dir="auto">This saves OAuth tokens to <code>~/.garminconnect</code> for future use. The server will automatically use these tokens when running in Claude Desktop or other MCP clients.</p>
+<p dir="auto"><strong>Additional Options:</strong></p>
+<div class="highlight highlight-source-shell" dir="auto"><pre><span class="pl-c"><span class="pl-c">#</span> Use environment variables for credentials</span>
+GARMIN_EMAIL=you@example.com GARMIN_PASSWORD=secret garmin-mcp-auth
+
+<span class="pl-c"><span class="pl-c">#</span> Verify existing tokens</span>
+garmin-mcp-auth --verify
+
+<span class="pl-c"><span class="pl-c">#</span> Force re-authentication (e.g., when tokens expire)</span>
+garmin-mcp-auth --force-reauth
+
+<span class="pl-c"><span class="pl-c">#</span> Use custom token location</span>
+garmin-mcp-auth --token-path <span class="pl-k">~</span>/.garmin_tokens</pre></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Alternative: Manual First Run</h4></div>
+<p dir="auto">You can also authenticate by running the server once interactively:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre><span class="pl-c"><span class="pl-c">#</span> Store credentials in files for security</span>
+<span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>your_email@example.com<span class="pl-pds">"</span></span> <span class="pl-k">&gt;</span> <span class="pl-k">~</span>/.garmin_email
+<span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>your_password<span class="pl-pds">"</span></span> <span class="pl-k">&gt;</span> <span class="pl-k">~</span>/.garmin_password
+chmod 600 <span class="pl-k">~</span>/.garmin_email <span class="pl-k">~</span>/.garmin_password
+
+<span class="pl-c"><span class="pl-c">#</span> Run server interactively to authenticate</span>
+GARMIN_EMAIL_FILE=<span class="pl-k">~</span>/.garmin_email GARMIN_PASSWORD_FILE=<span class="pl-k">~</span>/.garmin_password \
+  uvx --python 3.12 --from git+https://github.com/Taxuspt/garmin_mcp garmin-mcp
+
+<span class="pl-c"><span class="pl-c">#</span> Enter MFA code when prompted</span>
+<span class="pl-c"><span class="pl-c">#</span> Tokens will be saved automatically</span>
+<span class="pl-c"><span class="pl-c">#</span> Now add to Claude Desktop config without credentials</span></pre></div>
+<p dir="auto">After initial authentication, configure Claude Desktop <strong>without</strong> credentials (tokens are already saved):</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"garmin"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>uvx<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"args"</span>: [
+        <span class="pl-s"><span class="pl-pds">"</span>--python<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>3.12<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>--from<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>git+https://github.com/Taxuspt/garmin_mcp<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>garmin-mcp<span class="pl-pds">"</span></span>
+      ]
+    }
+  }
+}</pre></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Using Docker with MFA</h4></div>
+<p dir="auto">If using Docker, follow the <a href="#handling-mfa-with-docker">Handling MFA with Docker</a> section above for a streamlined experience with persistent token storage.</p>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Troubleshooting MFA</h4></div>
+<p dir="auto"><strong>Error: "MFA authentication required but no interactive terminal available"</strong></p>
+<p dir="auto">Solution:</p>
+<ol dir="auto">
+<li>Open terminal</li>
+<li>Run: <code>garmin-mcp-auth</code></li>
+<li>Enter credentials and MFA code</li>
+<li>Restart Claude Desktop</li>
+</ol>
+<p dir="auto"><strong>Token Expired</strong></p>
+<p dir="auto">OAuth tokens expire periodically (approximately every 6 months). Re-authenticate:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>garmin-mcp-auth --force-reauth</pre></div>
+<p dir="auto"><strong>Verify Tokens Work</strong></p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>garmin-mcp-auth --verify</pre></div>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Testing</h2></div>
+<p dir="auto">This project includes comprehensive tests for all MCP tools. <strong>All tests are currently passing (100%)</strong>.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Running Tests</h3></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre><span class="pl-c"><span class="pl-c">#</span> Run all integration tests (default - uses mocked Garmin API)</span>
+uv run pytest tests/integration/
+
+<span class="pl-c"><span class="pl-c">#</span> Run tests with verbose output</span>
+uv run pytest tests/integration/ -v
+
+<span class="pl-c"><span class="pl-c">#</span> Run a specific test module</span>
+uv run pytest tests/integration/test_health_wellness_tools.py -v
+
+<span class="pl-c"><span class="pl-c">#</span> Run end-to-end tests (requires real Garmin credentials)</span>
+uv run pytest tests/e2e/ -m e2e -v</pre></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Test Structure</h3></div>
+<ul dir="auto">
+<li><strong>Integration tests</strong> (200+ tests): Test all MCP tools using FastMCP integration with mocked Garmin API responses</li>
+<li><strong>End-to-end tests</strong> (4 tests): Test with real MCP server and Garmin API (requires valid credentials)</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Reinstalling from local path</h2></div>
+<p dir="auto">If you are working from a local checkout or fork:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>uv tool install --python 3.12 --force C:<span class="pl-cce">\U</span>sers<span class="pl-cce">\a</span>resd<span class="pl-cce">\D</span>esktop<span class="pl-cce">\p</span>rogramacion<span class="pl-cce">\g</span>armin_mcp</pre></div>
