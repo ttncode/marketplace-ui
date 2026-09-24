@@ -1,0 +1,89 @@
+<div class="markdown-heading" dir="auto"><h1 dir="auto">Cal MCP</h1></div>
+<p dir="auto">MCP server for <a href="/not-found">Calagopus Panel</a>. It lets AI assistants such as Claude, Cursor and VS Code manage your panel through its API, limited to the permissions of the API key they connect with.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Requirements</h2></div>
+<p dir="auto">Calagopus Panel 1.2.0 or newer.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Install</h2></div>
+<ol dir="auto">
+<li>In the panel, open <strong>Admin → Extensions</strong> and install <code>dev_caloptreyx_calmcp.c7s.zip</code>.</li>
+<li>Restart the panel.</li>
+</ol>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Connect</h2></div>
+<ol dir="auto">
+<li>Create an API key under <strong>Account → API Keys</strong>. Give it only the permissions the assistant needs.</li>
+<li>Open <strong>Account → MCP</strong>. It shows the endpoint and ready-made setup for Claude Code, Cursor, VS Code and Claude Desktop, plus a prompt your AI agent can use to set itself up.</li>
+</ol>
+<p dir="auto">Endpoint:</p>
+<div><pre><code>https://your-panel.com/api/client/extensions/dev.caloptreyx.calmcp/mcp
+</code></pre></div>
+<p dir="auto">Send the key as <code>Authorization: Bearer &lt;api key&gt;</code>. For example, in Claude Code:</p>
+<div><pre><code>claude mcp add --transport http calagopus https://your-panel.com/api/client/extensions/dev.caloptreyx.calmcp/mcp --header "Authorization: Bearer &lt;api key&gt;"
+</code></pre></div>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Tools</h2></div>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>search_api</code></td>
+<td>Finds panel API endpoints by keywords</td>
+</tr>
+<tr>
+<td><code>describe_api</code></td>
+<td>Shows an endpoint's parameters, request body and response</td>
+</tr>
+<tr>
+<td><code>read_api</code></td>
+<td>Sends a GET request to any <code>/api/client</code> or <code>/api/admin</code> endpoint</td>
+</tr>
+<tr>
+<td><code>write_api</code></td>
+<td>Sends a POST, PUT, PATCH or DELETE request to any <code>/api/client</code> or <code>/api/admin</code> endpoint</td>
+</tr>
+<tr>
+<td><code>list_servers</code></td>
+<td>Lists the servers the account can access</td>
+</tr>
+<tr>
+<td><code>get_server</code></td>
+<td>Shows a server's details and live resource usage</td>
+</tr>
+<tr>
+<td><code>power_server</code></td>
+<td>Starts, stops, restarts or kills a server</td>
+</tr>
+<tr>
+<td><code>send_command</code></td>
+<td>Sends a console command</td>
+</tr>
+<tr>
+<td><code>read_console</code></td>
+<td>Reads recent console output</td>
+</tr>
+<tr>
+<td><code>list_files</code></td>
+<td>Lists files in a server directory</td>
+</tr>
+<tr>
+<td><code>read_file</code></td>
+<td>Reads a text file</td>
+</tr>
+<tr>
+<td><code>write_file</code></td>
+<td>Creates or replaces a text file</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto">The four API tools cover every client and admin endpoint, including those added by other extensions.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Security</h2></div>
+<ul dir="auto">
+<li>Every call runs as the API key, so the panel's own permission checks, rate limits and activity log apply.</li>
+<li>Only API keys are accepted. Browser sessions are refused.</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Support</h2></div>
+<p dir="auto">Join the <a href="/not-found">Discord</a>.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">License</h2></div>
+<p dir="auto"><a href="/not-found">MIT</a></p>

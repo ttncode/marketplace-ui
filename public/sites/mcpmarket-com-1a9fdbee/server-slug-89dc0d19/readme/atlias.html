@@ -1,0 +1,137 @@
+<p align="center" dir="auto"><a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/b51395899cb381a4.svg" alt="atlias: a sub-harness, or an agent of its own" width="100%"></a></p>
+<p align="center" dir="auto">
+<a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/5597f088923d4522.svg" alt="tests"></a>
+<a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/7b808e5e1df51f38.svg" alt="node 18 or newer"></a>
+<a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/ed4671d7327cec28.svg" alt="no dependencies"></a>
+<a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/7cc321372f24045f.svg" alt="MIT"></a>
+</p>
+<p dir="auto">atlias is a harness for AI coding agents, built so that "done" means done. It runs two ways, or both at once:</p>
+<ul dir="auto">
+<li><strong>as a sub-harness</strong> inside Claude Code, Codex, Antigravity, Gemini CLI and fourteen other harnesses, where it adds a shared memory, a knowledge graph, loop and destructive-command guards, and a gate that holds a reply until the work behind it is real;</li>
+<li><strong>as an agent of its own</strong>, typed as <code>atlias</code> in any terminal, driving Claude Code, Codex, any OpenAI-compatible model or a local Ollama model through a tool loop designed around what weaker models get wrong.</li>
+</ul>
+<p dir="auto">No dependencies. Node 18 or newer. MIT.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">What it catches</h2></div>
+<p dir="auto">The most expensive thing an agent does is say it finished when it did not. atlias checks the claim against what actually happened in the session, and holds the reply once, with every finding in one message, when they disagree:</p>
+<table>
+<thead>
+<tr>
+<th>The agent</th>
+<th>atlias sees</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>says the tests pass, but ran none</td>
+<td>a pass claimed with no test run on record</td>
+</tr>
+<tr>
+<td>says the tests pass after a failing run</td>
+<td>the failure, quoted from the run's own output</td>
+</tr>
+<tr>
+<td>says done after an edit, with no check since</td>
+<td>no verification after the last edit</td>
+</tr>
+<tr>
+<td>leaves <code>TODO</code>, <code>...rest of the code</code>, placeholder data</td>
+<td>the lines, from the diff</td>
+</tr>
+<tr>
+<td>skips, focuses or deletes a test, or asserts <code>true</code></td>
+<td>the weakened test, from the diff</td>
+</tr>
+<tr>
+<td>adds a function nothing calls</td>
+<td>the definition, and that no other line names it</td>
+</tr>
+<tr>
+<td>saves a file that does not parse</td>
+<td>the parser's own error</td>
+</tr>
+<tr>
+<td>repeats a call, or swaps between two calls</td>
+<td>the loop, stopped with what to change</td>
+</tr>
+<tr>
+<td>runs <code>rm -rf ~</code>, a force push, a dropped table</td>
+<td>a question to the user first, in Claude Code, Codex, Gemini CLI and the atlias agent</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto">Every finding names what happened, why it matters and how to fix it, and the gate says how to mark one as a false alarm. Nothing it checks is claimed: a TypeScript file it cannot parse is named as unchecked, a test run whose outcome it cannot read is recorded as unknown, never as a pass.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Install</h2></div>
+<p dir="auto"><strong>The <code>atlias</code> command</strong>, from anywhere:</p>
+<div><pre><code>npm install -g github:ridelink0/atlias
+</code></pre></div>
+<p dir="auto">or, from an installed copy, <code>atlias shortcut install</code>, which puts the command in a folder already on PATH (<code>%APPDATA%\npm</code> or WindowsApps on Windows, <code>~/.local/bin</code> elsewhere) through a launcher that always runs the newest installed version. Use one of the two, not both. Then open a new terminal and type <code>atlias</code>.</p>
+<p dir="auto"><strong>Claude Code</strong>:</p>
+<div><pre><code>/plugin marketplace add ridelink0/atlias
+/plugin install atlias@atlias
+</code></pre></div>
+<p dir="auto"><strong>Codex</strong>: <code>codex plugin marketplace add ridelink0/atlias</code> lists it in Codex's own plugin browser (Codex reads the same marketplace file), and <code>atlias install --codex</code> adds the hooks and the MCP server.</p>
+<p dir="auto"><strong>Every other harness on the machine</strong>: <code>atlias install</code>. It writes only into harnesses whose config folder already exists, marks every block it adds, and <code>atlias uninstall</code> removes exactly those. <code>atlias doctor</code> checks all of it, including that typing <code>atlias</code> finds the command.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Sub-harness, agent, or both</h2></div>
+<div><pre><code>atlias mode both         # the default: hooks in every host, and the agent in a terminal
+atlias mode sub          # hooks only; typing atlias shows the status
+atlias mode standalone   # agent only; the hooks stay silent in other harnesses
+</code></pre></div>
+<p dir="auto"><code>atlias</code> with nothing after it follows the mode: in <code>both</code> it asks which you want, with a third choice for settings. <code>atlias settings</code> opens a menu over every option, each with a sentence on what it does; <code>atlias settings list</code> prints them.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">The agent</h2></div>
+<div><pre><code>atlias                          # choose, then fly
+atlias agent [--engine claude|codex|openai|ollama|echo]
+atlias exec "fix the failing test" [--json]      # one prompt, no questions, scriptable
+echo "add a --verbose flag" | atlias exec
+atlias resume [id]              # carry on the last session in this folder
+</code></pre></div>
+<p dir="auto">Engines: Claude Code (<code>claude -p</code>, resumed by session id), Codex (<code>codex exec</code>), <strong>any OpenAI-compatible endpoint</strong> (OpenAI, OpenRouter, LM Studio, vLLM, llama.cpp: set <code>agent.openaiModel</code>, <code>agent.openaiUrl</code>, and <code>ATLIAS_API_KEY</code> or <code>OPENAI_API_KEY</code>), or a local Ollama model. The last two run on atlias's own tool loop, which does for a weak model what a strong one does in its head:</p>
+<ul dir="auto">
+<li><strong>It repairs what weak models write.</strong> Single quotes, bare keys, trailing commas, Python <code>True</code>, raw newlines in strings, bad escapes and JSON cut off at the token limit are repaired; <code>bash</code>, <code>str_replace</code>, <code>file_path</code> and the rest of other harnesses' vocabulary are mapped onto atlias's tools; native function calling is used where the endpoint has it, with a fallback to text blocks where it refuses.</li>
+<li><strong>It edits the way the model was trained to.</strong> Exact-text <code>edit_file</code> that must match once, and Codex's own <code>apply_patch</code> format, parsed from Codex's grammar, applied all or nothing, and accepted when sent through the shell the way Codex models send it. An edit that would break the syntax is refused and the file put back. Every change can be undone with <code>/undo</code>.</li>
+<li><strong>It reads in windows.</strong> Numbered lines, a window at a time, an <code>outline</code> of definitions before any reading, and a note instead of a second copy when the same window is read again unchanged.</li>
+<li><strong>It keeps the context small.</strong> Old tool results shrink to one line, output keeps its head and its tail (errors come last), the plan is repeated after every result, and project <code>AGENTS.md</code>, <code>CLAUDE.md</code> or <code>GEMINI.md</code> files ride in a prompt prefix that does not change between calls.</li>
+<li><strong>It checks for the model.</strong> When the model answers after editing, atlias runs the project's own check itself (found from <code>package.json</code>, <code>Cargo.toml</code>, <code>go.mod</code> or pytest, or set in <code>agent.testCommand</code>) and hands back the result. If there is no check, the model is sent back once to run one. Out of rounds is reported as unfinished, never as done.</li>
+<li><strong>It asks first when told to.</strong> <code>/permissions workspace</code> (edits in the project run), <code>ask</code> (every edit and command asks), <code>read-only</code> (plan mode).</li>
+</ul>
+<p dir="auto">Inside: <code>/status</code>, <code>/diff</code>, <code>/review</code> (the engine reviews the uncommitted changes), <code>/undo</code>, <code>/compact</code>, <code>/plan</code>, <code>/sessions</code>, <code>/permissions</code>, <code>/engine</code>, <code>/graph</code>, <code>/recall</code>, <code>/progress</code>, <code>/settings</code>, <code>/doctor</code>.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">In every host</h2></div>
+<ol dir="auto">
+<li><strong>Session start</strong>: one brief. The handoff note from the last stretch, the memory index, the knowledge graph's hubs, pending Dream digests, and, in Claude Code, where the 5-hour and weekly usage windows stand, from the <a href="/not-found">usage-limits</a> plugin's last reading, <strong>as information, never as a brake</strong>: the model keeps full quality and scope, and whatever you say about usage decides.</li>
+<li><strong>Each prompt</strong>: silent, unless it is a codebase question and a graph exists, in which case the graph answers in a few hundred tokens before any file is read.</li>
+<li><strong>Before each tool</strong>: silent, unless the call is a loop or the command is destructive. Codex and Gemini CLI cannot pause a tool for the user, so there the command is stopped, the model is told to ask, and the identical command goes through once after you answer.</li>
+<li><strong>After each tool</strong>: records the files changed and the checks run, with their outcome read from the tool's own response.</li>
+<li><strong>Compaction</strong>: writes the handoff note before and puts it back after.</li>
+<li><strong>End of a reply</strong>: the gate described above.</li>
+<li><strong>Session end</strong>: a background worker distils the session for the model to fold into memory later.</li>
+</ol>
+<p dir="auto">Hosts: <strong>Claude Code</strong> (plugin), <strong>Codex</strong> (hooks, MCP, AGENTS.md), <strong>Antigravity</strong> (MCP, GEMINI.md), <strong>Gemini CLI</strong> (MCP, optional hooks), then Cursor, Windsurf, OpenCode, Amp, Zed, Kiro, Droid, Aider, Trae, Cline, Continue, CodeBuddy, Hermes and Pi, each in its own config shape. MCP tools, shared by all of them: <code>harness_recall</code>, <code>harness_remember</code>, <code>harness_progress</code>, <code>harness_verify</code>, <code>harness_digest</code>, <code>graph_query</code>, <code>graph_affected</code>, <code>graph_explain</code>, <code>harness_bench</code>, <code>harness_status</code>. Memory is written in Claude Code's own format, so every host shares one memory.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Tests</h2></div>
+<div><pre><code>node test/run.mjs
+</code></pre></div>
+<p dir="auto">Over five hundred and seventy checks in ninety suites, each written from one expert's point of view, and each failure printed as what happened, why it matters and how to fix it. A coverage suite fails the run if any exported function is not exercised by a test through its own module, so a feature cannot arrive untested. Host payloads are pinned to the hosts' own source code, not to guesses. CI runs everything on Linux, macOS and Windows under Node 18, 20 and 22, plus a sandboxed install that parses every config atlias writes with a real parser and proves that uninstall leaves other tools' entries alone.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">What it refuses to pretend</h2></div>
+<ul dir="auto">
+<li>It names what it did not check, and marks a stale graph as stale.</li>
+<li>It reports a test run it cannot read as unknown, never as a pass.</li>
+<li>It tells the agent when it ran out of rounds rather than letting that read as an answer.</li>
+<li>It shows the caveat with the number: <code>atlias bench</code> measures token cost and says it has not measured task success.</li>
+<li>It says, in <a href="/not-found">docs/RESEARCH.md</a>, which source each mechanism comes from and what has not been measured: whether atlias makes a given model finish more tasks is the aim of the design, not yet a result.</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Measured</h2></div>
+<p dir="auto"><code>atlias bench</code> in any project prints numbers, not claims. On atlias itself: the session brief costs about 1,000 tokens once per session, and one graph answer about 600, against an upper bound of about 26,000 for opening in full the files that answer names.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Settings</h2></div>
+<p dir="auto"><code>atlias settings</code>, or <code>atlias config set &lt;section.key&gt; &lt;value&gt;</code>. The keys, each described in the menu: <code>verify.*</code> (syntax, second pass, integrity, placeholders, weakened tests, unwired code), <code>guard.*</code>, <code>graph.*</code>, <code>brief.*</code>, <code>recall.*</code>, <code>dream.*</code>, <code>router.*</code>, <code>usage.show</code>, and <code>agent.*</code> (mode, engine, endpoints, permissions, test command, rounds, observations kept). State lives in <code>~/.atlias/</code> (<code>ATLIAS_HOME</code> overrides it).</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Surviving an update</h2></div>
+<p dir="auto">No host config ever holds a path with a version number in it, because the next update deletes that folder. Hosts point at <code>~/.atlias/server.mjs</code> and the terminal command at <code>~/.atlias/cli.mjs</code>; both find the newest installed copy when they run.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Versioning</h2></div>
+<p dir="auto">Plain semantic versioning: patch for a fix, minor for a feature or a behaviour change, major for a change in what atlias is. A test ties the changelog to the version in every manifest.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Known limits</h2></div>
+<ul dir="auto">
+<li>The OpenAI-compatible engine is tested against a local server that speaks the wire format, not against a live paid endpoint in CI.</li>
+<li>The extra harnesses' config shapes follow each tool's documentation and are marked UNVERIFIED in <code>lib/hosts-extra.mjs</code>; only Claude Code and Codex are pinned to source.</li>
+<li>Antigravity has no hook API, so it gets the MCP server and the instruction block only.</li>
+<li>Whether atlias raises task success is unmeasured; see <a href="/not-found">docs/RESEARCH.md</a>.</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Built on</h2></div>
+<p dir="auto"><a href="/not-found">HKUDS nanobot</a> for the memory and Dream design, <a href="/not-found">graphify</a> for the knowledge graph, <a href="/not-found">ultimate-frontend-skills</a> for frontend work, and the sources in <a href="/not-found">docs/RESEARCH.md</a>. The name is a tribute to atelier, the art-direction plugin that became Ultimate Frontend Skills.</p>
+<p dir="auto">MIT. Built by Gev.</p>

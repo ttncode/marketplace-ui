@@ -1,0 +1,697 @@
+<div class="markdown-heading" dir="auto"><h1 dir="auto">Yahoo Finance MCP Server</h1></div>
+
+<p dir="auto"><a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/3e2c2bdb5223e706.svg" alt="PyPI version"></a>
+<a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/e53008e0d4196dbc.svg" alt="Python"></a>
+<a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/3ca99749b6ec8080.svg" alt="CI"></a>
+<a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/6ffbd06557ed93f1.svg" alt="License: MIT"></a></p>
+<p dir="auto">A <a href="/not-found">Model Context Protocol (MCP)</a> server that provides AI assistants with access to Yahoo Finance data via <a href="/not-found">yfinance</a>. Query stock information, financial news, sector rankings, and generate professional financial charts — all from your AI chat.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Features</h2></div>
+<ul dir="auto">
+<li><strong>Stock Data</strong> — Company info, financials, valuation metrics, dividends, and trading data</li>
+<li><strong>Analyst Data</strong> — Consensus targets, estimate/revision trends, recommendation history, and firm-level actions</li>
+<li><strong>Financial Statements</strong> — Income statement and balance sheet with historical data (EBIT, Invested Capital, etc.)</li>
+<li><strong>Financial News</strong> — Recent news articles and press releases for any ticker</li>
+<li><strong>Search</strong> — Find stocks, ETFs, and news across Yahoo Finance</li>
+<li><strong>Sector Rankings</strong> — Top ETFs, mutual funds, companies, growth leaders, and top performers by sector</li>
+<li><strong>Price History</strong> — Historical OHLCV data as markdown tables or professional charts</li>
+<li><strong>Chart Generation</strong> — Candlestick, VWAP, and volume profile charts returned as WebP images</li>
+<li><strong>Options Data</strong> — Option chains with calls, puts, strike prices, IV, and expiration dates</li>
+<li><strong>Ownership Data</strong> — Major holders, institutional investors, mutual fund holders, and insider transactions</li>
+<li><strong>Fund Look-Through</strong> — ETF and mutual-fund holdings, asset classes, sectors, ratings, and operating details</li>
+<li><strong>Screeners</strong> — Predefined, equity, mutual-fund, and ETF query trees</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Tools</h2></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>yfinance_get_ticker_info</code></h3></div>
+<p dir="auto">Retrieve comprehensive stock data including company info, financials, trading metrics, and governance data.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>symbol</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Stock ticker symbol (e.g. <code>AAPL</code>, <code>GOOGL</code>, <code>MSFT</code>)</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"><strong>Returns:</strong> JSON object with company details, price data, valuation metrics, trading info, dividends, financials, and performance indicators.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>yfinance_get_analyst_price_targets</code></h3></div>
+<p dir="auto">Fetch the current price and analyst consensus price targets for a stock.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>symbol</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Stock ticker symbol (e.g. <code>AAPL</code>, <code>GOOGL</code>, <code>MSFT</code>)</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"><strong>Returns:</strong> JSON object with <code>current</code>, <code>low</code>, <code>high</code>, <code>mean</code>, and <code>median</code> price fields. Analyst coverage and available fields vary by symbol.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>yfinance_get_analyst_estimates</code></h3></div>
+<p dir="auto">Fetch analyst consensus estimates, revision momentum, recommendations, growth estimates, and earnings history.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>symbol</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Stock ticker symbol</td>
+</tr>
+<tr>
+<td><code>sections</code></td>
+<td>array</td>
+<td>No</td>
+<td>Any of <code>recommendations</code>, <code>earnings_estimate</code>, <code>revenue_estimate</code>, <code>eps_trend</code>, <code>eps_revisions</code>, <code>earnings_history</code>, or <code>growth_estimates</code>. Omit for all sections</td>
+</tr>
+<tr>
+<td><code>max_rows</code></td>
+<td>number</td>
+<td>No</td>
+<td>Maximum rows per section. Default: <code>12</code>. Use <code>0</code> for all rows</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"><strong>Returns:</strong> Named arrays for available sections plus <code>_metadata</code> containing per-section row counts, truncation status, unavailable sections, and failed sections. A failure in one section does not discard successfully fetched sections.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>yfinance_get_upgrades_downgrades</code></h3></div>
+<p dir="auto">Fetch analyst upgrades, downgrades, initiations, reiterations, and price-target changes, newest first.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>symbol</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Stock ticker symbol</td>
+</tr>
+<tr>
+<td><code>max_rows</code></td>
+<td>number</td>
+<td>No</td>
+<td>Maximum actions to return. Default: <code>25</code>. Use <code>0</code> to return all rows</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"><strong>Returns:</strong> JSON object containing <code>upgrades_downgrades</code> records and <code>_metadata</code> with row counts and truncation status. Records can include:</p>
+<ul dir="auto">
+<li><code>GradeDate</code>: Date and time of the analyst action</li>
+<li><code>Firm</code>: Analyst firm name</li>
+<li><code>ToGrade</code> and <code>FromGrade</code>: New and previous ratings</li>
+<li><code>Action</code>: Rating action</li>
+<li><code>priceTargetAction</code>: Price-target action such as <code>Raises</code>, <code>Lowers</code>, or <code>Maintains</code></li>
+<li><code>currentPriceTarget</code> and <code>priorPriceTarget</code>: New and previous price targets</li>
+</ul>
+<p dir="auto">Available fields vary by symbol and analyst action.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>yfinance_get_ticker_news</code></h3></div>
+<p dir="auto">Fetch recent news articles and press releases for a specific stock.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>symbol</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Stock ticker symbol</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"><strong>Returns:</strong> JSON array of news items with title, summary, publication date, provider, URL, and thumbnail.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>yfinance_search</code></h3></div>
+<p dir="auto">Search Yahoo Finance for stocks, ETFs, and news articles.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>query</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Search query — company name, ticker symbol, or keywords</td>
+</tr>
+<tr>
+<td><code>search_type</code></td>
+<td>string</td>
+<td>Yes</td>
+<td><code>"all"</code> (quotes + news), <code>"quotes"</code> (stocks/ETFs only), or <code>"news"</code> (articles only)</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"><strong>Returns:</strong> Matching quotes and/or news results depending on <code>search_type</code>.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>yfinance_get_top</code></h3></div>
+<p dir="auto">Get top-ranked financial entities within a market sector.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sector</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Market sector (see <a href="#supported-sectors">supported sectors</a> below)</td>
+</tr>
+<tr>
+<td><code>top_type</code></td>
+<td>string</td>
+<td>Yes</td>
+<td><code>"top_etfs"</code>, <code>"top_mutual_funds"</code>, <code>"top_companies"</code>, <code>"top_growth_companies"</code>, or <code>"top_performing_companies"</code></td>
+</tr>
+<tr>
+<td><code>top_n</code></td>
+<td>number</td>
+<td>No</td>
+<td>Number of results to return (default: <code>10</code>, max: <code>100</code>)</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"><strong>Returns:</strong> JSON array of top entities with relevant metrics.</p>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Supported Sectors</h4></div>
+<p dir="auto"><code>Basic Materials</code>, <code>Communication Services</code>, <code>Consumer Cyclical</code>, <code>Consumer Defensive</code>, <code>Energy</code>, <code>Financial Services</code>, <code>Healthcare</code>, <code>Industrials</code>, <code>Real Estate</code>, <code>Technology</code>, <code>Utilities</code></p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>yfinance_screen</code></h3></div>
+<p dir="auto">Run Yahoo Finance screeners using either predefined screener keys or custom query trees.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>query</code></td>
+<td>string/object</td>
+<td>Yes</td>
+<td>For <code>query_type="predefined"</code>: screener key such as <code>"day_gainers"</code>. For <code>query_type="equity"</code>, <code>"fund"</code>, or <code>"etf"</code>: custom query tree with <code>{operator, operands}</code> nodes</td>
+</tr>
+<tr>
+<td><code>query_type</code></td>
+<td>string</td>
+<td>No</td>
+<td><code>"predefined"</code> (default), <code>"equity"</code>, <code>"fund"</code>, or <code>"etf"</code></td>
+</tr>
+<tr>
+<td><code>offset</code></td>
+<td>number</td>
+<td>No</td>
+<td>Result offset</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td>number</td>
+<td>No</td>
+<td>Rows for custom queries; Yahoo maximum is <code>250</code></td>
+</tr>
+<tr>
+<td><code>count</code></td>
+<td>number</td>
+<td>No</td>
+<td>Rows for predefined queries; Yahoo maximum is <code>250</code></td>
+</tr>
+<tr>
+<td><code>sort_field</code></td>
+<td>string</td>
+<td>No</td>
+<td>Sort field, for example <code>"percentchange"</code></td>
+</tr>
+<tr>
+<td><code>sort_asc</code></td>
+<td>boolean</td>
+<td>No</td>
+<td>Sort ascending if <code>true</code>, descending if <code>false</code></td>
+</tr>
+<tr>
+<td><code>user_id</code></td>
+<td>string</td>
+<td>No</td>
+<td>Optional Yahoo user identifier</td>
+</tr>
+<tr>
+<td><code>user_id_type</code></td>
+<td>string</td>
+<td>No</td>
+<td>Optional Yahoo user ID type, commonly <code>"guid"</code></td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"><strong>Returns:</strong> JSON screener response from Yahoo Finance, typically including quote rows and metadata.</p>
+<p dir="auto">Custom equity screener example:</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"query_type"</span>: <span class="pl-s"><span class="pl-pds">"</span>equity<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"query"</span>: {
+    <span class="pl-ent">"operator"</span>: <span class="pl-s"><span class="pl-pds">"</span>and<span class="pl-pds">"</span></span>,
+    <span class="pl-ent">"operands"</span>: [
+      { <span class="pl-ent">"operator"</span>: <span class="pl-s"><span class="pl-pds">"</span>gt<span class="pl-pds">"</span></span>, <span class="pl-ent">"operands"</span>: [<span class="pl-s"><span class="pl-pds">"</span>percentchange<span class="pl-pds">"</span></span>, <span class="pl-c1">3</span>] },
+      { <span class="pl-ent">"operator"</span>: <span class="pl-s"><span class="pl-pds">"</span>eq<span class="pl-pds">"</span></span>, <span class="pl-ent">"operands"</span>: [<span class="pl-s"><span class="pl-pds">"</span>region<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>us<span class="pl-pds">"</span></span>] },
+      { <span class="pl-ent">"operator"</span>: <span class="pl-s"><span class="pl-pds">"</span>gte<span class="pl-pds">"</span></span>, <span class="pl-ent">"operands"</span>: [<span class="pl-s"><span class="pl-pds">"</span>intradayprice<span class="pl-pds">"</span></span>, <span class="pl-c1">5</span>] },
+      { <span class="pl-ent">"operator"</span>: <span class="pl-s"><span class="pl-pds">"</span>gt<span class="pl-pds">"</span></span>, <span class="pl-ent">"operands"</span>: [<span class="pl-s"><span class="pl-pds">"</span>dayvolume<span class="pl-pds">"</span></span>, <span class="pl-c1">500000</span>] }
+    ]
+  },
+  <span class="pl-ent">"sort_field"</span>: <span class="pl-s"><span class="pl-pds">"</span>percentchange<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"sort_asc"</span>: <span class="pl-c1">false</span>,
+  <span class="pl-ent">"size"</span>: <span class="pl-c1">50</span>
+}</pre></div>
+<p dir="auto">Custom ETF screener example:</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"query_type"</span>: <span class="pl-s"><span class="pl-pds">"</span>etf<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"query"</span>: {
+    <span class="pl-ent">"operator"</span>: <span class="pl-s"><span class="pl-pds">"</span>and<span class="pl-pds">"</span></span>,
+    <span class="pl-ent">"operands"</span>: [
+      { <span class="pl-ent">"operator"</span>: <span class="pl-s"><span class="pl-pds">"</span>eq<span class="pl-pds">"</span></span>, <span class="pl-ent">"operands"</span>: [<span class="pl-s"><span class="pl-pds">"</span>categoryname<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>Large Blend<span class="pl-pds">"</span></span>] },
+      { <span class="pl-ent">"operator"</span>: <span class="pl-s"><span class="pl-pds">"</span>lte<span class="pl-pds">"</span></span>, <span class="pl-ent">"operands"</span>: [<span class="pl-s"><span class="pl-pds">"</span>annualreportnetexpenseratio<span class="pl-pds">"</span></span>, <span class="pl-c1">0.2</span>] }
+    ]
+  },
+  <span class="pl-ent">"sort_field"</span>: <span class="pl-s"><span class="pl-pds">"</span>fundnetassets<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"sort_asc"</span>: <span class="pl-c1">false</span>,
+  <span class="pl-ent">"size"</span>: <span class="pl-c1">25</span>
+}</pre></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>yfinance_screen_gappers</code></h3></div>
+<p dir="auto">Run a purpose-built custom screener for opening-session bullish gappers.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>min_percent_change</code></td>
+<td>number</td>
+<td>No</td>
+<td>Minimum percent gap/change from prior close (default: <code>3.0</code>)</td>
+</tr>
+<tr>
+<td><code>min_price</code></td>
+<td>number</td>
+<td>No</td>
+<td>Minimum intraday price (default: <code>5.0</code>)</td>
+</tr>
+<tr>
+<td><code>min_volume</code></td>
+<td>number</td>
+<td>No</td>
+<td>Minimum day volume (default: <code>500000</code>)</td>
+</tr>
+<tr>
+<td><code>min_market_cap</code></td>
+<td>number</td>
+<td>No</td>
+<td>Minimum intraday market cap in USD (default: <code>2000000000</code>)</td>
+</tr>
+<tr>
+<td><code>region</code></td>
+<td>string</td>
+<td>No</td>
+<td>Yahoo region code (default: <code>"us"</code>)</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td>number</td>
+<td>No</td>
+<td>Number of results (default: <code>50</code>, max: <code>250</code>)</td>
+</tr>
+<tr>
+<td><code>offset</code></td>
+<td>number</td>
+<td>No</td>
+<td>Result offset for pagination (default: <code>0</code>)</td>
+</tr>
+<tr>
+<td><code>sort_asc</code></td>
+<td>boolean</td>
+<td>No</td>
+<td>Sort by <code>percentchange</code> ascending (<code>true</code>) or descending (<code>false</code>, default)</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"><strong>Returns:</strong> JSON screener response from Yahoo Finance.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>yfinance_get_price_history</code></h3></div>
+<p dir="auto">Fetch historical price data and optionally generate technical analysis charts.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>symbol</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Stock ticker symbol</td>
+</tr>
+<tr>
+<td><code>period</code></td>
+<td>string</td>
+<td>No</td>
+<td>Time range — <code>1d</code>, <code>5d</code>, <code>1mo</code>, <code>3mo</code>, <code>6mo</code>, <code>1y</code>, <code>2y</code>, <code>5y</code>, <code>10y</code>, <code>ytd</code>, <code>max</code> (default: <code>1mo</code>)</td>
+</tr>
+<tr>
+<td><code>interval</code></td>
+<td>string</td>
+<td>No</td>
+<td>Data granularity — <code>1m</code>, <code>2m</code>, <code>5m</code>, <code>15m</code>, <code>30m</code>, <code>60m</code>, <code>90m</code>, <code>1h</code>, <code>1d</code>, <code>5d</code>, <code>1wk</code>, <code>1mo</code>, <code>3mo</code> (default: <code>1d</code>)</td>
+</tr>
+<tr>
+<td><code>chart_type</code></td>
+<td>string</td>
+<td>No</td>
+<td>Chart to generate (omit for tabular data)</td>
+</tr>
+<tr>
+<td><code>prepost</code></td>
+<td>boolean</td>
+<td>No</td>
+<td>Include pre-market and post-market data when available (default: <code>false</code>; useful with intraday requests like <code>period="1d"</code>, <code>interval="1m"</code>)</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"><strong>Chart types:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>"price_volume"</code></td>
+<td>Candlestick chart with volume bars</td>
+</tr>
+<tr>
+<td><code>"vwap"</code></td>
+<td>Price chart with Volume Weighted Average Price overlay</td>
+</tr>
+<tr>
+<td><code>"volume_profile"</code></td>
+<td>Candlestick chart with volume distribution by price level</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"><strong>Returns:</strong></p>
+<ul dir="auto">
+<li>Without <code>chart_type</code>: Markdown table with Date, Open, High, Low, Close, Volume, Dividends, and Stock Splits columns.</li>
+<li>With <code>chart_type</code>: Base64-encoded WebP image for efficient token usage.</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>yfinance_get_financials</code></h3></div>
+<p dir="auto">Fetch financial statements (income statement, balance sheet, and cash flow) with historical data.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>symbol</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Stock ticker symbol</td>
+</tr>
+<tr>
+<td><code>frequency</code></td>
+<td>string</td>
+<td>No</td>
+<td><code>"annual"</code> (yearly), <code>"quarterly"</code> (quarterly), or <code>"ttm"</code> (trailing twelve months). Default: <code>"annual"</code></td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"><strong>Returns:</strong> JSON object with income statement, balance sheet, and cash flow data for each reporting period.</p>
+<ul dir="auto">
+<li><strong>Income Statement fields</strong>: EBIT, Net Income, Tax Provision, Pretax Income, Interest Expense, Total Revenue, Operating Income, EBITDA, Normalized Income</li>
+<li><strong>Balance Sheet fields</strong>: Stockholders Equity, Total Debt, Cash And Cash Equivalents, Invested Capital, Net Debt, Total Assets, Total Liabilities Net Minority Interest, Net Tangible Assets, Tangible Book Value</li>
+<li><strong>Cash Flow fields</strong>: Operating Cash Flow, Free Cash Flow, Capital Expenditure, Net Income From Continuing Operations, Depreciation And Amortization, Change In Working Capital, Cash Dividends Paid</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>yfinance_get_holders</code></h3></div>
+<p dir="auto">Fetch major holders, institutional holders, mutual fund holders, and insider data.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>symbol</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Stock ticker symbol (e.g. <code>AAPL</code>, <code>MSFT</code>)</td>
+</tr>
+<tr>
+<td><code>max_rows</code></td>
+<td>number</td>
+<td>No</td>
+<td>Maximum rows returned per holder section. Default: <code>10</code>. Use <code>0</code> to return all rows</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"><strong>Returns:</strong> JSON object with:</p>
+<ul dir="auto">
+<li><strong><code>major_holders</code></strong> — Aggregated breakdown where each row has an <code>index</code> label (e.g. <code>insidersPercentHeld</code>, <code>institutionsPercentHeld</code>, <code>institutionsFloatPercentHeld</code>, <code>institutionsCount</code>) and a <code>Value</code></li>
+<li><strong><code>institutional_holders</code></strong> — Institutional investors; records typically include fields such as <code>Date Reported</code>, <code>Holder</code>, <code>Shares</code>, <code>Value</code>, <code>pctChange</code>, <code>pctHeld</code></li>
+<li><strong><code>mutualfund_holders</code></strong> — Mutual fund holders; records typically include fields similar to institutional holders</li>
+<li><strong><code>insider_transactions</code></strong> — Recent insider trades; records typically include fields such as <code>Shares</code>, <code>Value</code>, <code>Insider</code>, <code>Position</code>, <code>Transaction</code>, <code>Start Date</code>, <code>Ownership</code></li>
+<li><strong><code>insider_purchases</code></strong> — Six-month summary where each row describes a category (Purchases, Sales, Net Shares, etc.); records typically include fields such as <code>Insider Purchases Last 6m</code>, <code>Shares</code>, <code>Trans</code></li>
+<li><strong><code>insider_roster</code></strong> — Known insiders; records typically include fields such as <code>Name</code>, <code>Position</code>, <code>Shares Owned Directly</code>, <code>Most Recent Transaction</code>, <code>Latest Transaction Date</code></li>
+<li><strong><code>_metadata</code></strong> — Row limit metadata with <code>max_rows</code> and per-section <code>total_rows</code>, <code>returned_rows</code>, and <code>truncated</code></li>
+</ul>
+<p dir="auto">Holder sections are limited to 10 rows by default to keep responses concise. Pass <code>max_rows: 0</code> when you need the complete holder datasets. Field names for holder-related datasets are provided by <code>yfinance</code> and may vary by ticker, data availability, and <code>yfinance</code> version.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>yfinance_get_fund_data</code></h3></div>
+<p dir="auto">Fetch ETF or mutual-fund portfolio composition and operating details.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>symbol</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>ETF or mutual-fund ticker symbol (for example <code>SPY</code>, <code>BND</code>, or <code>VFIAX</code>)</td>
+</tr>
+<tr>
+<td><code>sections</code></td>
+<td>array</td>
+<td>No</td>
+<td>Any of <code>description</code>, <code>fund_overview</code>, <code>fund_operations</code>, <code>asset_classes</code>, <code>top_holdings</code>, <code>equity_holdings</code>, <code>bond_holdings</code>, <code>bond_ratings</code>, or <code>sector_weightings</code>. Omit for all sections</td>
+</tr>
+<tr>
+<td><code>max_rows</code></td>
+<td>number</td>
+<td>No</td>
+<td>Maximum rows per tabular section. Default: <code>25</code>. Use <code>0</code> for all rows</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"><strong>Returns:</strong> Available fund sections plus <code>_metadata</code> with row limits, per-section truncation, unavailable sections, and failed sections. The mix of sections depends on the fund; for example, equity funds and bond funds expose different portfolio breakdowns.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>yfinance_get_option_dates</code></h3></div>
+<p dir="auto">Fetch available option expiration dates for a stock.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>symbol</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Stock ticker symbol (e.g. <code>AAPL</code>, <code>MSFT</code>)</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"><strong>Returns:</strong> JSON array of expiration dates in YYYY-MM-DD format.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto"><code>yfinance_get_option_chain</code></h3></div>
+<p dir="auto">Fetch option chain data (calls and puts) for a stock with available strike prices.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>symbol</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Stock ticker symbol</td>
+</tr>
+<tr>
+<td><code>expiration_date</code></td>
+<td>string</td>
+<td>No</td>
+<td>Option expiration date in YYYY-MM-DD format. Omit to fetch all dates.</td>
+</tr>
+<tr>
+<td><code>option_type</code></td>
+<td>string</td>
+<td>No</td>
+<td><code>"calls"</code>, <code>"puts"</code>, or <code>"all"</code> (default: <code>"all"</code>)</td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"><strong>Returns:</strong> JSON object keyed by expiration date, with calls and/or puts data including:</p>
+<ul dir="auto">
+<li><code>contractSymbol</code>: Option contract identifier</li>
+<li><code>strike</code>: Strike price</li>
+<li><code>lastPrice</code>: Last traded price</li>
+<li><code>bid</code>/<code>ask</code>: Bid and ask prices</li>
+<li><code>volume</code>: Trading volume</li>
+<li><code>openInterest</code>: Open interest</li>
+<li><code>impliedVolatility</code>: IV</li>
+<li><code>inTheMoney</code>: Whether option is ITM</li>
+<li><code>contractSize</code>: Contract size (REGULAR)</li>
+<li><code>currency</code>: Currency (USD)</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Usage</h2></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Via uv (recommended)</h3></div>
+<ol dir="auto">
+<li><a href="/not-found">Install uv</a></li>
+<li>Add the following to your MCP client configuration:</li>
+</ol>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"yfmcp"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>uvx<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"args"</span>: [<span class="pl-s"><span class="pl-pds">"</span>yfmcp@latest<span class="pl-pds">"</span></span>]
+    }
+  }
+}</pre></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Via Docker</h3></div>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"yfmcp"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>docker<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"args"</span>: [<span class="pl-s"><span class="pl-pds">"</span>run<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>-i<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>--rm<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>narumi/yfinance-mcp<span class="pl-pds">"</span></span>]
+    }
+  }
+}</pre></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">From Source</h3></div>
+<ol dir="auto">
+<li>Clone the repository and install dependencies:</li>
+</ol>
+<div class="highlight highlight-source-shell" dir="auto"><pre>git clone https://github.com/narumiruna/yfinance-mcp.git
+<span class="pl-c1">cd</span> yfinance-mcp
+uv sync</pre></div>
+<ol start="2" dir="auto">
+<li>Add the following to your MCP client configuration:</li>
+</ol>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"yfmcp"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>uv<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"args"</span>: [
+        <span class="pl-s"><span class="pl-pds">"</span>run<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>--directory<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>/path/to/yfinance-mcp<span class="pl-pds">"</span></span>,
+        <span class="pl-s"><span class="pl-pds">"</span>yfmcp<span class="pl-pds">"</span></span>
+      ]
+    }
+  }
+}</pre></div>
+<p dir="auto">Replace <code>/path/to/yfinance-mcp</code> with the actual path to your cloned repository.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Testing with Codex CLI</h3></div>
+<p dir="auto">This repository includes <code>.codex/config.toml</code>, which registers the local <code>yfmcp</code> MCP server for Codex CLI using <code>uv run yfmcp</code>. After cloning the repository and running <code>uv sync</code>, open Codex CLI from the repository root and try prompts such as:</p>
+<div><pre lang="text"><code>Show VOO ticker info
+Show VOO price history for the last 5 days
+Find the ticker symbol for Toyota
+Get AAPL option expiration dates
+</code></pre></div>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Development</h2></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Prerequisites</h3></div>
+<ul dir="auto">
+<li>Python ≥ 3.12</li>
+<li><a href="/not-found">uv</a> package manager</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Setup</h3></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre>uv sync --extra dev</pre></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Lint &amp; Format</h3></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre>uv run ruff check <span class="pl-c1">.</span>
+uv run ruff format <span class="pl-c1">.</span></pre></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Type Check</h3></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre>uv run ty check src tests</pre></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Test</h3></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre>uv run pytest -v -s --cov=src tests</pre></div>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Demo Chatbot</h2></div>
+<p dir="auto">See the demo chatbot in its dedicated repository: <a href="/not-found">yfinance-mcp-demo</a></p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Contributors</h2></div>
+<a href="/not-found">
+  <img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/ce41d60be86def4b.svg">
+</a>
+<p dir="auto">Made with <a href="/not-found">contrib.rocks</a>.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">License</h2></div>
+<p dir="auto">This project is licensed under the <a href="/not-found">MIT License</a>.</p>

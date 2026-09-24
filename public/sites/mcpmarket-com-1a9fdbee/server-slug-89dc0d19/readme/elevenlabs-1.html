@@ -1,0 +1,145 @@
+<p dir="auto"><a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/76b3f53b43d4f7ba.webp" alt="export"></a></p>
+<div class="markdown-alert markdown-alert-warning" dir="auto"><p dir="auto">Warning</p><p dir="auto"><strong>This local MCP server is deprecated in favor of the <a href="/not-found">ElevenLabs hosted MCP server</a>.</strong></p>
+<p dir="auto">The hosted server is available at <code>https://api.elevenlabs.io/v1/mcp</code>, with nothing to install or run locally. It authenticates with OAuth, so no API keys are copied into your client. See the <a href="/not-found">hosted MCP server documentation</a> to connect from Claude, Cursor, or any other MCP client.</p>
+<p dir="auto">This repository is no longer actively maintained.</p>
+</div>
+<div align="center" dir="auto">
+<p dir="auto"><a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/1ec76d014aa14139.svg" alt="Discord Community"></a>
+<a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/c08d4dbca725d960.svg" alt="Twitter"></a>
+<a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/d32b85abb37f3169.svg" alt="PyPI"></a>
+<a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/5537d4071f440c5c.svg" alt="Tests"></a></p>
+</div>
+<p align="center" dir="auto">
+  Official ElevenLabs <a href="/not-found">Model Context Protocol (MCP)</a> server that enables interaction with powerful Text to Speech and audio processing APIs. This server allows MCP clients like <a href="/not-found">Claude Desktop</a>, <a href="/not-found">Cursor</a>, <a href="/not-found">Windsurf</a>, <a href="/not-found">OpenAI Agents</a> and others to generate speech, clone voices, transcribe audio, and more.
+</p>
+
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Quickstart with Claude Desktop</h2></div>
+<ol dir="auto">
+<li>Get your API key from <a href="/not-found">ElevenLabs</a>. There is a free tier with 10k credits per month.</li>
+<li>Install <code>uv</code> (Python package manager), install with <code>curl -LsSf https://astral.sh/uv/install.sh | sh</code> or see the <code>uv</code> <a href="/not-found">repo</a> for additional install methods.</li>
+<li>Go to Claude &gt; Settings &gt; Developer &gt; Edit Config &gt; claude_desktop_config.json to include the following:</li>
+</ol>
+<div><pre><code>{
+  "mcpServers": {
+    "ElevenLabs": {
+      "command": "uvx",
+      "args": ["elevenlabs-mcp"],
+      "env": {
+        "ELEVENLABS_API_KEY": "&lt;insert-your-api-key-here&gt;"
+      }
+    }
+  }
+}
+
+</code></pre></div>
+<p dir="auto">If you're using Windows, you will have to enable "Developer Mode" in Claude Desktop to use the MCP server. Click "Help" in the hamburger menu at the top left and select "Enable Developer Mode".</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Other MCP clients</h2></div>
+<p dir="auto">For other clients like Cursor and Windsurf, run:</p>
+<ol dir="auto">
+<li><code>pip install elevenlabs-mcp</code></li>
+<li><code>python -m elevenlabs_mcp --api-key={{PUT_YOUR_API_KEY_HERE}} --print</code> to get the configuration. Paste it into appropriate configuration directory specified by your MCP client.</li>
+</ol>
+<p dir="auto">That's it. Your MCP client can now interact with ElevenLabs through these tools:</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Example usage</h2></div>
+<p dir="auto">⚠️ Warning: ElevenLabs credits are needed to use these tools.</p>
+<p dir="auto">Try asking Claude:</p>
+<ul dir="auto">
+<li>"Create an AI agent that speaks like a film noir detective and can answer questions about classic movies"</li>
+<li>"Generate three voice variations for a wise, ancient dragon character, then I will choose my favorite voice to add to my voice library"</li>
+<li>"Convert this recording of my voice to sound like a medieval knight"</li>
+<li>"Create a soundscape of a thunderstorm in a dense jungle with animals reacting to the weather"</li>
+<li>"Turn this speech into text, identify different speakers, then convert it back using unique voices for each person"</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Optional features</h2></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">File Output Configuration</h3></div>
+<p dir="auto">You can configure how the MCP server handles file outputs using these environment variables in your <code>claude_desktop_config.json</code>:</p>
+<ul dir="auto">
+<li><strong><code>ELEVENLABS_MCP_BASE_PATH</code></strong>: Specify the base path for file operations (default: <code>~/Desktop</code>). This directory is also the security boundary for <strong>input</strong> files: any path passed to a tool that reads a local file (e.g. <code>speech_to_text</code>, <code>isolate_audio</code>, <code>speech_to_speech</code>, <code>video_to_music</code>, <code>upload_music_for_inpainting</code>) must resolve inside this directory, whether given as an absolute or relative path. Paths outside it — even if absolute and previously accepted — are rejected. Set this to a directory that contains everything you need to read from or write to.</li>
+<li><strong><code>ELEVENLABS_MCP_OUTPUT_MODE</code></strong>: Control how generated files are returned (default: <code>files</code>)</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Output Modes</h4></div>
+<p dir="auto">The <code>ELEVENLABS_MCP_OUTPUT_MODE</code> environment variable supports three modes:</p>
+<ol dir="auto">
+<li>
+<p dir="auto"><strong><code>files</code></strong> (default): Save files to disk and return file paths</p>
+<div class="highlight highlight-source-json" dir="auto"><pre><span class="pl-ent">"env"</span>: {
+  <span class="pl-ent">"ELEVENLABS_API_KEY"</span>: <span class="pl-s"><span class="pl-pds">"</span>your-api-key<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"ELEVENLABS_MCP_OUTPUT_MODE"</span>: <span class="pl-s"><span class="pl-pds">"</span>files<span class="pl-pds">"</span></span>
+}</pre></div>
+</li>
+<li>
+<p dir="auto"><strong><code>resources</code></strong>: Return files as MCP resources; binary data is base64-encoded, text is returned as UTF-8 text</p>
+<div class="highlight highlight-source-json" dir="auto"><pre><span class="pl-ent">"env"</span>: {
+  <span class="pl-ent">"ELEVENLABS_API_KEY"</span>: <span class="pl-s"><span class="pl-pds">"</span>your-api-key<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"ELEVENLABS_MCP_OUTPUT_MODE"</span>: <span class="pl-s"><span class="pl-pds">"</span>resources<span class="pl-pds">"</span></span>
+}</pre></div>
+</li>
+<li>
+<p dir="auto"><strong><code>both</code></strong>: Save files to disk AND return as MCP resources</p>
+<div class="highlight highlight-source-json" dir="auto"><pre><span class="pl-ent">"env"</span>: {
+  <span class="pl-ent">"ELEVENLABS_API_KEY"</span>: <span class="pl-s"><span class="pl-pds">"</span>your-api-key<span class="pl-pds">"</span></span>,
+  <span class="pl-ent">"ELEVENLABS_MCP_OUTPUT_MODE"</span>: <span class="pl-s"><span class="pl-pds">"</span>both<span class="pl-pds">"</span></span>
+}</pre></div>
+</li>
+</ol>
+<p dir="auto"><strong>Resource Mode Benefits:</strong></p>
+<ul dir="auto">
+<li>Files are returned directly in the MCP response as base64-encoded data</li>
+<li>No disk I/O required - useful for containerized or serverless environments</li>
+<li>MCP clients can access file content immediately without file system access</li>
+<li>In <code>both</code> mode, resources can be fetched later using the <code>elevenlabs://filename</code> URI pattern</li>
+</ul>
+<p dir="auto"><strong>Use Cases:</strong></p>
+<ul dir="auto">
+<li><code>files</code>: Traditional file-based workflows, local development</li>
+<li><code>resources</code>: Cloud environments, MCP clients without file system access</li>
+<li><code>both</code>: Maximum flexibility, caching, and resource sharing scenarios</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Data residency keys</h3></div>
+<p dir="auto">You can specify the data residency region with the <code>ELEVENLABS_API_RESIDENCY</code> environment variable. Defaults to <code>"us"</code>.</p>
+<p dir="auto"><strong>Note:</strong> Data residency is an enterprise only feature. See <a href="/not-found">the docs</a> for more details.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Contributing</h2></div>
+<p dir="auto">If you want to contribute or run from source:</p>
+<ol dir="auto">
+<li>Clone the repository:</li>
+</ol>
+<div class="highlight highlight-source-shell" dir="auto"><pre>git clone https://github.com/elevenlabs/elevenlabs-mcp
+<span class="pl-c1">cd</span> elevenlabs-mcp</pre></div>
+<ol start="2" dir="auto">
+<li>Create a virtual environment and install dependencies <a href="/not-found">using uv</a>:</li>
+</ol>
+<div class="highlight highlight-source-shell" dir="auto"><pre>uv venv
+<span class="pl-c1">source</span> .venv/bin/activate
+uv pip install -e <span class="pl-s"><span class="pl-pds">"</span>.[dev]<span class="pl-pds">"</span></span></pre></div>
+<ol start="3" dir="auto">
+<li>Copy <code>.env.example</code> to <code>.env</code> and add your ElevenLabs API key:</li>
+</ol>
+<div class="highlight highlight-source-shell" dir="auto"><pre>cp .env.example .env
+<span class="pl-c"><span class="pl-c">#</span> Edit .env and add your API key</span></pre></div>
+<ol start="4" dir="auto">
+<li>Run the tests to make sure everything is working:</li>
+</ol>
+<div class="highlight highlight-source-shell" dir="auto"><pre>./scripts/test.sh
+<span class="pl-c"><span class="pl-c">#</span> Or with options</span>
+./scripts/test.sh --verbose --fail-fast</pre></div>
+<ol start="5" dir="auto">
+<li>
+<p dir="auto">Install the server in Claude Desktop: <code>mcp install elevenlabs_mcp/server.py</code></p>
+</li>
+<li>
+<p dir="auto">Debug and test locally with MCP Inspector: <code>mcp dev elevenlabs_mcp/server.py</code></p>
+</li>
+</ol>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Troubleshooting</h2></div>
+<p dir="auto">Logs when running with Claude Desktop can be found at:</p>
+<ul dir="auto">
+<li><strong>Windows</strong>: <code>%APPDATA%\Claude\logs\mcp-server-elevenlabs.log</code></li>
+<li><strong>macOS</strong>: <code>~/Library/Logs/Claude/mcp-server-elevenlabs.log</code></li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Timeouts when using certain tools</h3></div>
+<p dir="auto">Certain ElevenLabs API operations, like voice design and audio isolation, can take a long time to resolve. When using the MCP inspector in dev mode, you might get timeout errors despite the tool completing its intended task.</p>
+<p dir="auto">This shouldn't occur when using a client like Claude.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">MCP ElevenLabs: spawn uvx ENOENT</h3></div>
+<p dir="auto">If you encounter the error "MCP ElevenLabs: spawn uvx ENOENT", confirm its absolute path by running this command in your terminal:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>which uvx</pre></div>
+<p dir="auto">Once you obtain the absolute path (e.g., <code>/usr/local/bin/uvx</code>), update your configuration to use that path (e.g., <code>"command": "/usr/local/bin/uvx"</code>). This ensures that the correct executable is referenced.</p>

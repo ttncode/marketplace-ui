@@ -1,0 +1,181 @@
+<div class="markdown-heading" dir="auto"><h1 dir="auto">Tavily MCP Server</h1></div>
+<p dir="auto"><a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/c27a0a0623e6d430.svg" alt="GitHub Repo stars"></a>
+<a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/1600c3068206776a.svg" alt="npm"></a>
+<a href="/not-found"></a></p>
+<p dir="auto">The Tavily MCP server provides:</p>
+<ul dir="auto">
+<li>search, extract, map, crawl tools</li>
+<li>Real-time web search capabilities through the tavily-search tool</li>
+<li>Intelligent data extraction from web pages via the tavily-extract tool</li>
+<li>Powerful web mapping tool that creates a structured map of website</li>
+<li>Web crawler that systematically explores websites</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">📚 Helpful Resources</h3></div>
+<ul dir="auto">
+<li><a href="/not-found">Tutorial</a> on combining Tavily MCP with Neo4j MCP server</li>
+<li><a href="/not-found">Tutorial</a> on integrating Tavily MCP with Cline in VS Code</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Remote MCP Server</h2></div>
+<p dir="auto">Connect directly to Tavily's remote MCP server instead of running it locally. This provides a seamless experience without requiring local installation or configuration.</p>
+<p dir="auto">Simply use the remote MCP server URL with your Tavily API key:</p>
+<div><pre><code>https://mcp.tavily.com/mcp/?tavilyApiKey=&lt;your-api-key&gt; 
+</code></pre></div>
+<p dir="auto">Get your Tavily API key from <a href="/not-found">tavily.com</a>.</p>
+<p dir="auto">Alternatively, you can pass your API key through an Authorization header if the MCP client supports this:</p>
+<div><pre><code>Authorization: Bearer &lt;your-api-key&gt;
+</code></pre></div>
+<p dir="auto"><strong>Note:</strong> When using the remote MCP, you can specify default parameters for all requests by including a <code>DEFAULT_PARAMETERS</code> header containing a JSON object with your desired defaults. Example:</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{<span class="pl-ent">"include_images"</span>:<span class="pl-c1">true</span>, <span class="pl-ent">"search_depth"</span>: <span class="pl-s"><span class="pl-pds">"</span>basic<span class="pl-pds">"</span></span>, <span class="pl-ent">"max_results"</span>: <span class="pl-c1">10</span>}</pre></div>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Connect to Claude Code</h2></div>
+<p dir="auto"><a href="/not-found">Claude Code</a> is Anthropic's official CLI tool for Claude. You can add the Tavily MCP server using the <code>claude mcp add</code> command. There are two ways to authenticate:</p>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Option 1: API Key in URL</h4></div>
+<p dir="auto">Pass your API key directly in the URL. Replace <code>&lt;your-api-key&gt;</code> with your actual <a href="/not-found">Tavily API key</a>:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>claude mcp add --transport http tavily https://mcp.tavily.com/mcp/<span class="pl-k">?</span>tavilyApiKey=<span class="pl-k">&lt;</span>your-api-key<span class="pl-k">&gt;</span></pre></div>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Option 2: OAuth Authentication Flow</h4></div>
+<p dir="auto">Add the server without an API key in the URL:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>claude mcp add --transport http tavily https://mcp.tavily.com/mcp</pre></div>
+<p dir="auto">After adding, you'll need to complete the authentication flow:</p>
+<ol dir="auto">
+<li>Run <code>claude</code> to start Claude Code</li>
+<li>Type <code>/mcp</code> to open the MCP server management</li>
+<li>Select the Tavily server and complete the authentication process</li>
+</ol>
+<p dir="auto"><strong>Tip:</strong> Add <code>--scope user</code> to either command to make the Tavily MCP server available globally across all your projects:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>claude mcp add --transport http --scope user tavily https://mcp.tavily.com/mcp/<span class="pl-k">?</span>tavilyApiKey=<span class="pl-k">&lt;</span>your-api-key<span class="pl-k">&gt;</span></pre></div>
+<p dir="auto">Once configured, you'll have access to the Tavily search, extract, map, and crawl tools.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Connect to Cursor</h2></div>
+<p dir="auto"><a href="/not-found"><img src="/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme/img/d622cdb2a54d2a04.svg" alt="Install MCP Server"></a></p>
+<p dir="auto">Click the ⬆️ Add to Cursor ⬆️ button, this will do most of the work for you but you will still need to edit the configuration to add your API-KEY. You can get a Tavily API key <a href="/not-found">here</a>.</p>
+<p dir="auto">once you click the button you should be redirect to Cursor ...</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Step 1</h3></div>
+<p dir="auto">Click the install button</p>
+<p dir="auto"><a href="/not-found"></a></p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Step 2</h3></div>
+<p dir="auto">You should see the MCP is now installed, if the blue slide is not already turned on, manually turn it on. You also need to edit the configuration to include your own Tavily API key.
+<a href="/not-found"></a></p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Step 3</h3></div>
+<p dir="auto">You will then be redirected to your <code>mcp.json</code> file where you have to add <code>your-api-key</code>.</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"tavily-remote-mcp"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>npx -y mcp-remote https://mcp.tavily.com/mcp/?tavilyApiKey=&lt;your-api-key&gt;<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"env"</span>: {}
+    }
+  }
+}</pre></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Remote MCP Server OAuth Flow</h3></div>
+<p dir="auto">The Tavily Remote MCP server supports secure OAuth authentication, allowing you to connect and authorize seamlessly with compatible clients.</p>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">How to Set Up OAuth Authentication</h4></div>
+<p dir="auto"><strong>A. Using MCP Inspector:</strong></p>
+<ul dir="auto">
+<li>Open the MCP Inspector and click "Open Auth Settings".</li>
+<li>Select the OAuth flow and complete these steps:
+<ol dir="auto">
+<li>Metadata discovery</li>
+<li>Client registration</li>
+<li>Preparing authorization</li>
+<li>Request authorization and obtain the authorization code</li>
+<li>Token request</li>
+<li>Authentication complete</li>
+</ol>
+</li>
+</ul>
+<p dir="auto">Once finished, you will receive an access token that lets you securely make authenticated requests to the Tavily Remote MCP server.</p>
+<p dir="auto"><strong>B. Using other MCP Clients (Example: Cursor):</strong></p>
+<p dir="auto">You can configure your MCP client to use OAuth without including your Tavily API key in the URL. For example, in your <code>mcp.json</code>:</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"tavily-remote-mcp"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>npx mcp-remote https://mcp.tavily.com/mcp<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"env"</span>: {}
+    }
+  }
+}</pre></div>
+<p dir="auto">If you need to clear stored OAuth credentials and reauthenticate, run:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>rm -rf <span class="pl-k">~</span>/.mcp-auth</pre></div>
+<blockquote>
+<p dir="auto"><strong>Note:</strong></p>
+<ul dir="auto">
+<li>OAuth authentication is optional. You can still use API key authentication at any time by including your Tavily API key in the URL query parameter (<code>?tavilyApiKey=...</code>) or by setting it in the <code>Authorization</code> header, as described above.</li>
+</ul>
+</blockquote>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Selecting Which API Key Is Used for OAuth</h4></div>
+<p dir="auto">After successful OAuth authentication, you can control which API key is used by naming it <code>mcp_auth_default</code>:</p>
+<ul dir="auto">
+<li>If you set a key named <code>mcp_auth_default</code> in your <strong>personal account</strong>, that key will be used for the auth flow.</li>
+<li>If you are part of a <strong>team</strong> that has a key named <code>mcp_auth_default</code>, that key will be used for the auth flow.</li>
+<li>If you have <strong>both</strong> a personal key and a team key named <code>mcp_auth_default</code>, the <strong>personal key will be prioritized</strong>.</li>
+<li>If no <code>mcp_auth_default</code> key is set, the <code>default</code> key in your personal account will be used. If no <code>default</code> key is set, the first available key will be used.</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Local MCP</h2></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Prerequisites 🔧</h3></div>
+<p dir="auto">Before you begin, ensure you have:</p>
+<ul dir="auto">
+<li><a href="/not-found">Tavily API key</a>
+<ul dir="auto">
+<li>If you don't have a Tavily API key, you can sign up for a free account <a href="/not-found">here</a></li>
+</ul>
+</li>
+<li><a href="/not-found">Claude Desktop</a> or <a href="/not-found">Cursor</a></li>
+<li><a href="/not-found">Node.js</a> (v20 or higher)
+<ul dir="auto">
+<li>You can verify your Node.js installation by running:
+<ul dir="auto">
+<li><code>node --version</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="/not-found">Git</a> installed (only needed if using Git installation method)
+<ul dir="auto">
+<li>On macOS: <code>brew install git</code></li>
+<li>On Linux:
+<ul dir="auto">
+<li>Debian/Ubuntu: <code>sudo apt install git</code></li>
+<li>RedHat/CentOS: <code>sudo yum install git</code></li>
+</ul>
+</li>
+<li>On Windows: Download <a href="/not-found">Git for Windows</a></li>
+</ul>
+</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Running with NPX</h3></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre>npx -y tavily-mcp@latest </pre></div>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Default Parameters Configuration ⚙️</h2></div>
+<p dir="auto">You can set default parameter values for the <code>tavily-search</code> tool using the <code>DEFAULT_PARAMETERS</code> environment variable. This allows you to configure default search behavior without specifying these parameters in every request.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Example Configuration</h3></div>
+<div class="highlight highlight-source-shell" dir="auto"><pre><span class="pl-k">export</span> DEFAULT_PARAMETERS=<span class="pl-s"><span class="pl-pds">'</span>{"include_images": true}<span class="pl-pds">'</span></span></pre></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Example usage from Client</h3></div>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"tavily-mcp"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>npx<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"args"</span>: [<span class="pl-s"><span class="pl-pds">"</span>-y<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>tavily-mcp@latest<span class="pl-pds">"</span></span>],
+      <span class="pl-ent">"env"</span>: {
+        <span class="pl-ent">"TAVILY_API_KEY"</span>: <span class="pl-s"><span class="pl-pds">"</span>your-api-key-here<span class="pl-pds">"</span></span>,
+        <span class="pl-ent">"DEFAULT_PARAMETERS"</span>: <span class="pl-s"><span class="pl-pds">"</span>{<span class="pl-cce">\"</span>include_images<span class="pl-cce">\"</span>: true, <span class="pl-cce">\"</span>max_results<span class="pl-cce">\"</span>: 15, <span class="pl-cce">\"</span>search_depth<span class="pl-cce">\"</span>: <span class="pl-cce">\"</span>advanced<span class="pl-cce">\"</span>}<span class="pl-pds">"</span></span>
+      }
+    }
+  }
+}</pre></div>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Identifying the End User (Optional)</h2></div>
+<p dir="auto">You can optionally identify the end user on whose behalf requests are being made by setting the <code>TAVILY_HUMAN_ID</code> environment variable. When set, Tavily MCP forwards it as the <code>X-Human-Id</code> header on every API call, enabling per-user analytics.</p>
+<p dir="auto">This is <strong>entirely optional</strong> — leave it unset and behavior is unchanged.</p>
+<div class="highlight highlight-source-json" dir="auto"><pre>{
+  <span class="pl-ent">"mcpServers"</span>: {
+    <span class="pl-ent">"tavily-mcp"</span>: {
+      <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>npx<span class="pl-pds">"</span></span>,
+      <span class="pl-ent">"args"</span>: [<span class="pl-s"><span class="pl-pds">"</span>-y<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>tavily-mcp@latest<span class="pl-pds">"</span></span>],
+      <span class="pl-ent">"env"</span>: {
+        <span class="pl-ent">"TAVILY_API_KEY"</span>: <span class="pl-s"><span class="pl-pds">"</span>your-api-key-here<span class="pl-pds">"</span></span>,
+        <span class="pl-ent">"TAVILY_HUMAN_ID"</span>: <span class="pl-s"><span class="pl-pds">"</span>your-user-id<span class="pl-pds">"</span></span>
+      }
+    }
+  }
+}</pre></div>
+<p dir="auto"><strong>Privacy note:</strong> Tavily hashes <code>human_id</code> server-side (SHA-256) before storage, so the raw value is never persisted. Even so, prefer opaque identifiers (e.g. an internal user ID) over raw PII like emails when possible.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Acknowledgments ✨</h2></div>
+<ul dir="auto">
+<li><a href="/not-found">Model Context Protocol</a> for the MCP specification</li>
+<li><a href="/not-found">Anthropic</a> for Claude Desktop</li>
+</ul>

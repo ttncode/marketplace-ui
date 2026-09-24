@@ -1,0 +1,326 @@
+<div class="markdown-heading" dir="auto"><h1 dir="auto">Superpowers</h1></div>
+<p dir="auto">Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Table of Contents</h2></div>
+<ul dir="auto">
+<li><a href="#how-it-works">How it works</a></li>
+<li><a href="#commercial-services">Commercial Services</a></li>
+<li><a href="#installation">Getting Started</a>
+<ul dir="auto">
+<li><a href="#claude-code">Claude Code</a></li>
+<li><a href="#antigravity">Antigravity</a></li>
+<li><a href="#codex-app">Codex App</a></li>
+<li><a href="#codex-cli">Codex CLI</a></li>
+<li><a href="#cursor">Cursor</a></li>
+<li><a href="#devin-cli">Devin CLI</a></li>
+<li><a href="#factory-droid">Factory Droid</a></li>
+<li><a href="#gemini-cli">Gemini CLI</a></li>
+<li><a href="#github-copilot-cli">GitHub Copilot CLI</a></li>
+<li><a href="#grok-build-cli">Grok Build CLI</a></li>
+<li><a href="#kimi-code">Kimi Code</a></li>
+<li><a href="#opencode">OpenCode</a></li>
+<li><a href="#pi">Pi</a></li>
+<li><a href="#qwen-code">Qwen Code</a></li>
+<li><a href="#hermes-agent">Hermes Agent</a></li>
+<li><a href="#muse">Muse</a></li>
+</ul>
+</li>
+<li><a href="#the-basic-workflow">The Basic Workflow</a></li>
+<li><a href="#when-something-goes-wrong">When Something Goes Wrong</a></li>
+<li><a href="#community">Community</a></li>
+<li><a href="#whats-inside">What's Inside</a></li>
+<li><a href="#philosophy">Philosophy</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#updating">Updating</a></li>
+<li><a href="#license">License</a></li>
+<li><a href="#visual-companion-telemetry">Visual companion telemetry</a></li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">How it works</h2></div>
+<p dir="auto">It starts from the moment you fire up your coding agent. As soon as it sees that you're building something, it <em>doesn't</em> just jump into trying to write code. Instead, it steps back and asks you what you're really trying to do.</p>
+<p dir="auto">Once it's teased a spec out of the conversation, it shows it to you in chunks short enough to actually read and digest.</p>
+<p dir="auto">After you've signed off on the design, your agent puts together an implementation plan that's clear enough for an enthusiastic junior engineer with poor taste, no judgement, no project context, and an aversion to testing to follow. It emphasizes true red/green TDD, YAGNI (You Aren't Gonna Need It), and DRY.</p>
+<p dir="auto">Next up, once you say "go", it launches a <em>subagent-driven-development</em> process, having agents work through each engineering task, inspecting and reviewing their work, and continuing forward. It's not uncommon for your agent to work autonomously for a couple hours at a time without deviating from the plan you put together.</p>
+<p dir="auto">There's a bunch more to it, but that's the core of the system. And because the skills trigger automatically, you don't need to do anything special. Your coding agent just has Superpowers.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Commercial Services</h2></div>
+<p dir="auto">If you're using Superpowers in enterprise and could benefit from commercial support, additional tooling, or managed spending, please don't hesitate to drop us a line at <a href="mailto:sales@primeradiant.com">sales@primeradiant.com</a>.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Installation</h2></div>
+<p dir="auto">Installation differs by harness. If you use more than one, install Superpowers separately for each one.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Claude Code</h3></div>
+<p dir="auto">Superpowers is available via the <a href="/not-found">official Claude plugin marketplace</a></p>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Official Marketplace</h4></div>
+<ul dir="auto">
+<li>
+<p dir="auto">Install the plugin from Anthropic's official marketplace:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>/plugin install superpowers@claude-plugins-official</pre></div>
+</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h4 dir="auto">Superpowers Marketplace</h4></div>
+<p dir="auto">The Superpowers marketplace provides Superpowers and some other related plugins for Claude Code.</p>
+<ul dir="auto">
+<li>
+<p dir="auto">Register the marketplace:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>/plugin marketplace add obra/superpowers-marketplace</pre></div>
+</li>
+<li>
+<p dir="auto">Install the plugin from this marketplace:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>/plugin install superpowers@superpowers-marketplace</pre></div>
+</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Antigravity</h3></div>
+<p dir="auto">Install Superpowers as a plugin from this repository:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>agy plugin install https://github.com/obra/superpowers</pre></div>
+<p dir="auto">Antigravity runs the plugin's session-start hook, so Superpowers is active from
+the first message. Reinstall with the same command to update.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Codex App</h3></div>
+<p dir="auto">Superpowers is available via the <a href="/not-found">official Codex plugin marketplace</a>.</p>
+<ul dir="auto">
+<li>In the Codex app, click on Plugins in the sidebar.</li>
+<li>You should see <code>Superpowers</code> in the Coding section.</li>
+<li>Click the <code>+</code> next to Superpowers and follow the prompts.</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Codex CLI</h3></div>
+<p dir="auto">Superpowers is available via the <a href="/not-found">official Codex plugin marketplace</a>.</p>
+<ul dir="auto">
+<li>
+<p dir="auto">Open the plugin search interface:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>/plugins</pre></div>
+</li>
+<li>
+<p dir="auto">Search for Superpowers:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>superpowers</pre></div>
+</li>
+<li>
+<p dir="auto">Select <code>Install Plugin</code>.</p>
+</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Cursor</h3></div>
+<ul dir="auto">
+<li>
+<p dir="auto">In Cursor Agent chat, install from marketplace:</p>
+<div><pre lang="text"><code>/add-plugin superpowers
+</code></pre></div>
+</li>
+<li>
+<p dir="auto">Or search for "superpowers" in the plugin marketplace.</p>
+</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Devin CLI</h3></div>
+<ul dir="auto">
+<li>
+<p dir="auto">Install the plugin from this repository:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>devin plugins install obra/superpowers</pre></div>
+</li>
+<li>
+<p dir="auto">Update to the latest version with:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>devin plugins update superpowers</pre></div>
+</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Factory Droid</h3></div>
+<ul dir="auto">
+<li>
+<p dir="auto">Register the marketplace:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>droid plugin marketplace add https://github.com/obra/superpowers</pre></div>
+</li>
+<li>
+<p dir="auto">Install the plugin:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>droid plugin install superpowers@superpowers</pre></div>
+</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Gemini CLI</h3></div>
+<ul dir="auto">
+<li>
+<p dir="auto">Install the extension:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>gemini extensions install https://github.com/obra/superpowers</pre></div>
+</li>
+<li>
+<p dir="auto">Update later:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>gemini extensions update superpowers</pre></div>
+</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">GitHub Copilot CLI</h3></div>
+<ul dir="auto">
+<li>
+<p dir="auto">Register the marketplace:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>copilot plugin marketplace add obra/superpowers-marketplace</pre></div>
+</li>
+<li>
+<p dir="auto">Install the plugin:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>copilot plugin install superpowers@superpowers-marketplace</pre></div>
+</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Grok Build CLI</h3></div>
+<p dir="auto">Superpowers is available via the <a href="/not-found">official Grok plugin marketplace</a>.</p>
+<ul dir="auto">
+<li>
+<p dir="auto">Install the plugin from xAI's official marketplace:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>grok plugin install superpowers@xai-official --trust</pre></div>
+</li>
+<li>
+<p dir="auto">Or open the marketplace in the TUI, search for Superpowers, and install it:</p>
+<div><pre lang="text"><code>/marketplace
+</code></pre></div>
+</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Kimi Code</h3></div>
+<p dir="auto">Superpowers is available in Kimi Code's plugin marketplace.</p>
+<ul dir="auto">
+<li>
+<p dir="auto">Open Kimi Code's plugin manager:</p>
+<div><pre lang="text"><code>/plugins
+</code></pre></div>
+</li>
+<li>
+<p dir="auto">Go to <code>Marketplace</code> &gt; <code>Superpowers</code> and install it.</p>
+</li>
+<li>
+<p dir="auto">Or install directly from this repository:</p>
+<div><pre lang="text"><code>/plugins install https://github.com/obra/superpowers
+</code></pre></div>
+</li>
+<li>
+<p dir="auto">Detailed docs: <a href="/not-found">docs/README.kimi.md</a></p>
+</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">OpenCode</h3></div>
+<p dir="auto">OpenCode uses its own plugin install; install Superpowers separately even if you
+already use it in another harness.</p>
+<ul dir="auto">
+<li>
+<p dir="auto">Tell OpenCode:</p>
+<div><pre><code>Fetch and follow instructions from https://raw.githubusercontent.com/obra/superpowers/refs/heads/main/.opencode/INSTALL.md
+</code></pre></div>
+</li>
+<li>
+<p dir="auto">Detailed docs: <a href="/not-found">docs/README.opencode.md</a></p>
+</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Pi</h3></div>
+<p dir="auto">Install Superpowers as a Pi package from this repository:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>pi install git:github.com/obra/superpowers</pre></div>
+<p dir="auto">For local development, run Pi with this checkout loaded as a temporary package:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>pi -e /path/to/superpowers</pre></div>
+<p dir="auto">The Pi package loads the Superpowers skills and a small extension that injects the <code>using-superpowers</code> bootstrap at session startup and again after compaction. Pi has native skills, so no compatibility <code>Skill</code> tool is required. Subagent and task-list tools remain optional Pi companion packages.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Qwen Code</h3></div>
+<p dir="auto">Qwen Code installs plugins from Claude Code marketplaces directly.</p>
+<ul dir="auto">
+<li>
+<p dir="auto">Install the plugin from this repository, and pick <code>superpowers</code> when prompted:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>qwen extensions install obra/superpowers</pre></div>
+</li>
+<li>
+<p dir="auto">Update later:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>qwen extensions update superpowers</pre></div>
+</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Hermes Agent</h3></div>
+<p dir="auto">Install Superpowers as a Hermes plugin from this repository:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>hermes plugins install obra/superpowers --enable</pre></div>
+<p dir="auto">Restart any active Hermes sessions after installing. Note: Hermes has no
+post-compaction hook, so a very long session that compacts over its first
+turn loses the bootstrap — start a fresh session if skills stop triggering.</p>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Muse</h3></div>
+<p dir="auto">Superpowers is available as a native Muse plugin — same repo, same skills, all harnesses. The <code>using-superpowers</code> bootstrap is injected via the native <code>SessionStart</code> hook alongside Claude Code, Codex, Cursor, Gemini, Pi, and the rest — no per-session opt-in.</p>
+<ul dir="auto">
+<li>
+<p dir="auto">Install from a local checkout:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>muse plugins install ./
+muse plugins approve superpowers</pre></div>
+<p dir="auto">Or clone and install:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>git clone https://github.com/obra/superpowers.git
+muse plugins install ./superpowers
+muse plugins approve superpowers</pre></div>
+</li>
+<li>
+<p dir="auto">Update later:</p>
+<div class="highlight highlight-source-shell" dir="auto"><pre>muse plugins update superpowers</pre></div>
+</li>
+</ul>
+<p dir="auto">Restart any active Muse sessions after installing so the <code>SessionStart</code> hook takes effect — skills are active immediately, hooks require approval on first install. To verify, start a fresh session and send <code>Let's make a react todo list</code> — a working install auto-triggers <code>brainstorming</code> before any code is written. Version is tracked in <code>.version-bump.json</code> so <code>scripts/bump-version.sh</code> keeps it in sync.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">The Basic Workflow</h2></div>
+<ol dir="auto">
+<li>
+<p dir="auto"><strong>brainstorming</strong> - Activates before writing code. Refines rough ideas through questions, explores alternatives, presents design in sections for validation. Saves design document.</p>
+</li>
+<li>
+<p dir="auto"><strong>using-git-worktrees</strong> - Activates after design approval. Creates isolated workspace on new branch, runs project setup, verifies clean test baseline.</p>
+</li>
+<li>
+<p dir="auto"><strong>writing-plans</strong> - Activates with approved design. Breaks work into bite-sized tasks (2-5 minutes each). Every task has exact file paths, complete code, verification steps.</p>
+</li>
+<li>
+<p dir="auto"><strong>subagent-driven-development</strong> or <strong>executing-plans</strong> - Activates with plan. Either dispatches a fresh subagent per task with a review after each (most thorough), or implements every task inline in the current session with one fresh review of the whole branch at the end (cheapest).</p>
+</li>
+<li>
+<p dir="auto"><strong>test-driven-development</strong> - Activates during implementation. Enforces RED-GREEN-REFACTOR: write failing test, watch it fail, write minimal code, watch it pass, commit. Deletes code written before tests.</p>
+</li>
+<li>
+<p dir="auto"><strong>requesting-code-review</strong> - Activates between tasks. Reviews against plan, reports issues by severity. Critical issues block progress.</p>
+</li>
+<li>
+<p dir="auto"><strong>finishing-a-development-branch</strong> - Activates when tasks complete. Verifies tests, presents options (merge/PR/keep/discard), cleans up worktree.</p>
+</li>
+</ol>
+<p dir="auto"><strong>The agent checks for relevant skills before any task.</strong> Mandatory workflows, not suggestions.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">When Something Goes Wrong</h2></div>
+<p dir="auto">Sometimes a session misbehaves: a skill fires when it shouldn't, stays silent when it should, or the agent ignores its plan, repeats work, or burns more tokens than you'd expect. Ask your coding agent to "figure out what went wrong with superpowers in this session" and it will invoke the <strong>diagnosing-superpowers</strong> skill. To examine an earlier session, name it: "figure out what went wrong with superpowers in session <code>&lt;id&gt;</code>".</p>
+<p dir="auto">The skill reads the session transcript, reports what happened with line-level evidence, and, if you want, packages a scrubbed bundle for a bug report.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Community</h2></div>
+<p dir="auto">Superpowers is built by <a href="/not-found">Jesse Vincent</a> and the rest of the folks at <a href="/not-found">Prime Radiant</a>.</p>
+<ul dir="auto">
+<li><strong>Discord</strong>: <a href="/not-found">Join us</a> for community support, questions, and sharing what you're building with Superpowers</li>
+<li><strong>Issues</strong>: <a href="/not-found">https://github.com/obra/superpowers/issues</a></li>
+<li><strong>Release announcements</strong>: <a href="/not-found">Sign up</a> to get notified about new versions</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">What's Inside</h2></div>
+<div class="markdown-heading" dir="auto"><h3 dir="auto">Skills Library</h3></div>
+<p dir="auto"><strong>Testing</strong></p>
+<ul dir="auto">
+<li><strong>test-driven-development</strong> - RED-GREEN-REFACTOR cycle (includes testing anti-patterns reference)</li>
+</ul>
+<p dir="auto"><strong>Debugging</strong></p>
+<ul dir="auto">
+<li><strong>systematic-debugging</strong> - 4-phase root cause process (includes root-cause-tracing, defense-in-depth, condition-based-waiting techniques)</li>
+<li><strong>verification-before-completion</strong> - Ensure it's actually fixed</li>
+<li><strong>diagnosing-superpowers</strong> - Work out what went wrong in a session, with evidence; export a scrubbed bundle or file an issue</li>
+</ul>
+<p dir="auto"><strong>Collaboration</strong></p>
+<ul dir="auto">
+<li><strong>brainstorming</strong> - Socratic design refinement</li>
+<li><strong>writing-plans</strong> - Detailed implementation plans</li>
+<li><strong>executing-plans</strong> - Inline plan execution: one context, one final review</li>
+<li><strong>dispatching-parallel-agents</strong> - Concurrent subagent workflows</li>
+<li><strong>requesting-code-review</strong> - Pre-review checklist</li>
+<li><strong>receiving-code-review</strong> - Responding to feedback</li>
+<li><strong>using-git-worktrees</strong> - Parallel development branches</li>
+<li><strong>finishing-a-development-branch</strong> - Merge/PR decision workflow</li>
+<li><strong>subagent-driven-development</strong> - Fast iteration with two-stage review (spec compliance, then code quality)</li>
+</ul>
+<p dir="auto"><strong>Meta</strong></p>
+<ul dir="auto">
+<li><strong>writing-skills</strong> - Create new skills following best practices (includes testing methodology)</li>
+<li><strong>using-superpowers</strong> - Introduction to the skills system</li>
+</ul>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Philosophy</h2></div>
+<ul dir="auto">
+<li><strong>Test-Driven Development</strong> - Write tests first, always</li>
+<li><strong>Systematic over ad-hoc</strong> - Process over guessing</li>
+<li><strong>Complexity reduction</strong> - Simplicity as primary goal</li>
+<li><strong>Evidence over claims</strong> - Verify before declaring success</li>
+</ul>
+<p dir="auto">Read <a href="/not-found">the original release announcement</a>.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Contributing</h2></div>
+<p dir="auto">The general contribution process for Superpowers is below. Keep in mind that we don't generally accept contributions of new skills and that any updates to skills must work across all of the coding agents we support.</p>
+<ol dir="auto">
+<li>Fork the repository</li>
+<li>Switch to the 'dev' branch</li>
+<li>Create a branch for your work</li>
+<li>Follow the <code>writing-skills</code> skill for creating and testing new and modified skills</li>
+<li>Submit a PR, being sure to fill in the pull request template.</li>
+</ol>
+<p dir="auto">Skill-behavior tests use the drill eval harness from <a href="/not-found">superpowers-evals</a>, cloned into <code>evals/</code> — see <code>evals/README.md</code> for setup. Plugin-infrastructure tests live at <code>tests/</code> and run via the relevant <code>run-*.sh</code> or <code>npm test</code>.</p>
+<p dir="auto">See <code>skills/writing-skills/SKILL.md</code> for the complete guide.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Updating</h2></div>
+<p dir="auto">Superpowers updates are somewhat coding-agent dependent, but are often automatic.</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">License</h2></div>
+<p dir="auto">MIT License - see LICENSE file for details</p>
+<div class="markdown-heading" dir="auto"><h2 dir="auto">Visual companion telemetry</h2></div>
+<p dir="auto">Because skills and plugins don't provide any feedback to creators, we have no idea how many of you are using Superpowers. By default, the Prime Radiant logo on brainstorming's optional visual companion feature is loaded from our website. It includes the version of Superpowers in use. It does not include any details about your project, prompt, or coding agent. We don't see your clicks or anything about what you're building. This helps us have a rough idea of how many folks are using Superpowers and which version of Superpowers they're using. It's 100% optional. To disable this, set the environment variable <code>SUPERPOWERS_DISABLE_TELEMETRY</code> to any true value. Superpowers also honors Claude Code's <code>DISABLE_TELEMETRY</code> and <code>CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC</code> opt-outs.</p>
