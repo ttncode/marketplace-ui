@@ -1,0 +1,17 @@
+.dither {
+  background-image:
+    radial-gradient(circle, rgba(34, 34, 34, 0.72) 0, rgba(34, 34, 34, 0.72) 0.65px, transparent 0.95px),
+    linear-gradient(112deg, rgba(255, 255, 255, 0.12), rgba(94, 94, 94, 0.04));
+}
+
+.link:nth-child(3n + 2) .dither {
+  background-image:
+    radial-gradient(circle, rgba(34, 34, 34, 0.66) 0, rgba(34, 34, 34, 0.66) 0.65px, transparent 0.95px),
+    linear-gradient(72deg, rgba(255, 255, 255, 0.14), rgba(94, 94, 94, 0.05));
+}
+
+.link:nth-child(3n) .dither {
+  background-image:
+    radial-gradient(circle, rgba(34, 34, 34, 0.62) 0, rgba(34, 34, 34, 0.62) 0.65px, transparent 0.95px),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(94, 94, 94, 0.06));
+}
