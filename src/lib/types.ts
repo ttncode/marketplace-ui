@@ -102,6 +102,8 @@ export interface SiteConfig {
   readonly name: string;
   readonly url: string;
   readonly description: string;
+  /** Where privacy and terms questions go. */
+  readonly contactEmail: string;
   readonly logo: { readonly light: string; readonly dark: string };
   readonly announcement: { readonly badge: string; readonly label: string; readonly href: string; readonly description: string } | null;
   readonly nav: readonly NavMenu[];

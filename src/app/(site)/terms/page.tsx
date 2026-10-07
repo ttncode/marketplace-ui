@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <LegalPage title="Terms of Service" lastUpdated={LAST_UPDATED}>
-      <TermsContent siteName={site.name} contactEmail="contact@example.com" />
+      <TermsContent siteName={site.name} contactEmail={site.contactEmail} />
     </LegalPage>
   );
 }

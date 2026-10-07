@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <LegalPage title="Privacy Policy" lastUpdated={LAST_UPDATED}>
-      <PrivacyContent siteName={site.name} contactEmail="contact@example.com" />
+      <PrivacyContent siteName={site.name} contactEmail={site.contactEmail} />
     </LegalPage>
   );
 }

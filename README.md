@@ -32,7 +32,7 @@ The repository ships `(site)`, `(auth)` and `(dashboard)`.
 
 ## Customising
 
-- Brand: edit `src/site.config.ts` (name, url, logo, navigation, footer).
+- Brand: edit `src/site.config.ts` (name, url, contact email, logo, navigation, footer).
 - Copy and demo data: replace the files in `src/content/` (categories, listings, home, FAQ, submit, legal).
 - Look and feel: edit the design tokens in `src/app/theme.css` and the fonts in `src/app/layout.tsx`. To change the brand color, set `--design-accent`, `--design-accent-foreground`, `--design-accent-raised` and `--design-accent-raised-hover` together, in both themes.
 - Logo and favicons: replace the files in `public/brand/`.

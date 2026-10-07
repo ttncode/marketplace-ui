@@ -4,6 +4,7 @@ export const site: SiteConfig = {
   name: "Acme Directory",
   url: "https://example.com",
   description: "A curated directory of tools, with a dashboard to manage your own.",
+  contactEmail: "contact@example.com",
   logo: { light: "/brand/logo.svg", dark: "/brand/logo-dark.svg" },
   announcement: { badge: "New", label: "Acme Studio", href: "/app", description: "Manage and schedule your content in one place" },
   nav: [
