@@ -18,7 +18,7 @@ function FaqAccordionItem({ item, isOpen, onToggle }: FaqAccordionItemProps) {
   const contentId = `${id}-content`;
 
   return (
-    <div className="border-b border-[#dbdbdb]">
+    <div className="border-b border-border">
       <h3 className="m-0 flex font-display text-[16px] font-normal tracking-[-0.035em]">
         <button
           type="button"
@@ -26,7 +26,7 @@ function FaqAccordionItem({ item, isOpen, onToggle }: FaqAccordionItemProps) {
           aria-expanded={isOpen}
           aria-controls={contentId}
           onClick={onToggle}
-          className="flex flex-1 items-center justify-between py-4 text-left font-mono text-[14px] leading-[20px] font-medium tracking-[-0.56px] text-[#0a0a0a] transition-all duration-150 ease-[cubic-bezier(0.4,0,0.2,1)] outline-none hover:text-[#0a0a0acc] hover:no-underline focus-visible:ring-2 focus-visible:ring-[#0a0a0a]/50 md:text-[16px] md:leading-[24px]"
+          className="flex flex-1 items-center justify-between py-4 text-left font-mono text-[14px] leading-[20px] font-medium tracking-[-0.56px] text-ink transition-all duration-150 ease-[cubic-bezier(0.4,0,0.2,1)] outline-none hover:text-ink/80 hover:no-underline focus-visible:ring-2 focus-visible:ring-ink/50 md:text-[16px] md:leading-[24px]"
         >
           {item.question}
           <ChevronDown
@@ -39,7 +39,7 @@ function FaqAccordionItem({ item, isOpen, onToggle }: FaqAccordionItemProps) {
       </h3>
       <AccordionRegion open={isOpen} id={contentId} labelledBy={triggerId} className="font-sans text-[14px] leading-[20px]">
           <div
-            className="pb-4 font-sans text-[14px] leading-[22.75px] text-[#616161]"
+            className="pb-4 font-sans text-[14px] leading-[22.75px] text-ink-muted"
           >
             {item.answer}
           </div>
@@ -58,9 +58,9 @@ export function FaqSection({
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="bg-[#f7f7f7] py-8 md:py-12">
+    <section className="bg-surface-subtle py-8 md:py-12">
       <div className="mx-auto max-w-[896px] px-6 md:px-8">
-        <h2 className="mt-0 mb-6 font-display text-[20px] leading-[28px] font-medium tracking-[-0.03em] text-[#0a0a0a] md:mb-8 md:text-[24px] md:leading-[32px]">
+        <h2 className="mt-0 mb-6 font-display text-[20px] leading-[28px] font-medium tracking-[-0.03em] text-ink md:mb-8 md:text-[24px] md:leading-[32px]">
           {title}
         </h2>
         <div className="w-full">

@@ -8,22 +8,18 @@ const COLOR = /#[0-9a-fA-F]{3,8}\b|\b(?:rgba?|hsla?)\(|-(?:white|black)\b/;
 
 /** Files still waiting for their Phase 4 tokenize task. Only ever remove entries. */
 const PENDING = new Set<string>([
-  "components/blocks/announcement-bar.tsx",
   "components/blocks/article-card.tsx",
   "components/blocks/auth.module.css",
   "components/blocks/browse-by-category.tsx",
   "components/blocks/category-index.tsx",
   "components/blocks/content-page-hero.tsx",
-  "components/blocks/faq.tsx",
   "components/blocks/item-detail.module.css",
   "components/blocks/item-hero.tsx",
   "components/blocks/item-sidebar.tsx",
-  "components/blocks/lead-dialog.tsx",
   "components/blocks/legal-prose.module.css",
   "components/blocks/listing-hero.tsx",
   "components/blocks/listing-results.tsx",
   "components/blocks/listing-search.tsx",
-  "components/blocks/newsletter-toast.tsx",
   "components/blocks/oauth-buttons.tsx",
   "components/blocks/ranked-hero.tsx",
   "components/blocks/ranked-list.tsx",

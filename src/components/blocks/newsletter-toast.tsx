@@ -91,7 +91,7 @@ export function NewsletterToast({ toast, name, logo }: { readonly toast: NonNull
   return (
     <div
       className={cn(
-        "fixed inset-x-4 bottom-5 z-[100] bg-[#fbfbfb] transition-[opacity,translate] duration-400 ease-[ease] motion-reduce:transition-none min-[601px]:right-8 min-[601px]:bottom-8 min-[601px]:left-auto min-[601px]:w-[356px]",
+        "fixed inset-x-4 bottom-5 z-[100] bg-canvas transition-[opacity,translate] duration-400 ease-[ease] motion-reduce:transition-none min-[601px]:right-8 min-[601px]:bottom-8 min-[601px]:left-auto min-[601px]:w-[356px]",
         mounted && !leaving ? "translate-y-0 opacity-100" : "translate-y-full opacity-0",
       )}
     >
@@ -99,7 +99,7 @@ export function NewsletterToast({ toast, name, logo }: { readonly toast: NonNull
         role="status"
         aria-live="polite"
         className={cn(
-          "relative flex items-start gap-3 overflow-hidden rounded-2xl border border-[rgba(0,0,0,0.08)] bg-[rgba(255,255,255,0.72)] py-4 pr-12 pl-4 font-[ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe_UI',Roboto,'Helvetica_Neue',Arial,'Noto_Sans',sans-serif] backdrop-blur-[12px] transition-[opacity,transform,translate,scale,rotate] duration-300 ease-out motion-reduce:transition-none sm:py-5 sm:pr-14 sm:pl-5",
+          "relative flex items-start gap-3 overflow-hidden rounded-2xl border border-ink/8 bg-surface/72 py-4 pr-12 pl-4 font-[ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe_UI',Roboto,'Helvetica_Neue',Arial,'Noto_Sans',sans-serif] backdrop-blur-[12px] transition-[opacity,transform,translate,scale,rotate] duration-300 ease-out motion-reduce:transition-none sm:py-5 sm:pr-14 sm:pl-5",
           entered ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0",
         )}
       >
@@ -107,29 +107,29 @@ export function NewsletterToast({ toast, name, logo }: { readonly toast: NonNull
           type="button"
           aria-label="Dismiss newsletter toast"
           onClick={dismiss}
-          className="absolute top-3 right-3 z-10 inline-flex size-8 items-center justify-center rounded-full text-[#626262] transition-colors duration-150 hover:bg-[#f5f5f5] hover:text-[#0a0a0a] focus-visible:ring-2 focus-visible:ring-[#0a0a0a]/30 focus-visible:outline-none sm:top-4 sm:right-4"
+          className="absolute top-3 right-3 z-10 inline-flex size-8 items-center justify-center rounded-full text-ink-muted transition-colors duration-150 hover:bg-surface-muted hover:text-ink focus-visible:ring-2 focus-visible:ring-ink/30 focus-visible:outline-none sm:top-4 sm:right-4"
         >
           <X className="size-3.5" aria-hidden="true" />
         </button>
         <div className="shrink-0 pt-0.5">
-          <div className="flex size-10 items-center justify-center rounded-xl border border-[rgba(10,10,10,0.14)] bg-[#f5f5f5] text-[#444444]">
+          <div className="flex size-10 items-center justify-center rounded-xl border border-ink/14 bg-surface-muted text-ink-secondary">
             <SiteLogo name={name} logo={logo} size={19} showName={false} />
           </div>
         </div>
         <div className="min-w-0 flex-1">
-          <h3 className="m-0 text-[15px] leading-[1.375] font-medium tracking-[-0.018em] text-[#0a0a0a]">
+          <h3 className="m-0 text-[15px] leading-[1.375] font-medium tracking-[-0.018em] text-ink">
             {toast.title}
           </h3>
-          <p className="mt-1.5 text-[13px] leading-[1.55] tracking-[-0.01em] text-[#626262]">
+          <p className="mt-1.5 text-[13px] leading-[1.55] tracking-[-0.01em] text-ink-muted">
             {toast.description}
           </p>
           <div className="mt-4 flex">
             <button
               type="button"
               onClick={join}
-              className="group/texture-button inline-flex h-8 w-fit items-stretch rounded-[10px] border border-black/10 bg-gradient-to-b from-black/70 to-black p-px font-sans font-normal transition duration-300 ease-in-out focus-visible:ring-2 focus-visible:ring-[#0a0a0a]/30 focus-visible:ring-offset-2 focus-visible:outline-none motion-reduce:transition-none"
+              className="group/texture-button inline-flex h-8 w-fit items-stretch rounded-[10px] border border-ink/10 bg-gradient-to-b from-ink/70 to-ink p-px font-sans font-normal transition duration-300 ease-in-out focus-visible:ring-2 focus-visible:ring-ink/30 focus-visible:ring-offset-2 focus-visible:outline-none motion-reduce:transition-none"
             >
-              <span className="flex h-full w-full items-center justify-center gap-2 rounded-[4px] bg-gradient-to-b from-neutral-800 to-black px-4 py-1 text-xs leading-4 font-normal tracking-[-0.01em] whitespace-nowrap text-white/90 transition-[background-image,color] duration-200 ease-out hover:from-stone-800 hover:to-neutral-800/70 active:from-black active:to-black motion-reduce:transition-none">
+              <span className="flex h-full w-full items-center justify-center gap-2 rounded-[4px] bg-gradient-to-b from-neutral-800 to-ink px-4 py-1 text-xs leading-4 font-normal tracking-[-0.01em] whitespace-nowrap text-surface/90 transition-[background-image,color] duration-200 ease-out hover:from-stone-800 hover:to-neutral-800/70 active:from-ink active:to-ink motion-reduce:transition-none">
                 {toast.cta}
               </span>
             </button>
