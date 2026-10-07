@@ -50,7 +50,8 @@ export function MobileNavSheet({ open, onOpenChange, name, logo, groups, actions
     document.body.style.overflow = "hidden";
     closeButtonRef.current?.focus();
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onOpenChange(false);
+      // An open menu (theme toggle) handles its own Escape.
+      if (event.key === "Escape" && !(event.target instanceof Element && event.target.closest('[role="menu"]'))) onOpenChange(false);
     };
     document.addEventListener("keydown", handleKeyDown);
     return () => {
