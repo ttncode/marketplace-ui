@@ -6,7 +6,7 @@ const crimson = Crimson_Text({ variable: "--font-crimson", weight: "400", subset
 
 export const metadata: Metadata = { title: "Sign in" };
 
-/** Auth pages: no marketing chrome, their own tokens and fonts. */
+/** Auth pages: no marketing chrome, site tokens, their own font. */
 export default function AuthLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return <div className={`${crimson.variable} min-h-screen bg-background text-[13.5px] leading-[1.55] text-foreground`}>{children}</div>;
 }
