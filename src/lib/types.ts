@@ -165,3 +165,40 @@ export interface HomeSection {
   readonly viewAll: LinkRef;
   readonly listingSlugs: readonly string[];
 }
+
+export type Platform = "tiktok" | "youtube" | "instagram";
+export type VideoStatus = "draft" | "scheduled" | "published" | "failed";
+
+export interface Video {
+  readonly id: string;
+  readonly title: string;
+  readonly platforms: readonly Platform[];
+  readonly status: VideoStatus;
+  /** ISO 8601 in UTC; null for drafts. */
+  readonly scheduledAt: string | null;
+  readonly views: number;
+}
+
+export interface Stat {
+  readonly label: string;
+  readonly value: string;
+  readonly change: string;
+  readonly trend: "up" | "down" | "flat";
+}
+
+export interface ActivityItem {
+  readonly id: string;
+  readonly message: string;
+  /** ISO 8601 in UTC. */
+  readonly at: string;
+}
+
+export interface PlatformOption {
+  readonly id: Platform;
+  readonly label: string;
+}
+
+export interface DashboardUser {
+  readonly name: string;
+  readonly email: string;
+}
