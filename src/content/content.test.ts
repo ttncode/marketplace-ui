@@ -2,6 +2,7 @@ import { deepStrictEqual, ok } from "node:assert";
 import { readdirSync, statSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 import { test } from "node:test";
+import { fileURLToPath } from "node:url";
 
 import { routeExists, type KnownRoutes } from "../lib/routes.ts";
 import { site } from "../site.config.ts";
@@ -10,7 +11,7 @@ import { PLATFORMS, VIDEOS } from "./dashboard.ts";
 import { HOME_SECTIONS } from "./home.ts";
 import { LISTINGS } from "./listings.ts";
 
-const APP_DIR = new URL("../app", import.meta.url).pathname;
+const APP_DIR = fileURLToPath(new URL("../app", import.meta.url));
 
 function appRoutes(dir: string): string[] {
   const found: string[] = [];
