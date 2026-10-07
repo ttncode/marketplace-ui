@@ -38,13 +38,13 @@ function GoogleMark() {
 const MARKS: Record<Provider, () => React.ReactElement> = { github: GithubMark, google: GoogleMark };
 
 /** No provider is wired up: the clicked button shows a spinner, both disable, then the app opens, like the email forms. */
-export function OAuthButtons() {
+export function OAuthButtons({ redirectTo = "/app" }: { readonly redirectTo?: string }) {
   const router = useRouter();
   const [pending, setPending] = useState<Provider | null>(null);
 
   const start = (provider: Provider) => {
     setPending(provider);
-    window.setTimeout(() => router.push("/app"), SIMULATED_REQUEST_MS);
+    window.setTimeout(() => router.push(redirectTo), SIMULATED_REQUEST_MS);
   };
 
   return (

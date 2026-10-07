@@ -12,7 +12,7 @@ import {
 import { SIMULATED_REQUEST_MS } from "@/lib/simulate";
 import { OAuthButtons } from "@/components/blocks/oauth-buttons";
 
-function EmailSignupForm() {
+function EmailSignupForm({ redirectTo }: { readonly redirectTo: string }) {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
 
@@ -21,7 +21,7 @@ function EmailSignupForm() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitting(true);
-    window.setTimeout(() => router.push("/app"), SIMULATED_REQUEST_MS);
+    window.setTimeout(() => router.push(redirectTo), SIMULATED_REQUEST_MS);
   };
 
   return (
@@ -44,17 +44,23 @@ function EmailSignupForm() {
   );
 }
 
-export function SignupForm({ name }: { readonly name: string }) {
+interface SignupFormProps {
+  readonly name: string;
+  /** Where the simulated sign-in lands. */
+  readonly redirectTo?: string;
+}
+
+export function SignupForm({ name, redirectTo = "/app" }: SignupFormProps) {
   const [emailOpen, setEmailOpen] = useState(false);
 
   return (
     <div>
       <AuthHeading>Create your {name} account</AuthHeading>
       <div className="space-y-6">
-        <OAuthButtons />
+        <OAuthButtons redirectTo={redirectTo} />
         <OrDivider />
         {emailOpen ? (
-          <EmailSignupForm />
+          <EmailSignupForm redirectTo={redirectTo} />
         ) : (
           <AuthButton variant="ghost" onClick={() => setEmailOpen(true)}>
             Sign up with Email

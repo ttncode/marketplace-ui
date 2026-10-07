@@ -12,7 +12,13 @@ import {
 import { SIMULATED_REQUEST_MS } from "@/lib/simulate";
 import { OAuthButtons } from "@/components/blocks/oauth-buttons";
 
-export function LoginForm({ name }: { readonly name: string }) {
+interface LoginFormProps {
+  readonly name: string;
+  /** Where the simulated sign-in lands. */
+  readonly redirectTo?: string;
+}
+
+export function LoginForm({ name, redirectTo = "/app" }: LoginFormProps) {
   const router = useRouter();
   const [emailOpen, setEmailOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -20,14 +26,14 @@ export function LoginForm({ name }: { readonly name: string }) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitting(true);
-    window.setTimeout(() => router.push("/app"), SIMULATED_REQUEST_MS);
+    window.setTimeout(() => router.push(redirectTo), SIMULATED_REQUEST_MS);
   };
 
   return (
     <div>
       <AuthHeading>Log in to {name}</AuthHeading>
       <div className="space-y-6">
-        <OAuthButtons />
+        <OAuthButtons redirectTo={redirectTo} />
         <OrDivider />
         {emailOpen ? (
           <form onSubmit={handleSubmit} className="space-y-4">

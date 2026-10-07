@@ -11,6 +11,8 @@ interface AppTopbarProps {
   readonly user: DashboardUser;
   readonly onMenu: () => void;
   readonly searchAction?: string;
+  readonly settingsHref?: string;
+  readonly signOutHref?: string;
 }
 
 const initials = (name: string) =>
@@ -21,7 +23,7 @@ const initials = (name: string) =>
     .slice(0, 2)
     .toUpperCase();
 
-export function AppTopbar({ user, onMenu, searchAction = "/app/videos" }: AppTopbarProps) {
+export function AppTopbar({ user, onMenu, searchAction = "/app/videos", settingsHref = "/app/settings", signOutHref = "/login" }: AppTopbarProps) {
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-border bg-canvas/80 px-4 backdrop-blur md:px-8">
       <button type="button" onClick={onMenu} aria-label="Open navigation" className="rounded-md p-2 text-ink-secondary outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring/40 md:hidden">
@@ -45,10 +47,10 @@ export function AppTopbar({ user, onMenu, searchAction = "/app/videos" }: AppTop
                   <p className="truncate text-xs text-ink-muted">{user.email}</p>
                 </div>
                 <Menu.Separator className="my-1 h-px bg-border" />
-                <Menu.Item render={<Link href="/app/settings" />} className="flex items-center gap-2 rounded-[8px] px-2 py-1.5 outline-none data-[highlighted]:bg-accent">
+                <Menu.Item render={<Link href={settingsHref} />} className="flex items-center gap-2 rounded-[8px] px-2 py-1.5 outline-none data-[highlighted]:bg-accent">
                   <Settings aria-hidden className="size-4" /> Settings
                 </Menu.Item>
-                <Menu.Item render={<Link href="/login" />} className="flex items-center gap-2 rounded-[8px] px-2 py-1.5 outline-none data-[highlighted]:bg-accent">
+                <Menu.Item render={<Link href={signOutHref} />} className="flex items-center gap-2 rounded-[8px] px-2 py-1.5 outline-none data-[highlighted]:bg-accent">
                   <LogOut aria-hidden className="size-4" /> Log out
                 </Menu.Item>
               </Menu.Popup>

@@ -14,9 +14,11 @@ interface VideoComposeFormProps {
   readonly platforms: readonly PlatformOption[];
   readonly defaultTitle?: string;
   readonly defaultPlatforms?: readonly string[];
+  /** Where the form goes after scheduling or cancelling. */
+  readonly doneHref?: string;
 }
 
-export function VideoComposeForm({ platforms, defaultTitle = "", defaultPlatforms = [] }: VideoComposeFormProps) {
+export function VideoComposeForm({ platforms, defaultTitle = "", defaultPlatforms = [], doneHref = "/app/videos" }: VideoComposeFormProps) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -29,7 +31,7 @@ export function VideoComposeForm({ platforms, defaultTitle = "", defaultPlatform
     }
     setError(null);
     setSubmitting(true);
-    window.setTimeout(() => router.push("/app/videos"), SIMULATED_REQUEST_MS);
+    window.setTimeout(() => router.push(doneHref), SIMULATED_REQUEST_MS);
   };
 
   return (
@@ -63,7 +65,7 @@ export function VideoComposeForm({ platforms, defaultTitle = "", defaultPlatform
         <ScheduleField name="publishAt" />
       </div>
       <div className="flex justify-end gap-2">
-        <Button variant="secondary" type="button" disabled={submitting} onClick={() => router.push("/app/videos")}>
+        <Button variant="secondary" type="button" disabled={submitting} onClick={() => router.push(doneHref)}>
           Save draft
         </Button>
         <Button type="submit" disabled={submitting}>
