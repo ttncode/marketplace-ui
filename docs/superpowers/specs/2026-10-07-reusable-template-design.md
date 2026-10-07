@@ -20,7 +20,7 @@ site chooses to pull them.
 ### Success criteria
 
 1. A new site is created with GitHub "Use this template", and its brand, copy and colors are
-   changed by editing `site.config.ts`, `content/` and `src/app/theme.css` only.
+   changed by editing `src/site.config.ts`, `src/content/` and `src/app/theme.css` only.
 2. Light, dark and system themes work on every page with no flash of the wrong theme.
 3. Any Next.js app can install a component with `npx shadcn add @ttn/<name>`, and an existing
    site upgrades a component by re-running the same command and reviewing the git diff.
@@ -47,9 +47,9 @@ site chooses to pull them.
 ## Repository layout
 
 ```text
-site.config.ts                    brand: name, url, logo, nav, dashboardNav, footer, socials
-content/                          typed demo data; the only place copy lives
-  listings.ts  categories.ts  faq.ts  dashboard.ts  legal/*.md
+src/site.config.ts                brand: name, url, logo, nav, dashboardNav, footer, socials
+src/content/                      typed demo data; the only place copy lives
+  listings.ts  categories.ts  faq.ts  dashboard.ts  legal/privacy.tsx  legal/terms.tsx
 src/app/
   (site)/layout.tsx               top nav + footer
   (site)/…                        /, /categories, /categories/[slug], /item/[slug],
@@ -61,10 +61,11 @@ src/app/
   globals.css                     Tailwind imports, @theme inline, base layer, component classes
 src/components/
   ui/                             primitives: button, input, textarea, select, badge,
-                                  accordion, dialog, menu, sheet, tabs
+                                  accordion-region, form-field; dialogs and menus use Base UI directly
   blocks/                         page sections (see Components)
   layout/                         site-header, site-footer, app-sidebar, app-topbar
-src/lib/                          utils, theme script, pure helpers (table sort/filter)
+  icons/                          SVG icon sets that lucide does not cover
+src/lib/                          types, utils, theme script, pure helpers (table sort/filter)
 registry.json                     registry items
 components.json                   shadcn config, including the @ttn registry
 public/brand/                     neutral placeholder logo and favicons
@@ -86,28 +87,34 @@ A sidebar fits screens people work in repeatedly, with many or nested sections, 
 
 ## Config and content
 
-`site.config.ts` exports one `site` object typed `satisfies SiteConfig`:
+`src/site.config.ts` exports one `site` object typed `satisfies SiteConfig`:
 `name`, `url`, `description`, `logo { light, dark }`, `nav`, `dashboardNav`, `footer { columns, copyright }`,
 `socials`. `src/app/layout.tsx` builds `metadata` (title template, Open Graph, favicons) from it,
 so the brand name appears in one place.
 
-`content/` exports typed data:
+`src/content/` exports typed data; the types live in `src/lib/types.ts` so blocks can import them
+without touching content, and ship in the registry. Both live under `src/` so the `node --test "src/**/*.test.ts"`
+glob and the `@/` alias reach them; both import types only, so tests can load them directly.
 
 | Type | Fields |
 | --- | --- |
-| `Listing` | `slug`, `name`, `summary`, `icon`, `category`, `tags`, `stars?`, `body` (markdown) |
+| `Listing` | `slug`, `name`, `summary`, `icon`, `category`, `tags`, `stars?`, `author`, `about` (paragraphs), `features`, `useCases`, `faq` |
 | `Category` | `slug`, `name`, `description` |
 | `FaqItem` | `question`, `answer` |
 | `DashboardData` | `stats`, `activity`, `videos` (`id`, `title`, `thumbnail`, `platforms`, `status`, `scheduledAt`) |
 
-Legal pages are plain markdown files. Demo content is neutral and invented; none of it comes
+Legal pages are TSX fragments in `src/content/legal/`, rendered inside the legal-page prose
+styles. No markdown library is added; listing bodies are arrays of paragraphs. Demo content is neutral and invented; none of it comes
 from mcpmarket.com.
 
-**Rule:** components never import `content/` or `site.config.ts`. Pages read config and content
+**Rule:** components never import `src/content/` or `src/site.config.ts`. Pages read config and content
 and pass them to blocks as props. This lets a block move to another site without its data.
 
 ## Theming
 
+- `globals.css` maps tokens to Tailwind colors in `@theme inline` (`--color-ink`, `--color-canvas`,
+  `--color-surface`, …), so components write `text-ink`, `bg-canvas`, `border-ink/14` instead of
+  hex or rgba values. Opacity modifiers replace the source's `rgba(10,10,10,a)` values.
 - `src/app/theme.css` holds two token sets: `:root` (light, today's measured values) and `.dark`.
   Every `--design-*` token and every shadcn token has a value in both.
 - Hardcoded colors are replaced by tokens: the dither dot colors in `.design-dither-static`,
@@ -162,8 +169,8 @@ so they follow the shadcn file conventions and install through the registry.
 ## Registry
 
 - `registry.json` uses the shadcn registry schema. Item types: `registry:ui` for `ui/`,
-  `registry:block` for `blocks/` and `layout/`, `registry:style` for the theme
-  (`theme.css` tokens), `registry:lib` for `utils` and the theme script.
+  `registry:block` for `blocks/` and `layout/`, `registry:file` for the theme
+  (`theme.css` shipped as a `registry:file` with a target path, so it has one source), `registry:lib` for `utils` and the theme script.
   Items declare `dependencies` (npm) and `registryDependencies` (`@ttn/…`).
 - `npm run registry:build` runs `shadcn build`, writing `public/r/*.json`. The template's own
   Vercel deployment serves the registry at `https://<template-domain>/r/{name}.json`.
@@ -178,7 +185,7 @@ so they follow the shadcn file conventions and install through the registry.
 
 `AGENTS.md` is rewritten for the template (the Next.js agent-rules block stays as generated):
 
-- Map: brand in `site.config.ts`, copy in `content/`, look in `theme.css`, sections in
+- Map: brand in `src/site.config.ts`, copy in `src/content/`, look in `theme.css`, sections in
   `blocks/`, primitives in `ui/`, shells in `layout/`.
 - New-site checklist: choose route groups, edit config, replace content, set accent and fonts,
   replace `public/brand/`, update README.
@@ -194,6 +201,8 @@ README is rewritten to describe the template, the layout choice table and the re
 
 Unit tests run with `node --test`, as today:
 
+- **No hardcoded colors:** no hex, `rgb()`, `rgba()` or `hsl()` value appears in `src/components/**`
+  or in `globals.css`; files not yet converted sit in an explicit pending list that only shrinks.
 - **Token parity:** every custom property declared in `:root` in `theme.css` is also declared in `.dark`.
 - **Content integrity:** listing slugs are unique, every listing's `category` exists, and every
   `nav` and `dashboardNav` href resolves to an existing route.
@@ -201,7 +210,7 @@ Unit tests run with `node --test`, as today:
 - **Registry integrity:** every file path in `registry.json` exists and every
   `registryDependencies` entry names an item in the registry.
 
-CI adds `npm run registry:build` after the build step. `npm run build` remains the smoke test
+`npm run registry:build` runs as the `prebuild` script, so every build (CI, Docker, Vercel) produces the registry. `npm run build` remains the smoke test
 for every page in both route groups.
 
 ## Implementation phases
