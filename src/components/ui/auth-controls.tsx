@@ -4,7 +4,7 @@ import styles from "@/components/blocks/auth.module.css";
 
 /** shadcn Button, size "lg" (36px, 13px text, 5px radius). */
 const BUTTON_BASE =
-  "inline-flex h-9 w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-[5px] px-4 text-[13px] leading-[1.55] whitespace-nowrap transition-all outline-none disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3";
+  "inline-flex h-9 w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-[5px] px-4 text-[13px] leading-[1.55] whitespace-nowrap transition-all outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3";
 
 const BUTTON_VARIANTS = {
   default: cn(BUTTON_BASE, styles.bevel, "font-semibold"),
@@ -65,7 +65,7 @@ export function Field({ id, label, hint, ...inputProps }: FieldProps) {
       <input
         id={id}
         data-slot="input"
-        className="h-[30px] w-full min-w-0 rounded-[5px] border border-[color:var(--design-line-strong)] bg-background px-2.5 py-0 text-[12.5px] leading-none transition-[color,border-color,box-shadow] outline-none selection:bg-primary selection:text-primary-foreground placeholder:text-ink-muted/60 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
+        className="h-[30px] w-full min-w-0 rounded-[5px] border border-[color:var(--design-line-strong)] bg-background px-2.5 py-0 text-[12.5px] leading-none transition-[color,border-color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 selection:bg-primary selection:text-primary-foreground placeholder:text-ink-muted/60 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
         {...inputProps}
       />
       {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
