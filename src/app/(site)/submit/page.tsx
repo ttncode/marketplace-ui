@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { SubmitHero } from "@/components/sites/mcpmarket-com-1a9fdbee/submit-7686f78b/SubmitHero";
-import { SubmitView } from "@/components/sites/mcpmarket-com-1a9fdbee/submit-7686f78b/SubmitView";
+import { SubmitHero } from "@/components/blocks/submit-hero";
+import { SubmitView } from "@/components/blocks/submit-view";
 
 interface SubmitPageProps {
   readonly searchParams: Promise<Readonly<Record<string, string | string[] | undefined>>>;
