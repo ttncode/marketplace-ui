@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { DirectoryCard } from "@/components/blocks/listing-card";
+import { ListingCard } from "@/components/blocks/listing-card";
+import { toListingCard } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/card-listing";
 import type { DirectorySection as DirectorySectionData } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
 
 const TONE_BACKGROUND = { canvas: "bg-[#fbfbfb]", subtle: "bg-[#f7f7f7]" } as const;
@@ -61,7 +62,7 @@ export function DirectorySection({
         </div>
         <div className="grid gap-[14px] md:grid-cols-2 lg:grid-cols-3">
           {section.cards.map((card) => (
-            <DirectoryCard key={card.href} card={card} />
+            <ListingCard key={card.href} listing={toListingCard(card)} />
           ))}
         </div>
       </div>

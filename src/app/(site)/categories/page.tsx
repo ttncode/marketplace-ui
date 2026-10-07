@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { CategoryIndex } from "@/components/blocks/category-index";
 import { CATEGORIES } from "@/content/categories";
+import { LISTINGS } from "@/content/listings";
 
 export const metadata: Metadata = {
   title: "Categories",
-  description: "Browse MCP servers by category to find the perfect tools for your AI workflow.",
+  description: "Browse every listing in the directory, organised by category.",
 };
 
-// ponytail: counts become real once listings exist (Task 34)
 const TILES = CATEGORIES.map((category) => ({
   name: category.name,
   href: `/categories/${category.slug}`,
-  count: (0).toLocaleString("en-US"),
+  count: LISTINGS.filter((listing) => listing.category === category.slug).length.toLocaleString("en-US"),
   icon: category.icon,
 }));
 
@@ -20,9 +20,9 @@ export default function CategoriesPage() {
     <CategoryIndex
       trail={[{ label: "Categories", href: "/categories" }]}
       title="Browse by"
-      description="Explore our comprehensive collection of MCP servers organized by category. Find the perfect MCP for your needs."
+      description="Browse every listing in the directory, organised by category."
       tiles={TILES}
-      unit="MCP servers"
+      unit="listings"
     />
   );
 }

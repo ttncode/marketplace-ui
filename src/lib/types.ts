@@ -117,3 +117,26 @@ export interface Category {
   /** A name `CategoryIcon` draws. */
   readonly icon: string;
 }
+
+export interface FaqItem {
+  readonly question: string;
+  readonly answer: string;
+}
+
+export interface Listing {
+  readonly slug: string;
+  readonly name: string;
+  readonly summary: string;
+  /** Falls back to the first letter of `name` when absent. */
+  readonly icon?: ImageRef;
+  /** A `Category.slug`. */
+  readonly category: string;
+  readonly tags: readonly string[];
+  /** Pre-formatted, e.g. "12.4k". */
+  readonly stars?: string;
+  readonly author: LinkRef;
+  readonly about: readonly string[];
+  readonly features: readonly string[];
+  readonly useCases: readonly string[];
+  readonly faq: readonly FaqItem[];
+}
