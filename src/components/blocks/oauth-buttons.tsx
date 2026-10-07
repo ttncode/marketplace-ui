@@ -3,11 +3,11 @@
 import { LoaderCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { AuthButton } from "@/components/ui/auth-controls";
+import { AuthButton, SIMULATED_REQUEST_MS } from "@/components/ui/auth-controls";
 
 const PROVIDERS = {
-  github: { label: "Continue with GitHub", href: "https://github.com/login/oauth/authorize" },
-  google: { label: "Continue with Google", href: "https://accounts.google.com/o/oauth2/v2/auth" },
+  github: { label: "Continue with GitHub" },
+  google: { label: "Continue with Google" },
 } as const;
 
 type Provider = keyof typeof PROVIDERS;
@@ -36,14 +36,14 @@ function GoogleMark() {
 
 const MARKS: Record<Provider, () => React.ReactElement> = { github: GithubMark, google: GoogleMark };
 
-/** Like the source: the clicked button shows a spinner, both disable, then the browser leaves for the provider (404 here). */
+/** No provider is wired up: the clicked button shows a spinner, both disable, then the app opens, like the email forms. */
 export function OAuthButtons() {
   const router = useRouter();
   const [pending, setPending] = useState<Provider | null>(null);
 
   const start = (provider: Provider) => {
     setPending(provider);
-    router.push(PROVIDERS[provider].href);
+    window.setTimeout(() => router.push("/app"), SIMULATED_REQUEST_MS);
   };
 
   return (
