@@ -32,7 +32,7 @@ export const site: SiteConfig = {
     },
   ],
   headerActions: { secondary: { label: "Submit", href: "/submit" }, primary: { label: "Open app", href: "/app" } },
-  dashboardNav: [{ label: "Overview", href: "/app", icon: "home" }],
+  dashboardNav: [{ label: "Overview", href: "/app", icon: "home" }, { label: "Videos", href: "/app/videos", icon: "video" }],
   footer: {
     description: "Acme Directory lists the best tools for your workflow.",
     columns: [

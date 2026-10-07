@@ -46,7 +46,7 @@ interface DataTableProps<T extends TableRow> {
 
 function Cell({ column, value, tones }: { readonly column: DataTableColumn; readonly value: CellValue | undefined; readonly tones?: Readonly<Record<string, BadgeTone>> }) {
   const label = (raw: string) => column.labels?.[raw] ?? raw;
-  if (value === undefined || value === null || value === "") return <span className="text-ink-muted">—</span>;
+  if (value === undefined || value === null || value === "" || (typeof value === "number" && Number.isNaN(value))) return <span className="text-ink-muted">—</span>;
   switch (column.kind) {
     case "number":
       return <span className="tabular-nums">{typeof value === "number" ? formatNumber(value) : String(value)}</span>;
