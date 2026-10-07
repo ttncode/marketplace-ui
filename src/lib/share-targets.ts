@@ -2,12 +2,12 @@ interface ShareTarget {
   readonly label: string;
   readonly color: string;
   readonly path: string;
-  /** Reddit is a plain link on the source; the rest are react-share buttons. */
+  /** Reddit is a plain link; the rest are react-share buttons. */
   readonly isLink: boolean;
   readonly buildHref: (entity: { readonly url: string; readonly name: string }) => string;
 }
 
-/** Share popover targets, glyphs copied from the source (react-share icons). */
+/** Share popover targets, glyphs from icon libraries. */
 export const SHARE_TARGETS: readonly ShareTarget[] = [
   {
     label: "Share on Facebook",

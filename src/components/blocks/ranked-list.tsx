@@ -15,7 +15,7 @@ const LAYOUT: Record<LeaderboardVariant, { card: string; body: string; descripti
   skill: { card: "", body: "h-full", description: "min-h-10" },
 };
 
-/** `homepage_rankChip` / `homepage_rankChipTop` from the source stylesheet; the top three are inverted. */
+/** homepage_rankChip styling; the top three are inverted. */
 function RankChip({ rank }: { readonly rank: number }) {
   return (
     <span

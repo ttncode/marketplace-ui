@@ -31,7 +31,7 @@ interface SearchViewProps {
 export function SearchView({ params, listings, categories, browse }: SearchViewProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
-  // Chips switch at once, like the source; results follow when the navigation lands.
+  // Chips switch at once; results follow when the navigation lands.
   const [shown, setShown] = useOptimistic(params);
 
   const navigate = (next: SearchParams) =>

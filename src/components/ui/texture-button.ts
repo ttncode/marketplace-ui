@@ -1,4 +1,4 @@
-// The source's "texture" button: a 1px gradient shell around a gradient face (Tailwind v3 neutral/stone hexes).
+// Texture button: a 1px gradient shell around a gradient face.
 const SHELL =
   "inline-flex w-full items-stretch rounded-xl border p-px font-sans font-normal transition duration-300 ease-in-out focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none";
 const FACE =

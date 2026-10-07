@@ -1,6 +1,6 @@
 import type { ReactNode, SVGProps } from "react";
 
-// Exact paths from the source page (an older lucide build than the one installed here).
+// Exact paths from lucide (an older build than the one installed here).
 type IconProps = SVGProps<SVGSVGElement>;
 
 function StrokeIcon({ children, strokeWidth = 2, ...props }: IconProps & { readonly children: ReactNode }) {

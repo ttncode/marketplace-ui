@@ -2,7 +2,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import styles from "@/components/blocks/auth.module.css";
 
-/** The source's shadcn Button, size "lg" (36px, 13px text, 5px radius). */
+/** shadcn Button, size "lg" (36px, 13px text, 5px radius). */
 const BUTTON_BASE =
   "inline-flex h-9 w-full shrink-0 cursor-pointer items-center justify-center gap-1.5 rounded-[5px] px-4 text-[13px] leading-[1.55] whitespace-nowrap transition-all outline-none disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3";
 

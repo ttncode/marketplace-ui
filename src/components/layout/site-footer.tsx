@@ -61,7 +61,7 @@ export function SiteFooter({ name, logo, footer, socials }: SiteFooterProps) {
         <div className="mx-auto max-w-[1280px] py-12 md:py-16">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-5 lg:gap-10">
             <div className="md:col-span-2">
-              {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- clone links mirror the source site's paths, not this app's routes */}
+              {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- site links mirror the paths, not this app's routes */}
               <a href="/" className="group mb-4 flex items-center gap-2">
                 <SiteLogo name={name} logo={logo} markClassName="transition-opacity duration-150 group-hover:opacity-80" nameClassName="text-xl leading-7 font-semibold tracking-[-0.5px]" />
               </a>

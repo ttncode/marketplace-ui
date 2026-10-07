@@ -16,7 +16,7 @@ const INVALID_EMAIL_MESSAGE = "Please enter a valid email address";
 const EMAIL_LOCAL_PART = /^[A-Za-z0-9!#$%&'*+/=?^_`{|}~.-]+$/;
 const EMAIL_DOMAIN_LABEL = /^[A-Za-z0-9-]+$/;
 
-// Port of the source's validator: stricter than type="email" (it demands a dotted domain), so "a@b" reaches it and fails.
+// Email validator: stricter than type="email", demands a dotted domain.
 function isValidEmail(value: FormDataEntryValue | null): boolean {
   if (typeof value !== "string") return false;
   const email = value.trim();
@@ -128,7 +128,7 @@ function LeadDialog({ form, open, onClose, onClosed, onError }: {
     >
       <Dialog.Portal>
         <Dialog.Backdrop className="fixed inset-0 z-50 bg-black/80 data-closed:animate-out data-closed:fade-out-0 data-open:animate-in data-open:fade-in-0" />
-        {/* The source's v3 keyframes replace its centring transform with translate(-50%,-48%); here that is a 2% slide on top of it. */}
+        {/* Centring uses translate(-50%,-48%); here that is a 2% slide on top of it. */}
         <Dialog.Popup
           initialFocus={emailRef}
           className="fixed top-1/2 left-1/2 z-50 grid w-full max-w-lg -translate-1/2 gap-4 border border-[#dbdbdb] bg-[#fbfbfb] p-6 font-sans text-base leading-6 text-[#0a0a0a] outline-none data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 data-closed:slide-out-to-bottom-[2%] data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-open:slide-in-from-bottom-[2%] sm:max-w-md sm:rounded-lg"
@@ -195,7 +195,7 @@ function LeadDialog({ form, open, onClose, onClosed, onError }: {
   );
 }
 
-// Mirrors the source's sonner error toast (unstyled theme, bottom-right, 4 s).
+// Error toast: unstyled theme, bottom-right, 4s.
 function ErrorToast({ message, onDone }: { readonly message: string; readonly onDone: () => void }) {
   const [shown, setShown] = useState(false);
 

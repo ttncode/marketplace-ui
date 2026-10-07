@@ -1,11 +1,4 @@
-/*
- * Hover animations of the source's animated category icons (framer-motion
- * variants in its CategoryCard chunk), rebuilt in CSS. The card link carries
- * `.tile`; every animation starts when the whole card is hovered, as the
- * source drives the icon through a ref from the card's onMouseEnter.
- * Motion's defaults: keyframe arrays tween with easeInOut per segment; springs
- * are sampled into linear() easings (stiffness/damping from the source).
- */
+/* Hover animations for category icons. Animations trigger when the card (`.tile`) is hovered. */
 
 .gear {
   transition: transform 1180ms

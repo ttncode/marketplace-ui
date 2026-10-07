@@ -8,7 +8,7 @@ const STATUS_TEXT = "text-sm text-[#616161]";
 interface ListingResultsProps {
   readonly listings: readonly ListingCardData[];
   readonly status: ResultsStatus;
-  /** The source's visually hidden crawler pagination; later pages are unbuilt and 404. */
+  /** Visually hidden crawler pagination; later pages are unbuilt and 404. */
   readonly pageLinks: readonly LinkRef[];
 }
 

@@ -2,12 +2,12 @@ import { Check } from "lucide-react";
 import type { ReactNode, SVGProps } from "react";
 import { cn } from "@/lib/utils";
 
-/** The source waits on its API here; the clone pauses so the loading state is visible. */
+/** Waits on its API here; paused for the loading state visibility. */
 export const SIMULATED_LATENCY_MS = 700;
 
 export const wait = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 
-// The source's shadcn `Input`; its `shadow-[var(--design-shadow-field)]` never made it into the v3 build.
+// shadcn `Input`; `shadow-[var(--design-shadow-field)]` not in v3 build.
 export const INPUT =
   "flex w-full rounded-lg border border-input bg-[var(--design-glass)] px-3 py-2 text-base leading-6 text-foreground ring-offset-background backdrop-blur-xl transition-[background-color,border-color,box-shadow] duration-200 placeholder:text-muted-foreground focus-visible:border-foreground/25 focus-visible:bg-[var(--design-glass-focus)] focus-visible:ring-2 focus-visible:ring-ring/20 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm md:leading-5";
 
@@ -37,7 +37,7 @@ const EMAIL_PATTERN =
 const MAX_EMAIL_LENGTH = 254;
 const MAX_LOCAL_PART_LENGTH = 64;
 
-/** The source's email check, rule for rule. */
+/** Email validation rules applied. */
 export function isValidEmail(value: string): boolean {
   const email = value.trim();
   if (email.length === 0 || email.length > MAX_EMAIL_LENGTH || email.includes("..")) return false;
@@ -95,14 +95,14 @@ export function RequiredMark() {
 
 export function FieldLabel({ htmlFor, children }: { readonly htmlFor?: string; readonly children: ReactNode }) {
   return (
-    // The source's label is inline (`leading-none`) inside a 24px line box; a 24px block reads the same.
+    // Label inside a 24px line box; a 24px block reads the same.
     <label htmlFor={htmlFor} className={cn(LABEL, "block leading-6")}>
       {children}
     </label>
   );
 }
 
-/** lucide `shield-check` as the source ships it (the installed lucide redraws the shield). */
+/** lucide `shield-check` icon. */
 export function ShieldCheckIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg

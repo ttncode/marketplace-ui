@@ -18,7 +18,7 @@ const CARD_TITLE = "text-[14px] leading-[17.5px] font-medium text-white";
 const CARD_DESCRIPTION = "mt-1 text-[12px] leading-[16.5px] text-[rgba(255,255,255,0.52)]";
 
 /**
- * Mirrors Radix NavigationMenu motion on the source: the viewport fades/slides 8px
+	 * Radix NavigationMenu motion: viewport fades/slides 8px
  * in and out, and switching menus slides the old content out and the new one in
  * (208px) toward the direction of travel.
  */
@@ -179,7 +179,7 @@ function NavPanelContent({
   readonly onAnimationEnd?: () => void;
 }) {
   return (
-    // Wider than the panel on purpose (clipped by overflow-hidden): the source centres the content in the viewport, not the panel.
+    // Wider than the panel on purpose (clipped by overflow-hidden): content is centred in the viewport, not the panel.
     <div
       className={cn("w-[calc(100vw-1.5rem)] motion-reduce:animate-none", className)}
       onAnimationEnd={(event) => {

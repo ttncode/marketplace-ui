@@ -1,4 +1,4 @@
-/* The source body is Tailwind Typography `prose prose-gray` inside `homepage_explainerContent`; the clone has no typography plugin. */
+/* Body is Tailwind Typography prose inside homepage_explainerContent. */
 .prose {
   color: #374151;
   font-size: 16px;

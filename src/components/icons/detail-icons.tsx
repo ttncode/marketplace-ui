@@ -3,7 +3,7 @@ import type { ReactNode, SVGProps } from "react";
 type IconProps = SVGProps<SVGSVGElement>;
 
 /**
- * Line icons exactly as the source server page serves them (lucide shapes of
+	 * Line icons exactly as served by the lucide design (lucide shapes of
  * the version it ships; the installed lucide-react drops the brand icons and
  * redraws several of these).
  */

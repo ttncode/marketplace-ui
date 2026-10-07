@@ -10,7 +10,7 @@ import { SECONDARY_FACE, SECONDARY_SHELL } from "@/components/ui/texture-button"
 const PAGE_SIZE = 21;
 const NEXT_PAGE_SKELETONS = 3;
 const INITIAL_SKELETONS = 9;
-// Stands in for the source's network round-trip so its "loading more" state stays visible.
+// Stands in for the network round-trip so the "loading more" state stays visible.
 const LOAD_MORE_DELAY_MS = 400;
 const STATUS_TEXT = "text-sm leading-5 text-[#616161]";
 const BAR = "rounded-[10px] bg-[#f5f5f5] motion-safe:animate-pulse";
@@ -24,7 +24,7 @@ function Spinner({ label, className }: { readonly label: string; readonly classN
   );
 }
 
-/** Placeholder the source appends to the grid while the next page loads. */
+/** Placeholder appended to the grid while the next page loads. */
 function NextPageSkeleton() {
   return (
     <div aria-hidden className="h-full overflow-hidden rounded-[12px] border border-[rgba(34,34,34,0.18)] bg-white shadow-[0_12px_34px_rgba(10,10,10,0.04)]">

@@ -1,8 +1,8 @@
 /*
- * CSS port of the source's motion icons (framer-motion variants in its layout chunk).
+	 * CSS port of motion icons (framer-motion variants).
  * An icon animates while its nearest [data-icon-trigger] ancestor is hovered — the
  * source starts them from the nav trigger or the whole menu row, not the icon itself.
- * Springs are the source's own { stiffness: 500, damping: 30 | 25 } sampled into linear().
+	 * Springs: { stiffness: 500, damping: 30 | 25 } sampled into linear().
  */
 
 .connectPart,
