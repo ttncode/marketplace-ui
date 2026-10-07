@@ -1,6 +1,6 @@
 import { DirectorySection } from "@/components/blocks/directory-section";
 import { DIRECTORY_SECTIONS } from "@/components/sites/mcpmarket-com-1a9fdbee/root-8a5edab2/directory-data";
-import { FaqSection } from "@/components/sites/mcpmarket-com-1a9fdbee/root-8a5edab2/FaqSection";
+import { FaqSection } from "@/components/blocks/faq";
 import { HeroSection } from "@/components/blocks/hero";
 
 export default function Home() {
