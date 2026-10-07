@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/blocks/legal-page";
-import { PrivacyContent } from "@/components/sites/mcpmarket-com-1a9fdbee/privacy-0ece7f7c/PrivacyContent";
+import { LAST_UPDATED, PrivacyContent } from "@/content/legal/privacy";
+import { site } from "@/site.config";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description:
-    "Privacy Policy for MCP Market, operated by Sitka Labs. Learn how we collect, use, and protect your personal information.",
+  description: `Privacy Policy for ${site.name}.`,
 };
 
 export default function PrivacyPage() {
   return (
-    <LegalPage title="Privacy Policy" lastUpdated="March 25, 2026">
-      <PrivacyContent />
+    <LegalPage title="Privacy Policy" lastUpdated={LAST_UPDATED}>
+      <PrivacyContent siteName={site.name} contactEmail="contact@example.com" />
     </LegalPage>
   );
 }
