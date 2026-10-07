@@ -11,11 +11,11 @@ const BUTTON_VARIANTS = {
   outline: cn(
     BUTTON_BASE,
     styles.bevelLite,
-    "border border-[color:var(--border-strong)] font-medium text-foreground has-[>svg]:px-3.5 disabled:opacity-50",
+    "border border-[color:var(--design-line-strong)] font-medium text-foreground has-[>svg]:px-3.5 disabled:opacity-50",
   ),
   ghost: cn(
     BUTTON_BASE,
-    "font-medium text-muted-foreground hover:bg-[color:var(--bg-hover)] hover:text-foreground disabled:opacity-50",
+    "font-medium text-muted-foreground hover:bg-accent hover:text-foreground disabled:opacity-50",
   ),
 } as const;
 
@@ -65,7 +65,7 @@ export function Field({ id, label, hint, ...inputProps }: FieldProps) {
       <input
         id={id}
         data-slot="input"
-        className="h-[30px] w-full min-w-0 rounded-[5px] border border-[color:var(--border-strong)] bg-background px-2.5 py-0 text-[12.5px] leading-none transition-[color,border-color,box-shadow] outline-none selection:bg-primary selection:text-primary-foreground placeholder:text-[color:var(--text-faint)] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
+        className="h-[30px] w-full min-w-0 rounded-[5px] border border-[color:var(--design-line-strong)] bg-background px-2.5 py-0 text-[12.5px] leading-none transition-[color,border-color,box-shadow] outline-none selection:bg-primary selection:text-primary-foreground placeholder:text-ink-muted/60 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
         {...inputProps}
       />
       {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
