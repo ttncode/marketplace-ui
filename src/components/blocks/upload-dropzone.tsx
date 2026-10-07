@@ -77,11 +77,9 @@ export function UploadDropzone({ name, accept, hint, multiple = true }: UploadDr
           ))}
         </ul>
       )}
-      {skipped > 0 && (
-        <p className="text-xs text-ink-muted">
-          {skipped} {skipped === 1 ? "file" : "files"} skipped — type not accepted
-        </p>
-      )}
+      <p role="status" aria-live="polite" className="text-xs text-ink-muted">
+        {skipped > 0 && `${skipped} ${skipped === 1 ? "file" : "files"} skipped — type not accepted`}
+      </p>
     </div>
   );
 }
