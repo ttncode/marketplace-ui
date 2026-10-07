@@ -1,7 +1,7 @@
 import type { ImageRef, LinkRef } from "@/lib/types";
 
-export interface LeaderboardRow {
-  /** Anchor id (`tool-card-<slug>` / `skill-card-<slug>`). */
+export interface RankedRow {
+  /** Anchor id, e.g. `rank-<slug>`. */
   readonly id: string;
   readonly rank: number;
   readonly title: string;
@@ -12,7 +12,7 @@ export interface LeaderboardRow {
   readonly stars: string;
 }
 
-export interface LeaderboardHeroContent {
+export interface RankedHeroContent {
   /** Every crumb but the last links; the last is the current page. */
   readonly crumbs: readonly LinkRef[];
   readonly current: string;
@@ -23,4 +23,5 @@ export interface LeaderboardHeroContent {
   readonly secondary: LinkRef;
 }
 
-export type LeaderboardVariant = "server" | "skill";
+/** Card layout; see `LAYOUT` in ranked-list.tsx. */
+export type RankedVariant = "default" | "compact";

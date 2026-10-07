@@ -7,12 +7,12 @@ import {
   SECONDARY_SHELL,
 } from "@/components/ui/texture-button";
 import { cn } from "@/lib/utils";
-import type { LeaderboardHeroContent } from "./ranked-types";
+import type { RankedHeroContent } from "./ranked-types";
 import { HeroDitherShader } from "@/components/blocks/dither-background";
 
 const CRUMB_LINK = "rounded-md px-1 py-1 transition-colors hover:bg-ink/[0.04] hover:text-[var(--design-ink)]";
 
-function Breadcrumbs({ crumbs, current }: Pick<LeaderboardHeroContent, "crumbs" | "current">) {
+function Breadcrumbs({ crumbs, current }: Pick<RankedHeroContent, "crumbs" | "current">) {
   const [home, ...rest] = crumbs;
   return (
     <nav
@@ -45,7 +45,7 @@ function Breadcrumbs({ crumbs, current }: Pick<LeaderboardHeroContent, "crumbs" 
   );
 }
 
-export function LeaderboardHero({ hero }: { readonly hero: LeaderboardHeroContent }) {
+export function RankedHero({ hero }: { readonly hero: RankedHeroContent }) {
   return (
     <section className="design-hero-under-navigation relative overflow-hidden bg-[var(--design-canvas)]">
       <div

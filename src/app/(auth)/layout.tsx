@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Crimson_Text } from "next/font/google";
 
-// The app ships only the regular cut; its italic "Market" is the browser's synthesized oblique.
+// Only the regular cut ships; italic text uses the browser's synthesized oblique.
 const crimson = Crimson_Text({ variable: "--font-crimson", weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = { title: "Sign in" };

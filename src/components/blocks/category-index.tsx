@@ -104,7 +104,7 @@ interface CategoryIndexProps {
   readonly title: string;
   readonly description: string;
   readonly tiles: readonly CategoryTile[];
-  /** "MCP servers" or "skills", printed after each count. */
+  /** Plural noun printed after each count, e.g. "tools". */
   readonly unit: string;
 }
 

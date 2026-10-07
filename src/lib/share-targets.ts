@@ -2,7 +2,7 @@ interface ShareTarget {
   readonly label: string;
   readonly color: string;
   readonly path: string;
-  /** Reddit is a plain link; the rest are react-share buttons. */
+  /** Reddit gets a padded hover box; the rest render as bare icons. */
   readonly isLink: boolean;
   readonly buildHref: (entity: { readonly url: string; readonly name: string }) => string;
 }

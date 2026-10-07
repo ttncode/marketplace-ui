@@ -122,7 +122,7 @@ export function ItemTabs({ about, features, useCases, faq }: ItemTabsProps) {
   };
 
   return (
-    <div data-server-detail-tabs className="w-full">
+    <div data-item-tabs className="w-full">
       <div className="mb-6 border-b border-border/40">
         <div className="flex items-center">
           <div

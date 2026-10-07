@@ -6,7 +6,7 @@ import type { RelatedListing } from "./item-types";
 
 function PrimaryAction({ link }: { readonly link: LinkRef }) {
   return (
-    <div data-server-detail-primary-actions className="flex w-full flex-col gap-2">
+    <div data-item-primary-actions className="flex w-full flex-col gap-2">
       <Link
         href={link.href}
         className="inline-flex h-11 w-full items-center justify-between gap-2 rounded-[10px] border border-foreground/20 bg-surface/20 px-4 font-sans text-sm font-normal tracking-[-0.01em] whitespace-nowrap text-foreground shadow-none ring-offset-background backdrop-blur-xl transition-all duration-200 hover:border-foreground/25 hover:bg-surface/40 hover:shadow-none focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:outline-none"
@@ -22,7 +22,7 @@ function RelatedCard({ items }: { readonly items: readonly RelatedListing[] }) {
   return (
     <nav aria-label="Related" className="related-content">
       <div
-        data-server-detail-card
+        data-item-card
         className="overflow-hidden rounded-[12px] border border-border bg-card text-card-foreground shadow-[var(--design-shadow-card)]"
       >
         <div className="flex flex-col space-y-1.5 border-b border-border bg-muted/50 px-4 py-3">

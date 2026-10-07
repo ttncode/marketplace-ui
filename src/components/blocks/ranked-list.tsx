@@ -2,17 +2,17 @@ import Link from "next/link";
 import { ArrowUpRight, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import styles from "@/components/blocks/listing-card.module.css";
-import type { LeaderboardRow, LeaderboardVariant } from "./ranked-types";
+import type { RankedRow, RankedVariant } from "./ranked-types";
 
 const TOP_RANKS = 3;
 
 /**
- * The server board's card is a flex column; the skill board's card is a block whose
+ * The default card is a flex column; the compact card is a block whose
  * `h-full` body ignores the 6px dither strip, so its footer sits 6px lower (clipped padding).
  */
-const LAYOUT: Record<LeaderboardVariant, { card: string; body: string; description: string }> = {
-  server: { card: "flex flex-col", body: "flex-1", description: "flex-1" },
-  skill: { card: "", body: "h-full", description: "min-h-10" },
+const LAYOUT: Record<RankedVariant, { card: string; body: string; description: string }> = {
+  default: { card: "flex flex-col", body: "flex-1", description: "flex-1" },
+  compact: { card: "", body: "h-full", description: "min-h-10" },
 };
 
 /** homepage_rankChip styling; the top three are inverted. */
@@ -33,7 +33,7 @@ function RankChip({ rank }: { readonly rank: number }) {
 }
 
 /** The listing grid's card (see `ListingCard`) with a rank chip before the avatar. */
-function LeaderboardCard({ row, variant }: { readonly row: LeaderboardRow; readonly variant: LeaderboardVariant }) {
+function RankedCard({ row, variant }: { readonly row: RankedRow; readonly variant: RankedVariant }) {
   const layout = LAYOUT[variant];
   return (
     <Link id={row.id} href={row.href} className={cn("group block h-full", styles.link)}>
@@ -91,18 +91,18 @@ function LeaderboardCard({ row, variant }: { readonly row: LeaderboardRow; reado
   );
 }
 
-interface LeaderboardGridProps {
-  readonly rows: readonly LeaderboardRow[];
-  readonly variant: LeaderboardVariant;
+interface RankedListProps {
+  readonly rows: readonly RankedRow[];
+  readonly variant: RankedVariant;
 }
 
-export function LeaderboardGrid({ rows, variant }: LeaderboardGridProps) {
+export function RankedList({ rows, variant }: RankedListProps) {
   return (
     <main className="flex-1 bg-[var(--design-canvas)] py-8 md:py-12">
       <div className="mx-auto max-w-[1280px] px-6 md:px-8">
         <div className="grid gap-[14px] md:grid-cols-2 lg:grid-cols-3">
           {rows.map((row) => (
-            <LeaderboardCard key={row.id} row={row} variant={variant} />
+            <RankedCard key={row.id} row={row} variant={variant} />
           ))}
         </div>
       </div>

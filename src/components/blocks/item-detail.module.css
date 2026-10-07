@@ -13,11 +13,11 @@
   color: var(--design-ink);
 }
 
-.hero [data-server-detail-header] {
+.hero [data-item-header] {
   width: 100%;
 }
 
-.hero [data-server-detail-title] {
+.hero [data-item-title] {
   max-width: 980px;
   color: var(--design-ink);
   font-family: var(--design-font-display);
@@ -28,56 +28,56 @@
   text-wrap: balance;
 }
 
-.hero [data-server-detail-meta] {
+.hero [data-item-meta] {
   color: color-mix(in oklab, var(--design-ink-soft) 72%, transparent);
   font-family: var(--design-font-body);
 }
 
-.hero [data-server-detail-meta] :global(.text-foreground) {
+.hero [data-item-meta] :global(.text-foreground) {
   color: color-mix(in oklab, var(--design-ink-soft) 90%, transparent) !important;
 }
 
-.hero [data-server-detail-meta] :global(.text-muted-foreground) {
+.hero [data-item-meta] :global(.text-muted-foreground) {
   color: color-mix(in oklab, var(--design-ink-soft) 68%, transparent) !important;
 }
 
-.hero [data-server-detail-meta] :global(.bg-muted) {
+.hero [data-item-meta] :global(.bg-muted) {
   border-color: color-mix(in oklab, var(--design-ink-soft) 14%, transparent) !important;
   background: color-mix(in oklab, var(--design-canvas) 80%, transparent) !important;
 }
 
-.hero [data-server-detail-meta] a[title="GitHub"],
-.hero [data-server-detail-meta] a[title="NPM"],
-.hero [data-server-detail-meta] button {
+.hero [data-item-meta] a[title="GitHub"],
+.hero [data-item-meta] a[title="NPM"],
+.hero [data-item-meta] button {
   color: color-mix(in oklab, var(--design-ink-soft) 62%, transparent) !important;
 }
 
-.hero [data-server-detail-meta] a[title="GitHub"]:hover,
-.hero [data-server-detail-meta] a[title="NPM"]:hover,
-.hero [data-server-detail-meta] button:hover {
+.hero [data-item-meta] a[title="GitHub"]:hover,
+.hero [data-item-meta] a[title="NPM"]:hover,
+.hero [data-item-meta] button:hover {
   background: color-mix(in oklab, var(--design-ink-soft) 8%, transparent) !important;
   color: var(--design-ink) !important;
 }
 
-.hero [data-server-detail-categories] :global(.border-border) {
+.hero [data-item-categories] :global(.border-border) {
   border-color: color-mix(in oklab, var(--design-ink-soft) 16%, transparent) !important;
 }
 
-.hero [data-server-detail-categories] :global(.bg-muted) {
+.hero [data-item-categories] :global(.bg-muted) {
   background: color-mix(in oklab, var(--design-canvas) 82%, transparent) !important;
 }
 
-.hero [data-server-detail-categories] :global(.text-muted-foreground) {
+.hero [data-item-categories] :global(.text-muted-foreground) {
   color: color-mix(in oklab, var(--design-ink-soft) 70%, transparent) !important;
 }
 
-.hero [data-server-detail-categories] a:hover :global(.bg-muted) {
+.hero [data-item-categories] a:hover :global(.bg-muted) {
   border-color: color-mix(in oklab, var(--design-ink-soft) 42%, transparent) !important;
   background: var(--design-ink) !important;
   color: var(--design-surface) !important;
 }
 
-.hero [data-server-detail-description] {
+.hero [data-item-description] {
   color: color-mix(in oklab, var(--design-ink-soft) 66%, transparent);
   font-family: var(--design-font-body);
   letter-spacing: -0.012em;
@@ -89,12 +89,12 @@
   background: var(--design-canvas);
 }
 
-.main [data-server-detail-tabs] {
+.main [data-item-tabs] {
   font-family: var(--design-font-body);
 }
 
-.main [data-server-detail-tabs] [data-server-detail-card],
-.sidebar [data-server-detail-card] {
+.main [data-item-tabs] [data-item-card],
+.sidebar [data-item-card] {
   box-shadow: var(--design-shadow-card);
   border-color: color-mix(in oklab, var(--design-ink-soft) 17%, transparent) !important;
   background: var(--design-surface) !important;
@@ -105,18 +105,18 @@
   font-family: var(--design-font-body);
 }
 
-.sidebar [data-server-detail-card] {
+.sidebar [data-item-card] {
   transition:
     border-color 0.18s,
     box-shadow 0.18s;
 }
 
-.sidebar [data-server-detail-card]:hover {
+.sidebar [data-item-card]:hover {
   box-shadow: color-mix(in oklab, var(--design-ink-soft) 6.7%, transparent) 0 15px 34px;
   border-color: color-mix(in oklab, var(--design-ink-soft) 30%, transparent) !important;
 }
 
-.sidebar [data-server-detail-card] h3 {
+.sidebar [data-item-card] h3 {
   color: var(--design-ink);
   font-family: var(--design-font-display);
   font-size: 15px;
@@ -124,7 +124,7 @@
   letter-spacing: -0.025em;
 }
 
-.sidebar [data-server-detail-card] :global(.bg-muted\/50) {
+.sidebar [data-item-card] :global(.bg-muted\/50) {
   background: color-mix(in oklab, var(--accent) 86%, transparent) !important;
 }
 
@@ -134,11 +134,11 @@
     padding: 28px 0 38px;
   }
 
-  .hero [data-server-detail-title] {
+  .hero [data-item-title] {
     font-size: clamp(40px, 13vw, 58px);
   }
 
-  .hero [data-server-detail-description] {
+  .hero [data-item-description] {
     font-size: 15px;
   }
 

@@ -9,7 +9,7 @@ interface ListingHeroProps {
   readonly mutedTitle: string;
   readonly description: ReactNode;
   readonly searchPlaceholder: string;
-  /** /server and /client show the category rail ("All" active); category pages omit it. */
+  /** Listing pages show the category rail ("All" active); category pages omit it. */
   readonly categoryLinks?: readonly LinkRef[];
 }
 

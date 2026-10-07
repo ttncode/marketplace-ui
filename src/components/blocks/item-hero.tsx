@@ -39,7 +39,7 @@ function Breadcrumbs({ category, name }: { readonly category: LinkRef; readonly 
 
 function MetaRow({ listing, shareUrl }: { readonly listing: Listing; readonly shareUrl: string }) {
   return (
-    <div data-server-detail-meta className="mt-3 flex flex-wrap items-center gap-3 text-sm">
+    <div data-item-meta className="mt-3 flex flex-wrap items-center gap-3 text-sm">
       <div className="flex items-center gap-1.5">
         <span className="text-muted-foreground">by</span>
         <Link href={listing.author.href} className="font-medium text-foreground transition-colors hover:text-primary">
@@ -81,7 +81,7 @@ export function ItemHero({ listing, categoryName, shareUrl }: ItemHeroProps) {
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background via-background/80 to-transparent" />
       <div className="relative z-10 container mx-auto max-w-7xl px-6 md:px-8">
         <div className={styles.hero}>
-          <header data-server-detail-header className="mb-0">
+          <header data-item-header className="mb-0">
             <Breadcrumbs category={{ label: categoryName, href: `/categories/${listing.category}` }} name={listing.name} />
             <div className="flex flex-col gap-6 md:flex-row md:items-start md:gap-8">
               <div className="min-w-0 flex-1">
@@ -90,7 +90,7 @@ export function ItemHero({ listing, categoryName, shareUrl }: ItemHeroProps) {
                     <div>
                       <div className="flex flex-wrap items-center gap-3 md:gap-4">
                         <h1
-                          data-server-detail-title
+                          data-item-title
                           className="min-w-0 pb-1 font-sans text-4xl leading-none font-normal tracking-[-0.055em] break-words text-foreground sm:text-5xl md:text-6xl lg:text-7xl"
                         >
                           {listing.name}
@@ -100,7 +100,7 @@ export function ItemHero({ listing, categoryName, shareUrl }: ItemHeroProps) {
                     </div>
                   </div>
                 </div>
-                <div data-server-detail-categories className="mb-5 flex flex-wrap items-center gap-2">
+                <div data-item-categories className="mb-5 flex flex-wrap items-center gap-2">
                   {listing.tags.map((tag) => (
                     <div
                       key={tag}
@@ -112,7 +112,7 @@ export function ItemHero({ listing, categoryName, shareUrl }: ItemHeroProps) {
                 </div>
                 <div className="flex flex-col md:flex-row md:items-center md:gap-4">
                   <p
-                    data-server-detail-description
+                    data-item-description
                     className="max-w-3xl font-sans text-base leading-relaxed font-normal text-muted-foreground md:text-lg md:leading-7 lg:text-xl lg:leading-7"
                   >
                     {listing.summary}

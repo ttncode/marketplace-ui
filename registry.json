@@ -1013,7 +1013,7 @@
       "name": "ranked-list",
       "type": "registry:block",
       "title": "Ranked list",
-      "description": "Leaderboard grid of ranked rows.",
+      "description": "Grid of ranked rows.",
       "dependencies": [
         "lucide-react"
       ],
@@ -1033,7 +1033,7 @@
       "name": "ranked-page",
       "type": "registry:block",
       "title": "Ranked page",
-      "description": "Ranked list page with hero and leaderboard.",
+      "description": "Ranked list page with hero and grid.",
       "registryDependencies": [
         "@ttn/ranked-hero",
         "@ttn/ranked-list",

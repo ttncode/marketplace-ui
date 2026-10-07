@@ -1,19 +1,19 @@
-import { LeaderboardGrid } from "./ranked-list";
-import { LeaderboardHero } from "./ranked-hero";
-import type { LeaderboardHeroContent, LeaderboardRow, LeaderboardVariant } from "./ranked-types";
+import { RankedList } from "./ranked-list";
+import { RankedHero } from "./ranked-hero";
+import type { RankedHeroContent, RankedRow, RankedVariant } from "./ranked-types";
 
-interface LeaderboardPageProps {
-  readonly hero: LeaderboardHeroContent;
-  readonly rows: readonly LeaderboardRow[];
-  readonly variant: LeaderboardVariant;
+interface RankedPageProps {
+  readonly hero: RankedHeroContent;
+  readonly rows: readonly RankedRow[];
+  readonly variant: RankedVariant;
 }
 
-export function LeaderboardPage({ hero, rows, variant }: LeaderboardPageProps) {
+export function RankedPage({ hero, rows, variant }: RankedPageProps) {
   return (
     <main className="min-h-screen">
       <div className="flex min-h-screen flex-col bg-[var(--design-canvas)] font-sans text-[var(--design-ink)]">
-        <LeaderboardHero hero={hero} />
-        <LeaderboardGrid rows={rows} variant={variant} />
+        <RankedHero hero={hero} />
+        <RankedList rows={rows} variant={variant} />
       </div>
     </main>
   );
