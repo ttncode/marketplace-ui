@@ -38,7 +38,7 @@
   line-height: 1.55;
 }
 
-/* Unlayered on the source too, so the ring beats the bevel shadows. */
+/* Unlayered, so the ring beats the bevel shadows. */
 .theme :where([data-slot="input"], [data-slot="button"]):focus-visible {
   box-shadow: 0 0 0 3px var(--accent-soft);
   border-color: var(--accent-brand);

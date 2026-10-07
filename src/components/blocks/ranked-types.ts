@@ -1,7 +1,7 @@
 import type { ImageRef, LinkRef } from "@/lib/types";
 
 export interface LeaderboardRow {
-  /** The source's anchor id (`tool-card-<slug>` / `skill-card-<slug>`). */
+  /** Anchor id (`tool-card-<slug>` / `skill-card-<slug>`). */
   readonly id: string;
   readonly rank: number;
   readonly title: string;

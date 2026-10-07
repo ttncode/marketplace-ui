@@ -47,7 +47,7 @@ export function NewsletterToast({ toast, name, logo }: { readonly toast: NonNull
     return () => clearTimeout(showTimer);
   }, []);
 
-  // As on the source, opening the newsletter modal from anywhere retires the toast for good.
+  // Opening the newsletter modal from anywhere retires the toast for good.
   useEffect(() => {
     const controller = new AbortController();
     window.addEventListener("open-newsletter-modal", () => writeFlag(local, DISMISSED_KEY), { signal: controller.signal });

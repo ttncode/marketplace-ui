@@ -24,7 +24,7 @@ function AnimatedSvg({ className, children }: { readonly className?: string; rea
   );
 }
 
-/** Plain lucide icons: the source only scales them to 105% on card hover. */
+/** Plain lucide icons. */
 function StaticSvg({ children }: { readonly children: ReactNode }) {
   return (
     <svg
@@ -225,7 +225,7 @@ const Gamepad2Icon = () => (
   </StaticSvg>
 );
 
-/** Same name → icon table as the source; unlisted names ("Official") fall back to the zap. */
+/** Icon table; unlisted names ("Official") fall back to the zap. */
 const ICONS: Readonly<Record<string, () => ReactNode>> = {
   "Developer Tools": SettingsIcon,
   "Data Science & ML": TrendingUpIcon,

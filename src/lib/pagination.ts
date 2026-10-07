@@ -1,6 +1,6 @@
 import type { LinkRef } from "@/lib/types";
 
-/** Mirrors the source's hidden page list: page 1 is the base path, page n is `<base>/page/n`. */
+/** Page 1 is the base path, page n is `<base>/page/n`. */
 export function paginationLinks(basePath: string, pageCount: number): readonly LinkRef[] {
   return Array.from({ length: pageCount }, (_, index) => {
     const page = index + 1;

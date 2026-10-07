@@ -4,12 +4,12 @@ import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
-/** Radix Accordion content timing on the source: `accordion-down/up 0.2s ease-out`. */
+/** Radix Accordion content timing: `accordion-down/up 0.2s ease-out`. */
 const DURATION_MS = 200;
 const EASING = "ease-out";
 
 /**
- * Collapsible accordion panel that animates its height like the source's Radix
+ * Collapsible accordion panel that animates its height like Radix
  * `AccordionContent`: 0 → content height on open, back to 0 on close, then unmounts.
  * Uses the Web Animations API with the measured height; a CSS keyframe reading a
  * custom property set in a layout effect resolves too late and jumps instead.

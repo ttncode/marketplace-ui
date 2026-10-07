@@ -1,6 +1,6 @@
 import type { ReactNode, SVGProps } from "react";
 
-// Exact lucide paths the source serves (an older build than the installed lucide-react).
+// Exact lucide paths served in the page (an older build than the installed lucide-react).
 type IconProps = SVGProps<SVGSVGElement>;
 
 function LineIcon({ children, ...props }: IconProps & { readonly children: ReactNode }) {

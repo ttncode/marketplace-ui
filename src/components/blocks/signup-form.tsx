@@ -16,7 +16,7 @@ function EmailSignupForm() {
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
 
-  // Validation is the browser's own (required / type=email / minLength), exactly as on the source.
+  // Validation is the browser's own (required / type=email / minLength).
   // No backend: nothing is sent; the form waits, then enters the app.
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import styles from "./animated-icons.module.css";
 import type { NavIconName } from "@/lib/types";
 
-/** Lucide's former `github` icon (removed from lucide 1.x); the source still ships it. */
+/** Lucide's former `github` icon (removed from lucide 1.x). */
 export function GithubIcon({ className, strokeWidth = 2 }: { readonly className?: string; readonly strokeWidth?: number }) {
   return (
     <svg {...strokeSvgProps(24, strokeWidth)} className={className}>
@@ -30,7 +30,7 @@ function strokeSvgProps(size: number, strokeWidth: number) {
 }
 
 /**
- * Tabler "plug-connected" (MIT). Animated like the source's ConnectIcon: the plug
+ * Tabler "plug-connected" (MIT). Animated like ConnectIcon: the plug
  * halves spring apart while the cable ends lengthen and the pins retract.
  */
 export function PlugConnectedIcon({ size = 16, className }: { readonly size?: number; readonly className?: string }) {
@@ -94,7 +94,7 @@ const STATIC_NAV_ICONS: Record<Extract<NavIconName, "bookOpen" | "trophy" | "dow
 };
 
 /**
- * Renders a nav icon by name. Stroke widths follow the source: 2 for plug/blocks,
+ * Renders a nav icon by name. Stroke widths: 2 for plug/blocks,
  * 1.5 for the rest. Animated ones play while a `data-icon-trigger` ancestor is hovered.
  */
 export function NavIcon({ name, size = 16, className }: { readonly name: NavIconName; readonly size?: number; readonly className?: string }) {

@@ -4,7 +4,7 @@ import { Component, useEffect, useRef, useState, type ReactNode } from "react";
 import dynamic from "next/dynamic";
 
 /**
- * The animated WebGL dithering layer the source mounts over every hero's static
+ * Animated WebGL dithering layer mounted over hero backgrounds.
  * dither (`HomeDitheringBackground` → `HomeDitheringField` in its bundles).
  * Same library and parameters (@paper-design/shaders-react Dithering); same gating:
  * skipped for reduced motion, Save-Data or < 4 CPU cores, then mounted once the
