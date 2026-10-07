@@ -272,7 +272,7 @@
       "name": "theme-tailwind",
       "type": "registry:file",
       "title": "Theme Tailwind colors",
-      "description": "Maps the theme tokens to Tailwind color utilities. Import it from globals.css after theme.css.",
+      "description": "Maps the theme tokens to Tailwind utilities and adds the fonts, radius, animations and component classes blocks use. Import it from globals.css after theme.css, and add @custom-variant dark (&:is(.dark *));.",
       "files": [
         {
           "path": "src/app/theme-tailwind.css",

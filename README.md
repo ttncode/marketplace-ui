@@ -56,9 +56,11 @@ For the design tokens, install `@ttn/theme` (it also installs `theme-tailwind`) 
 ```css
 @import "./theme.css";
 @import "./theme-tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
 ```
 
-`theme.css` holds the tokens and `theme-tailwind.css` maps them to Tailwind colors such as `bg-canvas` and `text-ink`; blocks need both.
+`theme.css` holds the tokens. `theme-tailwind.css` maps them to Tailwind utilities such as `bg-canvas` and `text-ink`, and adds the fonts, radius, accordion animations and component classes (`design-dither-static`, `design-navigation-surface`, `scrollbar-hide`, …) the blocks use. Blocks need both files and the `dark` variant, which follows the `.dark` class that the theme toggle sets.
 
 To upgrade an item later, run the same command with `--overwrite`, review `git diff`, keep the local changes you want, and commit.
 

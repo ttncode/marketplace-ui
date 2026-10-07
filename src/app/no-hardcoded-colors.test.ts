@@ -17,10 +17,10 @@ function files(dir: string): string[] {
   });
 }
 
-const scanned = [...files(join(SRC, "components")), join(SRC, "app", "globals.css")];
+const scanned = [...files(join(SRC, "components")), join(SRC, "app", "globals.css"), join(SRC, "app", "theme-tailwind.css")];
 const hasColor = (path: string) => COLOR.test(readFileSync(path, "utf8"));
 
-test("components and globals.css use tokens, not color values", () => {
+test("components, globals.css and theme-tailwind.css use tokens, not color values", () => {
   const offenders = scanned.map((path) => relative(SRC, path)).filter((path) => !PENDING.has(path) && hasColor(join(SRC, path)));
   deepStrictEqual(offenders, []);
 });
