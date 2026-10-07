@@ -6,6 +6,7 @@ import { Search } from "lucide-react";
 import { CategoryRail } from "@/components/blocks/category-rail";
 import { HERO } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
 import { HeroDitherShader } from "@/components/blocks/dither-background";
+import type { LinkRef } from "@/lib/types";
 
 const HOLD_MS = 2000;
 const DELETE_MS = 50;
@@ -41,7 +42,7 @@ function useTypewriter(): string {
   return text;
 }
 
-export function HeroSection() {
+export function HeroSection({ categoryLinks }: { readonly categoryLinks: readonly LinkRef[] }) {
   const router = useRouter();
   const typed = useTypewriter();
 
@@ -114,7 +115,7 @@ export function HeroSection() {
             </form>
           </div>
           <div className="w-full min-w-0 pt-[22px] max-md:pt-[42px]">
-            <CategoryRail />
+            <CategoryRail links={categoryLinks} />
           </div>
         </div>
       </div>

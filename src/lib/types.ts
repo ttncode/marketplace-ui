@@ -109,3 +109,11 @@ export interface SiteConfig {
   readonly leadForms: readonly LeadForm[];
   readonly socials: Readonly<Partial<Record<"github" | "x" | "linkedin" | "youtube", string>>>;
 }
+
+export interface Category {
+  readonly slug: string;
+  readonly name: string;
+  readonly description: string;
+  /** A name `CategoryIcon` draws. */
+  readonly icon: string;
+}

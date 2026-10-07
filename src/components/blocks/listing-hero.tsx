@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { CategoryRail } from "@/components/blocks/category-rail";
 import { ListingSearch } from "@/components/blocks/listing-search";
 import { HeroDitherShader } from "@/components/blocks/dither-background";
+import type { LinkRef } from "@/lib/types";
 
 const HERO_MASK =
   "linear-gradient(to bottom, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0.28) 20%, rgba(0,0,0,0.32) 38%, rgba(0,0,0,0.38) 56%, rgba(0,0,0,0.46) 70%, rgba(0,0,0,0.4) 78%, rgba(0,0,0,0.28) 86%, rgba(0,0,0,0.12) 94%, transparent 100%)";
@@ -11,11 +12,11 @@ interface ListingHeroProps {
   readonly mutedTitle: string;
   readonly description: ReactNode;
   readonly searchPlaceholder: string;
-  /** /server and /client show the category rail ("All" active); category pages don't. */
-  readonly withCategoryRail?: boolean;
+  /** /server and /client show the category rail ("All" active); category pages omit it. */
+  readonly categoryLinks?: readonly LinkRef[];
 }
 
-export function ListingHero({ title, mutedTitle, description, searchPlaceholder, withCategoryRail }: ListingHeroProps) {
+export function ListingHero({ title, mutedTitle, description, searchPlaceholder, categoryLinks }: ListingHeroProps) {
   return (
     <section className="design-hero-under-navigation relative overflow-hidden bg-[#fbfbfb]">
       <div
@@ -35,9 +36,9 @@ export function ListingHero({ title, mutedTitle, description, searchPlaceholder,
             {description}
           </p>
           <ListingSearch placeholder={searchPlaceholder} />
-          {withCategoryRail ? (
+          {categoryLinks ? (
             <div className="mt-6 w-full pt-[22px] max-md:pt-2.5">
-              <CategoryRail />
+              <CategoryRail links={categoryLinks} />
             </div>
           ) : null}
         </div>

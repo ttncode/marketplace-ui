@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { CATEGORY_LINKS } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
+import type { LinkRef } from "@/lib/types";
 
 const EDGE_THRESHOLD_PX = 5;
 
@@ -14,7 +14,7 @@ function maskFor(canScrollLeft: boolean, canScrollRight: boolean): string {
   return "none";
 }
 
-export function CategoryRail() {
+export function CategoryRail({ links }: { readonly links: readonly LinkRef[] }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -48,7 +48,7 @@ export function CategoryRail() {
         className="scrollbar-hide flex max-w-full gap-2 overflow-x-auto py-3"
         style={{ maskImage: mask, WebkitMaskImage: mask }}
       >
-        {CATEGORY_LINKS.map((link, index) => (
+        {links.map((link, index) => (
           <a
             key={link.href}
             href={link.href}

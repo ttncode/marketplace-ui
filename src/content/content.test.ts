@@ -1,0 +1,60 @@
+import { deepStrictEqual, ok } from "node:assert";
+import { readdirSync, statSync } from "node:fs";
+import { join, relative, sep } from "node:path";
+import { test } from "node:test";
+
+import { routeExists, type KnownRoutes } from "../lib/routes.ts";
+import { site } from "../site.config.ts";
+import { CATEGORIES } from "./categories.ts";
+
+const APP_DIR = new URL("../app", import.meta.url).pathname;
+
+function appRoutes(dir: string): string[] {
+  const found: string[] = [];
+  for (const entry of readdirSync(dir)) {
+    const full = join(dir, entry);
+    if (statSync(full).isDirectory()) found.push(...appRoutes(full));
+    else if (entry === "page.tsx") {
+      const route = relative(APP_DIR, dir).split(sep).filter((part) => part && !/^\(.*\)$/.test(part)).join("/");
+      found.push(`/${route}`);
+    }
+  }
+  return found;
+}
+
+const known: KnownRoutes = {
+  routes: appRoutes(APP_DIR),
+  params: { "/categories/[slug]": CATEGORIES.map((category) => category.slug) },
+};
+
+function siteHrefs(): string[] {
+  return [
+    ...site.nav.flatMap((menu) => [menu.hero.href, ...menu.features.map((f) => f.href), ...menu.links.map((l) => l.href)]),
+    ...site.mobileNav.flatMap((group) => group.items.map((item) => item.href)),
+    site.headerActions.primary.href,
+    ...(site.headerActions.secondary ? [site.headerActions.secondary.href] : []),
+    ...site.footer.columns.flatMap((column) => column.links.flatMap((link) => (link.kind === "link" ? [link.href] : []))),
+    ...site.footer.legalLinks.map((link) => link.href),
+    ...site.dashboardNav.map((item) => item.href),
+    ...(site.announcement ? [site.announcement.href] : []),
+  ].filter((href) => href.startsWith("/"));
+}
+
+test("category slugs are unique", () => {
+  const slugs = CATEGORIES.map((category) => category.slug);
+  deepStrictEqual(slugs, [...new Set(slugs)]);
+});
+
+test("every internal link in the site config resolves to a route", () => {
+  const broken = siteHrefs().filter((href) => !routeExists(href, known));
+  deepStrictEqual(broken, []);
+});
+
+test("routeExists matches static and dynamic routes", () => {
+  const sample: KnownRoutes = { routes: ["/", "/categories/[slug]"], params: { "/categories/[slug]": ["design"] } };
+  ok(routeExists("/", sample));
+  ok(routeExists("/categories/design", sample));
+  ok(routeExists("/categories/design?page=2#top", sample));
+  ok(!routeExists("/categories/missing", sample));
+  ok(!routeExists("/nowhere", sample));
+});

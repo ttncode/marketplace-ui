@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ListingHero } from "@/components/blocks/listing-hero";
 import { ListingResults } from "@/components/blocks/listing-results";
+import { CATEGORY_LINKS } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
 import {
   SERVER_CARDS,
   SERVER_PAGE_COUNT,
@@ -22,7 +23,7 @@ export default function ServersPage() {
           mutedTitle="MCP Servers"
           description="Explore our complete collection of MCP servers to connect AI to your favorite tools."
           searchPlaceholder="Search for MCP servers..."
-          withCategoryRail
+          categoryLinks={CATEGORY_LINKS}
         />
         <ListingResults
           cards={SERVER_CARDS}
