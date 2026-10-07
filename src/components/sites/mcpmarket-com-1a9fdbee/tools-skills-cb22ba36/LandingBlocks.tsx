@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import { CATEGORY_STATS, TOP_SKILLS } from "./skills-landing-data";
 import type { CategoryIconName } from "./types";
-import { BRAND_FAVICONS } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/icons";
+import { BRAND_FAVICONS } from "@/components/icons/nav-icons";
 
 
 const CATEGORY_ICONS: Record<CategoryIconName, LucideIcon> = {

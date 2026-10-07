@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { ArrowRight, CircleCheck } from "lucide-react";
-import { LogoMarkIcon } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/icons";
+import { LogoMarkIcon } from "@/components/icons/nav-icons";
 import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import {
   PRIMARY_FACE,

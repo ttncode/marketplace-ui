@@ -1,4 +1,4 @@
-import { LogoMarkIcon } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/icons";
+import { LogoMarkIcon } from "@/components/icons/nav-icons";
 
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { toSiteHref } from "./links";

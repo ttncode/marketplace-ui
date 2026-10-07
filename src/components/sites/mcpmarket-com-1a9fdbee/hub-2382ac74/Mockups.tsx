@@ -13,7 +13,7 @@ import {
   UserPlus,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { BRAND_FAVICONS, GithubIcon, type BrandName } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/icons";
+import { BRAND_FAVICONS, GithubIcon, type BrandName } from "@/components/icons/nav-icons";
 import s from "./AppSurface.module.css";
 
 // Static product mockups: the source renders them as inert spans, not controls.

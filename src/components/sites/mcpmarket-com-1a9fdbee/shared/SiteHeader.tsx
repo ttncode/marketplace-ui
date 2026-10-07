@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Menu, Plug } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { LogoMarkIcon } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/icons";
+import { LogoMarkIcon } from "@/components/icons/nav-icons";
 
 import { MobileNavSheet } from "./MobileNavSheet";
 import { NavMegaMenu } from "./NavMegaMenu";
