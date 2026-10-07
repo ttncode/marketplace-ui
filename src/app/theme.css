@@ -32,6 +32,7 @@
   --design-shadow-floating: 0 0 0 1px rgb(10 10 10 / 0.035), 0 0 24px rgb(10 10 10 / 0.09), 0 18px 40px rgb(10 10 10 / 0.11), 0 38px 72px rgb(10 10 10 / 0.07), inset 0 1px 0 rgb(255 255 255 / 0.9);
   --design-shadow-navigation: 0 1px 2px rgb(10 10 10 / 0.08), 0 5px 12px -3px rgb(10 10 10 / 0.16), 0 18px 42px -12px rgb(10 10 10 / 0.18), 0 36px 72px -28px rgb(10 10 10 / 0.14), inset 0 1px 0 rgb(255 255 255 / 0.98), inset 0 -1px 0 rgb(10 10 10 / 0.075);
   --design-gradient-dark-card: linear-gradient(145deg, rgb(32 32 28), rgb(21 21 18) 48%, rgb(12 12 11));
+  --design-dark-card-foreground: #ffffff;
   --design-shadow-dark-card: 0 10px 24px rgb(0 0 0 / 0.18), inset 0 1px 0 rgb(255 255 255 / 0.14), inset 0 -1px 0 rgb(0 0 0 / 0.45);
   --design-mask-hero-fade: linear-gradient(to bottom, rgb(0 0 0 / 0.34) 0%, rgb(0 0 0 / 0.28) 20%, rgb(0 0 0 / 0.32) 38%, rgb(0 0 0 / 0.38) 56%, rgb(0 0 0 / 0.46) 70%, rgb(0 0 0 / 0.4) 78%, rgb(0 0 0 / 0.28) 86%, rgb(0 0 0 / 0.12) 94%, transparent 100%);
   --design-hero-halo: radial-gradient(82% 84% at 50% 48%, rgb(255 255 255 / 0.46) 0, rgb(255 255 255 / 0.34) 46%, rgb(255 255 255 / 0.16) 68%, transparent 90%);
@@ -126,6 +127,7 @@
   --design-shadow-floating: 0 0 0 1px rgb(255 255 255 / 0.06), 0 18px 40px rgb(0 0 0 / 0.5), 0 38px 72px rgb(0 0 0 / 0.4);
   --design-shadow-navigation: 0 1px 2px rgb(0 0 0 / 0.4), 0 18px 42px -12px rgb(0 0 0 / 0.6), inset 0 1px 0 rgb(255 255 255 / 0.06);
   --design-gradient-dark-card: linear-gradient(145deg, rgb(32 32 28), rgb(21 21 18) 48%, rgb(12 12 11));
+  --design-dark-card-foreground: #ffffff;
   --design-shadow-dark-card: 0 10px 24px rgb(0 0 0 / 0.4), inset 0 1px 0 rgb(255 255 255 / 0.14), inset 0 -1px 0 rgb(0 0 0 / 0.45);
   --design-mask-hero-fade: linear-gradient(to bottom, rgb(0 0 0 / 0.34) 0%, rgb(0 0 0 / 0.28) 20%, rgb(0 0 0 / 0.32) 38%, rgb(0 0 0 / 0.38) 56%, rgb(0 0 0 / 0.46) 70%, rgb(0 0 0 / 0.4) 78%, rgb(0 0 0 / 0.28) 86%, rgb(0 0 0 / 0.12) 94%, transparent 100%);
   --design-hero-halo: radial-gradient(82% 84% at 50% 48%, rgb(11 11 11 / 0.46) 0, rgb(11 11 11 / 0.34) 46%, rgb(11 11 11 / 0.16) 68%, transparent 90%);
