@@ -51,7 +51,7 @@ export function SiteHeader({ name, logo }: { readonly name: string; readonly log
         >
           <div className="flex items-center gap-8">
             <Link href="/" className="group flex items-center gap-2">
-              <SiteLogo name={name} logo={logo} />
+              <SiteLogo name={name} logo={logo} nameClassName="hidden font-sans text-[24px] leading-8 font-semibold tracking-[-0.6px] sm:inline" />
             </Link>
             <div className="hidden items-center md:flex">
               <NavMegaMenu />

@@ -54,7 +54,7 @@ export function SiteFooter({ name, logo }: { readonly name: string; readonly log
             <div className="md:col-span-2">
               {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- clone links mirror the source site's paths, not this app's routes */}
               <a href="/" className="group mb-4 flex items-center gap-2">
-                <SiteLogo name={name} logo={logo} />
+                <SiteLogo name={name} logo={logo} nameClassName="text-xl leading-7 font-semibold tracking-[-0.5px]" />
               </a>
               <p className="max-w-[448px] font-sans text-sm leading-[1.625] text-[#616161]">{FOOTER.description}</p>
             </div>

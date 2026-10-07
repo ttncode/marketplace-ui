@@ -75,7 +75,7 @@ export function MobileNavSheet({ open, onOpenChange, name, logo }: { readonly op
         )}
       >
         <div className="mb-8 pt-4">
-          <SiteLogo name={name} logo={logo} size={28} />
+          <SiteLogo name={name} logo={logo} size={28} nameClassName="text-[18px]/[28px] font-semibold tracking-[-0.45px]" />
         </div>
         <nav className="flex flex-col gap-1 pr-6">
           {MOBILE_NAV_GROUPS.map((group) => [
