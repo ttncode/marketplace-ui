@@ -3,7 +3,7 @@ import type { LinkRef } from "@/lib/types";
 import { ListingCard, type ListingCardData } from "@/components/blocks/listing-card";
 import type { ResultsStatus } from "@/components/blocks/listing-types";
 
-const STATUS_TEXT = "text-sm text-[#616161]";
+const STATUS_TEXT = "text-sm text-ink-muted";
 
 interface ListingResultsProps {
   readonly listings: readonly ListingCardData[];
@@ -22,7 +22,7 @@ export function ListingResults({ listings, status, pageLinks }: ListingResultsPr
           </Link>
         ))}
       </div>
-      <section className="flex-grow bg-[#fbfbfb] pt-6 pb-10 md:pt-8 md:pb-16">
+      <section className="flex-grow bg-canvas pt-6 pb-10 md:pt-8 md:pb-16">
         <div className="mx-auto max-w-[1280px] px-6 md:px-8">
           <div className="grid gap-[14px] md:grid-cols-2 lg:grid-cols-3">
             {listings.map((listing) => (

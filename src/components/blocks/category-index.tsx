@@ -6,9 +6,9 @@ import { CategoryIcon, ICON_HOVER_SCOPE } from "@/components/blocks/category-ico
 import { HeroDitherShader } from "@/components/blocks/dither-background";
 
 const HERO_MASK =
-  "linear-gradient(to bottom, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0.28) 20%, rgba(0,0,0,0.32) 38%, rgba(0,0,0,0.38) 56%, rgba(0,0,0,0.46) 70%, rgba(0,0,0,0.4) 78%, rgba(0,0,0,0.28) 86%, rgba(0,0,0,0.12) 94%, transparent 100%)";
+  "var(--design-mask-hero-fade)";
 
-const CRUMB_LINK = "rounded-md px-1 py-1 transition-colors hover:bg-black/[0.04] hover:text-[var(--design-ink)]";
+const CRUMB_LINK = "rounded-md px-1 py-1 transition-colors hover:bg-ink/[0.04] hover:text-[var(--design-ink)]";
 
 const CRUMB_SVG = {
   xmlns: "http://www.w3.org/2000/svg",
@@ -73,11 +73,11 @@ export interface CategoryTile {
 function CategoryCard({ tile, unit }: { readonly tile: CategoryTile; readonly unit: string }) {
   return (
     <Link href={tile.href} className={cn("group block", cardStyles.link, ICON_HOVER_SCOPE)}>
-      <div className="relative h-full overflow-hidden rounded-[12px] border border-[rgba(34,34,34,0.18)] bg-white shadow-[var(--design-shadow-card)] transition-[translate,border-color,box-shadow] duration-[180ms] ease-[ease] group-hover:-translate-y-px group-hover:border-[rgba(34,34,34,0.34)] group-hover:bg-[rgba(242,242,242,0.94)] group-hover:shadow-[0_16px_36px_rgba(34,34,34,0.07)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
+      <div className="relative h-full overflow-hidden rounded-[12px] border border-ink/18 bg-surface shadow-[var(--design-shadow-card)] transition-[translate,border-color,box-shadow] duration-[180ms] ease-[ease] group-hover:-translate-y-px group-hover:border-ink/34 group-hover:bg-accent/94 group-hover:shadow-[var(--design-shadow-card-hover)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
         <span
           aria-hidden="true"
           className={cn(
-            "block h-[6px] border-b border-[rgba(34,34,34,0.14)] bg-[#f5f5f5] bg-[length:4px_4px,100%_100%] bg-[position:0_0,0_0] opacity-[0.72]",
+            "block h-[6px] border-b border-ink/14 bg-surface-muted bg-[length:4px_4px,100%_100%] bg-[position:0_0,0_0] opacity-[0.72]",
             cardStyles.dither,
           )}
         />

@@ -5,7 +5,7 @@ import { HeroDitherShader } from "@/components/blocks/dither-background";
 import type { LinkRef } from "@/lib/types";
 
 const HERO_MASK =
-  "linear-gradient(to bottom, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0.28) 20%, rgba(0,0,0,0.32) 38%, rgba(0,0,0,0.38) 56%, rgba(0,0,0,0.46) 70%, rgba(0,0,0,0.4) 78%, rgba(0,0,0,0.28) 86%, rgba(0,0,0,0.12) 94%, transparent 100%)";
+  "var(--design-mask-hero-fade)";
 
 interface ListingHeroProps {
   readonly title: string;
@@ -18,7 +18,7 @@ interface ListingHeroProps {
 
 export function ListingHero({ title, mutedTitle, description, searchPlaceholder, categoryLinks }: ListingHeroProps) {
   return (
-    <section className="design-hero-under-navigation relative overflow-hidden bg-[#fbfbfb]">
+    <section className="design-hero-under-navigation relative overflow-hidden bg-canvas">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
@@ -29,10 +29,10 @@ export function ListingHero({ title, mutedTitle, description, searchPlaceholder,
       </div>
       <div className="relative z-10 mx-auto max-w-[1280px] px-6 md:px-8">
         <div className="flex min-h-[410px] flex-col items-center justify-center pt-[42px] pb-[18px] text-center max-md:min-h-[480px] max-md:pt-[34px] max-md:pb-4">
-          <h1 className="max-w-[940px] text-balance font-display text-[clamp(48px,6vw,82px)] leading-[0.94] font-normal tracking-[-0.055em] text-[#0a0a0a] max-md:text-[clamp(42px,13vw,60px)]">
-            {title} <span className="text-[#444444]">{mutedTitle}</span>
+          <h1 className="max-w-[940px] text-balance font-display text-[clamp(48px,6vw,82px)] leading-[0.94] font-normal tracking-[-0.055em] text-ink max-md:text-[clamp(42px,13vw,60px)]">
+            {title} <span className="text-ink-secondary">{mutedTitle}</span>
           </h1>
-          <p className="mt-6 max-w-[650px] font-sans text-base leading-[1.65] tracking-[-0.018em] text-[rgba(10,10,10,0.64)] max-md:max-w-[94%] max-md:text-[15px]">
+          <p className="mt-6 max-w-[650px] font-sans text-base leading-[1.65] tracking-[-0.018em] text-ink/64 max-md:max-w-[94%] max-md:text-[15px]">
             {description}
           </p>
           <ListingSearch placeholder={searchPlaceholder} />
