@@ -25,7 +25,7 @@ async function findCategory({ params }: CategoryPageProps) {
 export async function generateMetadata(props: CategoryPageProps): Promise<Metadata> {
   const { name } = await findCategory(props);
   return {
-    title: `${name} MCP Servers | MCP Market`,
+    title: `${name} MCP Servers`,
     // The literal "{count}" is on the source: its meta template is never filled in.
     description: `Discover our curated collection of MCP servers for ${name.toLowerCase()}. Browse {count} servers and find the perfect MCPs for your needs.`,
   };

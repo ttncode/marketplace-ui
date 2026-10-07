@@ -23,7 +23,7 @@ import { SellFaq } from "@/components/sites/mcpmarket-com-1a9fdbee/sell-04d85308
 import { SellCta, SellHero } from "@/components/sites/mcpmarket-com-1a9fdbee/sell-04d85308/SellSections";
 
 export const metadata: Metadata = {
-  title: "Sell Your Agent Skills | MCP Market",
+  title: "Sell Your Agent Skills",
   description:
     "List and sell your agent skills on MCP Market. Create your seller account, publish paid listings, and reach over a million unique visitors.",
 };

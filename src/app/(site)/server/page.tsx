@@ -8,7 +8,7 @@ import {
 import { paginationLinks } from "@/lib/pagination";
 
 export const metadata: Metadata = {
-  title: "Browse All MCP Servers | MCP Market",
+  title: "Browse All MCP Servers",
   description:
     "Explore our complete collection of MCP servers that connect Claude and Cursor to tools like Figma, Databricks, Storybook, and Ghidra.",
 };

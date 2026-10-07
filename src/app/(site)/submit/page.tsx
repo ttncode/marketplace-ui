@@ -8,7 +8,7 @@ interface SubmitPageProps {
 
 // The source keeps this title and description for `?type=skill` too.
 export const metadata: Metadata = {
-  title: "Submit an MCP Server | MCP Market",
+  title: "Submit an MCP Server",
   description:
     "Submit an MCP server to be featured on MCP Market. Share your MCP server with the community and help others discover powerful AI tools.",
 };

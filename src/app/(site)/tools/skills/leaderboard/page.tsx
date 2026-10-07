@@ -3,7 +3,7 @@ import { SKILL_ROWS } from "@/components/sites/mcpmarket-com-1a9fdbee/leaderboar
 import { LeaderboardPage } from "@/components/blocks/ranked-page";
 
 export const metadata: Metadata = {
-  title: "Skills Leaderboard | MCP Market",
+  title: "Skills Leaderboard",
   description: "Discover the most popular Agent Skills ranked by GitHub stars.",
 };
 

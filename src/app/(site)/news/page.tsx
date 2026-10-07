@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { NewsPage } from "@/components/sites/mcpmarket-com-1a9fdbee/news-f46b16ed/NewsPage";
 
 export const metadata: Metadata = {
-  title: "MCP Server News | MCP Market",
+  title: "MCP Server News",
   description: "Latest model context protocol news and updates",
 };
 

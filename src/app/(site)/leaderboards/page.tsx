@@ -3,7 +3,7 @@ import { SERVER_ROWS } from "@/components/sites/mcpmarket-com-1a9fdbee/leaderboa
 import { LeaderboardPage } from "@/components/blocks/ranked-page";
 
 export const metadata: Metadata = {
-  title: "Top 100 MCP Servers Leaderboard | MCP Market",
+  title: "Top 100 MCP Servers Leaderboard",
   description:
     "Explore the most popular MCP servers ranked by GitHub stars. Find the best MCP servers to connect AI to your favorite tools.",
 };
