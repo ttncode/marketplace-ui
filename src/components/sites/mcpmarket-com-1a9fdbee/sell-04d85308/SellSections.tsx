@@ -8,7 +8,7 @@ import {
 import { cn } from "@/lib/utils";
 import { EarningsMockup } from "./Mockups";
 import { SELL_URL } from "./sell-data";
-import { HeroDitherShader } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/HeroDitherShader";
+import { HeroDitherShader } from "@/components/blocks/dither-background";
 
 const HERO_MASK =
   "linear-gradient(to bottom, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0.28) 20%, rgba(0,0,0,0.32) 38%, rgba(0,0,0,0.38) 56%, rgba(0,0,0,0.46) 70%, rgba(0,0,0,0.4) 78%, rgba(0,0,0,0.28) 86%, rgba(0,0,0,0.12) 94%, transparent 100%)";

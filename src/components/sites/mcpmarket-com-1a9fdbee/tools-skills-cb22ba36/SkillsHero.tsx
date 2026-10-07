@@ -4,7 +4,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 import { SkillsCategoryRail } from "./SkillsCategoryRail";
-import { HeroDitherShader } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/HeroDitherShader";
+import { HeroDitherShader } from "@/components/blocks/dither-background";
 
 const HOLD_MS = 2000;
 const DELETE_MS = 50;
