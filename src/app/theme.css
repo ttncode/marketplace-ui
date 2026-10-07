@@ -30,6 +30,8 @@
   --design-shadow-field: 0 18px 42px rgb(10 10 10 / 0.1), inset 0 1px 0 rgb(255 255 255 / 0.64);
   --design-shadow-floating: 0 0 0 1px rgb(10 10 10 / 0.035), 0 0 24px rgb(10 10 10 / 0.09), 0 18px 40px rgb(10 10 10 / 0.11), 0 38px 72px rgb(10 10 10 / 0.07), inset 0 1px 0 rgb(255 255 255 / 0.9);
   --design-shadow-navigation: 0 1px 2px rgb(10 10 10 / 0.08), 0 5px 12px -3px rgb(10 10 10 / 0.16), 0 18px 42px -12px rgb(10 10 10 / 0.18), 0 36px 72px -28px rgb(10 10 10 / 0.14), inset 0 1px 0 rgb(255 255 255 / 0.98), inset 0 -1px 0 rgb(10 10 10 / 0.075);
+  --design-gradient-dark-card: linear-gradient(145deg, rgb(32 32 28), rgb(21 21 18) 48%, rgb(12 12 11));
+  --design-shadow-dark-card: 0 10px 24px rgb(0 0 0 / 0.18), inset 0 1px 0 rgb(255 255 255 / 0.14), inset 0 -1px 0 rgb(0 0 0 / 0.45);
   --design-success: #10b981;
 
   --background: #fbfbfb;

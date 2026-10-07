@@ -30,7 +30,6 @@ const PENDING = new Set<string>([
   "components/blocks/listing-hero.tsx",
   "components/blocks/listing-results.tsx",
   "components/blocks/listing-search.tsx",
-  "components/blocks/mega-menu.tsx",
   "components/blocks/newsletter-toast.tsx",
   "components/blocks/oauth-buttons.tsx",
   "components/blocks/ranked-hero.tsx",
@@ -41,9 +40,7 @@ const PENDING = new Set<string>([
   "components/blocks/search-view.tsx",
   "components/blocks/submit-hero.tsx",
   "components/icons/breadcrumb-icons.tsx",
-  "components/layout/mobile-nav-sheet.tsx",
   "components/layout/site-footer.tsx",
-  "components/layout/site-header.tsx",
   "components/ui/form-field.tsx",
   "components/ui/texture-button.ts",
 ]);

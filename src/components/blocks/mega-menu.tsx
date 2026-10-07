@@ -12,10 +12,10 @@ import type { NavFeatureCard, NavListItem, NavMenu } from "@/lib/types";
 const CLOSE_DELAY_MS = 150;
 
 const DARK_CARD =
-  "group/card relative overflow-hidden rounded-[14px] border border-[rgba(0,0,0,0.2)] text-white bg-[linear-gradient(145deg,rgb(32,32,28),rgb(21,21,18)_48%,rgb(12,12,11))] shadow-[0_10px_24px_rgba(0,0,0,0.18),inset_0_1px_0_rgba(255,255,255,0.14),inset_0_-1px_0_rgba(0,0,0,0.45)] transition-[box-shadow,filter,transform,translate,scale,rotate] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]";
+  "group/card relative overflow-hidden rounded-[14px] border border-ink/20 text-primary-foreground bg-[image:var(--design-gradient-dark-card)] shadow-[var(--design-shadow-dark-card)] transition-[box-shadow,filter,transform,translate,scale,rotate] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]";
 const CARD_IMAGE = "object-contain transition-transform duration-300 group-hover/card:scale-[1.035]";
-const CARD_TITLE = "text-[14px] leading-[17.5px] font-medium text-white";
-const CARD_DESCRIPTION = "mt-1 text-[12px] leading-[16.5px] text-[rgba(255,255,255,0.52)]";
+const CARD_TITLE = "text-[14px] leading-[17.5px] font-medium text-primary-foreground";
+const CARD_DESCRIPTION = "mt-1 text-[12px] leading-[16.5px] text-primary-foreground/52";
 
 /**
  * Radix NavigationMenu motion: viewport fades/slides 8px
@@ -106,8 +106,8 @@ function NavTrigger({
       className={cn(
         "inline-flex h-10 items-center rounded-[12px] px-4 py-2 font-sans text-[14px] leading-5 font-normal transition-colors duration-150",
         open
-          ? "bg-[rgba(10,10,10,0.06)] text-[#0a0a0a]"
-          : "bg-transparent text-[#444444] hover:bg-[rgba(10,10,10,0.05)] hover:text-[#0a0a0a]",
+          ? "bg-ink/6 text-ink"
+          : "bg-transparent text-ink-secondary hover:bg-ink/5 hover:text-ink",
       )}
     >
       <span className="flex items-center gap-1.5">
@@ -142,7 +142,7 @@ function NavPanel({
           if (event.target === event.currentTarget && panel.closing) onExited();
         }}
         className={cn(
-          "relative mx-3 mt-2 h-[240px] flex-1 overflow-hidden rounded-[24px] border border-[rgba(10,10,10,0.12)] bg-[linear-gradient(180deg,#ffffff,#fafafa)] shadow-[var(--design-shadow-navigation)] backdrop-blur-[24px] backdrop-saturate-[0.9] motion-reduce:animate-none",
+          "relative mx-3 mt-2 h-[240px] flex-1 overflow-hidden rounded-[24px] border border-ink/12 bg-[image:var(--design-navigation-panel)] shadow-[var(--design-shadow-navigation)] backdrop-blur-[24px] backdrop-saturate-[0.9] motion-reduce:animate-none",
           panel.closing
             ? "animate-out fade-out slide-out-to-top-2 fill-mode-forwards"
             : "animate-in fade-in slide-in-from-top-2",
@@ -239,14 +239,14 @@ function ListItem({ item }: { readonly item: NavListItem }) {
     <a
       href={item.href}
       data-icon-trigger=""
-      className="group flex items-start gap-3 rounded-[12px] p-3 transition-colors duration-150 hover:bg-[#f2f2f2]"
+      className="group flex items-start gap-3 rounded-[12px] p-3 transition-colors duration-150 hover:bg-accent"
     >
       <span className="flex size-8 shrink-0 items-center justify-center">
-        <NavIcon name={item.icon} size={16} className="text-[#616161] group-hover:text-[#0a0a0a]" />
+        <NavIcon name={item.icon} size={16} className="text-ink-muted group-hover:text-ink" />
       </span>
       <span className="flex-1 pt-0.5">
-        <span className="block text-[14px] leading-[17.5px] font-medium text-[#0a0a0a]">{item.title}</span>
-        <span className="mt-0.5 block text-[12px] leading-[19.5px] text-[#616161]">{item.description}</span>
+        <span className="block text-[14px] leading-[17.5px] font-medium text-ink">{item.title}</span>
+        <span className="mt-0.5 block text-[12px] leading-[19.5px] text-ink-muted">{item.description}</span>
       </span>
     </a>
   );
