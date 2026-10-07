@@ -6,10 +6,7 @@ import { test } from "node:test";
 const SRC = new URL("..", import.meta.url).pathname;
 const COLOR = /#[0-9a-fA-F]{3,8}\b|\b(?:rgba?|hsla?)\(|-(?:white|black)\b/;
 
-/** Files still waiting for their Phase 4 tokenize task. Only ever remove entries. */
-const PENDING = new Set<string>([
-  "components/icons/breadcrumb-icons.tsx",
-]);
+const PENDING = new Set<string>([]);
 
 function files(dir: string): string[] {
   return readdirSync(dir).flatMap((entry) => {
