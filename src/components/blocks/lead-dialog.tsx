@@ -169,9 +169,9 @@ function LeadDialog({ form, open, onClose, onClosed, onError }: {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex flex-1 items-stretch rounded-xl border border-ink/10 bg-gradient-to-b from-ink/70 to-ink p-px font-normal ring-offset-canvas transition duration-300 ease-in-out focus-visible:ring-2 focus-visible:ring-ink/30 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none"
+                  className="inline-flex flex-1 items-stretch rounded-xl border border-ink/10 bg-gradient-to-b from-primary/70 to-primary p-px font-normal ring-offset-canvas transition duration-300 ease-in-out focus-visible:ring-2 focus-visible:ring-ink/30 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none"
                 >
-                  <span className="flex h-full w-full items-center justify-center gap-2 rounded-[10px] bg-gradient-to-b from-ink-raised to-ink px-4 py-2 text-sm leading-5 tracking-[-0.01em] whitespace-nowrap text-primary-foreground/90 transition-[background-image,color] duration-200 ease-out hover:from-ink-raised-hover hover:to-ink-raised/70 active:from-ink active:to-ink motion-reduce:transition-none">
+                  <span className="flex h-full w-full items-center justify-center gap-2 rounded-[10px] bg-gradient-to-b from-accent-raised to-primary px-4 py-2 text-sm leading-5 tracking-[-0.01em] whitespace-nowrap text-primary-foreground/90 transition-[background-image,color] duration-200 ease-out hover:from-accent-raised-hover hover:to-accent-raised/70 active:from-primary active:to-primary motion-reduce:transition-none">
                     {submitting ? (
                       <>
                         <LoaderCircle className="mr-2 size-4 animate-spin" aria-hidden="true" />

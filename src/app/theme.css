@@ -65,18 +65,23 @@
   --design-bevel-rim-hover: #ffffffd9;
   --design-bevel-highlight-soft: var(--design-surface);
   --design-bevel-shade-soft: #0000000a;
-  --design-bevel-grad-from: color-mix(in oklab, var(--design-ink), white 10%);
-  --design-bevel-grad-to: color-mix(in oklab, var(--design-ink), black 12%);
-  --design-bevel-grad-active-from: color-mix(in oklab, var(--design-ink), black 12%);
-  --design-bevel-grad-active-to: color-mix(in oklab, var(--design-ink), black 4%);
+  --design-bevel-grad-from: color-mix(in oklab, var(--primary), white 10%);
+  --design-bevel-grad-to: color-mix(in oklab, var(--primary), black 12%);
+  --design-bevel-grad-active-from: color-mix(in oklab, var(--primary), black 12%);
+  --design-bevel-grad-active-to: color-mix(in oklab, var(--primary), black 4%);
   --design-brand-google-blue: #4285f4;
   --design-brand-google-green: #34a853;
   --design-brand-google-yellow: #fbbc05;
   --design-brand-google-red: #ea4335;
-  --design-ink-raised: #262626;
-  --design-ink-raised-hover: #292524;
   --design-success: #10b981;
   --design-overlay: rgb(10 10 10 / 0.8);
+
+  /* Brand color. shadcn's --accent is a hover background, not this. */
+  --design-accent: #0a0a0a;
+  --design-accent-foreground: #ffffff;
+  /* Lighter shades of the accent; they change with it. */
+  --design-accent-raised: #262626;
+  --design-accent-raised-hover: #292524;
 
   --background: #fbfbfb;
   --foreground: #0a0a0a;
@@ -84,8 +89,8 @@
   --card-foreground: #0a0a0a;
   --popover: #ffffff;
   --popover-foreground: #0a0a0a;
-  --primary: #0a0a0a;
-  --primary-foreground: #ffffff;
+  --primary: var(--design-accent);
+  --primary-foreground: var(--design-accent-foreground);
   --secondary: #f5f5f5;
   --secondary-foreground: #0a0a0a;
   --muted: #f5f5f5;
@@ -95,7 +100,7 @@
   --destructive: hsl(0 84.2% 60.2%);
   --border: #dbdbdb;
   --input: #d6d6d6;
-  --ring: #0a0a0a;
+  --ring: var(--design-accent);
   --radius: var(--design-radius-md);
 }
 
@@ -161,18 +166,22 @@
   --design-bevel-rim-hover: #ffffffd9;
   --design-bevel-highlight-soft: var(--design-surface);
   --design-bevel-shade-soft: #00000040;
-  --design-bevel-grad-from: color-mix(in oklab, var(--design-ink), white 10%);
-  --design-bevel-grad-to: color-mix(in oklab, var(--design-ink), black 12%);
-  --design-bevel-grad-active-from: color-mix(in oklab, var(--design-ink), black 12%);
-  --design-bevel-grad-active-to: color-mix(in oklab, var(--design-ink), black 4%);
+  --design-bevel-grad-from: color-mix(in oklab, var(--primary), white 10%);
+  --design-bevel-grad-to: color-mix(in oklab, var(--primary), black 12%);
+  --design-bevel-grad-active-from: color-mix(in oklab, var(--primary), black 12%);
+  --design-bevel-grad-active-to: color-mix(in oklab, var(--primary), black 4%);
   --design-brand-google-blue: #4285f4;
   --design-brand-google-green: #34a853;
   --design-brand-google-yellow: #fbbc05;
   --design-brand-google-red: #ea4335;
-  --design-ink-raised: #e5e5e5;
-  --design-ink-raised-hover: #f5f5f4;
   --design-success: #34d399;
   --design-overlay: rgb(10 10 10 / 0.8);
+
+  --design-accent: #f5f5f5;
+  --design-accent-foreground: #0a0a0a;
+  /* Lighter shades of the accent; they change with it. */
+  --design-accent-raised: #e5e5e5;
+  --design-accent-raised-hover: #f5f5f4;
 
   --background: #0b0b0b;
   --foreground: #f5f5f5;
@@ -180,8 +189,8 @@
   --card-foreground: #f5f5f5;
   --popover: #141414;
   --popover-foreground: #f5f5f5;
-  --primary: #f5f5f5;
-  --primary-foreground: #0a0a0a;
+  --primary: var(--design-accent);
+  --primary-foreground: var(--design-accent-foreground);
   --secondary: #1a1a1a;
   --secondary-foreground: #f5f5f5;
   --muted: #1a1a1a;
@@ -191,5 +200,5 @@
   --destructive: hsl(0 72% 58%);
   --border: #2a2a2a;
   --input: #2e2e2e;
-  --ring: #f5f5f5;
+  --ring: var(--design-accent);
 }

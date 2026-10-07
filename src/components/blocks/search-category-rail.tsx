@@ -23,7 +23,7 @@ export function CategoryRail({ categories, selectedSlug, onSelect }: CategoryRai
               className={cn(
                 "flex shrink-0 items-center gap-2 rounded-[12px] border px-4 py-2 font-sans text-sm leading-5 font-normal tracking-[-0.01em] whitespace-nowrap transition-all duration-200",
                 selected
-                  ? "border-ink bg-ink text-primary-foreground"
+                  ? "border-ink bg-ink text-canvas"
                   : "border-border bg-surface text-ink-muted hover:text-ink",
               )}
             >
