@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteOverlays } from "@/components/blocks/lead-dialog";
 
-// Every mcpmarket.com page shares this frame; the plain Next.js 404 (as on the source) sits outside it.
+// Every site page shares this frame; the plain Next.js 404 (as on the source) sits outside it.
 export default function SiteLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <>

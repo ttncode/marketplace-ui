@@ -6,7 +6,7 @@ import { X } from "lucide-react";
 
 import type { SiteConfig } from "@/lib/types";
 
-const DISMISSED_KEY = "mcpmarket-announcement-dismissed";
+const DISMISSED_KEY = "announcement-dismissed";
 
 const subscribeToNothing = () => () => {};
 
