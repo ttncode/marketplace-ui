@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ExternalLinkIcon } from "@/components/icons/detail-icons";
 import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
-import { CalendarIcon } from "./icons";
+import { CalendarIcon } from "@/components/icons/news-icons";
 import type { NewsItem } from "./news-data";
 
 // The source's glass card; its shadow token computes to `none` on the live page, so no shadow here.
