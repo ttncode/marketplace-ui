@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import styles from "@/components/sites/mcpmarket-com-1a9fdbee/shared/DirectoryCard.module.css";
+import styles from "@/components/blocks/listing-card.module.css";
 import { cn } from "@/lib/utils";
 import { WEBMCP_EXAMPLES, type WebMcpExample } from "./webmcp-data";
 

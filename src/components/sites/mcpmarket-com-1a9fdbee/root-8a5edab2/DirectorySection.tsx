@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { DirectoryCard } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/DirectoryCard";
+import { DirectoryCard } from "@/components/blocks/listing-card";
 import type { DirectorySection as DirectorySectionData } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
 
 const TONE_BACKGROUND = { canvas: "bg-[#fbfbfb]", subtle: "bg-[#f7f7f7]" } as const;

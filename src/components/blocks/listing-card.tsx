@@ -1,7 +1,7 @@
 import { ArrowUpRight, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
-import styles from "./DirectoryCard.module.css";
-import type { CardFooter, DirectoryCard as DirectoryCardData } from "./types";
+import styles from "./listing-card.module.css";
+import type { CardFooter, DirectoryCard as DirectoryCardData } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
 
 function FooterValue({ footer }: { readonly footer: CardFooter }) {
   switch (footer.kind) {
