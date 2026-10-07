@@ -69,7 +69,7 @@ test("every registry dependency is prefixed @ttn/", () => {
   deepStrictEqual(items.flatMap((item) => (item.registryDependencies ?? []).filter((dep) => !dep.startsWith("@ttn/")).map((dep) => `${item.name} -> ${dep}`)), []);
 });
 
-test("every shipped component file belongs to exactly one item", { skip: "blocks, layout and icons arrive in Tasks 92–93" }, () => {
+test("every shipped component file belongs to exactly one item", () => {
   const files = SHIPPED_DIRS.flatMap(walk).filter((path) => !path.endsWith(".test.ts"));
   deepStrictEqual(files.filter((path) => !owner.has(path)), []);
   const counts = new Map<string, number>();

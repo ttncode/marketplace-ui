@@ -355,7 +355,7 @@
       "name": "breadcrumb-icons",
       "type": "registry:ui",
       "title": "Breadcrumb icons",
-      "description": "Inline SVG icon set.",
+      "description": "Inline SVG icons for breadcrumbs.",
       "files": [
         {
           "path": "src/components/icons/breadcrumb-icons.tsx",
@@ -367,7 +367,7 @@
       "name": "detail-icons",
       "type": "registry:ui",
       "title": "Detail icons",
-      "description": "Inline SVG icon set.",
+      "description": "Inline SVG icons for item detail pages.",
       "files": [
         {
           "path": "src/components/icons/detail-icons.tsx",
@@ -379,7 +379,7 @@
       "name": "news-icons",
       "type": "registry:ui",
       "title": "News icons",
-      "description": "Inline SVG icon set.",
+      "description": "Inline SVG icons for article cards.",
       "files": [
         {
           "path": "src/components/icons/news-icons.tsx",
@@ -1291,6 +1291,130 @@
       "files": [
         {
           "path": "src/components/blocks/video-compose-form.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "site-header",
+      "type": "registry:block",
+      "title": "Site header",
+      "description": "Floating top navigation with mega menus and mobile sheet.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/mega-menu",
+        "@ttn/mobile-nav-sheet",
+        "@ttn/site-logo",
+        "@ttn/theme-toggle",
+        "@ttn/types",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/layout/site-header.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "site-footer",
+      "type": "registry:block",
+      "title": "Site footer",
+      "description": "Footer with link columns and copyright.",
+      "registryDependencies": [
+        "@ttn/lead-dialog",
+        "@ttn/site-logo",
+        "@ttn/types"
+      ],
+      "files": [
+        {
+          "path": "src/components/layout/site-footer.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "mobile-nav-sheet",
+      "type": "registry:block",
+      "title": "Mobile nav sheet",
+      "description": "Slide-in navigation sheet for small screens.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/nav-icons",
+        "@ttn/site-logo",
+        "@ttn/theme-toggle",
+        "@ttn/types",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/layout/mobile-nav-sheet.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "app-shell",
+      "type": "registry:block",
+      "title": "App shell",
+      "description": "Dashboard shell with sidebar, top bar and mobile drawer.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@ttn/app-sidebar",
+        "@ttn/app-topbar",
+        "@ttn/types"
+      ],
+      "files": [
+        {
+          "path": "src/components/layout/app-shell.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "app-sidebar",
+      "type": "registry:block",
+      "title": "App sidebar",
+      "description": "Collapsible dashboard sidebar navigation.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/nav",
+        "@ttn/site-logo",
+        "@ttn/types",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/layout/app-sidebar.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "app-topbar",
+      "type": "registry:block",
+      "title": "App topbar",
+      "description": "Dashboard top bar with search, theme toggle and user menu.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/input",
+        "@ttn/theme-toggle",
+        "@ttn/types"
+      ],
+      "files": [
+        {
+          "path": "src/components/layout/app-topbar.tsx",
           "type": "registry:block"
         }
       ]
