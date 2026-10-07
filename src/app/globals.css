@@ -23,6 +23,8 @@
   --color-ink-muted: var(--design-ink-muted);
   --color-ink-soft: var(--design-ink-soft);
   --color-success: var(--design-success);
+  --color-warning: var(--design-warning);
+  --color-info: var(--design-info);
   --color-accent-raised: var(--design-accent-raised);
   --color-overlay: var(--design-overlay);
   --color-dark-card-foreground: var(--design-dark-card-foreground);
