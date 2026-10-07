@@ -1,6 +1,6 @@
 "use client";
 
-import { Component, useEffect, useRef, useState, type ReactNode } from "react";
+import { Component, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import dynamic from "next/dynamic";
 
 /**
@@ -13,14 +13,13 @@ import dynamic from "next/dynamic";
 const DitheringField = dynamic(
   () =>
     import("@paper-design/shaders-react").then(({ Dithering }) => {
-      function HeroDitheringField() {
-        const tokens = getComputedStyle(document.documentElement);
+      function HeroDitheringField({ colorBack, colorFront }: { readonly colorBack: string; readonly colorFront: string }) {
         return (
           <Dithering
             minPixelRatio={0.5}
             maxPixelCount={750_000}
-            colorBack={tokens.getPropertyValue("--design-dither-back").trim()}
-            colorFront={tokens.getPropertyValue("--design-dither-front").trim()}
+            colorBack={colorBack}
+            colorFront={colorFront}
             shape="simplex"
             type="4x4"
             size={2}
@@ -61,7 +60,19 @@ function shouldSkipShader(): boolean {
   return reducedMotion || connection?.saveData === true || lowPower;
 }
 
+function subscribeToThemeClass(onChange: () => void) {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+  return () => observer.disconnect();
+}
+
+function readDitherColors(): string {
+  const style = getComputedStyle(document.documentElement);
+  return `${style.getPropertyValue("--design-dither-back").trim()}|${style.getPropertyValue("--design-dither-front").trim()}`;
+}
+
 export function HeroDitherShader() {
+  const [back = "", front = ""] = useSyncExternalStore(subscribeToThemeClass, readDitherColors, () => "").split("|");
   const anchorRef = useRef<HTMLDivElement>(null);
   const [idle, setIdle] = useState(false);
   const [nearViewport, setNearViewport] = useState(false);
@@ -99,7 +110,7 @@ export function HeroDitherShader() {
       {idle && nearViewport && (
         <div className="absolute inset-0" data-home-dither-shader="">
           <ShaderBoundary>
-            <DitheringField />
+            {back && front && <DitheringField colorBack={back} colorFront={front} />}
           </ShaderBoundary>
         </div>
       )}
