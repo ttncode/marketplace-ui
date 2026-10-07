@@ -16,6 +16,8 @@ export function UploadDropzone({ name, accept, hint, multiple = true }: UploadDr
   const inputRef = useRef<HTMLInputElement>(null);
   const [files, setFiles] = useState<readonly File[]>([]);
   const [dragging, setDragging] = useState(false);
+  const [skipped, setSkipped] = useState(0);
+  const rules = accept.split(",").map((rule) => rule.trim()).filter(Boolean);
 
   const sync = (next: readonly File[]) => {
     setFiles(next);
@@ -26,7 +28,10 @@ export function UploadDropzone({ name, accept, hint, multiple = true }: UploadDr
 
   const add = (list: FileList | null) => {
     if (!list) return;
-    const accepted = Array.from(list).filter((file) => accept === "" || accept.split(",").some((rule) => matches(file, rule.trim())));
+    const incoming = Array.from(list);
+    const accepted = incoming.filter((file) => rules.length === 0 || rules.some((rule) => matches(file, rule)));
+    setSkipped(incoming.length - accepted.length);
+    if (accepted.length === 0) return sync(files); // a browse pick already replaced input.files
     sync(multiple ? [...files, ...accepted] : accepted.slice(0, 1));
   };
 
@@ -43,7 +48,9 @@ export function UploadDropzone({ name, accept, hint, multiple = true }: UploadDr
           event.preventDefault();
           setDragging(true);
         }}
-        onDragLeave={() => setDragging(false)}
+        onDragLeave={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setDragging(false);
+        }}
         onDrop={onDrop}
         className={cn(
           "flex cursor-pointer flex-col items-center justify-center gap-2 rounded-[var(--design-radius-lg)] border border-dashed border-border bg-surface px-6 py-10 text-center transition-colors hover:bg-surface-subtle has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring/40",
@@ -69,6 +76,11 @@ export function UploadDropzone({ name, accept, hint, multiple = true }: UploadDr
             </li>
           ))}
         </ul>
+      )}
+      {skipped > 0 && (
+        <p className="text-xs text-ink-muted">
+          {skipped} {skipped === 1 ? "file" : "files"} skipped — type not accepted
+        </p>
       )}
     </div>
   );
