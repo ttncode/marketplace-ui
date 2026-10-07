@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import styles from "./auth.module.css";
-import { AuthSidePanel } from "./AuthSidePanel";
-import { HubLockup } from "./HubLockup";
+import { AuthSidePanel } from "./auth-side-panel";
+import { HubLockup } from "./auth-lockup";
 
 interface AuthShellProps {
   readonly redirect: string;

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import styles from "./auth.module.css";
+import styles from "@/components/blocks/auth.module.css";
 
 /** The source's shadcn Button, size "lg" (36px, 13px text, 5px radius). */
 const BUTTON_BASE =

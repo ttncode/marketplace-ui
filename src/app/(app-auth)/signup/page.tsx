@@ -1,6 +1,6 @@
-import { AuthShell } from "@/components/sites/app-mcpmarket-com-ac75c135/shared/AuthShell";
-import { validateRedirectPath } from "@/components/sites/app-mcpmarket-com-ac75c135/shared/redirect";
-import { SignupForm } from "@/components/sites/app-mcpmarket-com-ac75c135/signup-847d8d45/SignupForm";
+import { AuthShell } from "@/components/blocks/auth-shell";
+import { validateRedirectPath } from "@/lib/auth-redirect";
+import { SignupForm } from "@/components/blocks/signup-form";
 
 export default async function SignupPage({ searchParams }: PageProps<"/signup">) {
   const { redirectTo } = await searchParams;

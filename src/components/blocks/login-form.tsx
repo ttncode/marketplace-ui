@@ -9,9 +9,9 @@ import {
   OrDivider,
   SIMULATED_REQUEST_MS,
   SwitchLink,
-} from "@/components/sites/app-mcpmarket-com-ac75c135/shared/controls";
-import { OAuthButtons } from "@/components/sites/app-mcpmarket-com-ac75c135/shared/OAuthButtons";
-import { loginHeading, redirectQuery } from "@/components/sites/app-mcpmarket-com-ac75c135/shared/redirect";
+} from "@/components/ui/auth-controls";
+import { OAuthButtons } from "@/components/blocks/oauth-buttons";
+import { loginHeading, redirectQuery } from "@/lib/auth-redirect";
 
 const CALLBACK_FAILED_MESSAGE = "Sign-in could not be completed. Please try again.";
 // The clone has no accounts, so every sign-in ends in the source's wrong-credentials message.
