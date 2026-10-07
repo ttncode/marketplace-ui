@@ -36,7 +36,7 @@ function isValidEmail(value: FormDataEntryValue | null): boolean {
 }
 
 export function OverlayTrigger({ event, ariaLabel, className, children }: {
-  readonly event: OverlayEvent;
+  readonly event: OverlayEvent | import("@/lib/types").OverlayEvent;
   readonly ariaLabel: string;
   readonly className: string;
   readonly children: React.ReactNode;

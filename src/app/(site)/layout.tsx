@@ -12,7 +12,7 @@ export default function SiteLayout({ children }: Readonly<{ children: React.Reac
       <AnnouncementBar />
       <SiteHeader name={site.name} logo={site.logo} nav={site.nav} mobileNav={site.mobileNav} actions={site.headerActions} />
       {children}
-      <SiteFooter name={site.name} logo={site.logo} />
+      <SiteFooter name={site.name} logo={site.logo} footer={site.footer} socials={site.socials} />
       <NewsletterToast name={site.name} logo={site.logo} />
       <SiteOverlays />
     </>
