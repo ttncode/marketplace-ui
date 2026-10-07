@@ -2,8 +2,8 @@ import { Download, ExternalLink, ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
-import { HubLockup } from "./HubLockup";
-import { getBuySkillContext, getImportSkillContext, type ImportSkillContext } from "./redirect";
+import { HubLockup } from "./auth-lockup";
+import { getBuySkillContext, getImportSkillContext, type ImportSkillContext } from "@/lib/auth-redirect";
 
 const PANEL_CARD = "rounded-[5px] border border-border bg-card p-6 text-left shadow-sm";
 const PANEL_EYEBROW = "mb-4 flex items-center gap-2 text-sm font-semibold tracking-tight text-foreground";

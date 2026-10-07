@@ -9,9 +9,9 @@ import {
   OrDivider,
   SIMULATED_REQUEST_MS,
   SwitchLink,
-} from "@/components/sites/app-mcpmarket-com-ac75c135/shared/controls";
-import { OAuthButtons } from "@/components/sites/app-mcpmarket-com-ac75c135/shared/OAuthButtons";
-import { redirectQuery, signupHeading } from "@/components/sites/app-mcpmarket-com-ac75c135/shared/redirect";
+} from "@/components/ui/auth-controls";
+import { OAuthButtons } from "@/components/blocks/oauth-buttons";
+import { redirectQuery, signupHeading } from "@/lib/auth-redirect";
 
 function CheckEmail() {
   return (

@@ -1,6 +1,6 @@
-import { AuthShell } from "@/components/sites/app-mcpmarket-com-ac75c135/shared/AuthShell";
-import { validateRedirectPath } from "@/components/sites/app-mcpmarket-com-ac75c135/shared/redirect";
-import { LoginForm } from "@/components/sites/app-mcpmarket-com-ac75c135/login-7e93fba0/LoginForm";
+import { AuthShell } from "@/components/blocks/auth-shell";
+import { validateRedirectPath } from "@/lib/auth-redirect";
+import { LoginForm } from "@/components/blocks/login-form";
 
 export default async function LoginPage({ searchParams }: PageProps<"/login">) {
   const { redirectTo, error } = await searchParams;

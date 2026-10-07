@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Crimson_Text } from "next/font/google";
-import styles from "@/components/sites/app-mcpmarket-com-ac75c135/shared/auth.module.css";
+import styles from "@/components/blocks/auth.module.css";
 
 // The app ships only the regular cut; its italic "Market" is the browser's synthesized oblique.
 const crimson = Crimson_Text({ variable: "--font-crimson", weight: "400", subsets: ["latin"] });

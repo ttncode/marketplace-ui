@@ -4,7 +4,7 @@ import { LoaderCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
-import { AuthButton } from "./controls";
+import { AuthButton } from "@/components/ui/auth-controls";
 
 const PROVIDERS = {
   github: { label: "Continue with GitHub", href: "https://github.com/login/oauth/authorize" },
