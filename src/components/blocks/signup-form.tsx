@@ -1,41 +1,27 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   AuthButton,
   AuthHeading,
-  AuthLink,
   Field,
   OrDivider,
   SIMULATED_REQUEST_MS,
   SwitchLink,
 } from "@/components/ui/auth-controls";
 import { OAuthButtons } from "@/components/blocks/oauth-buttons";
-import { redirectQuery, signupHeading } from "@/lib/auth-redirect";
 
-function CheckEmail() {
-  return (
-    <div>
-      <div className="mb-8 text-center">
-        <h1 className="text-2xl font-medium tracking-tight text-foreground">Check your email</h1>
-        <p className="mt-2 text-sm text-balance text-muted-foreground">Check your email for a confirmation link.</p>
-      </div>
-      <p className="text-center text-sm text-muted-foreground">
-        <AuthLink href="/login">Back to sign in</AuthLink>
-      </p>
-    </div>
-  );
-}
-
-function EmailSignupForm({ onSent }: { readonly onSent: () => void }) {
+function EmailSignupForm() {
+  const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
 
   // Validation is the browser's own (required / type=email / minLength), exactly as on the source.
-  // No backend: nothing is sent; the source's no-session path ("Check your email") follows its loading state.
+  // No backend: nothing is sent; the form waits, then enters the app.
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSubmitting(true);
-    window.setTimeout(onSent, SIMULATED_REQUEST_MS);
+    window.setTimeout(() => router.push("/app"), SIMULATED_REQUEST_MS);
   };
 
   return (
@@ -58,27 +44,24 @@ function EmailSignupForm({ onSent }: { readonly onSent: () => void }) {
   );
 }
 
-export function SignupForm({ redirect }: { readonly redirect: string }) {
+export function SignupForm({ name }: { readonly name: string }) {
   const [emailOpen, setEmailOpen] = useState(false);
-  const [sent, setSent] = useState(false);
-
-  if (sent) return <CheckEmail />;
 
   return (
     <div>
-      <AuthHeading>{signupHeading(redirect)}</AuthHeading>
+      <AuthHeading>Create your {name} account</AuthHeading>
       <div className="space-y-6">
         <OAuthButtons />
         <OrDivider />
         {emailOpen ? (
-          <EmailSignupForm onSent={() => setSent(true)} />
+          <EmailSignupForm />
         ) : (
           <AuthButton variant="ghost" onClick={() => setEmailOpen(true)}>
             Sign up with Email
           </AuthButton>
         )}
       </div>
-      <SwitchLink prompt="Already have an account?" label="Sign in" href={`/login${redirectQuery(redirect)}`} />
+      <SwitchLink prompt="Already have an account?" label="Sign in" href="/login" />
     </div>
   );
 }

@@ -1,23 +1,24 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import type { SiteConfig } from "@/lib/types";
 import styles from "./auth.module.css";
 import { AuthSidePanel } from "./auth-side-panel";
-import { HubLockup } from "./auth-lockup";
+import { AuthLockup } from "./auth-lockup";
 
 interface AuthShellProps {
-  readonly redirect: string;
+  readonly name: string;
+  readonly logo: SiteConfig["logo"];
   readonly children: React.ReactNode;
 }
 
-/** Split layout of app.mcpmarket.com's (auth) routes: form column + dotted brand panel from lg up. */
-export function AuthShell({ redirect, children }: AuthShellProps) {
+/** Split layout of the auth routes: form column + dotted brand panel from lg up. */
+export function AuthShell({ name, logo, children }: AuthShellProps) {
   return (
     <div className="grid min-h-svh lg:grid-cols-2" translate="no">
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex justify-center gap-2 md:justify-start">
-          {/* The source links to app "/", which sends signed-out visitors to /login. */}
-          <Link href="/login" className="group inline-flex items-center transition-opacity hover:opacity-80">
-            <HubLockup size={32} className="text-foreground" />
+          <Link href="/" className="group inline-flex items-center transition-opacity hover:opacity-80">
+            <AuthLockup name={name} logo={logo} />
           </Link>
         </div>
         <div className="flex flex-1 items-center justify-center">
@@ -32,7 +33,7 @@ export function AuthShell({ redirect, children }: AuthShellProps) {
           )}
         />
         <div className="absolute inset-0 flex items-center justify-center p-10">
-          <AuthSidePanel redirect={redirect} />
+          <AuthSidePanel name={name} logo={logo} />
         </div>
       </div>
     </div>

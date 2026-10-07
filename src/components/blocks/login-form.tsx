@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   AuthButton,
-  AuthError,
   AuthHeading,
   Field,
   OrDivider,
@@ -11,36 +11,21 @@ import {
   SwitchLink,
 } from "@/components/ui/auth-controls";
 import { OAuthButtons } from "@/components/blocks/oauth-buttons";
-import { loginHeading, redirectQuery } from "@/lib/auth-redirect";
 
-const CALLBACK_FAILED_MESSAGE = "Sign-in could not be completed. Please try again.";
-// The clone has no accounts, so every sign-in ends in the source's wrong-credentials message.
-const INVALID_CREDENTIALS_MESSAGE = "Invalid email or password";
-
-interface LoginFormProps {
-  readonly redirect: string;
-  readonly callbackFailed: boolean;
-}
-
-export function LoginForm({ redirect, callbackFailed }: LoginFormProps) {
+export function LoginForm({ name }: { readonly name: string }) {
+  const router = useRouter();
   const [emailOpen, setEmailOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(callbackFailed ? CALLBACK_FAILED_MESSAGE : null);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setError(null);
     setSubmitting(true);
-    window.setTimeout(() => {
-      setError(INVALID_CREDENTIALS_MESSAGE);
-      setSubmitting(false);
-    }, SIMULATED_REQUEST_MS);
+    window.setTimeout(() => router.push("/app"), SIMULATED_REQUEST_MS);
   };
 
   return (
     <div>
-      <AuthHeading>{loginHeading(redirect)}</AuthHeading>
-      <AuthError message={error} />
+      <AuthHeading>Log in to {name}</AuthHeading>
       <div className="space-y-6">
         <OAuthButtons />
         <OrDivider />
@@ -66,7 +51,7 @@ export function LoginForm({ redirect, callbackFailed }: LoginFormProps) {
           </AuthButton>
         )}
       </div>
-      <SwitchLink prompt="Don't have an account?" label="Sign up" href={`/signup${redirectQuery(redirect)}`} />
+      <SwitchLink prompt="Don't have an account?" label="Sign up" href="/signup" />
     </div>
   );
 }
