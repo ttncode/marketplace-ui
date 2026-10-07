@@ -1,4 +1,5 @@
-/* Hover animations for category icons. Animations trigger when the card (`.tile`) is hovered. */
+/* Hover animations for category icons: every animation starts when the card (`.tile`) is hovered. */
+/* Keyframe arrays tween with easeInOut per segment; springs are sampled into linear() easings. */
 
 .gear {
   transition: transform 1180ms

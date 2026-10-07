@@ -1,4 +1,4 @@
-/* Body is Tailwind Typography prose inside homepage_explainerContent. */
+/* Hand-written equivalent of Tailwind Typography `prose`; no typography plugin is installed. */
 .prose {
   color: #374151;
   font-size: 16px;

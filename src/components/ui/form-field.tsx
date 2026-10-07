@@ -2,12 +2,12 @@ import { Check } from "lucide-react";
 import type { ReactNode, SVGProps } from "react";
 import { cn } from "@/lib/utils";
 
-/** Waits on its API here; paused for the loading state visibility. */
+/** Simulated API latency so the loading state is visible. */
 export const SIMULATED_LATENCY_MS = 700;
 
 export const wait = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 
-// shadcn `Input`; `shadow-[var(--design-shadow-field)]` not in v3 build.
+// shadcn `Input`; uses `shadow-[var(--design-shadow-field)]` because the utility class is not available.
 export const INPUT =
   "flex w-full rounded-lg border border-input bg-[var(--design-glass)] px-3 py-2 text-base leading-6 text-foreground ring-offset-background backdrop-blur-xl transition-[background-color,border-color,box-shadow] duration-200 placeholder:text-muted-foreground focus-visible:border-foreground/25 focus-visible:bg-[var(--design-glass-focus)] focus-visible:ring-2 focus-visible:ring-ring/20 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm md:leading-5";
 
@@ -102,7 +102,7 @@ export function FieldLabel({ htmlFor, children }: { readonly htmlFor?: string; r
   );
 }
 
-/** lucide `shield-check` icon. */
+/** lucide `shield-check` icon; hand-copied because the installed lucide-react version draws a different shield. */
 export function ShieldCheckIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg

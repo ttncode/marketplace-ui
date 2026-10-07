@@ -18,7 +18,7 @@ const CARD_TITLE = "text-[14px] leading-[17.5px] font-medium text-white";
 const CARD_DESCRIPTION = "mt-1 text-[12px] leading-[16.5px] text-[rgba(255,255,255,0.52)]";
 
 /**
-	 * Radix NavigationMenu motion: viewport fades/slides 8px
+ * Radix NavigationMenu motion: viewport fades/slides 8px
  * in and out, and switching menus slides the old content out and the new one in
  * (208px) toward the direction of travel.
  */

@@ -3,9 +3,8 @@ import type { ReactNode, SVGProps } from "react";
 type IconProps = SVGProps<SVGSVGElement>;
 
 /**
-	 * Line icons exactly as served by the lucide design (lucide shapes of
- * the version it ships; the installed lucide-react drops the brand icons and
- * redraws several of these).
+ * Line icons (lucide shapes); the installed lucide-react version
+ * has dropped the brand icons and redraws several of these.
  */
 function LineIcon({ children, strokeWidth = 2, ...props }: IconProps & { readonly children: ReactNode }) {
   return (

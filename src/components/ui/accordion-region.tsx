@@ -9,7 +9,7 @@ const DURATION_MS = 200;
 const EASING = "ease-out";
 
 /**
-	 * Collapsible accordion panel that animates its height like Radix
+ * Collapsible accordion panel that animates its height like Radix
  * `AccordionContent`: 0 → content height on open, back to 0 on close, then unmounts.
  * Uses the Web Animations API with the measured height; a CSS keyframe reading a
  * custom property set in a layout effect resolves too late and jumps instead.
