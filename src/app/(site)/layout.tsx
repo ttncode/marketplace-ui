@@ -1,3 +1,4 @@
+import { site } from "@/site.config";
 import { AnnouncementBar } from "@/components/blocks/announcement-bar";
 import { NewsletterToast } from "@/components/blocks/newsletter-toast";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -9,10 +10,10 @@ export default function SiteLayout({ children }: Readonly<{ children: React.Reac
   return (
     <>
       <AnnouncementBar />
-      <SiteHeader />
+      <SiteHeader name={site.name} logo={site.logo} />
       {children}
-      <SiteFooter />
-      <NewsletterToast />
+      <SiteFooter name={site.name} logo={site.logo} />
+      <NewsletterToast name={site.name} logo={site.logo} />
       <SiteOverlays />
     </>
   );

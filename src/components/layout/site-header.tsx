@@ -5,7 +5,8 @@ import Link from "next/link";
 import { Menu, Plug } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { LogoMarkIcon } from "@/components/icons/nav-icons";
+import { SiteLogo } from "@/components/layout/site-logo";
+import type { SiteConfig } from "@/lib/types";
 
 import { MobileNavSheet } from "@/components/layout/mobile-nav-sheet";
 import { NavMegaMenu } from "@/components/blocks/mega-menu";
@@ -20,7 +21,7 @@ function subscribeToScroll(onChange: () => void) {
 const isScrolled = () => window.scrollY > 0;
 const isScrolledOnServer = () => false;
 
-export function SiteHeader() {
+export function SiteHeader({ name, logo }: { readonly name: string; readonly logo: SiteConfig["logo"] }) {
   const scrolled = useSyncExternalStore(subscribeToScroll, isScrolled, isScrolledOnServer);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -50,14 +51,7 @@ export function SiteHeader() {
         >
           <div className="flex items-center gap-8">
             <Link href="/" className="group flex items-center gap-2">
-              <LogoMarkIcon
-                size={36}
-                className="text-[var(--design-ink)] transition-opacity duration-150 group-hover:opacity-80"
-              />
-              <div className="hidden items-baseline font-sans text-[24px] leading-8 tracking-[-0.6px] sm:flex">
-                <span className="font-semibold text-[#0a0a0a]">MCP</span>
-                <span className="font-medium text-[#444444] italic">Market</span>
-              </div>
+              <SiteLogo name={name} logo={logo} />
             </Link>
             <div className="hidden items-center md:flex">
               <NavMegaMenu />
@@ -96,7 +90,7 @@ export function SiteHeader() {
           </div>
         </div>
       </div>
-      <MobileNavSheet open={mobileOpen} onOpenChange={setMobileOpen} />
+      <MobileNavSheet open={mobileOpen} onOpenChange={setMobileOpen} name={name} logo={logo} />
     </header>
   );
 }
