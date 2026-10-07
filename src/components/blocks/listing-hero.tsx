@@ -4,9 +4,6 @@ import { ListingSearch } from "@/components/blocks/listing-search";
 import { HeroDitherShader } from "@/components/blocks/dither-background";
 import type { LinkRef } from "@/lib/types";
 
-const HERO_MASK =
-  "var(--design-mask-hero-fade)";
-
 interface ListingHeroProps {
   readonly title: string;
   readonly mutedTitle: string;
@@ -22,7 +19,7 @@ export function ListingHero({ title, mutedTitle, description, searchPlaceholder,
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
-        style={{ maskImage: HERO_MASK, WebkitMaskImage: HERO_MASK }}
+        style={{ maskImage: "var(--design-mask-hero-fade)", WebkitMaskImage: "var(--design-mask-hero-fade)" }}
       >
         <div className="design-dither-static absolute inset-0" />
         <HeroDitherShader />

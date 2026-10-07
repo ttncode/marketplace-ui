@@ -29,38 +29,38 @@
 }
 
 .hero [data-server-detail-meta] {
-  color: color-mix(in oklab, var(--design-ink) 72%, transparent);
+  color: color-mix(in oklab, var(--design-ink-soft) 72%, transparent);
   font-family: var(--design-font-body);
 }
 
 .hero [data-server-detail-meta] :global(.text-foreground) {
-  color: color-mix(in oklab, var(--design-ink) 90%, transparent) !important;
+  color: color-mix(in oklab, var(--design-ink-soft) 90%, transparent) !important;
 }
 
 .hero [data-server-detail-meta] :global(.text-muted-foreground) {
-  color: color-mix(in oklab, var(--design-ink) 68%, transparent) !important;
+  color: color-mix(in oklab, var(--design-ink-soft) 68%, transparent) !important;
 }
 
 .hero [data-server-detail-meta] :global(.bg-muted) {
-  border-color: color-mix(in oklab, var(--design-ink) 14%, transparent) !important;
+  border-color: color-mix(in oklab, var(--design-ink-soft) 14%, transparent) !important;
   background: color-mix(in oklab, var(--design-canvas) 80%, transparent) !important;
 }
 
 .hero [data-server-detail-meta] a[title="GitHub"],
 .hero [data-server-detail-meta] a[title="NPM"],
 .hero [data-server-detail-meta] button {
-  color: color-mix(in oklab, var(--design-ink) 62%, transparent) !important;
+  color: color-mix(in oklab, var(--design-ink-soft) 62%, transparent) !important;
 }
 
 .hero [data-server-detail-meta] a[title="GitHub"]:hover,
 .hero [data-server-detail-meta] a[title="NPM"]:hover,
 .hero [data-server-detail-meta] button:hover {
-  background: color-mix(in oklab, var(--design-ink) 8%, transparent) !important;
+  background: color-mix(in oklab, var(--design-ink-soft) 8%, transparent) !important;
   color: var(--design-ink) !important;
 }
 
 .hero [data-server-detail-categories] :global(.border-border) {
-  border-color: color-mix(in oklab, var(--design-ink) 16%, transparent) !important;
+  border-color: color-mix(in oklab, var(--design-ink-soft) 16%, transparent) !important;
 }
 
 .hero [data-server-detail-categories] :global(.bg-muted) {
@@ -68,17 +68,17 @@
 }
 
 .hero [data-server-detail-categories] :global(.text-muted-foreground) {
-  color: color-mix(in oklab, var(--design-ink) 70%, transparent) !important;
+  color: color-mix(in oklab, var(--design-ink-soft) 70%, transparent) !important;
 }
 
 .hero [data-server-detail-categories] a:hover :global(.bg-muted) {
-  border-color: color-mix(in oklab, var(--design-ink) 42%, transparent) !important;
+  border-color: color-mix(in oklab, var(--design-ink-soft) 42%, transparent) !important;
   background: var(--design-ink) !important;
   color: var(--design-surface) !important;
 }
 
 .hero [data-server-detail-description] {
-  color: color-mix(in oklab, var(--design-ink) 66%, transparent);
+  color: color-mix(in oklab, var(--design-ink-soft) 66%, transparent);
   font-family: var(--design-font-body);
   letter-spacing: -0.012em;
 }
@@ -96,7 +96,7 @@
 .main [data-server-detail-tabs] [data-server-detail-card],
 .sidebar [data-server-detail-card] {
   box-shadow: var(--design-shadow-card);
-  border-color: color-mix(in oklab, var(--design-ink) 17%, transparent) !important;
+  border-color: color-mix(in oklab, var(--design-ink-soft) 17%, transparent) !important;
   background: var(--design-surface) !important;
 }
 
@@ -112,8 +112,8 @@
 }
 
 .sidebar [data-server-detail-card]:hover {
-  box-shadow: color-mix(in oklab, var(--design-ink) 6.7%, transparent) 0 15px 34px;
-  border-color: color-mix(in oklab, var(--design-ink) 30%, transparent) !important;
+  box-shadow: color-mix(in oklab, var(--design-ink-soft) 6.7%, transparent) 0 15px 34px;
+  border-color: color-mix(in oklab, var(--design-ink-soft) 30%, transparent) !important;
 }
 
 .sidebar [data-server-detail-card] h3 {

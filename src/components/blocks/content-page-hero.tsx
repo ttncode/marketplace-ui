@@ -3,9 +3,6 @@ import { ChevronRightIcon, HomeIcon } from "@/components/icons/breadcrumb-icons"
 import { cn } from "@/lib/utils";
 import { HeroDitherShader } from "@/components/blocks/dither-background";
 
-const HERO_MASK =
-  "var(--design-mask-hero-fade)";
-
 // Content-page hero comes in two layouts: left-aligned (legal pages) and centered (listings).
 const LAYOUTS = {
   start: {
@@ -38,7 +35,7 @@ export function ContentPageHero({ crumb, title, subtitle, align }: ContentPageHe
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
-        style={{ maskImage: HERO_MASK, WebkitMaskImage: HERO_MASK }}
+        style={{ maskImage: "var(--design-mask-hero-fade)", WebkitMaskImage: "var(--design-mask-hero-fade)" }}
       >
         <div className="design-dither-static absolute inset-0" />
         <HeroDitherShader />

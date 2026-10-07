@@ -11,10 +11,10 @@ export type ListingCardData = Pick<Listing, "slug" | "name" | "summary" | "icon"
 export function ListingCard({ listing }: { readonly listing: ListingCardData }) {
   return (
     <Link href={`/item/${listing.slug}`} className={cn("group block h-full", styles.link)}>
-      <div className="relative flex h-full flex-col overflow-hidden rounded-[12px] border border-ink/18 bg-surface shadow-[var(--design-shadow-card)] transition-[transform,translate,scale,rotate,border-color,box-shadow] duration-[180ms] ease-[ease] group-hover:-translate-y-px group-hover:border-ink/34 group-hover:bg-accent/94 group-hover:shadow-[var(--design-shadow-card-hover)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
+      <div className="relative flex h-full flex-col overflow-hidden rounded-[12px] border border-ink-soft/18 bg-surface shadow-[var(--design-shadow-card)] transition-[transform,translate,scale,rotate,border-color,box-shadow] duration-[180ms] ease-[ease] group-hover:-translate-y-px group-hover:border-ink-soft/34 group-hover:bg-accent/94 group-hover:shadow-[var(--design-shadow-card-hover)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
         <span
           className={cn(
-            "block h-[6px] border-b border-ink/14 bg-surface-muted bg-[length:4px_4px,100%_100%] bg-[position:0_0,0_0] opacity-[0.72]",
+            "block h-[6px] border-b border-ink-soft/14 bg-surface-muted bg-[length:4px_4px,100%_100%] bg-[position:0_0,0_0] opacity-[0.72]",
             styles.dither,
           )}
         />
@@ -45,7 +45,7 @@ export function ListingCard({ listing }: { readonly listing: ListingCardData }) 
             </div>
             <ArrowUpRight
               aria-hidden
-              className="mt-0.5 size-4 shrink-0 text-ink/38 transition-[color,transform,translate,scale,rotate] duration-[180ms] ease-[ease] group-hover:translate-x-px group-hover:-translate-y-px group-hover:text-ink motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-hover:translate-y-0"
+              className="mt-0.5 size-4 shrink-0 text-ink-soft/38 transition-[color,transform,translate,scale,rotate] duration-[180ms] ease-[ease] group-hover:translate-x-px group-hover:-translate-y-px group-hover:text-ink motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-hover:translate-y-0"
               strokeWidth={2}
             />
           </div>
@@ -57,7 +57,7 @@ export function ListingCard({ listing }: { readonly listing: ListingCardData }) 
               {listing.tags.slice(0, MAX_TAGS).map((tag) => (
                 <span
                   key={tag}
-                  className="inline-flex items-center rounded-full border border-ink/18 bg-surface/50 px-2.5 py-0.5 font-sans text-[9px] leading-[1.7] font-semibold tracking-[0.055em] text-ink-muted uppercase"
+                  className="inline-flex items-center rounded-full border border-ink-soft/18 bg-surface/50 px-2.5 py-0.5 font-sans text-[9px] leading-[1.7] font-semibold tracking-[0.055em] text-ink-muted uppercase"
                 >
                   {tag}
                 </span>

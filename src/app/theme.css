@@ -7,6 +7,7 @@
   --design-ink: #0a0a0a;
   --design-ink-secondary: #444444;
   --design-ink-muted: #626262;
+  --design-ink-soft: #222222;
   --design-line: rgb(10 10 10 / 0.14);
   --design-line-strong: rgb(10 10 10 / 0.28);
   --design-glass: rgb(255 255 255 / 0.78);
@@ -63,10 +64,10 @@
   --design-bevel-rim-hover: #ffffffd9;
   --design-bevel-highlight-soft: var(--design-surface);
   --design-bevel-shade-soft: #0000000a;
-  --design-bevel-grad-from: color-mix(in oklab, #0a0a0a, white 10%);
-  --design-bevel-grad-to: color-mix(in oklab, #0a0a0a, black 12%);
-  --design-bevel-grad-active-from: color-mix(in oklab, #0a0a0a, black 12%);
-  --design-bevel-grad-active-to: color-mix(in oklab, #0a0a0a, black 4%);
+  --design-bevel-grad-from: color-mix(in oklab, var(--design-ink), white 10%);
+  --design-bevel-grad-to: color-mix(in oklab, var(--design-ink), black 12%);
+  --design-bevel-grad-active-from: color-mix(in oklab, var(--design-ink), black 12%);
+  --design-bevel-grad-active-to: color-mix(in oklab, var(--design-ink), black 4%);
   --design-brand-google-blue: #4285f4;
   --design-brand-google-green: #34a853;
   --design-brand-google-yellow: #fbbc05;
