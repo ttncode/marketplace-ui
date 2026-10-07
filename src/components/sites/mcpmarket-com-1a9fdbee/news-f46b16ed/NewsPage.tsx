@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ContentPageHero } from "@/components/sites/mcpmarket-com-1a9fdbee/privacy-0ece7f7c/ContentPageHero";
+import { ContentPageHero } from "@/components/blocks/content-page-hero";
 import { ChevronLeftIcon, ChevronRightIcon, EllipsisIcon } from "@/components/icons/news-icons";
 import { NewsCard } from "./NewsCard";
 import { NEWS_ITEMS, NEWS_PAGE_COUNT, NEWS_TOTAL } from "./news-data";

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { LegalPage } from "@/components/sites/mcpmarket-com-1a9fdbee/privacy-0ece7f7c/LegalPage";
+import { LegalPage } from "@/components/blocks/legal-page";
 import { TermsContent } from "@/components/sites/mcpmarket-com-1a9fdbee/terms-2dda5c6b/TermsContent";
 
 export const metadata: Metadata = {
