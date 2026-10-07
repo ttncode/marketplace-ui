@@ -7,8 +7,8 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NavIcon } from "@/components/icons/nav-icons";
 
-import { NAV_MENUS } from "./site-data";
-import type { NavFeatureCard, NavListItem, NavMenu } from "./types";
+import { NAV_MENUS } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
+import type { NavFeatureCard, NavListItem, NavMenu } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
 
 const CLOSE_DELAY_MS = 150;
 
