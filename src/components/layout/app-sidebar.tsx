@@ -38,7 +38,7 @@ export function AppSidebar({ name, logo, items, collapsed, onToggle, onNavigate,
           <SiteLogo name={name} logo={logo} size={28} showName={!collapsed} />
         </Link>
         {onToggle && !collapsed && (
-          <button type="button" onClick={onToggle} aria-label="Collapse sidebar" className="rounded-md p-1.5 text-ink-muted hover:bg-accent hover:text-ink">
+          <button type="button" onClick={onToggle} aria-label="Collapse sidebar" aria-expanded={!collapsed} className="rounded-md p-1.5 text-ink-muted hover:bg-accent hover:text-ink">
             <ToggleIcon aria-hidden className="size-4" />
           </button>
         )}
@@ -67,7 +67,7 @@ export function AppSidebar({ name, logo, items, collapsed, onToggle, onNavigate,
         })}
       </nav>
       {onToggle && collapsed && (
-        <button type="button" onClick={onToggle} aria-label="Expand sidebar" className="m-2 flex h-9 items-center justify-center rounded-md text-ink-muted hover:bg-accent hover:text-ink">
+        <button type="button" onClick={onToggle} aria-label="Expand sidebar" aria-expanded={!collapsed} className="m-2 flex h-9 items-center justify-center rounded-md text-ink-muted hover:bg-accent hover:text-ink">
           <ToggleIcon aria-hidden className="size-4" />
         </button>
       )}
