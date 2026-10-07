@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import { ContentPageHero } from "./content-page-hero";
 import styles from "./legal-prose.module.css";
 
@@ -26,5 +25,5 @@ export function LegalPage({ title, lastUpdated, children }: LegalPageProps) {
 }
 
 export function ProseLink({ href, children }: { readonly href: string; readonly children: ReactNode }) {
-  return <Link href={toSiteHref(href)}>{children}</Link>;
+  return <Link href={href}>{children}</Link>;
 }
