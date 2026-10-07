@@ -2,5 +2,300 @@
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "ttn",
   "homepage": "https://github.com/ttncode/marketplace-ui",
-  "items": []
+  "items": [
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "title": "Class name helper",
+      "description": "cn() merges class names with clsx and tailwind-merge.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "types",
+      "type": "registry:lib",
+      "title": "Shared types",
+      "description": "Link, image and content types shared by blocks.",
+      "files": [
+        {
+          "path": "src/lib/types.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "theme-preference",
+      "type": "registry:lib",
+      "title": "Theme preference helpers",
+      "description": "Read, parse and apply the light, dark or system theme preference.",
+      "files": [
+        {
+          "path": "src/lib/theme.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "nav",
+      "type": "registry:lib",
+      "title": "Navigation helpers",
+      "description": "Active link matching for navigation.",
+      "files": [
+        {
+          "path": "src/lib/nav.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "format",
+      "type": "registry:lib",
+      "title": "Formatters",
+      "description": "Date and number formatters.",
+      "files": [
+        {
+          "path": "src/lib/format.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:lib",
+      "title": "Table helpers",
+      "description": "Stable sort and filter helpers for data tables.",
+      "files": [
+        {
+          "path": "src/lib/table.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "search-index",
+      "type": "registry:lib",
+      "title": "Search index",
+      "description": "Query and category filtering for listings.",
+      "files": [
+        {
+          "path": "src/lib/search-index.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:lib",
+      "title": "Pagination helpers",
+      "description": "Builds page links for paginated lists.",
+      "registryDependencies": [
+        "@ttn/types"
+      ],
+      "files": [
+        {
+          "path": "src/lib/pagination.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "share-targets",
+      "type": "registry:lib",
+      "title": "Share targets",
+      "description": "Share popover targets and URL builders.",
+      "files": [
+        {
+          "path": "src/lib/share-targets.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "routes",
+      "type": "registry:lib",
+      "title": "Route helpers",
+      "description": "Checks that a link points to a known route.",
+      "files": [
+        {
+          "path": "src/lib/routes.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "accordion-region",
+      "type": "registry:ui",
+      "title": "Accordion region",
+      "description": "Height-animated disclosure region.",
+      "registryDependencies": [
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/accordion-region.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "auth-controls",
+      "type": "registry:ui",
+      "title": "Auth controls",
+      "description": "Buttons and links for sign-in and sign-up screens.",
+      "registryDependencies": [
+        "@ttn/utils",
+        "@ttn/auth-styles"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/auth-controls.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Small status badge with tones.",
+      "registryDependencies": [
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Button with primary, secondary, ghost and destructive variants.",
+      "registryDependencies": [
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "form-field",
+      "type": "registry:ui",
+      "title": "Form field",
+      "description": "Labelled field wrapper and simulated submit helpers.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/form-field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Text input and shared field styles.",
+      "registryDependencies": [
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Native select styled like the input.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/input",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "texture-button",
+      "type": "registry:ui",
+      "title": "Texture button styles",
+      "description": "Class names for the gradient texture button.",
+      "files": [
+        {
+          "path": "src/components/ui/texture-button.ts",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "auth-styles",
+      "type": "registry:file",
+      "title": "Auth styles",
+      "description": "CSS module shared by the auth controls and auth shell.",
+      "files": [
+        {
+          "path": "src/components/blocks/auth.module.css",
+          "type": "registry:file",
+          "target": "components/blocks/auth.module.css"
+        }
+      ]
+    },
+    {
+      "name": "theme-tailwind",
+      "type": "registry:file",
+      "title": "Theme Tailwind colors",
+      "description": "Maps the theme tokens to Tailwind color utilities. Import it from globals.css after theme.css.",
+      "files": [
+        {
+          "path": "src/app/theme-tailwind.css",
+          "type": "registry:file",
+          "target": "app/theme-tailwind.css"
+        }
+      ]
+    },
+    {
+      "name": "theme",
+      "type": "registry:file",
+      "title": "Theme tokens",
+      "description": "Light and dark design tokens. Import it from globals.css, together with theme-tailwind.css.",
+      "registryDependencies": [
+        "@ttn/theme-tailwind"
+      ],
+      "files": [
+        {
+          "path": "src/app/theme.css",
+          "type": "registry:file",
+          "target": "app/theme.css"
+        }
+      ]
+    }
+  ]
 }
