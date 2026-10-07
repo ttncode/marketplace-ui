@@ -2,12 +2,11 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
-import { Plus, X } from "lucide-react";
+import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SiteLogo } from "@/components/layout/site-logo";
-import type { SiteConfig } from "@/lib/types";
+import type { MobileNavGroup, SiteConfig } from "@/lib/types";
 import { NavIcon } from "@/components/icons/nav-icons";
-import { MOBILE_NAV_FOOTER_LINKS, MOBILE_NAV_GROUPS } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
 
 const EXIT_DURATION_MS = 300;
 
@@ -22,7 +21,16 @@ function useIsClient(): boolean {
   return useSyncExternalStore(subscribeNoop, () => true, () => false);
 }
 
-export function MobileNavSheet({ open, onOpenChange, name, logo }: { readonly open: boolean; readonly onOpenChange: (open: boolean) => void; readonly name: string; readonly logo: SiteConfig["logo"] }) {
+interface MobileNavSheetProps {
+  readonly open: boolean;
+  readonly onOpenChange: (open: boolean) => void;
+  readonly name: string;
+  readonly logo: SiteConfig["logo"];
+  readonly groups: readonly MobileNavGroup[];
+  readonly actions: SiteConfig["headerActions"];
+}
+
+export function MobileNavSheet({ open, onOpenChange, name, logo, groups, actions }: MobileNavSheetProps) {
   const isClient = useIsClient();
   const [rendered, setRendered] = useState(open);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -53,7 +61,6 @@ export function MobileNavSheet({ open, onOpenChange, name, logo }: { readonly op
   if (!isClient || !rendered) return null;
 
   const close = () => onOpenChange(false);
-  const [submitLink, sellLink] = MOBILE_NAV_FOOTER_LINKS;
 
   return createPortal(
     <>
@@ -78,7 +85,7 @@ export function MobileNavSheet({ open, onOpenChange, name, logo }: { readonly op
           <SiteLogo name={name} logo={logo} size={28} nameClassName="text-[18px]/[28px] font-semibold tracking-[-0.45px]" />
         </div>
         <nav className="flex flex-col gap-1 pr-6">
-          {MOBILE_NAV_GROUPS.map((group) => [
+          {groups.map((group) => [
             <div key={group.heading} className={HEADING_CLASS}>
               {group.heading}
             </div>,
@@ -90,12 +97,13 @@ export function MobileNavSheet({ open, onOpenChange, name, logo }: { readonly op
             )),
           ])}
           <div className="mx-3 h-px bg-[#dbdbdb]" />
-          <a href={submitLink.href} onClick={close} className={MUTED_ITEM_CLASS}>
-            <Plus size={16} strokeWidth={1.5} aria-hidden="true" />
-            {submitLink.label}
-          </a>
-          <a href={sellLink.href} onClick={close} className={MUTED_ITEM_CLASS}>
-            {sellLink.label}
+          {actions.secondary && (
+            <a href={actions.secondary.href} onClick={close} className={MUTED_ITEM_CLASS}>
+              {actions.secondary.label}
+            </a>
+          )}
+          <a href={actions.primary.href} onClick={close} className={MUTED_ITEM_CLASS}>
+            {actions.primary.label}
           </a>
         </nav>
         <button

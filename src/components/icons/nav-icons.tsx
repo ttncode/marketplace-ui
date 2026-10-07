@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 import styles from "./animated-icons.module.css";
 import { MCPMARKET_LOGO_PATHS } from "./logo-paths";
-import type { NavIconName } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
+import type { NavIconName } from "@/lib/types";
 
 type IconProps = SVGProps<SVGSVGElement> & { readonly size?: number };
 
