@@ -40,10 +40,10 @@ export function AnnouncementBar({ announcement }: { readonly announcement: NonNu
   };
 
   return (
-    <div className="relative z-40 w-full border-b border-[#dbdbdb] bg-[#0a0a0a] font-sans text-base leading-6 text-[#fbfbfb]">
+    <div className="relative z-40 w-full border-b border-border bg-ink font-sans text-base leading-6 text-canvas">
       <div className="mx-auto max-w-[1280px] px-10 py-1.5 sm:px-12">
         <div className="flex h-5 items-center justify-center gap-2 font-mono text-xs leading-4">
-          <span className="inline-flex h-5 shrink-0 items-center whitespace-nowrap rounded-full bg-[#fbfbfb] px-2 text-[10px] font-semibold leading-none tracking-[0.05em] text-[#0a0a0a] uppercase">
+          <span className="inline-flex h-5 shrink-0 items-center whitespace-nowrap rounded-full bg-canvas px-2 text-[10px] font-semibold leading-none tracking-[0.05em] text-ink uppercase">
             {announcement.badge}
           </span>
           <Link
@@ -52,7 +52,7 @@ export function AnnouncementBar({ announcement }: { readonly announcement: NonNu
           >
             {announcement.label}
           </Link>
-          <span className="hidden text-[rgba(251,251,251,0.6)] sm:inline">
+          <span className="hidden text-canvas/60 sm:inline">
             — {announcement.description}
           </span>
         </div>
@@ -61,7 +61,7 @@ export function AnnouncementBar({ announcement }: { readonly announcement: NonNu
         type="button"
         aria-label="Dismiss banner"
         onClick={dismiss}
-        className="absolute top-1/2 right-2 z-10 -translate-y-1/2 rounded-[12px] p-1 text-[#fbfbfb] transition-colors duration-150 ease-[cubic-bezier(0.4,0,0.2,1)] hover:bg-[rgba(251,251,251,0.1)]"
+        className="absolute top-1/2 right-2 z-10 -translate-y-1/2 rounded-[12px] p-1 text-canvas transition-colors duration-150 ease-[cubic-bezier(0.4,0,0.2,1)] hover:bg-canvas/10"
       >
         <X size={14} strokeWidth={2} />
       </button>

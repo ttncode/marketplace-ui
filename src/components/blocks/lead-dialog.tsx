@@ -50,7 +50,7 @@ export function OverlayTrigger({ event, ariaLabel, className, children }: {
 const LABEL_CLASS = "text-sm leading-5 font-medium";
 // v3's space-y-2 put the gap on top of the field, below the inline label's 24px line box; v4's lands on the label and vanishes.
 const FIELD_CLASS =
-  "mt-2 ring-offset-[#fbfbfb] placeholder:text-[#616161] focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50";
+  "mt-2 ring-offset-canvas placeholder:text-ink-muted focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50";
 
 function ExtraField({ field, disabled }: { readonly field: LeadFormField; readonly disabled: boolean }) {
   return (
@@ -64,7 +64,7 @@ function ExtraField({ field, disabled }: { readonly field: LeadFormField; readon
           name={field.id}
           placeholder={field.placeholder}
           disabled={disabled}
-          className={`${FIELD_CLASS} flex min-h-[80px] w-full resize-none rounded-md border border-[#d6d6d6] bg-[#fbfbfb] px-3 py-2 text-base leading-6 focus-visible:ring-[#0a0a0a] md:text-sm md:leading-5`}
+          className={`${FIELD_CLASS} flex min-h-[80px] w-full resize-none rounded-md border border-input bg-canvas px-3 py-2 text-base leading-6 focus-visible:ring-ink md:text-sm md:leading-5`}
         />
       ) : (
         <GlassInput id={field.id} type="text" placeholder={field.placeholder} disabled={disabled} />
@@ -79,7 +79,7 @@ function GlassInput({ ref, ...props }: React.ComponentProps<"input">) {
       ref={ref}
       name={props.id}
       {...props}
-      className={`${FIELD_CLASS} flex h-10 w-full rounded-lg border border-[#d6d6d6] bg-[var(--design-glass)] px-3 py-2 text-base leading-6 backdrop-blur-xl transition-[background-color,border-color,box-shadow] duration-200 focus-visible:border-[rgba(10,10,10,0.25)] focus-visible:bg-[var(--design-glass-focus)] focus-visible:ring-[rgba(10,10,10,0.2)] md:text-sm md:leading-5`}
+      className={`${FIELD_CLASS} flex h-10 w-full rounded-lg border border-input bg-[var(--design-glass)] px-3 py-2 text-base leading-6 backdrop-blur-xl transition-[background-color,border-color,box-shadow] duration-200 focus-visible:border-ink/25 focus-visible:bg-[var(--design-glass-focus)] focus-visible:ring-ink/20 md:text-sm md:leading-5`}
     />
   );
 }
@@ -127,24 +127,24 @@ function LeadDialog({ form, open, onClose, onClosed, onError }: {
       onOpenChangeComplete={(next) => !next && onClosed()}
     >
       <Dialog.Portal>
-        <Dialog.Backdrop className="fixed inset-0 z-50 bg-black/80 data-closed:animate-out data-closed:fade-out-0 data-open:animate-in data-open:fade-in-0" />
+        <Dialog.Backdrop className="fixed inset-0 z-50 bg-ink/80 data-closed:animate-out data-closed:fade-out-0 data-open:animate-in data-open:fade-in-0" />
         {/* Centring uses translate(-50%,-48%); here that is a 2% slide on top of it. */}
         <Dialog.Popup
           initialFocus={emailRef}
-          className="fixed top-1/2 left-1/2 z-50 grid w-full max-w-lg -translate-1/2 gap-4 border border-[#dbdbdb] bg-[#fbfbfb] p-6 font-sans text-base leading-6 text-[#0a0a0a] outline-none data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 data-closed:slide-out-to-bottom-[2%] data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-open:slide-in-from-bottom-[2%] sm:max-w-md sm:rounded-lg"
+          className="fixed top-1/2 left-1/2 z-50 grid w-full max-w-lg -translate-1/2 gap-4 border border-border bg-canvas p-6 font-sans text-base leading-6 text-ink outline-none data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 data-closed:slide-out-to-bottom-[2%] data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-open:slide-in-from-bottom-[2%] sm:max-w-md sm:rounded-lg"
         >
           <div className="flex flex-col space-y-1.5 text-center sm:text-left">
             <Dialog.Title className="font-heading text-lg leading-7 font-semibold tracking-[-0.025em]">
               {succeeded ? form.successTitle : form.title}
             </Dialog.Title>
-            <Dialog.Description className="text-sm leading-5 text-[#616161]">
+            <Dialog.Description className="text-sm leading-5 text-ink-muted">
               {succeeded ? form.successDescription : form.description}
             </Dialog.Description>
           </div>
           {succeeded ? (
             <div className="flex flex-col items-center space-y-4 py-6">
-              <CircleCheck className="size-12 text-[#22c55e]" aria-hidden="true" />
-              <p className="text-center text-sm leading-5 text-[#616161]">{form.successDescription}</p>
+              <CircleCheck className="size-12 text-success" aria-hidden="true" />
+              <p className="text-center text-sm leading-5 text-ink-muted">{form.successDescription}</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -162,16 +162,16 @@ function LeadDialog({ form, open, onClose, onClosed, onError }: {
                   type="button"
                   onClick={close}
                   disabled={submitting}
-                  className="inline-flex h-10 flex-1 items-center justify-center rounded-lg border border-[#d6d6d6] bg-[var(--design-glass)] px-4 py-2 text-sm leading-5 font-normal tracking-[-0.01em] whitespace-nowrap ring-offset-[#fbfbfb] backdrop-blur-xl transition-[background-color,border-color,color,box-shadow,transform,translate,scale] duration-200 hover:border-[rgba(10,10,10,0.25)] hover:bg-[#f7f7f7] focus-visible:ring-2 focus-visible:ring-[rgba(10,10,10,0.3)] focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+                  className="inline-flex h-10 flex-1 items-center justify-center rounded-lg border border-input bg-[var(--design-glass)] px-4 py-2 text-sm leading-5 font-normal tracking-[-0.01em] whitespace-nowrap ring-offset-canvas backdrop-blur-xl transition-[background-color,border-color,color,box-shadow,transform,translate,scale] duration-200 hover:border-ink/25 hover:bg-surface-subtle focus-visible:ring-2 focus-visible:ring-ink/30 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex flex-1 items-stretch rounded-xl border border-black/10 bg-gradient-to-b from-black/70 to-black p-px font-normal ring-offset-[#fbfbfb] transition duration-300 ease-in-out focus-visible:ring-2 focus-visible:ring-[rgba(10,10,10,0.3)] focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none"
+                  className="inline-flex flex-1 items-stretch rounded-xl border border-ink/10 bg-gradient-to-b from-ink/70 to-ink p-px font-normal ring-offset-canvas transition duration-300 ease-in-out focus-visible:ring-2 focus-visible:ring-ink/30 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 motion-reduce:transition-none"
                 >
-                  <span className="flex h-full w-full items-center justify-center gap-2 rounded-[10px] bg-gradient-to-b from-[#262626] to-black px-4 py-2 text-sm leading-5 tracking-[-0.01em] whitespace-nowrap text-white/90 transition-[background-image,color] duration-200 ease-out hover:from-[#292524] hover:to-[rgba(38,38,38,0.7)] active:from-black active:to-black motion-reduce:transition-none">
+                  <span className="flex h-full w-full items-center justify-center gap-2 rounded-[10px] bg-gradient-to-b from-ink/85 to-ink px-4 py-2 text-sm leading-5 tracking-[-0.01em] whitespace-nowrap text-primary-foreground/90 transition-[background-image,color] duration-200 ease-out hover:from-ink/85 hover:to-ink/70 active:from-ink active:to-ink motion-reduce:transition-none">
                     {submitting ? (
                       <>
                         <LoaderCircle className="mr-2 size-4 animate-spin" aria-hidden="true" />
@@ -185,7 +185,7 @@ function LeadDialog({ form, open, onClose, onClosed, onError }: {
               </div>
             </form>
           )}
-          <Dialog.Close className="absolute top-4 right-4 rounded-sm opacity-70 ring-offset-[#fbfbfb] transition-opacity hover:opacity-100 focus:ring-2 focus:ring-[#0a0a0a] focus:ring-offset-2 focus:outline-none disabled:pointer-events-none">
+          <Dialog.Close className="absolute top-4 right-4 rounded-sm opacity-70 ring-offset-canvas transition-opacity hover:opacity-100 focus:ring-2 focus:ring-ink focus:ring-offset-2 focus:outline-none disabled:pointer-events-none">
             <X className="size-4" aria-hidden="true" />
             <span className="sr-only">Close</span>
           </Dialog.Close>
@@ -216,7 +216,7 @@ function ErrorToast({ message, onDone }: { readonly message: string; readonly on
         role="status"
         aria-live="polite"
         className={cn(
-          "absolute bottom-0 flex w-full items-center gap-1.5 rounded-[6px] border border-[#dbdbdb] bg-[#fbfbfb] p-4 font-[ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe_UI',Roboto,'Helvetica_Neue',Arial,'Noto_Sans',sans-serif] text-[13px] leading-[1.5] text-[#0a0a0a] transition-[opacity,translate] duration-400 ease-[ease] motion-reduce:transition-none",
+          "absolute bottom-0 flex w-full items-center gap-1.5 rounded-[6px] border border-border bg-canvas p-4 font-[ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe_UI',Roboto,'Helvetica_Neue',Arial,'Noto_Sans',sans-serif] text-[13px] leading-[1.5] text-ink transition-[opacity,translate] duration-400 ease-[ease] motion-reduce:transition-none",
           shown ? "translate-y-0 opacity-100" : "translate-y-full opacity-0",
         )}
       >
