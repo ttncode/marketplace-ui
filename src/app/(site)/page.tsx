@@ -1,4 +1,4 @@
-import { DirectorySection } from "@/components/sites/mcpmarket-com-1a9fdbee/root-8a5edab2/DirectorySection";
+import { DirectorySection } from "@/components/blocks/directory-section";
 import { DIRECTORY_SECTIONS } from "@/components/sites/mcpmarket-com-1a9fdbee/root-8a5edab2/directory-data";
 import { FaqSection } from "@/components/sites/mcpmarket-com-1a9fdbee/root-8a5edab2/FaqSection";
 import { HeroSection } from "@/components/sites/mcpmarket-com-1a9fdbee/root-8a5edab2/HeroSection";
