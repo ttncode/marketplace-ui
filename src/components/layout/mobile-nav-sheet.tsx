@@ -4,7 +4,9 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { Plus, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { LogoMarkIcon, NavIcon } from "@/components/icons/nav-icons";
+import { SiteLogo } from "@/components/layout/site-logo";
+import type { SiteConfig } from "@/lib/types";
+import { NavIcon } from "@/components/icons/nav-icons";
 import { MOBILE_NAV_FOOTER_LINKS, MOBILE_NAV_GROUPS } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
 
 const EXIT_DURATION_MS = 300;
@@ -20,7 +22,7 @@ function useIsClient(): boolean {
   return useSyncExternalStore(subscribeNoop, () => true, () => false);
 }
 
-export function MobileNavSheet({ open, onOpenChange }: { readonly open: boolean; readonly onOpenChange: (open: boolean) => void }) {
+export function MobileNavSheet({ open, onOpenChange, name, logo }: { readonly open: boolean; readonly onOpenChange: (open: boolean) => void; readonly name: string; readonly logo: SiteConfig["logo"] }) {
   const isClient = useIsClient();
   const [rendered, setRendered] = useState(open);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -72,12 +74,8 @@ export function MobileNavSheet({ open, onOpenChange }: { readonly open: boolean;
           open ? "animate-in slide-in-from-left duration-500" : "animate-out slide-out-to-left fill-mode-forwards duration-300",
         )}
       >
-        <div className="mb-8 flex items-center gap-2 pt-4">
-          <LogoMarkIcon size={28} className="text-[#0a0a0a]" />
-          <span className="flex items-baseline text-[18px]/[28px] tracking-[-0.45px]">
-            <span className="font-semibold text-[#0a0a0a]">MCP</span>
-            <span className="font-medium text-[rgba(10,10,10,0.7)] italic">Market</span>
-          </span>
+        <div className="mb-8 pt-4">
+          <SiteLogo name={name} logo={logo} size={28} nameClassName="text-[18px]/[28px] font-semibold tracking-[-0.45px]" />
         </div>
         <nav className="flex flex-col gap-1 pr-6">
           {MOBILE_NAV_GROUPS.map((group) => [

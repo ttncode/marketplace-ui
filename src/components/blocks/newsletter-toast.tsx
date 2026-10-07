@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { LogoMarkIcon } from "@/components/icons/nav-icons";
+import { SiteLogo } from "@/components/layout/site-logo";
+import type { SiteConfig } from "@/lib/types";
 import { NEWSLETTER_TOAST } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
 
 const DISMISSED_KEY = "newsletter-toast-dismissed";
@@ -32,7 +33,7 @@ function writeFlag(storage: () => Storage, key: string): void {
 const local = () => window.localStorage;
 const session = () => window.sessionStorage;
 
-export function NewsletterToast() {
+export function NewsletterToast({ name, logo }: { readonly name: string; readonly logo: SiteConfig["logo"] }) {
   const [visible, setVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [entered, setEntered] = useState(false);
@@ -113,7 +114,7 @@ export function NewsletterToast() {
         </button>
         <div className="shrink-0 pt-0.5">
           <div className="flex size-10 items-center justify-center rounded-xl border border-[rgba(10,10,10,0.14)] bg-[#f5f5f5] text-[#444444]">
-            <LogoMarkIcon size={19} />
+            <SiteLogo name={name} logo={logo} size={19} showName={false} />
           </div>
         </div>
         <div className="min-w-0 flex-1">

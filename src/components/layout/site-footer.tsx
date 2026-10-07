@@ -1,4 +1,5 @@
-import { LogoMarkIcon } from "@/components/icons/nav-icons";
+import { SiteLogo } from "@/components/layout/site-logo";
+import type { SiteConfig } from "@/lib/types";
 
 import { LanguageSwitcher } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/LanguageSwitcher";
 import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
@@ -44,7 +45,7 @@ function FooterLinkColumn({ column }: { column: FooterColumn }) {
   );
 }
 
-export function SiteFooter() {
+export function SiteFooter({ name, logo }: { readonly name: string; readonly logo: SiteConfig["logo"] }) {
   return (
     <footer className="border-t border-[#dbdbdb] bg-white">
       <div className="w-full px-6 lg:px-8">
@@ -53,11 +54,7 @@ export function SiteFooter() {
             <div className="md:col-span-2">
               {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- clone links mirror the source site's paths, not this app's routes */}
               <a href="/" className="group mb-4 flex items-center gap-2">
-                <LogoMarkIcon size={36} className="text-[#0a0a0a] transition-opacity duration-150 group-hover:opacity-80" />
-                <span className="flex items-baseline text-xl leading-7 tracking-[-0.5px]">
-                  <span className="font-semibold text-[#0a0a0a]">MCP</span>
-                  <span className="font-medium text-[rgba(10,10,10,0.7)] italic">Market</span>
-                </span>
+                <SiteLogo name={name} logo={logo} nameClassName="text-xl leading-7 font-semibold tracking-[-0.5px]" />
               </a>
               <p className="max-w-[448px] font-sans text-sm leading-[1.625] text-[#616161]">{FOOTER.description}</p>
             </div>
