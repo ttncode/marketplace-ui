@@ -24,6 +24,8 @@
   --color-ink-soft: var(--design-ink-soft);
   --color-success: var(--design-success);
   --color-ink-raised: var(--design-ink-raised);
+  --color-overlay: var(--design-overlay);
+  --color-dark-card-foreground: var(--design-dark-card-foreground);
   --color-ink-raised-hover: var(--design-ink-raised-hover);
   --color-brand-google-blue: var(--design-brand-google-blue);
   --color-brand-google-green: var(--design-brand-google-green);

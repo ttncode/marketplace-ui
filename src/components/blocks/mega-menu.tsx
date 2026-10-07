@@ -12,10 +12,10 @@ import type { NavFeatureCard, NavListItem, NavMenu } from "@/lib/types";
 const CLOSE_DELAY_MS = 150;
 
 const DARK_CARD =
-  "group/card relative overflow-hidden rounded-[14px] border border-ink/20 text-primary-foreground bg-[image:var(--design-gradient-dark-card)] shadow-[var(--design-shadow-dark-card)] transition-[box-shadow,filter,transform,translate,scale,rotate] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]";
+  "group/card relative overflow-hidden rounded-[14px] border border-ink/20 text-dark-card-foreground bg-[image:var(--design-gradient-dark-card)] shadow-[var(--design-shadow-dark-card)] transition-[box-shadow,filter,transform,translate,scale,rotate] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)]";
 const CARD_IMAGE = "object-contain transition-transform duration-300 group-hover/card:scale-[1.035]";
-const CARD_TITLE = "text-[14px] leading-[17.5px] font-medium text-primary-foreground";
-const CARD_DESCRIPTION = "mt-1 text-[12px] leading-[16.5px] text-primary-foreground/52";
+const CARD_TITLE = "text-[14px] leading-[17.5px] font-medium text-dark-card-foreground";
+const CARD_DESCRIPTION = "mt-1 text-[12px] leading-[16.5px] text-dark-card-foreground/52";
 
 /**
  * Radix NavigationMenu motion: viewport fades/slides 8px
