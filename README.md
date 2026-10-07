@@ -97,16 +97,19 @@ Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, Base UI, and Luc
 ## Project layout
 
 ```text
-src/site.config.ts     brand: name, url, logo, navigation, footer
-src/content/           typed demo data; the only place copy lives
-src/app/(site)/        /, /categories, /item, /search, /submit, /privacy, /terms
-src/app/(auth)/        /login and /signup
-src/components/ui/     primitives
-src/components/blocks/ page sections
-src/components/layout/ header and footer
-src/components/icons/  SVG icon sets that lucide does not cover
-src/lib/               types, routes, search index and other pure helpers
-public/brand/          logo and favicons
+src/site.config.ts           brand: name, url, contact email, logo, navigation, footer
+src/content/                 typed demo data; the only place copy lives
+src/app/theme.css            design tokens for light and dark
+src/app/theme-tailwind.css   Tailwind mappings, fonts, radius and component classes
+src/app/(site)/              /, /categories, /item, /search, /submit, /privacy, /terms
+src/app/(auth)/              /login and /signup
+src/app/(dashboard)/app/     /app, /app/videos, /app/settings
+src/components/ui/           primitives
+src/components/blocks/       page sections
+src/components/layout/       header, footer, sidebar and top bar
+src/components/icons/        SVG icon sets that lucide does not cover
+src/lib/                     types, routes, search index and other pure helpers
+public/brand/                logo and favicons
 ```
 
 ## License
