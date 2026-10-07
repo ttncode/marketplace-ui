@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChevronRightIcon, HomeIcon } from "@/components/sites/mcpmarket-com-1a9fdbee/tools-skills-slug-229a0ca0/icons";
+import { ChevronRightIcon, HomeIcon } from "@/components/icons/breadcrumb-icons";
 import type { DailyHeroContent } from "./types";
 import { HeroDitherShader } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/HeroDitherShader";
 

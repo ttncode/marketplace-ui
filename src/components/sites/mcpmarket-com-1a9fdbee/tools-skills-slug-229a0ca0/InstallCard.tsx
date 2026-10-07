@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Check, Copy } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
-import { DownloadIcon, ShieldIcon, TerminalIcon } from "./icons";
+import { DownloadIcon, ShieldIcon, TerminalIcon } from "@/components/icons/breadcrumb-icons";
 import { SecurityScanSheet } from "./SecurityScanSheet";
 import { PRIMARY_FACE, PRIMARY_SHELL, SECONDARY_FACE, SECONDARY_SHELL } from "@/components/ui/texture-button";
 

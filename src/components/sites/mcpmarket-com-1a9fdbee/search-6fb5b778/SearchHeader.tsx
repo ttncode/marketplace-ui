@@ -4,7 +4,7 @@ import { useRef, useState, type KeyboardEvent } from "react";
 import Link from "next/link";
 import { Search, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ChevronRightIcon, HomeIcon } from "@/components/sites/mcpmarket-com-1a9fdbee/tools-skills-slug-229a0ca0/icons";
+import { ChevronRightIcon, HomeIcon } from "@/components/icons/breadcrumb-icons";
 import { PlugIcon, SparklesIcon } from "./icons";
 import type { SearchType } from "./search-index";
 

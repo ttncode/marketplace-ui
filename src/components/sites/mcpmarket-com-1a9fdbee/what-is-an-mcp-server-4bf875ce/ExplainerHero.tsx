@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
-import { ChevronRightIcon, HomeIcon } from "@/components/sites/mcpmarket-com-1a9fdbee/tools-skills-slug-229a0ca0/icons";
+import { ChevronRightIcon, HomeIcon } from "@/components/icons/breadcrumb-icons";
 import {
   PRIMARY_FACE,
   PRIMARY_SHELL,
