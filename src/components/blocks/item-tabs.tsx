@@ -1,60 +1,15 @@
 "use client";
 
 import { useId, useRef, useState, type KeyboardEvent } from "react";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import styles from "./item-detail.module.css";
-import { ToolsPanel } from "./item-tools-panel";
-import type { ServerTabsData } from "./item-types";
+import { AccordionRegion } from "@/components/ui/accordion-region";
+import type { FaqItem } from "@/lib/types";
 
-/** Sanitised GitHub READMEs, fetched on first open like the source's /api/readme. */
-const README_ROOT = "/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme";
-const README_FAILED_HTML = "<p>Failed to load README content. Please try again later.</p>";
-
-type TabValue = "about" | "readme" | "faq" | "tools";
-type ReadmeState = { readonly status: "idle" | "loading" } | { readonly status: "done"; readonly html: string };
+type TabValue = "overview" | "features" | "use-cases" | "faq";
 
 const TAB_TRIGGER =
   "relative -mb-px inline-flex items-center justify-center whitespace-nowrap rounded-none border-0 border-b-2 border-transparent bg-transparent px-0 py-3 font-sans text-xs font-semibold text-muted-foreground shadow-none ring-offset-background transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none aria-selected:border-foreground aria-selected:text-foreground";
-
-function SkeletonBar({ className }: { readonly className: string }) {
-  return <div aria-hidden="true" className={cn("rounded-md bg-muted motion-safe:animate-pulse motion-reduce:animate-none", className)} />;
-}
-
-function LoadingSkeleton() {
-  return (
-    <div className="animate-pulse space-y-6">
-      <div className="space-y-2">
-        <SkeletonBar className="h-10 w-3/4" />
-        <div className="space-y-2">
-          <SkeletonBar className="h-4 w-full" />
-          <SkeletonBar className="h-4 w-full" />
-          <SkeletonBar className="h-4 w-5/6" />
-        </div>
-      </div>
-      <div className="space-y-2">
-        <SkeletonBar className="h-6 w-1/3" />
-        <div className="space-y-2">
-          <SkeletonBar className="h-4 w-full" />
-          <SkeletonBar className="h-4 w-full" />
-          <SkeletonBar className="h-4 w-4/5" />
-        </div>
-      </div>
-      <div className="space-y-2">
-        <SkeletonBar className="h-6 w-1/4" />
-        <div className="grid grid-cols-1 gap-2">
-          <div className="space-y-2">
-            <SkeletonBar className="h-4 w-4/5" />
-            <SkeletonBar className="h-4 w-full" />
-          </div>
-          <div className="space-y-2">
-            <SkeletonBar className="h-4 w-3/4" />
-            <SkeletonBar className="h-4 w-full" />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function NumberedList({ title, items }: { readonly title: string; readonly items: readonly string[] }) {
   return (
@@ -77,92 +32,77 @@ function NumberedList({ title, items }: { readonly title: string; readonly items
   );
 }
 
-function AboutPanel({ data }: { readonly data: ServerTabsData }) {
+function OverviewPanel({ about }: { readonly about: readonly string[] }) {
   return (
-    <div className="space-y-8">
-      {data.longDescription && (
-        <div>
-          <p className="text-[15px] leading-[1.8] text-muted-foreground">{data.longDescription}</p>
-        </div>
-      )}
-      {data.features.length > 0 && <NumberedList title="Key Features" items={data.features} />}
-      {data.useCases.length > 0 && <NumberedList title="Use Cases" items={data.useCases} />}
-    </div>
-  );
-}
-
-function ReadmePanel({ readme }: { readonly readme: ReadmeState }) {
-  return (
-    <div
-      data-server-detail-card
-      className="overflow-hidden rounded-[12px] border border-border/60 bg-card/50 text-card-foreground shadow-none backdrop-blur-sm"
-    >
-      <div className="p-0">
-        <div className="overflow-hidden px-6 py-6">
-          {readme.status === "done" ? (
-            readme.html ? (
-              <div className={styles.readme} dangerouslySetInnerHTML={{ __html: readme.html }} />
-            ) : (
-              <p className="py-8 text-center text-muted-foreground">No README content available.</p>
-            )
-          ) : (
-            <div className="py-3">
-              <LoadingSkeleton />
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function FaqPanel({ data }: { readonly data: ServerTabsData }) {
-  return (
-    <div className="space-y-6">
-      {data.faq.map((item) => (
-        <div
-          key={item.question}
-          className="group border-l-2 border-border/50 py-2 pl-4 transition-colors hover:border-primary/60"
-        >
-          <h3 className="mb-2 text-sm font-semibold text-foreground">{item.question}</h3>
-          <p className="text-sm leading-relaxed text-muted-foreground">{item.answer}</p>
-        </div>
+    <div className="space-y-4">
+      {about.map((paragraph) => (
+        <p key={paragraph} className="text-[15px] leading-[1.8] text-muted-foreground">
+          {paragraph}
+        </p>
       ))}
     </div>
   );
 }
 
-function tabsFor(data: ServerTabsData): readonly { readonly value: TabValue; readonly label: string }[] {
-  return [
-    { value: "about", label: "About" },
-    ...(data.hasReadme ? [{ value: "readme" as const, label: "README" }] : []),
-    ...(data.faq.length > 0 ? [{ value: "faq" as const, label: "FAQ" }] : []),
-    ...(data.mcpTools.length > 0 ? [{ value: "tools" as const, label: "Tools" }] : []),
-  ];
+function FaqPanel({ faq }: { readonly faq: readonly FaqItem[] }) {
+  const id = useId();
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  return (
+    <div>
+      {faq.map((item, index) => {
+        const isOpen = openIndex === index;
+        const triggerId = `${id}-faq-trigger-${index}`;
+        const contentId = `${id}-faq-content-${index}`;
+        return (
+          <div key={item.question} className="border-b border-border/50">
+            <h3 className="m-0">
+              <button
+                type="button"
+                id={triggerId}
+                aria-expanded={isOpen}
+                aria-controls={contentId}
+                onClick={() => setOpenIndex(isOpen ? null : index)}
+                className="flex w-full items-center justify-between py-4 text-left text-sm font-semibold text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                {item.question}
+                <ChevronDown
+                  aria-hidden="true"
+                  size={16}
+                  strokeWidth={2}
+                  className={cn("shrink-0 transition-transform duration-200", isOpen && "rotate-180")}
+                />
+              </button>
+            </h3>
+            <AccordionRegion open={isOpen} id={contentId} labelledBy={triggerId}>
+              <p className="pb-4 text-sm leading-relaxed text-muted-foreground">{item.answer}</p>
+            </AccordionRegion>
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 
-export function ServerTabs({ data }: { readonly data: ServerTabsData }) {
+const TABS: readonly { readonly value: TabValue; readonly label: string }[] = [
+  { value: "overview", label: "Overview" },
+  { value: "features", label: "Features" },
+  { value: "use-cases", label: "Use cases" },
+  { value: "faq", label: "FAQ" },
+];
+
+interface ItemTabsProps {
+  readonly about: readonly string[];
+  readonly features: readonly string[];
+  readonly useCases: readonly string[];
+  readonly faq: readonly FaqItem[];
+}
+
+export function ItemTabs({ about, features, useCases, faq }: ItemTabsProps) {
   const id = useId();
-  const tabs = tabsFor(data);
-  const [active, setActive] = useState<TabValue>("about");
-  const [readme, setReadme] = useState<ReadmeState>({ status: "idle" });
+  const tabs = TABS;
+  const [active, setActive] = useState<TabValue>("overview");
   const tabRefs = useRef(new Map<TabValue, HTMLButtonElement>());
-
-  const loadReadme = async () => {
-    setReadme({ status: "loading" });
-    try {
-      const response = await fetch(`${README_ROOT}/${data.slug}.html`);
-      if (!response.ok) throw new Error(`HTTP ${response.status}: Failed to load README`);
-      setReadme({ status: "done", html: await response.text() });
-    } catch {
-      setReadme({ status: "done", html: README_FAILED_HTML });
-    }
-  };
-
-  const select = (value: TabValue) => {
-    setActive(value);
-    if (value === "readme" && readme.status === "idle") void loadReadme();
-  };
+  const select = setActive;
 
   // Radix-style roving focus: arrows move and activate, Home/End jump.
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
@@ -220,10 +160,10 @@ export function ServerTabs({ data }: { readonly data: ServerTabsData }) {
         tabIndex={0}
         className="mt-0 ring-offset-background duration-300 animate-in fade-in-50 slide-in-from-bottom-2 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
       >
-        {active === "about" && <AboutPanel data={data} />}
-        {active === "readme" && <ReadmePanel readme={readme} />}
-        {active === "faq" && <FaqPanel data={data} />}
-        {active === "tools" && <ToolsPanel tools={data.mcpTools} />}
+        {active === "overview" && <OverviewPanel about={about} />}
+        {active === "features" && <NumberedList title="Key features" items={features} />}
+        {active === "use-cases" && <NumberedList title="Use cases" items={useCases} />}
+        {active === "faq" && <FaqPanel faq={faq} />}
       </div>
     </div>
   );

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import { GithubIcon, PackageIcon, ShareIcon } from "@/components/icons/detail-icons";
 import { SHARE_TARGETS } from "@/lib/share-targets";
 
@@ -32,12 +31,12 @@ export function HeaderActions({ entityName, shareUrl, githubUrl, npmUrl }: Heade
   return (
     <div className="flex items-center gap-1">
       {githubUrl && (
-        <Link href={toSiteHref(githubUrl)} title="GitHub" className={ICON_BUTTON}>
+        <Link href={githubUrl} title="GitHub" className={ICON_BUTTON}>
           <GithubIcon className="h-4 w-4" />
         </Link>
       )}
       {npmUrl && (
-        <Link href={toSiteHref(npmUrl)} title="NPM" className={ICON_BUTTON}>
+        <Link href={npmUrl} title="NPM" className={ICON_BUTTON}>
           <PackageIcon className="h-4 w-4" />
         </Link>
       )}
@@ -57,7 +56,7 @@ export function HeaderActions({ entityName, shareUrl, githubUrl, npmUrl }: Heade
               {SHARE_TARGETS.map((target) => (
                 <Link
                   key={target.label}
-                  href={toSiteHref(target.buildHref({ url: shareUrl, name: entityName }))}
+                  href={target.buildHref({ url: shareUrl, name: entityName })}
                   title={target.label}
                   className={target.isLink ? "flex h-8 w-8 items-center justify-center rounded-lg transition-opacity hover:opacity-90" : "cursor-pointer"}
                 >

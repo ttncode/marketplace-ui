@@ -26,7 +26,10 @@ function appRoutes(dir: string): string[] {
 
 const known: KnownRoutes = {
   routes: appRoutes(APP_DIR),
-  params: { "/categories/[slug]": CATEGORIES.map((category) => category.slug) },
+  params: {
+    "/categories/[slug]": CATEGORIES.map((category) => category.slug),
+    "/item/[slug]": LISTINGS.map((listing) => listing.slug),
+  },
 };
 
 function siteHrefs(): string[] {
@@ -82,4 +85,8 @@ test("home sections reference existing listings and routes", () => {
   const slugs = new Set(LISTINGS.map((listing) => listing.slug));
   deepStrictEqual(HOME_SECTIONS.flatMap((section) => section.listingSlugs.filter((slug) => !slugs.has(slug))), []);
   deepStrictEqual(HOME_SECTIONS.map((s) => s.viewAll.href).filter((href) => !routeExists(href, known)), []);
+});
+
+test("item route exists for every listing", () => {
+  deepStrictEqual(LISTINGS.filter((l) => !routeExists(`/item/${l.slug}`, known)).map((l) => l.slug), []);
 });
