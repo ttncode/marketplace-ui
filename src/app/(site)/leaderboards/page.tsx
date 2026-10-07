@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { SERVER_ROWS } from "@/components/sites/mcpmarket-com-1a9fdbee/leaderboards-47b0390f/leaderboard-data";
-import { LeaderboardPage } from "@/components/sites/mcpmarket-com-1a9fdbee/leaderboards-47b0390f/LeaderboardPage";
+import { LeaderboardPage } from "@/components/blocks/ranked-page";
 
 export const metadata: Metadata = {
   title: "Top 100 MCP Servers Leaderboard | MCP Market",

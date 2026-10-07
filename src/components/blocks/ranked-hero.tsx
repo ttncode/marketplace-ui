@@ -7,7 +7,7 @@ import {
   SECONDARY_SHELL,
 } from "@/components/ui/texture-button";
 import { cn } from "@/lib/utils";
-import type { LeaderboardHeroContent } from "./types";
+import type { LeaderboardHeroContent } from "./ranked-types";
 import { HeroDitherShader } from "@/components/blocks/dither-background";
 
 const HERO_MASK =

@@ -2,7 +2,7 @@ import type { CardFooter, DirectoryCard } from "@/components/sites/mcpmarket-com
 import { CATEGORY_LISTINGS, SERVER_CARDS } from "@/components/sites/mcpmarket-com-1a9fdbee/categories-slug-c9486983/listing-data";
 import { DIRECTORY_SECTIONS } from "@/components/sites/mcpmarket-com-1a9fdbee/root-8a5edab2/directory-data";
 import { SERVER_ROWS, SKILL_ROWS } from "@/components/sites/mcpmarket-com-1a9fdbee/leaderboards-47b0390f/leaderboard-data";
-import type { LeaderboardRow } from "@/components/sites/mcpmarket-com-1a9fdbee/leaderboards-47b0390f/types";
+import type { LeaderboardRow } from "@/components/blocks/ranked-types";
 import { SKILLS } from "@/components/sites/mcpmarket-com-1a9fdbee/tools-skills-slug-229a0ca0/skills-data";
 
 export type SearchType = "mcp" | "skills";

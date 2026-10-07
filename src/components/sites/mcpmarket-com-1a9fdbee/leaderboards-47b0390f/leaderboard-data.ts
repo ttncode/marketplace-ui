@@ -1,4 +1,4 @@
-import type { LeaderboardRow } from "./types";
+import type { LeaderboardRow } from "@/components/blocks/ranked-types";
 
 // Captured from mcpmarket.com on 2026-09-24.
 export const SERVER_ROWS: readonly LeaderboardRow[] = [

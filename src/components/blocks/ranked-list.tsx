@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight, Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import styles from "@/components/blocks/listing-card.module.css";
-import type { LeaderboardRow, LeaderboardVariant } from "./types";
+import type { LeaderboardRow, LeaderboardVariant } from "./ranked-types";
 
 const TOP_RANKS = 3;
 
