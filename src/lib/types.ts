@@ -81,6 +81,15 @@ export interface LeadForm {
   readonly submitLabel: string;
 }
 
+export interface SubmitContent {
+  readonly title: string;
+  readonly description: string;
+  readonly fields: readonly LeadFormField[];
+  readonly submitLabel: string;
+  readonly successTitle: string;
+  readonly successDescription: string;
+}
+
 export type DashboardIconName = "home" | "video" | "plus" | "settings";
 
 export interface DashboardNavItem {
