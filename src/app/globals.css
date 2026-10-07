@@ -65,7 +65,7 @@
   .design-dither-static {
     overflow: hidden;
     background-color: var(--design-surface-muted);
-    background-image: radial-gradient(circle, rgba(42, 42, 42, 0.2) 0px, rgba(42, 42, 42, 0.2) 0.65px, transparent 0.9px);
+    background-image: radial-gradient(circle, var(--design-dither-dot) 0px, var(--design-dither-dot) 0.65px, transparent 0.9px);
     background-position: 0 0;
     background-size: 4px 4px;
   }
@@ -76,13 +76,13 @@
     content: "";
   }
   .design-dither-static::before {
-    background-image: radial-gradient(circle, rgba(35, 35, 35, 0.2) 0px, rgba(35, 35, 35, 0.2) 0.7px, transparent 0.95px);
+    background-image: radial-gradient(circle, var(--design-dither-dot-strong) 0px, var(--design-dither-dot-strong) 0.7px, transparent 0.95px);
     background-position: 2px 1px;
     background-size: 5px 5px;
     mask-image: radial-gradient(48% 42% at 18% 58%, black 0px, transparent 78%), radial-gradient(54% 46% at 78% 36%, black 0px, transparent 82%), radial-gradient(60% 38% at 54% 86%, black 0px, transparent 84%);
   }
   .design-dither-static::after {
-    background: linear-gradient(112deg, rgba(255, 255, 255, 0.24), transparent 28%, rgba(255, 255, 255, 0.1) 54%, transparent 78%);
+    background: var(--design-dither-sheen);
   }
 
   .design-navigation-surface {
