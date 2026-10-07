@@ -14,7 +14,6 @@ A Next.js starter for directory sites and management dashboards. Static data, no
 
 - `npm run check` runs lint, typecheck, tests and build, and the build also builds the registry (via `prebuild`). Run it before committing.
 - TypeScript strict, no `any`. Tailwind utilities, no inline styles. Named exports.
-- New or changed files in `ui/`, `blocks/`, `layout/`, `icons/` or shared `lib/` files need a `registry.json` entry; `src/lib/registry.test.ts` fails otherwise.
 - Authentication is simulated: forms and OAuth buttons navigate to `/app`. There is no backend.
 
 ## Where things live
@@ -36,7 +35,7 @@ A Next.js starter for directory sites and management dashboards. Static data, no
    internal tool keeps `(dashboard)` and `(auth)`; a SaaS product keeps all three.
 2. Edit `src/site.config.ts`.
 3. Replace the files in `src/content/`.
-4. Set `--design-accent` and fonts in `src/app/theme.css` and `src/app/layout.tsx`.
+4. Set the four `--design-accent*` tokens (see README) and fonts in `src/app/theme.css` and `src/app/layout.tsx`.
 5. Replace `public/brand/`.
 6. Rewrite `README.md`.
 
@@ -45,4 +44,4 @@ A Next.js starter for directory sites and management dashboards. Static data, no
 - Blocks take props. They never import `@/content/*` or `@/site.config`; pages do.
 - Colors come only from tokens in `theme.css`, defined for both `:root` and `.dark`. No hex, `rgb()` or `rgba()` in components.
 - To redesign: change tokens first, then edit a block, then write a new block.
-- A changed or added block updates its entry in `registry.json` in the same commit.
+- Every file under `src/components/{ui,blocks,layout,icons}` belongs to exactly one `registry.json` item, and each import must be covered by that item's `registryDependencies` or `dependencies`; `src/lib/registry.test.ts` fails otherwise. Update the entry in the same commit.

@@ -1,6 +1,6 @@
 # marketplace-ui
 
-A Next.js starter for directory and marketplace sites: top navigation, listings, categories, search, a submit form, legal pages and sign-in screens. Static data, no backend. Copy it, edit the config and content, and ship.
+A Next.js starter for directory and marketplace sites: top navigation, listings, categories, search, a submit form, legal pages, sign-in screens and a dashboard shell. Static data, no backend. Copy it, edit the config and content, and ship.
 
 [![CI](https://github.com/ttncode/marketplace-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/ttncode/marketplace-ui/actions/workflows/ci.yml)
 ![Next.js 16](https://img.shields.io/badge/Next.js-16-black)
@@ -28,7 +28,7 @@ Open http://localhost:3000.
 
 Top navigation fits pages people browse or read, with about seven or fewer top-level sections.
 A sidebar fits screens people work in repeatedly, with many or nested sections, behind sign-in.
-The `(dashboard)` layout is planned; today the repository ships `(site)` and `(auth)`.
+The repository ships `(site)`, `(auth)` and `(dashboard)`.
 
 ## Customising
 
@@ -41,22 +41,28 @@ The `(dashboard)` layout is planned; today the repository ships `(site)` and `(a
 
 Add the registry to the app's `components.json`:
 
-    "registries": { "@ttn": "https://<your-deployment>/r/{name}.json" }
+```json
+"registries": { "@ttn": "https://<your-deployment>/r/{name}.json" }
+```
 
 Then install any item:
 
-    npx shadcn@latest add @ttn/data-table
+```bash
+npx shadcn@latest add @ttn/data-table
+```
 
 For the design tokens, install `@ttn/theme` (it also installs `theme-tailwind`) and import both files from the app's `globals.css`, after `@import "tailwindcss";`:
 
-    @import "./theme.css";
-    @import "./theme-tailwind.css";
+```css
+@import "./theme.css";
+@import "./theme-tailwind.css";
+```
 
 `theme.css` holds the tokens and `theme-tailwind.css` maps them to Tailwind colors such as `bg-canvas` and `text-ink`; blocks need both.
 
 To upgrade an item later, run the same command with `--overwrite`, review `git diff`, keep the local changes you want, and commit.
 
-The registry is rebuilt into `public/r` by the `prebuild` script, so `npm run build` always includes it. With pnpm or yarn, run `npm run registry:build` (or the equivalent) before building.
+The registry is rebuilt into `public/r` by the `prebuild` script, so `npm run build` always includes it. With pnpm or yarn, run `npm run registry:build` first; it only calls `shadcn build`.
 
 ## Authentication is simulated
 
