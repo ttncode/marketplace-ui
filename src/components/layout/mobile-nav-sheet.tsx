@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { SiteLogo } from "@/components/layout/site-logo";
 import type { MobileNavGroup, SiteConfig } from "@/lib/types";
 import { NavIcon } from "@/components/icons/nav-icons";
+import { ThemeToggle } from "@/components/blocks/theme-toggle";
 
 const EXIT_DURATION_MS = 300;
 
@@ -49,7 +50,8 @@ export function MobileNavSheet({ open, onOpenChange, name, logo, groups, actions
     document.body.style.overflow = "hidden";
     closeButtonRef.current?.focus();
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onOpenChange(false);
+      // An open menu (theme toggle) handles its own Escape.
+      if (event.key === "Escape" && !(event.target instanceof Element && event.target.closest('[role="menu"]'))) onOpenChange(false);
     };
     document.addEventListener("keydown", handleKeyDown);
     return () => {
@@ -106,6 +108,7 @@ export function MobileNavSheet({ open, onOpenChange, name, logo, groups, actions
             {actions.primary.label}
           </a>
         </nav>
+        <ThemeToggle className="absolute top-2 right-10 size-8" />
         <button
           ref={closeButtonRef}
           type="button"

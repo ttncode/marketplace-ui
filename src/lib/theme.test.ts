@@ -38,7 +38,9 @@ function runScript(stored: string | null | Error, prefersDark: boolean) {
 test("the inline script agrees with isDark for every stored value", () => {
   for (const stored of ["light", "dark", null, "garbage"]) {
     for (const prefersDark of [true, false]) {
-      strictEqual(runScript(stored, prefersDark).dark, isDark(parsePreference(stored), prefersDark), `${stored}/${prefersDark}`);
+      const { dark, scheme } = runScript(stored, prefersDark);
+      strictEqual(dark, isDark(parsePreference(stored), prefersDark), `${stored}/${prefersDark}`);
+      strictEqual(scheme, dark ? "dark" : "light", `${stored}/${prefersDark} scheme`);
     }
   }
 });
