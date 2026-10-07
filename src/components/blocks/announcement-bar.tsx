@@ -4,9 +4,9 @@ import { useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { X } from "lucide-react";
 
-import { ANNOUNCEMENT } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
+import type { SiteConfig } from "@/lib/types";
 
-const DISMISSED_KEY = "mcpmarket-announcement-dismissed";
+const DISMISSED_KEY = "announcement-dismissed";
 
 const subscribeToNothing = () => () => {};
 
@@ -19,7 +19,7 @@ function readStoredDismissal(): boolean {
   }
 }
 
-export function AnnouncementBar() {
+export function AnnouncementBar({ announcement }: { readonly announcement: NonNullable<SiteConfig["announcement"]> }) {
   // Server snapshot is false so SSR and hydration always render the bar.
   const storedDismissal = useSyncExternalStore(
     subscribeToNothing,
@@ -44,16 +44,16 @@ export function AnnouncementBar() {
       <div className="mx-auto max-w-[1280px] px-10 py-1.5 sm:px-12">
         <div className="flex h-5 items-center justify-center gap-2 font-mono text-xs leading-4">
           <span className="inline-flex h-5 shrink-0 items-center whitespace-nowrap rounded-full bg-[#fbfbfb] px-2 text-[10px] font-semibold leading-none tracking-[0.05em] text-[#0a0a0a] uppercase">
-            {ANNOUNCEMENT.badge}
+            {announcement.badge}
           </span>
           <Link
-            href={ANNOUNCEMENT.href}
+            href={announcement.href}
             className="whitespace-nowrap underline-offset-2 before:absolute before:inset-0 before:content-[''] hover:underline"
           >
-            {ANNOUNCEMENT.label}
+            {announcement.label}
           </Link>
           <span className="hidden text-[rgba(251,251,251,0.6)] sm:inline">
-            — {ANNOUNCEMENT.description}
+            — {announcement.description}
           </span>
         </div>
       </div>

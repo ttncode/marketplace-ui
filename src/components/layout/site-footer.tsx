@@ -48,7 +48,13 @@ interface SiteFooterProps {
   readonly socials: SiteConfig["socials"];
 }
 
-export function SiteFooter({ name, logo, footer }: SiteFooterProps) {
+const SOCIAL_LABELS = { github: "GitHub", x: "X", linkedin: "LinkedIn", youtube: "YouTube" } as const;
+
+export function SiteFooter({ name, logo, footer, socials }: SiteFooterProps) {
+  const socialLinks = (Object.keys(SOCIAL_LABELS) as (keyof typeof SOCIAL_LABELS)[]).flatMap((key) => {
+    const href = socials[key];
+    return href ? [{ label: SOCIAL_LABELS[key], href }] : [];
+  });
   return (
     <footer className="border-t border-[#dbdbdb] bg-white">
       <div className="w-full px-6 lg:px-8">
@@ -72,6 +78,19 @@ export function SiteFooter({ name, logo, footer }: SiteFooterProps) {
                 <span key={link.href}>
                   <span className="mx-1.5">·</span>
                   <a href={link.href} className="transition-colors duration-150 hover:text-[#0a0a0a]">
+                    {link.label}
+                  </a>
+                </span>
+              ))}
+              {socialLinks.map((link) => (
+                <span key={link.label}>
+                  <span className="mx-1.5">·</span>
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-colors duration-150 hover:text-[#0a0a0a]"
+                  >
                     {link.label}
                   </a>
                 </span>

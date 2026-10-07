@@ -5,7 +5,6 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SiteLogo } from "@/components/layout/site-logo";
 import type { SiteConfig } from "@/lib/types";
-import { NEWSLETTER_TOAST } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
 
 const DISMISSED_KEY = "newsletter-toast-dismissed";
 const SHOWN_KEY = "newsletter-toast-shown";
@@ -33,7 +32,7 @@ function writeFlag(storage: () => Storage, key: string): void {
 const local = () => window.localStorage;
 const session = () => window.sessionStorage;
 
-export function NewsletterToast({ name, logo }: { readonly name: string; readonly logo: SiteConfig["logo"] }) {
+export function NewsletterToast({ toast, name, logo }: { readonly toast: NonNullable<SiteConfig["newsletterToast"]>; readonly name: string; readonly logo: SiteConfig["logo"] }) {
   const [visible, setVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [entered, setEntered] = useState(false);
@@ -119,10 +118,10 @@ export function NewsletterToast({ name, logo }: { readonly name: string; readonl
         </div>
         <div className="min-w-0 flex-1">
           <h3 className="m-0 text-[15px] leading-[1.375] font-medium tracking-[-0.018em] text-[#0a0a0a]">
-            {NEWSLETTER_TOAST.title}
+            {toast.title}
           </h3>
           <p className="mt-1.5 text-[13px] leading-[1.55] tracking-[-0.01em] text-[#626262]">
-            {NEWSLETTER_TOAST.description}
+            {toast.description}
           </p>
           <div className="mt-4 flex">
             <button
@@ -131,7 +130,7 @@ export function NewsletterToast({ name, logo }: { readonly name: string; readonl
               className="group/texture-button inline-flex h-8 w-fit items-stretch rounded-[10px] border border-black/10 bg-gradient-to-b from-black/70 to-black p-px font-sans font-normal transition duration-300 ease-in-out focus-visible:ring-2 focus-visible:ring-[#0a0a0a]/30 focus-visible:ring-offset-2 focus-visible:outline-none motion-reduce:transition-none"
             >
               <span className="flex h-full w-full items-center justify-center gap-2 rounded-[4px] bg-gradient-to-b from-neutral-800 to-black px-4 py-1 text-xs leading-4 font-normal tracking-[-0.01em] whitespace-nowrap text-white/90 transition-[background-image,color] duration-200 ease-out hover:from-stone-800 hover:to-neutral-800/70 active:from-black active:to-black motion-reduce:transition-none">
-                {NEWSLETTER_TOAST.cta}
+                {toast.cta}
               </span>
             </button>
           </div>
