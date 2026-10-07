@@ -8,11 +8,39 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# marketplace-ui
+# Site template
 
-A static Next.js clone of the mcpmarket.com UI. No backend.
+A Next.js starter for directory sites and management dashboards. Static data, no backend.
 
-- `npm run check` runs lint, typecheck, tests, and build. Run it before committing.
+- `npm run check` runs lint, typecheck, tests and build. Run it before committing.
 - TypeScript strict, no `any`. Tailwind utilities, no inline styles. Named exports.
-- Match the source site 1:1; don't add personal design changes.
-- Route every captured link through `toSiteHref` (`src/components/sites/mcpmarket-com-1a9fdbee/shared/links.ts`): other websites go to the 404 page.
+
+## Where things live
+
+| What | Where |
+| --- | --- |
+| Brand: name, url, logo, nav, footer | `src/site.config.ts` |
+| Copy and demo data | `src/content/` |
+| Colors, radius, shadows, fonts for light and dark | `src/app/theme.css` |
+| Page sections | `src/components/blocks/` |
+| Header, footer, sidebar, top bar | `src/components/layout/` |
+| Primitives | `src/components/ui/` |
+| Pages | `src/app/(site)`, `src/app/(auth)`, `src/app/(dashboard)/app` |
+
+## Starting a new site
+
+1. Keep the route groups the site needs and delete the rest:
+   marketplace or landing page keeps `(site)` (and `(auth)` with accounts);
+   internal tool keeps `(dashboard)` and `(auth)`; a SaaS product keeps all three.
+2. Edit `src/site.config.ts`.
+3. Replace the files in `src/content/`.
+4. Set `--design-accent` and fonts in `src/app/theme.css` and `src/app/layout.tsx`.
+5. Replace `public/brand/`.
+6. Rewrite `README.md`.
+
+## Rules
+
+- Blocks take props. They never import `@/content/*` or `@/site.config`; pages do.
+- Colors come only from tokens in `theme.css`, defined for both `:root` and `.dark`. No hex, `rgb()` or `rgba()` in components.
+- To redesign: change tokens first, then edit a block, then write a new block.
+- A changed or added block updates its entry in `registry.json` in the same commit.
