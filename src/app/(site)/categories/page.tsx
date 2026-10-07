@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CategoryIndex } from "@/components/sites/mcpmarket-com-1a9fdbee/categories-f91e624d/CategoryIndex";
+import { CategoryIndex } from "@/components/blocks/category-index";
 import { MCP_CATEGORIES } from "@/components/sites/mcpmarket-com-1a9fdbee/categories-f91e624d/categories-data";
 
 export const metadata: Metadata = {
