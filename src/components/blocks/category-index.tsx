@@ -2,7 +2,6 @@ import Link from "next/link";
 import cardStyles from "@/components/blocks/listing-card.module.css";
 import type { LinkRef } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
 import { cn } from "@/lib/utils";
-import type { CategoryTile } from "@/components/sites/mcpmarket-com-1a9fdbee/categories-f91e624d/categories-data";
 import { CategoryIcon, ICON_HOVER_SCOPE } from "@/components/blocks/category-icon";
 import { HeroDitherShader } from "@/components/blocks/dither-background";
 
@@ -62,6 +61,15 @@ function Breadcrumbs({ trail }: { readonly trail: readonly LinkRef[] }) {
   );
 }
 
+export interface CategoryTile {
+  readonly name: string;
+  readonly href: string;
+  /** Pre-formatted count ("1,240"). */
+  readonly count: string;
+  /** Name `CategoryIcon` draws; defaults to `name`. */
+  readonly icon?: string;
+}
+
 function CategoryCard({ tile, unit }: { readonly tile: CategoryTile; readonly unit: string }) {
   return (
     <Link href={tile.href} className={cn("group block", cardStyles.link, ICON_HOVER_SCOPE)}>
@@ -75,7 +83,7 @@ function CategoryCard({ tile, unit }: { readonly tile: CategoryTile; readonly un
         />
         <div className="relative px-[19px] pt-[18px] pb-[17px]">
           <div className="mb-4 flex items-center gap-2.5">
-            <CategoryIcon name={tile.name} />
+            <CategoryIcon name={tile.icon ?? tile.name} />
             <div className="min-w-0 flex-1">
               <h3 className="line-clamp-1 font-display text-[16px] leading-[24px] font-semibold tracking-[-0.025em] text-[var(--design-ink)]">
                 {tile.name}

@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
 import { CategoryIndex } from "@/components/blocks/category-index";
-import { MCP_CATEGORIES } from "@/components/sites/mcpmarket-com-1a9fdbee/categories-f91e624d/categories-data";
+import { CATEGORIES } from "@/content/categories";
 
 export const metadata: Metadata = {
   title: "Categories",
   description: "Browse MCP servers by category to find the perfect tools for your AI workflow.",
 };
+
+// ponytail: counts become real once listings exist (Task 34)
+const TILES = CATEGORIES.map((category) => ({
+  name: category.name,
+  href: `/categories/${category.slug}`,
+  count: (0).toLocaleString("en-US"),
+  icon: category.icon,
+}));
 
 export default function CategoriesPage() {
   return (
@@ -13,7 +21,7 @@ export default function CategoriesPage() {
       trail={[{ label: "Categories", href: "/categories" }]}
       title="Browse by"
       description="Explore our comprehensive collection of MCP servers organized by category. Find the perfect MCP for your needs."
-      tiles={MCP_CATEGORIES}
+      tiles={TILES}
       unit="MCP servers"
     />
   );

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ListingHero } from "@/components/blocks/listing-hero";
 import { ListingResults } from "@/components/blocks/listing-results";
+import { CATEGORY_LINKS } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
 import { CLIENT_CARDS } from "@/components/sites/mcpmarket-com-1a9fdbee/categories-slug-c9486983/listing-data";
 
 const DESCRIPTION = "Explore our complete collection of MCP clients that connect AI tools to Claude and Cursor.";
@@ -22,7 +23,7 @@ export default function ClientsPage() {
           mutedTitle="MCP Clients"
           description={DESCRIPTION}
           searchPlaceholder="Search for MCP servers..."
-          withCategoryRail
+          categoryLinks={CATEGORY_LINKS}
         />
         <ListingResults cards={CLIENT_CARDS} status="all" pageLinks={PAGE_LINKS} />
       </div>
