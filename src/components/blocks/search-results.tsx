@@ -1,12 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { LoaderCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ListingCard } from "@/components/blocks/listing-card";
+import { ListingCard, type ListingCardData } from "@/components/blocks/listing-card";
 import styles from "@/components/blocks/listing-card.module.css";
-import { toListingCard } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/card-listing";
-import type { DirectoryCard } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
 import { SECONDARY_FACE, SECONDARY_SHELL } from "@/components/ui/texture-button";
 
 const PAGE_SIZE = 21;
@@ -93,41 +91,25 @@ function NoResults({ query }: { readonly query: string }) {
             Try a different search or category.
           </>
         ) : (
-          "No tools found. Try a different category or search."
+          "No listings found. Try a different category or search."
         )}
       </p>
     </div>
   );
 }
 
-function useInfiniteScroll(enabled: boolean, onReach: () => void) {
-  const sentinel = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const node = sentinel.current;
-    if (!enabled || !node) return;
-    const observer = new IntersectionObserver((entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) onReach();
-    });
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [enabled, onReach]);
-  return sentinel;
-}
-
 interface SearchResultsProps {
-  readonly cards: readonly DirectoryCard[];
+  readonly listings: readonly ListingCardData[];
   readonly query: string;
-  /** Servers page with a "Load More" button; skills load on scroll. */
-  readonly loadMode: "button" | "scroll";
 }
 
-export function SearchResults({ cards, query, loadMode }: SearchResultsProps) {
+export function SearchResults({ listings, query }: SearchResultsProps) {
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [loading, setLoading] = useState(false);
-  const shown = cards.slice(0, visibleCount);
-  const hasMore = visibleCount < cards.length;
+  const shown = listings.slice(0, visibleCount);
+  const hasMore = visibleCount < listings.length;
 
-  // Both triggers are inert while loading (button disabled, sentinel unmounted), so no re-entry guard.
+  // The button is disabled while loading, so no re-entry guard.
   const loadMore = useCallback(() => {
     setLoading(true);
     window.setTimeout(() => {
@@ -135,40 +117,25 @@ export function SearchResults({ cards, query, loadMode }: SearchResultsProps) {
       setLoading(false);
     }, LOAD_MORE_DELAY_MS);
   }, []);
-  const sentinel = useInfiniteScroll(loadMode === "scroll" && hasMore && !loading, loadMore);
 
-  if (cards.length === 0) return <NoResults query={query} />;
+  if (listings.length === 0) return <NoResults query={query} />;
 
   return (
     <div>
       <div className="grid gap-[14px] sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {shown.map((card) => (
-          <ListingCard key={card.href} listing={toListingCard(card)} />
+        {shown.map((listing) => (
+          <ListingCard key={listing.slug} listing={listing} />
         ))}
         {loading &&
           Array.from({ length: NEXT_PAGE_SKELETONS }, (_, index) => <NextPageSkeleton key={index} />)}
       </div>
       <div className="mt-8 flex flex-col items-center gap-4 pt-6">
-        {loadMode === "button" ? (
-          hasMore && (
-            <button type="button" onClick={loadMore} disabled={loading} className={cn(SECONDARY_SHELL, "w-fit")}>
-              <span className={cn(SECONDARY_FACE, "text-sm leading-5")}>
-                {loading ? <Spinner label="Loading..." className="text-inherit" /> : "Load More Results"}
-              </span>
-            </button>
-          )
-        ) : (
-          <>
-            <div className={cn("text-center", STATUS_TEXT)}>
-              {shown.length} results loaded{hasMore && " • More available"}
-            </div>
-            {hasMore && !loading && (
-              <div ref={sentinel} className="flex items-center justify-center p-4">
-                <p className={STATUS_TEXT}>Scroll for more results...</p>
-              </div>
-            )}
-            {loading && <Spinner label="Loading more tools..." className="p-4" />}
-          </>
+        {hasMore && (
+          <button type="button" onClick={loadMore} disabled={loading} className={cn(SECONDARY_SHELL, "w-fit")}>
+            <span className={cn(SECONDARY_FACE, "text-sm leading-5")}>
+              {loading ? <Spinner label="Loading..." className="text-inherit" /> : "Load More Results"}
+            </span>
+          </button>
         )}
         {!hasMore && !loading && <p className={STATUS_TEXT}>All results loaded</p>}
       </div>
