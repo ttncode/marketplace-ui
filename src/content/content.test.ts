@@ -6,6 +6,7 @@ import { test } from "node:test";
 import { routeExists, type KnownRoutes } from "../lib/routes.ts";
 import { site } from "../site.config.ts";
 import { CATEGORIES } from "./categories.ts";
+import { HOME_SECTIONS } from "./home.ts";
 import { LISTINGS } from "./listings.ts";
 
 const APP_DIR = new URL("../app", import.meta.url).pathname;
@@ -75,4 +76,10 @@ test("every listing belongs to an existing category", () => {
 test("every category has at least one listing", () => {
   const used = new Set(LISTINGS.map((listing) => listing.category));
   deepStrictEqual(CATEGORIES.filter((category) => !used.has(category.slug)).map((c) => c.slug), []);
+});
+
+test("home sections reference existing listings and routes", () => {
+  const slugs = new Set(LISTINGS.map((listing) => listing.slug));
+  deepStrictEqual(HOME_SECTIONS.flatMap((section) => section.listingSlugs.filter((slug) => !slugs.has(slug))), []);
+  deepStrictEqual(HOME_SECTIONS.map((s) => s.viewAll.href).filter((href) => !routeExists(href, known)), []);
 });

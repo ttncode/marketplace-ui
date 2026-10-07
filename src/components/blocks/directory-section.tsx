@@ -1,8 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ListingCard } from "@/components/blocks/listing-card";
-import { toListingCard } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/card-listing";
-import type { DirectorySection as DirectorySectionData } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
+import { ListingCard, type ListingCardData } from "@/components/blocks/listing-card";
+import type { LinkRef } from "@/lib/types";
 
 const TONE_BACKGROUND = { canvas: "bg-[#fbfbfb]", subtle: "bg-[#f7f7f7]" } as const;
 
@@ -13,13 +12,18 @@ const TITLE =
   "font-display text-[clamp(24px,2.3vw,34px)] leading-[28px] font-normal tracking-[-0.045em] text-[#0a0a0a] md:leading-[32px]";
 
 export function DirectorySection({
-  section,
+  title,
+  badge,
+  viewAll,
+  listings,
   tone,
 }: {
-  readonly section: DirectorySectionData;
+  readonly title: string;
+  readonly badge?: LinkRef;
+  readonly viewAll: LinkRef;
+  readonly listings: readonly ListingCardData[];
   readonly tone: "canvas" | "subtle";
 }) {
-  const { badge } = section;
   return (
     <section
       className={cn(
@@ -33,7 +37,7 @@ export function DirectorySection({
             {badge ? (
               <div className="mb-1 flex items-center gap-3">
                 <h2 className={TITLE}>
-                  <span>{section.title}</span>
+                  <span>{title}</span>
                 </h2>
                 <a
                   href={badge.href}
@@ -44,15 +48,15 @@ export function DirectorySection({
               </div>
             ) : (
               <h2 className={cn(TITLE, "mb-1")}>
-                <span>{section.title}</span>
+                <span>{title}</span>
               </h2>
             )}
           </div>
           <a
-            href={section.viewAll.href}
+            href={viewAll.href}
             className={cn(PILL_LINK, "group inline-flex h-[34px] items-center gap-1.5 px-3 py-1.5 leading-[20px]")}
           >
-            {section.viewAll.label}
+            {viewAll.label}
             <ArrowRight
               aria-hidden
               className="size-3.5 transition-transform duration-150 group-hover:translate-x-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
@@ -61,8 +65,8 @@ export function DirectorySection({
           </a>
         </div>
         <div className="grid gap-[14px] md:grid-cols-2 lg:grid-cols-3">
-          {section.cards.map((card) => (
-            <ListingCard key={card.href} listing={toListingCard(card)} />
+          {listings.map((listing) => (
+            <ListingCard key={listing.slug} listing={listing} />
           ))}
         </div>
       </div>

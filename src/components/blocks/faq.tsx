@@ -3,8 +3,7 @@
 import { useId, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { FAQ_ITEMS } from "@/components/sites/mcpmarket-com-1a9fdbee/root-8a5edab2/directory-data";
-import type { FaqItem } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
+import type { FaqItem } from "@/lib/types";
 import { AccordionRegion } from "@/components/ui/accordion-region";
 
 interface FaqAccordionItemProps {
@@ -49,17 +48,23 @@ function FaqAccordionItem({ item, isOpen, onToggle }: FaqAccordionItemProps) {
   );
 }
 
-export function FaqSection() {
+export function FaqSection({
+  title = "Frequently Asked Questions",
+  items,
+}: {
+  readonly title?: string;
+  readonly items: readonly FaqItem[];
+}) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <section className="bg-[#f7f7f7] py-8 md:py-12">
       <div className="mx-auto max-w-[896px] px-6 md:px-8">
         <h2 className="mt-0 mb-6 font-display text-[20px] leading-[28px] font-medium tracking-[-0.03em] text-[#0a0a0a] md:mb-8 md:text-[24px] md:leading-[32px]">
-          Frequently Asked Questions
+          {title}
         </h2>
         <div className="w-full">
-          {FAQ_ITEMS.map((item, index) => (
+          {items.map((item, index) => (
             <FaqAccordionItem
               key={item.question}
               item={item}

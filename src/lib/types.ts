@@ -140,3 +140,19 @@ export interface Listing {
   readonly useCases: readonly string[];
   readonly faq: readonly FaqItem[];
 }
+
+export interface HeroContent {
+  readonly countLabel: string;
+  readonly updatedLabel: string;
+  readonly title: string;
+  readonly rotatingTerms: readonly [string, ...string[]];
+  readonly description: string;
+  readonly searchPlaceholder: string;
+}
+
+export interface HomeSection {
+  readonly title: string;
+  readonly badge?: LinkRef;
+  readonly viewAll: LinkRef;
+  readonly listingSlugs: readonly string[];
+}

@@ -4,9 +4,8 @@ import { useEffect, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 import { CategoryRail } from "@/components/blocks/category-rail";
-import { HERO } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
 import { HeroDitherShader } from "@/components/blocks/dither-background";
-import type { LinkRef } from "@/lib/types";
+import type { HeroContent, LinkRef } from "@/lib/types";
 
 const HOLD_MS = 2000;
 const DELETE_MS = 50;
@@ -15,15 +14,13 @@ const TYPE_MS = 80;
 const HERO_MASK =
   "linear-gradient(to bottom, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0.28) 20%, rgba(0,0,0,0.32) 38%, rgba(0,0,0,0.38) 56%, rgba(0,0,0,0.46) 70%, rgba(0,0,0,0.4) 78%, rgba(0,0,0,0.28) 86%, rgba(0,0,0,0.12) 94%, transparent 100%)";
 
-const WORDS = HERO.rotatingTerms;
-
-function useTypewriter(): string {
+function useTypewriter(words: readonly string[]): string {
   const [wordIndex, setWordIndex] = useState(0);
-  const [text, setText] = useState<string>(WORDS[0]);
+  const [text, setText] = useState<string>(words[0]);
   const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
-    const word = WORDS[wordIndex];
+    const word = words[wordIndex];
     const holding = !deleting && text === word;
     const delay = holding ? HOLD_MS : deleting ? DELETE_MS : TYPE_MS;
     const id = setTimeout(() => {
@@ -31,20 +28,26 @@ function useTypewriter(): string {
         setDeleting(true);
       } else if (deleting && text === "") {
         setDeleting(false);
-        setWordIndex((wordIndex + 1) % WORDS.length);
+        setWordIndex((wordIndex + 1) % words.length);
       } else {
         setText(deleting ? text.slice(0, -1) : word.slice(0, text.length + 1));
       }
     }, delay);
     return () => clearTimeout(id);
-  }, [wordIndex, text, deleting]);
+  }, [words, wordIndex, text, deleting]);
 
   return text;
 }
 
-export function HeroSection({ categoryLinks }: { readonly categoryLinks: readonly LinkRef[] }) {
+export function HeroSection({
+  hero,
+  categoryLinks,
+}: {
+  readonly hero: HeroContent;
+  readonly categoryLinks: readonly LinkRef[];
+}) {
   const router = useRouter();
-  const typed = useTypewriter();
+  const typed = useTypewriter(hero.rotatingTerms);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -71,18 +74,18 @@ export function HeroSection({ categoryLinks }: { readonly categoryLinks: readonl
                 <span className="flex items-center gap-2">
                   <span className="size-1.5 animate-pulse rounded-full bg-[#0a0a0a] [animation-duration:3.4s]" />
                   <span>
-                    <strong className="font-semibold text-[#0a0a0a]">{HERO.serverCount}</strong> Servers
+                    <strong className="font-semibold text-[#0a0a0a]">{hero.countLabel}</strong>
                   </span>
                 </span>
                 <span className="hidden h-3 w-px bg-[#dbdbdb] sm:block" />
-                <span className="hidden gap-1 text-[#616161] sm:flex">{HERO.updatedLabel}</span>
+                <span className="hidden gap-1 text-[#616161] sm:flex">{hero.updatedLabel}</span>
               </div>
             </div>
             <div className="relative isolate z-0 w-full before:pointer-events-none before:absolute before:inset-[-38px_-76px_-44px] before:-z-10 before:blur-[14px] before:content-[''] before:[background:radial-gradient(82%_84%_at_50%_48%,rgba(255,255,255,0.46)_0,rgba(255,255,255,0.34)_46%,rgba(255,255,255,0.16)_68%,transparent_90%)] max-md:before:inset-[-30px_-42px_-36px] max-md:before:[background:radial-gradient(82%_86%_at_50%_48%,rgba(255,255,255,.5)_0,rgba(255,255,255,.36)_48%,rgba(255,255,255,.16)_70%,transparent_92%)] md:max-[899px]:before:inset-x-[-64px] md:max-[899px]:before:[background:radial-gradient(84%_84%_at_50%_48%,rgba(255,255,255,.48)_0,rgba(255,255,255,.35)_48%,rgba(255,255,255,.16)_70%,transparent_92%)]">
               <h1 className="m-0 mx-auto max-w-[1180px] text-balance font-display text-[clamp(50px,5vw,72px)] font-normal leading-[0.94] tracking-[-0.055em] text-[#0a0a0a] max-md:text-[clamp(44px,14vw,66px)] md:max-[899px]:max-w-[760px]">
-                <span className="sr-only">{`${HERO.title} ${WORDS.join(" - ")}`}</span>
+                <span className="sr-only">{`${hero.title} ${hero.rotatingTerms.join(" - ")}`}</span>
                 <span aria-hidden="true" className="block">
-                  <span className="block">{HERO.title}</span>
+                  <span className="block">{hero.title}</span>
                   <span className="text-[#444444]">
                     {typed}
                     <span className="animate-pulse">|</span>
@@ -90,7 +93,7 @@ export function HeroSection({ categoryLinks }: { readonly categoryLinks: readonl
                 </span>
               </h1>
               <p className="mx-auto mt-[18px] max-w-[650px] font-sans text-base leading-[1.65] tracking-[-0.018em] text-[rgba(10,10,10,0.64)] max-md:max-w-[92%] max-md:text-[15px]">
-                {HERO.description}
+                {hero.description}
               </p>
             </div>
             <form role="search" onSubmit={handleSubmit} className="mt-[22px] w-[min(100%,610px)]">
@@ -99,8 +102,8 @@ export function HeroSection({ categoryLinks }: { readonly categoryLinks: readonl
                   type="text"
                   name="search"
                   autoComplete="off"
-                  placeholder={HERO.searchPlaceholder}
-                  aria-label={HERO.searchPlaceholder}
+                  placeholder={hero.searchPlaceholder}
+                  aria-label={hero.searchPlaceholder}
                   className="flex h-[52px] w-full rounded-[10px] border-0 bg-transparent px-12 py-2 font-sans text-sm leading-5 tracking-[-0.14px] text-[#0a0a0a] shadow-none outline-none placeholder:text-[rgba(34,34,34,0.48)]"
                 />
                 <Search
