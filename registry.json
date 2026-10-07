@@ -296,6 +296,1004 @@
           "target": "app/theme.css"
         }
       ]
+    },
+    {
+      "name": "article-types",
+      "type": "registry:lib",
+      "title": "Article types",
+      "description": "Article content types shared by blocks.",
+      "files": [
+        {
+          "path": "src/components/blocks/article-types.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "item-types",
+      "type": "registry:lib",
+      "title": "Item types",
+      "description": "Item content types shared by blocks.",
+      "registryDependencies": [
+        "@ttn/types"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/item-types.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "listing-types",
+      "type": "registry:lib",
+      "title": "Listing types",
+      "description": "Listing content types shared by blocks.",
+      "files": [
+        {
+          "path": "src/components/blocks/listing-types.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "ranked-types",
+      "type": "registry:lib",
+      "title": "Ranked list types",
+      "description": "Ranked list content types shared by blocks.",
+      "registryDependencies": [
+        "@ttn/types"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/ranked-types.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
+      "name": "breadcrumb-icons",
+      "type": "registry:ui",
+      "title": "Breadcrumb icons",
+      "description": "Inline SVG icon set.",
+      "files": [
+        {
+          "path": "src/components/icons/breadcrumb-icons.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "detail-icons",
+      "type": "registry:ui",
+      "title": "Detail icons",
+      "description": "Inline SVG icon set.",
+      "files": [
+        {
+          "path": "src/components/icons/detail-icons.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "news-icons",
+      "type": "registry:ui",
+      "title": "News icons",
+      "description": "Inline SVG icon set.",
+      "files": [
+        {
+          "path": "src/components/icons/news-icons.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "nav-icons",
+      "type": "registry:ui",
+      "title": "Nav icons",
+      "description": "Animated navigation icons.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/types",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/icons/nav-icons.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/components/icons/animated-icons.module.css",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "site-logo",
+      "type": "registry:block",
+      "title": "Site logo",
+      "description": "Brand logo that switches between light and dark images.",
+      "registryDependencies": [
+        "@ttn/types",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/layout/site-logo.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "activity-list",
+      "type": "registry:block",
+      "title": "Activity list",
+      "description": "Recent activity feed with timestamps.",
+      "registryDependencies": [
+        "@ttn/format",
+        "@ttn/types"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/activity-list.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "announcement-bar",
+      "type": "registry:block",
+      "title": "Announcement bar",
+      "description": "Dismissible announcement banner above the header.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/types"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/announcement-bar.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "article-card",
+      "type": "registry:block",
+      "title": "Article card",
+      "description": "News article card with date and external link.",
+      "registryDependencies": [
+        "@ttn/article-types",
+        "@ttn/detail-icons",
+        "@ttn/news-icons"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/article-card.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "auth-lockup",
+      "type": "registry:block",
+      "title": "Auth lockup",
+      "description": "Logo and brand name shown on auth screens.",
+      "registryDependencies": [
+        "@ttn/site-logo",
+        "@ttn/types"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/auth-lockup.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "auth-shell",
+      "type": "registry:block",
+      "title": "Auth shell",
+      "description": "Split layout for sign-in and sign-up: form column and brand panel.",
+      "registryDependencies": [
+        "@ttn/auth-lockup",
+        "@ttn/auth-side-panel",
+        "@ttn/auth-styles",
+        "@ttn/types",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/auth-shell.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "auth-side-panel",
+      "type": "registry:block",
+      "title": "Auth side panel",
+      "description": "Dotted brand panel for the auth layout.",
+      "registryDependencies": [
+        "@ttn/auth-lockup",
+        "@ttn/types"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/auth-side-panel.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "browse-by-category",
+      "type": "registry:block",
+      "title": "Browse by category",
+      "description": "Grid of category links with icons.",
+      "registryDependencies": [
+        "@ttn/category-icon",
+        "@ttn/types"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/browse-by-category.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "category-icon",
+      "type": "registry:block",
+      "title": "Category icon",
+      "description": "Animated category icon.",
+      "files": [
+        {
+          "path": "src/components/blocks/category-icon.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "src/components/blocks/category-icon.module.css",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "category-index",
+      "type": "registry:block",
+      "title": "Category index",
+      "description": "Category index page grid with hero.",
+      "registryDependencies": [
+        "@ttn/category-icon",
+        "@ttn/dither-background",
+        "@ttn/listing-card",
+        "@ttn/types",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/category-index.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "category-rail",
+      "type": "registry:block",
+      "title": "Category rail",
+      "description": "Horizontal rail of category links.",
+      "registryDependencies": [
+        "@ttn/types"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/category-rail.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "content-page-hero",
+      "type": "registry:block",
+      "title": "Content page hero",
+      "description": "Hero with breadcrumbs for content pages.",
+      "registryDependencies": [
+        "@ttn/breadcrumb-icons",
+        "@ttn/dither-background",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/content-page-hero.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "data-table",
+      "type": "registry:block",
+      "title": "Data table",
+      "description": "Sortable, filterable table with badges and row actions.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/badge",
+        "@ttn/format",
+        "@ttn/input",
+        "@ttn/select",
+        "@ttn/table",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/data-table.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "directory-section",
+      "type": "registry:block",
+      "title": "Directory section",
+      "description": "Titled section of listing cards with a view-all link.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/listing-card",
+        "@ttn/types",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/directory-section.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "dither-background",
+      "type": "registry:block",
+      "title": "Dither background",
+      "description": "Animated dither shader background for heroes.",
+      "dependencies": [
+        "@paper-design/shaders-react"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/dither-background.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "faq",
+      "type": "registry:block",
+      "title": "Faq",
+      "description": "Accordion list of questions and answers.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/accordion-region",
+        "@ttn/types",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/faq.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "hero",
+      "type": "registry:block",
+      "title": "Hero",
+      "description": "Home hero with search box and category rail.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/category-rail",
+        "@ttn/dither-background",
+        "@ttn/types"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/hero.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "item-header-actions",
+      "type": "registry:block",
+      "title": "Item header actions",
+      "description": "Share, repository and package actions for an item header.",
+      "registryDependencies": [
+        "@ttn/detail-icons",
+        "@ttn/share-targets"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/item-header-actions.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "item-hero",
+      "type": "registry:block",
+      "title": "Item hero",
+      "description": "Item detail header with breadcrumbs and actions.",
+      "registryDependencies": [
+        "@ttn/detail-icons",
+        "@ttn/item-header-actions",
+        "@ttn/types",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/item-hero.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "src/components/blocks/item-detail.module.css",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "item-sidebar",
+      "type": "registry:block",
+      "title": "Item sidebar",
+      "description": "Item detail sidebar with links and related items.",
+      "registryDependencies": [
+        "@ttn/detail-icons",
+        "@ttn/item-hero",
+        "@ttn/item-types",
+        "@ttn/types"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/item-sidebar.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "item-tabs",
+      "type": "registry:block",
+      "title": "Item tabs",
+      "description": "Item detail tabs for overview, features and FAQ.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/accordion-region",
+        "@ttn/types",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/item-tabs.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "lead-dialog",
+      "type": "registry:block",
+      "title": "Lead dialog",
+      "description": "Dialog with a configurable lead capture form.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/types",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/lead-dialog.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "legal-page",
+      "type": "registry:block",
+      "title": "Legal page",
+      "description": "Prose page for privacy and terms.",
+      "registryDependencies": [
+        "@ttn/content-page-hero"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/legal-page.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "src/components/blocks/legal-prose.module.css",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "listing-card",
+      "type": "registry:block",
+      "title": "Listing card",
+      "description": "Card for a directory listing.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/types",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/listing-card.tsx",
+          "type": "registry:block"
+        },
+        {
+          "path": "src/components/blocks/listing-card.module.css",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "listing-hero",
+      "type": "registry:block",
+      "title": "Listing hero",
+      "description": "Listing page hero with search and category rail.",
+      "registryDependencies": [
+        "@ttn/category-rail",
+        "@ttn/dither-background",
+        "@ttn/listing-search",
+        "@ttn/types"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/listing-hero.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "listing-results",
+      "type": "registry:block",
+      "title": "Listing results",
+      "description": "Grid of listing cards with status states.",
+      "registryDependencies": [
+        "@ttn/listing-card",
+        "@ttn/listing-types",
+        "@ttn/types"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/listing-results.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "listing-search",
+      "type": "registry:block",
+      "title": "Listing search",
+      "description": "Search input for listing pages.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/listing-search.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "login-form",
+      "type": "registry:block",
+      "title": "Login form",
+      "description": "Sign-in form with simulated authentication.",
+      "registryDependencies": [
+        "@ttn/auth-controls",
+        "@ttn/oauth-buttons"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/login-form.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "mega-menu",
+      "type": "registry:block",
+      "title": "Mega menu",
+      "description": "Navigation mega menu with lists and feature cards.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/nav-icons",
+        "@ttn/types",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/mega-menu.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "newsletter-toast",
+      "type": "registry:block",
+      "title": "Newsletter toast",
+      "description": "Dismissible newsletter sign-up toast.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/site-logo",
+        "@ttn/types",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/newsletter-toast.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "oauth-buttons",
+      "type": "registry:block",
+      "title": "Oauth buttons",
+      "description": "Simulated OAuth provider buttons.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/auth-controls"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/oauth-buttons.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "platform-picker",
+      "type": "registry:block",
+      "title": "Platform picker",
+      "description": "Multi-select of publishing platforms.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/types"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/platform-picker.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "ranked-hero",
+      "type": "registry:block",
+      "title": "Ranked hero",
+      "description": "Hero for ranked list pages.",
+      "registryDependencies": [
+        "@ttn/breadcrumb-icons",
+        "@ttn/dither-background",
+        "@ttn/ranked-types",
+        "@ttn/texture-button",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/ranked-hero.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "ranked-list",
+      "type": "registry:block",
+      "title": "Ranked list",
+      "description": "Leaderboard grid of ranked rows.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/listing-card",
+        "@ttn/ranked-types",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/ranked-list.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "ranked-page",
+      "type": "registry:block",
+      "title": "Ranked page",
+      "description": "Ranked list page with hero and leaderboard.",
+      "registryDependencies": [
+        "@ttn/ranked-hero",
+        "@ttn/ranked-list",
+        "@ttn/ranked-types"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/ranked-page.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "schedule-field",
+      "type": "registry:block",
+      "title": "Schedule field",
+      "description": "Date and time field for scheduling.",
+      "registryDependencies": [
+        "@ttn/input"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/schedule-field.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "search-category-rail",
+      "type": "registry:block",
+      "title": "Search category rail",
+      "description": "Category filter rail for search.",
+      "registryDependencies": [
+        "@ttn/types",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/search-category-rail.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "search-header",
+      "type": "registry:block",
+      "title": "Search header",
+      "description": "Search bar and breadcrumbs.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/breadcrumb-icons"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/search-header.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "search-results",
+      "type": "registry:block",
+      "title": "Search results",
+      "description": "Search result grid with loading skeleton.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/listing-card",
+        "@ttn/texture-button",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/search-results.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "search-view",
+      "type": "registry:block",
+      "title": "Search view",
+      "description": "Search page view combining rail, header and results.",
+      "registryDependencies": [
+        "@ttn/listing-card",
+        "@ttn/search-category-rail",
+        "@ttn/search-header",
+        "@ttn/search-index",
+        "@ttn/search-results",
+        "@ttn/types"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/search-view.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "settings-form",
+      "type": "registry:block",
+      "title": "Settings form",
+      "description": "Profile settings form.",
+      "registryDependencies": [
+        "@ttn/button",
+        "@ttn/input",
+        "@ttn/types"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/settings-form.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "signup-form",
+      "type": "registry:block",
+      "title": "Signup form",
+      "description": "Sign-up form with simulated authentication.",
+      "registryDependencies": [
+        "@ttn/auth-controls",
+        "@ttn/oauth-buttons"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/signup-form.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "stat-card",
+      "type": "registry:block",
+      "title": "Stat card",
+      "description": "Dashboard statistic card with trend.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/types",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/stat-card.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "submit-form",
+      "type": "registry:block",
+      "title": "Submit form",
+      "description": "Submission form for new listings.",
+      "registryDependencies": [
+        "@ttn/auth-controls",
+        "@ttn/form-field",
+        "@ttn/types",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/submit-form.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "submit-hero",
+      "type": "registry:block",
+      "title": "Submit hero",
+      "description": "Hero for the submit page.",
+      "registryDependencies": [
+        "@ttn/dither-background"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/submit-hero.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "submit-view",
+      "type": "registry:block",
+      "title": "Submit view",
+      "description": "Submit page view with hero and form.",
+      "registryDependencies": [
+        "@ttn/submit-form",
+        "@ttn/types"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/submit-view.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "theme-toggle",
+      "type": "registry:block",
+      "title": "Theme toggle",
+      "description": "Light, dark and system theme menu.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/theme-preference",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/theme-toggle.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "upload-dropzone",
+      "type": "registry:block",
+      "title": "Upload dropzone",
+      "description": "Drag and drop file upload area.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@ttn/format",
+        "@ttn/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/upload-dropzone.tsx",
+          "type": "registry:block"
+        }
+      ]
+    },
+    {
+      "name": "video-compose-form",
+      "type": "registry:block",
+      "title": "Video compose form",
+      "description": "Form for composing and scheduling a video post.",
+      "registryDependencies": [
+        "@ttn/button",
+        "@ttn/input",
+        "@ttn/platform-picker",
+        "@ttn/schedule-field",
+        "@ttn/types",
+        "@ttn/upload-dropzone"
+      ],
+      "files": [
+        {
+          "path": "src/components/blocks/video-compose-form.tsx",
+          "type": "registry:block"
+        }
+      ]
     }
   ]
 }
