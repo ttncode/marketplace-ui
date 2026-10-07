@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { CategoryRail } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/CategoryRail";
+import { CategoryRail } from "@/components/blocks/category-rail";
 import { ListingSearch } from "./ListingSearch";
 import { HeroDitherShader } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/HeroDitherShader";
 

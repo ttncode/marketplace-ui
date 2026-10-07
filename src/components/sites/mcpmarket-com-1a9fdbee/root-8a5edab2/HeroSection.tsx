@@ -3,7 +3,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
-import { CategoryRail } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/CategoryRail";
+import { CategoryRail } from "@/components/blocks/category-rail";
 import { HERO } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
 import { HeroDitherShader } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/HeroDitherShader";
 
