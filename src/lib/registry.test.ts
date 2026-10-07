@@ -2,6 +2,7 @@ import { deepStrictEqual } from "node:assert";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
 import { test } from "node:test";
+import { fileURLToPath } from "node:url";
 
 interface RegistryItem {
   readonly name: string;
@@ -10,7 +11,7 @@ interface RegistryItem {
   readonly files: readonly { readonly path: string }[];
 }
 
-const ROOT = new URL("../..", import.meta.url).pathname;
+const ROOT = fileURLToPath(new URL("../..", import.meta.url));
 const registry = JSON.parse(readFileSync(join(ROOT, "registry.json"), "utf8")) as { items: readonly RegistryItem[] };
 const items = registry.items;
 const byName = new Map(items.map((item) => [item.name, item]));
@@ -59,6 +60,15 @@ test("every @ttn registry dependency names an item", () => {
   deepStrictEqual(missing, []);
 });
 
+test("every npm dependency is declared in package.json", () => {
+  const declared = Object.keys((JSON.parse(readFileSync(join(ROOT, "package.json"), "utf8")) as { dependencies: Record<string, string> }).dependencies);
+  deepStrictEqual(items.flatMap((item) => (item.dependencies ?? []).filter((dep) => !declared.includes(dep)).map((dep) => `${item.name} -> ${dep}`)), []);
+});
+
+test("every registry dependency is prefixed @ttn/", () => {
+  deepStrictEqual(items.flatMap((item) => (item.registryDependencies ?? []).filter((dep) => !dep.startsWith("@ttn/")).map((dep) => `${item.name} -> ${dep}`)), []);
+});
+
 test("every shipped component file belongs to exactly one item", { skip: items.length === 0 ? "registry items arrive in Tasks 91–93" : false }, () => {
   const files = SHIPPED_DIRS.flatMap(walk).filter((path) => !path.endsWith(".test.ts"));
   deepStrictEqual(files.filter((path) => !owner.has(path)), []);
@@ -74,8 +84,8 @@ test("every import is satisfied by the item, its registry dependencies, or its n
     for (const file of item.files) {
       if (!/\.(tsx?|ts)$/.test(file.path)) continue;
       const source = readFileSync(join(ROOT, file.path), "utf8");
-      for (const match of source.matchAll(/from\s+"([^"]+)"|import\s+"([^"]+)"/g)) {
-        const specifier = match[1] ?? match[2];
+      for (const match of source.matchAll(/(?:\bfrom|\bimport)\s*\(?\s*["']([^"']+)["']/g)) {
+        const specifier = match[1];
         if (!specifier) continue;
         if (specifier.startsWith("@/") || specifier.startsWith(".")) {
           const target = resolveImport(file.path, specifier);
