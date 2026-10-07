@@ -53,7 +53,7 @@ export function CategoryRail({ links }: { readonly links: readonly LinkRef[] }) 
             key={link.href}
             href={link.href}
             data-active={index === 0 ? "true" : undefined}
-            className="h-[26px] shrink-0 whitespace-nowrap rounded-[999px] border border-ink-soft/16 bg-canvas/78 px-3 py-1 font-sans text-[10px] font-medium uppercase leading-4 tracking-[0.055em] text-ink-soft/72 transition-[border-color,background-color,color] duration-[160ms] ease-[ease] hover:border-ink-soft/44 hover:bg-ink hover:text-primary-foreground data-[active=true]:border-ink-soft/44 data-[active=true]:bg-ink data-[active=true]:text-primary-foreground motion-reduce:transition-none"
+            className="h-[26px] shrink-0 whitespace-nowrap rounded-[999px] border border-ink-soft/16 bg-canvas/78 px-3 py-1 font-sans text-[10px] font-medium uppercase leading-4 tracking-[0.055em] text-ink-soft/72 transition-[border-color,background-color,color] duration-[160ms] ease-[ease] hover:border-ink-soft/44 hover:bg-ink hover:text-canvas data-[active=true]:border-ink-soft/44 data-[active=true]:bg-ink data-[active=true]:text-canvas motion-reduce:transition-none"
           >
             {link.label}
           </a>

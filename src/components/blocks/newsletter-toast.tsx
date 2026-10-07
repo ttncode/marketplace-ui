@@ -127,9 +127,9 @@ export function NewsletterToast({ toast, name, logo }: { readonly toast: NonNull
             <button
               type="button"
               onClick={join}
-              className="group/texture-button inline-flex h-8 w-fit items-stretch rounded-[10px] border border-ink/10 bg-gradient-to-b from-ink/70 to-ink p-px font-sans font-normal transition duration-300 ease-in-out focus-visible:ring-2 focus-visible:ring-ink/30 focus-visible:ring-offset-2 focus-visible:outline-none motion-reduce:transition-none"
+              className="group/texture-button inline-flex h-8 w-fit items-stretch rounded-[10px] border border-ink/10 bg-gradient-to-b from-primary/70 to-primary p-px font-sans font-normal transition duration-300 ease-in-out focus-visible:ring-2 focus-visible:ring-ink/30 focus-visible:ring-offset-2 focus-visible:outline-none motion-reduce:transition-none"
             >
-              <span className="flex h-full w-full items-center justify-center gap-2 rounded-[4px] bg-gradient-to-b from-ink-raised to-ink px-4 py-1 text-xs leading-4 font-normal tracking-[-0.01em] whitespace-nowrap text-primary-foreground/90 transition-[background-image,color] duration-200 ease-out hover:from-ink-raised-hover hover:to-ink-raised/70 active:from-ink active:to-ink motion-reduce:transition-none">
+              <span className="flex h-full w-full items-center justify-center gap-2 rounded-[4px] bg-gradient-to-b from-accent-raised to-primary px-4 py-1 text-xs leading-4 font-normal tracking-[-0.01em] whitespace-nowrap text-primary-foreground/90 transition-[background-image,color] duration-200 ease-out hover:from-accent-raised-hover hover:to-accent-raised/70 active:from-primary active:to-primary motion-reduce:transition-none">
                 {toast.cta}
               </span>
             </button>
