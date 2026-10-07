@@ -1,5 +1,5 @@
 import { Rocket, Tag, Wallet } from "lucide-react";
-import { GithubIcon } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/icons";
+import { GithubIcon } from "@/components/icons/nav-icons";
 import type { FaqItem } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
 import type { CheckItem, IconItem } from "@/components/sites/mcpmarket-com-1a9fdbee/hub-2382ac74/hub-data";
 

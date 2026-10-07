@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { LogoMarkIcon } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/icons";
+import { LogoMarkIcon } from "@/components/icons/nav-icons";
 import { NEWSLETTER_TOAST } from "./site-data";
 
 const DISMISSED_KEY = "newsletter-toast-dismissed";

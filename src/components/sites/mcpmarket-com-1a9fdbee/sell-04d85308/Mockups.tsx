@@ -14,7 +14,7 @@ import {
 import s from "@/components/sites/mcpmarket-com-1a9fdbee/hub-2382ac74/AppSurface.module.css";
 import { cn } from "@/lib/utils";
 import { AGENTS, CATEGORIES, EARNINGS_ROWS, STORE_SKILLS, TRENDING } from "./sell-data";
-import { BRAND_FAVICONS } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/icons";
+import { BRAND_FAVICONS } from "@/components/icons/nav-icons";
 
 // Static product mockups: the source renders their buttons and badges as inert spans.
 // Its seller palette (mint, accent-brand, rose/butter) resolves to the same greys as the hub surface tokens.
