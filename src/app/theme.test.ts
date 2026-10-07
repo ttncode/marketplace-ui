@@ -1,4 +1,4 @@
-import { deepStrictEqual } from "node:assert";
+import { deepStrictEqual, ok } from "node:assert";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
 
@@ -17,6 +17,7 @@ const THEME_INDEPENDENT = /^--(?:design-font|design-radius|radius$)/;
 
 test("every themed token in :root is redefined in .dark", () => {
   const dark = declared(".dark");
+  ok(dark.size > 0);
   const missing = [...declared(":root")].filter((name) => !THEME_INDEPENDENT.test(name) && !dark.has(name));
   deepStrictEqual(missing, []);
 });

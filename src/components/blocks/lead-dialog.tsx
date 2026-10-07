@@ -127,7 +127,7 @@ function LeadDialog({ form, open, onClose, onClosed, onError }: {
       onOpenChangeComplete={(next) => !next && onClosed()}
     >
       <Dialog.Portal>
-        <Dialog.Backdrop className="fixed inset-0 z-50 bg-ink/80 data-closed:animate-out data-closed:fade-out-0 data-open:animate-in data-open:fade-in-0" />
+        <Dialog.Backdrop className="fixed inset-0 z-50 bg-overlay data-closed:animate-out data-closed:fade-out-0 data-open:animate-in data-open:fade-in-0" />
         {/* Centring uses translate(-50%,-48%); here that is a 2% slide on top of it. */}
         <Dialog.Popup
           initialFocus={emailRef}

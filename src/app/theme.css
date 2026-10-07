@@ -76,6 +76,7 @@
   --design-ink-raised: #262626;
   --design-ink-raised-hover: #292524;
   --design-success: #10b981;
+  --design-overlay: rgb(10 10 10 / 0.8);
 
   --background: #fbfbfb;
   --foreground: #0a0a0a;
@@ -171,6 +172,7 @@
   --design-ink-raised: #e5e5e5;
   --design-ink-raised-hover: #f5f5f4;
   --design-success: #34d399;
+  --design-overlay: rgb(10 10 10 / 0.8);
 
   --background: #0b0b0b;
   --foreground: #f5f5f5;

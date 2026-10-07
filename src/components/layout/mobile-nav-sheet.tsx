@@ -68,7 +68,7 @@ export function MobileNavSheet({ open, onOpenChange, name, logo, groups, actions
         aria-hidden="true"
         onClick={close}
         className={cn(
-          "fixed inset-0 z-50 bg-ink/80",
+          "fixed inset-0 z-50 bg-overlay",
           open ? "animate-in fade-in-0 duration-500" : "animate-out fade-out-0 fill-mode-forwards duration-300",
         )}
       />
