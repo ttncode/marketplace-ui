@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BrowseCategoryIcon } from "./icons";
+import { BrowseCategoryIcon } from "@/components/icons/search-icons";
 import { BROWSE_CATEGORIES } from "./search-data";
 
 export function BrowseByCategory() {
