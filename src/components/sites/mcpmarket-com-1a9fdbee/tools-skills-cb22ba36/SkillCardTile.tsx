@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight, Award } from "lucide-react";
 import { cn } from "@/lib/utils";
-import styles from "@/components/sites/mcpmarket-com-1a9fdbee/shared/DirectoryCard.module.css";
+import styles from "@/components/blocks/listing-card.module.css";
 import type { SkillBadge, SkillCard } from "./types";
 
 const CHIP =

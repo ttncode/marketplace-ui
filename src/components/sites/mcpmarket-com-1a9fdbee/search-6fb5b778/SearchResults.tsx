@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { LoaderCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ListingCard } from "@/components/sites/mcpmarket-com-1a9fdbee/categories-slug-c9486983/ListingCard";
-import styles from "@/components/sites/mcpmarket-com-1a9fdbee/shared/DirectoryCard.module.css";
+import styles from "@/components/blocks/listing-card.module.css";
 import type { DirectoryCard } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
 import { SECONDARY_FACE, SECONDARY_SHELL } from "@/components/ui/texture-button";
 

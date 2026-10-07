@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, BadgeCheck } from "lucide-react";
-import cardStyles from "@/components/sites/mcpmarket-com-1a9fdbee/shared/DirectoryCard.module.css";
+import cardStyles from "@/components/blocks/listing-card.module.css";
 import { cn } from "@/lib/utils";
 import type { OfficialPublisher, OfficialSkill } from "./official-data";
 
