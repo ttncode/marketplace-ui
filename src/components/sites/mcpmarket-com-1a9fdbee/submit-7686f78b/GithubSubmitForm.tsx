@@ -17,7 +17,7 @@ import {
   isValidEmail,
   parseGithubRepo,
   wait,
-} from "./form-ui";
+} from "@/components/ui/form-field";
 import { FORM_COPY, LISTED_REPOS, MESSAGES, type ListedTool, type SubmissionType } from "./submit-data";
 
 type Tier = "paid" | "free";

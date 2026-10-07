@@ -19,7 +19,7 @@ import {
   TEXTAREA,
   isHttpUrl,
   wait,
-} from "./form-ui";
+} from "@/components/ui/form-field";
 import { REMOTE_CATEGORIES, REMOTE_LIMITS, REMOTE_MESSAGES } from "./submit-data";
 
 type Status = "idle" | "error" | "loading";

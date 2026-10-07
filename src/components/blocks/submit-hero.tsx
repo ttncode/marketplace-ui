@@ -1,4 +1,4 @@
-import { TRUST_STATS } from "./submit-data";
+import { TRUST_STATS } from "@/components/sites/mcpmarket-com-1a9fdbee/submit-7686f78b/submit-data";
 import { HeroDitherShader } from "@/components/blocks/dither-background";
 
 const HERO_MASK =

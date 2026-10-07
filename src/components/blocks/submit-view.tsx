@@ -2,10 +2,10 @@
 
 import { useEffect, useState, type KeyboardEvent } from "react";
 import { cn } from "@/lib/utils";
-import { GithubSubmitForm } from "./GithubSubmitForm";
-import { PopularGrid } from "./PopularGrid";
-import { RemoteMcpForm } from "./RemoteMcpForm";
-import { POPULAR, type SubmissionType } from "./submit-data";
+import { GithubSubmitForm } from "@/components/sites/mcpmarket-com-1a9fdbee/submit-7686f78b/GithubSubmitForm";
+import { PopularGrid } from "@/components/sites/mcpmarket-com-1a9fdbee/submit-7686f78b/PopularGrid";
+import { RemoteMcpForm } from "@/components/sites/mcpmarket-com-1a9fdbee/submit-7686f78b/RemoteMcpForm";
+import { POPULAR, type SubmissionType } from "@/components/sites/mcpmarket-com-1a9fdbee/submit-7686f78b/submit-data";
 
 type Source = "github" | "remote";
 
