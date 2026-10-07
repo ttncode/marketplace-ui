@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { ArrowRight, Check, Globe, Loader2, Plus, X } from "lucide-react";
-import { PRIMARY_FACE, PRIMARY_SHELL } from "@/components/sites/mcpmarket-com-1a9fdbee/tools-skills-slug-229a0ca0/texture-button";
+import { PRIMARY_FACE, PRIMARY_SHELL } from "@/components/ui/texture-button";
 import { cn } from "@/lib/utils";
 import {
   CHECKOUT_HREF,
