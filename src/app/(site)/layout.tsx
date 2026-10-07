@@ -1,4 +1,4 @@
-import { AnnouncementBar } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/AnnouncementBar";
+import { AnnouncementBar } from "@/components/blocks/announcement-bar";
 import { NewsletterToast } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/NewsletterToast";
 import { SiteFooter } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/SiteFooter";
 import { SiteHeader } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/SiteHeader";
