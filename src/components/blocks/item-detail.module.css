@@ -2,7 +2,7 @@
 
 .dotPattern {
   background-size: 40px 40px;
-  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.42) 1px, transparent 0);
+  background-image: radial-gradient(circle, color-mix(in oklab, var(--design-ink) 42%, transparent) 1px, transparent 0);
 }
 
 .hero {
@@ -29,56 +29,56 @@
 }
 
 .hero [data-server-detail-meta] {
-  color: rgba(34, 34, 34, 0.72);
+  color: color-mix(in oklab, var(--design-ink) 72%, transparent);
   font-family: var(--design-font-body);
 }
 
 .hero [data-server-detail-meta] :global(.text-foreground) {
-  color: rgba(34, 34, 34, 0.9) !important;
+  color: color-mix(in oklab, var(--design-ink) 90%, transparent) !important;
 }
 
 .hero [data-server-detail-meta] :global(.text-muted-foreground) {
-  color: rgba(34, 34, 34, 0.68) !important;
+  color: color-mix(in oklab, var(--design-ink) 68%, transparent) !important;
 }
 
 .hero [data-server-detail-meta] :global(.bg-muted) {
-  border-color: rgba(34, 34, 34, 0.14) !important;
-  background: rgba(250, 250, 250, 0.8) !important;
+  border-color: color-mix(in oklab, var(--design-ink) 14%, transparent) !important;
+  background: color-mix(in oklab, var(--design-canvas) 80%, transparent) !important;
 }
 
 .hero [data-server-detail-meta] a[title="GitHub"],
 .hero [data-server-detail-meta] a[title="NPM"],
 .hero [data-server-detail-meta] button {
-  color: rgba(34, 34, 34, 0.62) !important;
+  color: color-mix(in oklab, var(--design-ink) 62%, transparent) !important;
 }
 
 .hero [data-server-detail-meta] a[title="GitHub"]:hover,
 .hero [data-server-detail-meta] a[title="NPM"]:hover,
 .hero [data-server-detail-meta] button:hover {
-  background: rgba(34, 34, 34, 0.08) !important;
+  background: color-mix(in oklab, var(--design-ink) 8%, transparent) !important;
   color: var(--design-ink) !important;
 }
 
 .hero [data-server-detail-categories] :global(.border-border) {
-  border-color: rgba(34, 34, 34, 0.16) !important;
+  border-color: color-mix(in oklab, var(--design-ink) 16%, transparent) !important;
 }
 
 .hero [data-server-detail-categories] :global(.bg-muted) {
-  background: rgba(250, 250, 250, 0.82) !important;
+  background: color-mix(in oklab, var(--design-canvas) 82%, transparent) !important;
 }
 
 .hero [data-server-detail-categories] :global(.text-muted-foreground) {
-  color: rgba(34, 34, 34, 0.7) !important;
+  color: color-mix(in oklab, var(--design-ink) 70%, transparent) !important;
 }
 
 .hero [data-server-detail-categories] a:hover :global(.bg-muted) {
-  border-color: rgba(34, 34, 34, 0.42) !important;
+  border-color: color-mix(in oklab, var(--design-ink) 42%, transparent) !important;
   background: var(--design-ink) !important;
   color: var(--design-surface) !important;
 }
 
 .hero [data-server-detail-description] {
-  color: rgba(34, 34, 34, 0.66);
+  color: color-mix(in oklab, var(--design-ink) 66%, transparent);
   font-family: var(--design-font-body);
   letter-spacing: -0.012em;
 }
@@ -96,7 +96,7 @@
 .main [data-server-detail-tabs] [data-server-detail-card],
 .sidebar [data-server-detail-card] {
   box-shadow: var(--design-shadow-card);
-  border-color: rgba(34, 34, 34, 0.17) !important;
+  border-color: color-mix(in oklab, var(--design-ink) 17%, transparent) !important;
   background: var(--design-surface) !important;
 }
 
@@ -112,8 +112,8 @@
 }
 
 .sidebar [data-server-detail-card]:hover {
-  box-shadow: rgba(34, 34, 34, 0.067) 0 15px 34px;
-  border-color: rgba(34, 34, 34, 0.3) !important;
+  box-shadow: color-mix(in oklab, var(--design-ink) 6.7%, transparent) 0 15px 34px;
+  border-color: color-mix(in oklab, var(--design-ink) 30%, transparent) !important;
 }
 
 .sidebar [data-server-detail-card] h3 {
@@ -125,7 +125,7 @@
 }
 
 .sidebar [data-server-detail-card] :global(.bg-muted\/50) {
-  background: rgba(242, 242, 242, 0.86) !important;
+  background: color-mix(in oklab, var(--accent) 86%, transparent) !important;
 }
 
 @media (max-width: 767px) {

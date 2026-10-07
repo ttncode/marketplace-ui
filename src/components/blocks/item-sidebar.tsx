@@ -9,7 +9,7 @@ function PrimaryAction({ link }: { readonly link: LinkRef }) {
     <div data-server-detail-primary-actions className="flex w-full flex-col gap-2">
       <Link
         href={link.href}
-        className="inline-flex h-11 w-full items-center justify-between gap-2 rounded-[10px] border border-foreground/20 bg-white/20 px-4 font-sans text-sm font-normal tracking-[-0.01em] whitespace-nowrap text-foreground shadow-none ring-offset-background backdrop-blur-xl transition-all duration-200 hover:border-foreground/25 hover:bg-white/40 hover:shadow-none focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:outline-none"
+        className="inline-flex h-11 w-full items-center justify-between gap-2 rounded-[10px] border border-foreground/20 bg-surface/20 px-4 font-sans text-sm font-normal tracking-[-0.01em] whitespace-nowrap text-foreground shadow-none ring-offset-background backdrop-blur-xl transition-all duration-200 hover:border-foreground/25 hover:bg-surface/40 hover:shadow-none focus-visible:ring-2 focus-visible:ring-ring/30 focus-visible:ring-offset-2 focus-visible:outline-none"
       >
         {link.label}
         <ExternalLinkIcon className="h-3 w-3" />
