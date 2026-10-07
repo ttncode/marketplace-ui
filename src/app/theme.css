@@ -145,8 +145,8 @@
   --design-dither-dot: rgb(245 245 245 / 0.16);
   --design-dither-dot-strong: rgb(245 245 245 / 0.16);
   --design-dither-sheen: linear-gradient(112deg, rgb(255 255 255 / 0.06), transparent 28%, rgb(255 255 255 / 0.03) 54%, transparent 78%);
-  --design-dither-back: #141414;
-  --design-dither-front: #bdbdbd40;
+  --design-dither-back: #1a1a1a;
+  --design-dither-front: #a0a0a052;
   --design-shadow-card-hover: 0 16px 36px rgb(0 0 0 / 0.5);
   --design-surface-sunken: #262626;
   --design-surface-pressed: #333333;
