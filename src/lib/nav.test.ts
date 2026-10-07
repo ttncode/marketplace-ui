@@ -10,6 +10,7 @@ test("picks the most specific matching href", () => {
   strictEqual(activeHref("/app/videos", hrefs), "/app/videos");
   strictEqual(activeHref("/app/videos/new", hrefs), "/app/videos/new");
   strictEqual(activeHref("/app/videos/123", hrefs), "/app/videos");
+  strictEqual(activeHref("/app/videos/", hrefs), "/app/videos");
 });
 
 test("does not match on a shared prefix that is not a path segment", () => {
