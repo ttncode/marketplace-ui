@@ -28,7 +28,7 @@ export function AppSidebar({ name, logo, items, collapsed, onToggle, onNavigate,
   return (
     <aside
       className={cn(
-        "flex h-full flex-col border-r border-border bg-surface transition-[width] duration-200",
+        "flex h-full min-h-0 flex-col border-r border-border bg-surface transition-[width] duration-200",
         collapsed ? "w-16" : "w-60",
         className,
       )}
@@ -43,7 +43,7 @@ export function AppSidebar({ name, logo, items, collapsed, onToggle, onNavigate,
           </button>
         )}
       </div>
-      <nav aria-label="Dashboard" className="flex-1 space-y-1 px-2 py-2">
+      <nav aria-label="Dashboard" className="min-h-0 flex-1 space-y-1 overflow-y-auto px-2 py-2">
         {items.map((item) => {
           const Icon = ICONS[item.icon];
           const isActive = item.href === active;
