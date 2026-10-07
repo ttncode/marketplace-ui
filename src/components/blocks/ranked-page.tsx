@@ -1,6 +1,6 @@
-import { LeaderboardGrid } from "./LeaderboardGrid";
-import { LeaderboardHero } from "./LeaderboardHero";
-import type { LeaderboardHeroContent, LeaderboardRow, LeaderboardVariant } from "./types";
+import { LeaderboardGrid } from "./ranked-list";
+import { LeaderboardHero } from "./ranked-hero";
+import type { LeaderboardHeroContent, LeaderboardRow, LeaderboardVariant } from "./ranked-types";
 
 interface LeaderboardPageProps {
   readonly hero: LeaderboardHeroContent;
