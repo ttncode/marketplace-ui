@@ -4,7 +4,7 @@ import { useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { X } from "lucide-react";
 
-import { ANNOUNCEMENT } from "./site-data";
+import { ANNOUNCEMENT } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
 
 const DISMISSED_KEY = "mcpmarket-announcement-dismissed";
 
