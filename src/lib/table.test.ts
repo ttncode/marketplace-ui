@@ -66,3 +66,11 @@ test("NaN and empty-list cells sort last in both directions", () => {
   deepStrictEqual(ids(sortRows(odd, { key: "n", direction: "asc" })), ["d", "b", "a", "c"]);
   deepStrictEqual(ids(sortRows(odd, { key: "n", direction: "desc" })), ["b", "d", "a", "c"]);
 });
+
+test("hex, exponent and binary strings stay text", () => {
+  const strs: TableRow[] = [
+    { id: "a", n: "9" },
+    { id: "b", n: "0x10" },
+  ];
+  deepStrictEqual(ids(sortRows(strs, { key: "n", direction: "asc" })), ["b", "a"]);
+});

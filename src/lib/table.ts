@@ -24,7 +24,8 @@ const asText = (value: CellValue | undefined) => (Array.isArray(value) ? value.j
 function asNumber(value: CellValue | undefined): number {
   if (typeof value === "number") return value;
   if (typeof value !== "string" || !value.trim()) return NaN;
-  return Number(value.replace(/[,\s]/g, ""));
+  const stripped = value.replace(/[,\s]/g, "");
+  return /^[+-]?\d+(\.\d+)?$/.test(stripped) ? Number(stripped) : NaN;
 }
 
 function compare(a: CellValue | undefined, b: CellValue | undefined): number {
