@@ -35,7 +35,23 @@ export const site: SiteConfig = {
   dashboardNav: [],
   footer: {
     description: "Acme Directory lists the best tools for your workflow.",
-    columns: [],
+    columns: [
+      {
+        heading: "Browse",
+        links: [
+          { kind: "link", label: "Categories", href: "/categories" },
+          { kind: "link", label: "Search", href: "/search" },
+          { kind: "link", label: "Submit", href: "/submit" },
+        ],
+      },
+      {
+        heading: "Company",
+        links: [
+          { kind: "button", label: "Newsletter", ariaLabel: "Open newsletter signup", event: "open-newsletter-modal" },
+          { kind: "button", label: "Contact", ariaLabel: "Open contact form", event: "open-contact-modal" },
+        ],
+      },
+    ],
     legalLinks: [
       { label: "Privacy", href: "/privacy" },
       { label: "Terms", href: "/terms" },
