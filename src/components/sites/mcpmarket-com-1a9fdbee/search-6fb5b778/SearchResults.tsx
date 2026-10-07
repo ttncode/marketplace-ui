@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { ListingCard } from "@/components/sites/mcpmarket-com-1a9fdbee/categories-slug-c9486983/ListingCard";
 import styles from "@/components/sites/mcpmarket-com-1a9fdbee/shared/DirectoryCard.module.css";
 import type { DirectoryCard } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
-import { SECONDARY_FACE, SECONDARY_SHELL } from "@/components/sites/mcpmarket-com-1a9fdbee/tools-skills-slug-229a0ca0/texture-button";
+import { SECONDARY_FACE, SECONDARY_SHELL } from "@/components/ui/texture-button";
 
 const PAGE_SIZE = 21;
 const NEXT_PAGE_SKELETONS = 3;

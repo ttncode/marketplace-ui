@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState, type FormEvent, type KeyboardEvent, type ReactNode } from "react";
 import { ArrowRight, Check, Loader2, X } from "lucide-react";
 import { GithubIcon } from "@/components/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/icons";
-import { PRIMARY_FACE, PRIMARY_SHELL } from "@/components/sites/mcpmarket-com-1a9fdbee/tools-skills-slug-229a0ca0/texture-button";
+import { PRIMARY_FACE, PRIMARY_SHELL } from "@/components/ui/texture-button";
 import { cn } from "@/lib/utils";
 import {
   CHECKOUT_HREF,

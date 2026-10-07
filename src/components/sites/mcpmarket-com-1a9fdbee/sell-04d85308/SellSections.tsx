@@ -4,7 +4,7 @@ import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/lin
 import {
   PRIMARY_FACE,
   PRIMARY_SHELL,
-} from "@/components/sites/mcpmarket-com-1a9fdbee/tools-skills-slug-229a0ca0/texture-button";
+} from "@/components/ui/texture-button";
 import { cn } from "@/lib/utils";
 import { EarningsMockup } from "./Mockups";
 import { SELL_URL } from "./sell-data";

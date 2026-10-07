@@ -5,7 +5,7 @@ import {
   PRIMARY_SHELL,
   SECONDARY_FACE,
   SECONDARY_SHELL,
-} from "@/components/sites/mcpmarket-com-1a9fdbee/tools-skills-slug-229a0ca0/texture-button";
+} from "@/components/ui/texture-button";
 import {
   ExplainerContent,
   PrimaryButton,

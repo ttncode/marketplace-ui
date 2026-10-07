@@ -8,7 +8,7 @@ import {
   PRIMARY_SHELL,
   SECONDARY_FACE,
   SECONDARY_SHELL,
-} from "@/components/sites/mcpmarket-com-1a9fdbee/tools-skills-slug-229a0ca0/texture-button";
+} from "@/components/ui/texture-button";
 import { cn } from "@/lib/utils";
 import { HERO_ITEMS, PRICING_PLANS, SIGNUP_URL, type CheckItem, type IconItem } from "./hub-data";
 import { HeroDitherShader } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/HeroDitherShader";
