@@ -40,7 +40,6 @@ const PENDING = new Set<string>([
   "components/blocks/search-view.tsx",
   "components/blocks/submit-hero.tsx",
   "components/icons/breadcrumb-icons.tsx",
-  "components/layout/site-footer.tsx",
   "components/ui/form-field.tsx",
   "components/ui/texture-button.ts",
 ]);
