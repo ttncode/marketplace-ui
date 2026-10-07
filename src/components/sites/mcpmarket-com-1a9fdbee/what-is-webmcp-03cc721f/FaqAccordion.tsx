@@ -4,7 +4,7 @@ import { useId, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import type { FaqItem } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
 import { cn } from "@/lib/utils";
-import { AccordionRegion } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/AccordionRegion";
+import { AccordionRegion } from "@/components/ui/accordion-region";
 
 interface AccordionItemProps {
   readonly item: FaqItem;

@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SKILL_FAQS } from "./skills-landing-data";
 import type { SkillFaq } from "./types";
-import { AccordionRegion } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/AccordionRegion";
+import { AccordionRegion } from "@/components/ui/accordion-region";
 
 interface FaqItemProps {
   readonly item: SkillFaq;
