@@ -22,6 +22,10 @@
   --color-ink-secondary: var(--design-ink-secondary);
   --color-ink-muted: var(--design-ink-muted);
   --color-success: var(--design-success);
+  --color-brand-google-blue: var(--design-brand-google-blue);
+  --color-brand-google-green: var(--design-brand-google-green);
+  --color-brand-google-yellow: var(--design-brand-google-yellow);
+  --color-brand-google-red: var(--design-brand-google-red);
   --color-surface-sunken: var(--design-surface-sunken);
   --color-surface-pressed: var(--design-surface-pressed);
   --color-error-line: var(--design-error-line);

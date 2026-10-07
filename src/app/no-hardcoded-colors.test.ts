@@ -8,8 +8,6 @@ const COLOR = /#[0-9a-fA-F]{3,8}\b|\b(?:rgba?|hsla?)\(|-(?:white|black)\b/;
 
 /** Files still waiting for their Phase 4 tokenize task. Only ever remove entries. */
 const PENDING = new Set<string>([
-  "components/blocks/auth.module.css",
-  "components/blocks/oauth-buttons.tsx",
   "components/icons/breadcrumb-icons.tsx",
 ]);
 
