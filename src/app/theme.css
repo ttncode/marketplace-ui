@@ -1,0 +1,54 @@
+/* Light theme values; dark theme is not defined yet. */
+:root {
+  --design-canvas: #fbfbfb;
+  --design-surface: #ffffff;
+  --design-surface-muted: #f5f5f5;
+  --design-surface-subtle: #f7f7f7;
+  --design-ink: #0a0a0a;
+  --design-ink-secondary: #444444;
+  --design-ink-muted: #626262;
+  --design-line: rgb(10 10 10 / 0.14);
+  --design-line-strong: rgb(10 10 10 / 0.28);
+  --design-glass: rgb(255 255 255 / 0.78);
+  --design-glass-focus: rgb(255 255 255 / 0.9);
+  --design-surface-glass: rgb(255 255 255 / 0.72);
+  --design-surface-glass-hover: rgb(255 255 255 / 0.88);
+  --design-surface-glass-line: rgb(0 0 0 / 0.08);
+  --design-surface-glass-line-hover: rgb(0 0 0 / 0.14);
+  --design-shadow-glass-card: 0 16px 38px -28px rgb(15 23 42 / 0.48);
+  --design-shadow-glass-card-hover: 0 22px 46px -30px rgb(15 23 42 / 0.55);
+  --design-navigation-glass: linear-gradient(180deg, rgb(255 255 255 / 0.82), rgb(250 250 250 / 0.64));
+  --design-navigation-panel: linear-gradient(180deg, #ffffff, #fafafa);
+  --design-navigation-line: rgb(10 10 10 / 0.12);
+  --design-font-display: "Helvetica Neue", Helvetica, Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", Meiryo, "Noto Sans CJK JP", sans-serif;
+  --design-font-body: var(--font-inter), "Helvetica Neue", Helvetica, Arial, system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", Meiryo, "Noto Sans CJK JP", sans-serif;
+  --design-radius-md: 0.75rem;
+  --design-radius-lg: 1.5rem;
+  --design-radius-pill: 999px;
+  --design-shadow-card: 0 12px 34px rgb(10 10 10 / 0.04);
+  --design-shadow-inset: inset 0 1px 0 rgb(255 255 255 / 0.9);
+  --design-shadow-field: 0 18px 42px rgb(10 10 10 / 0.1), inset 0 1px 0 rgb(255 255 255 / 0.64);
+  --design-shadow-floating: 0 0 0 1px rgb(10 10 10 / 0.035), 0 0 24px rgb(10 10 10 / 0.09), 0 18px 40px rgb(10 10 10 / 0.11), 0 38px 72px rgb(10 10 10 / 0.07), inset 0 1px 0 rgb(255 255 255 / 0.9);
+  --design-shadow-navigation: 0 1px 2px rgb(10 10 10 / 0.08), 0 5px 12px -3px rgb(10 10 10 / 0.16), 0 18px 42px -12px rgb(10 10 10 / 0.18), 0 36px 72px -28px rgb(10 10 10 / 0.14), inset 0 1px 0 rgb(255 255 255 / 0.98), inset 0 -1px 0 rgb(10 10 10 / 0.075);
+  --design-success: #10b981;
+
+  --background: #fbfbfb;
+  --foreground: #0a0a0a;
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
+  --popover: #ffffff;
+  --popover-foreground: #0a0a0a;
+  --primary: #0a0a0a;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #0a0a0a;
+  --muted: #f5f5f5;
+  --muted-foreground: #616161;
+  --accent: #f2f2f2;
+  --accent-foreground: #0a0a0a;
+  --destructive: hsl(0 84.2% 60.2%);
+  --border: #dbdbdb;
+  --input: #d6d6d6;
+  --ring: #0a0a0a;
+  --radius: var(--design-radius-md);
+}
