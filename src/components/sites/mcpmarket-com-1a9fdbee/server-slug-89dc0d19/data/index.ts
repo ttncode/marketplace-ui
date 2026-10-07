@@ -1,4 +1,4 @@
-import type { ServerDetail } from "../types";
+import type { ServerDetail } from "@/components/blocks/item-types";
 import { firecrawl } from "./firecrawl";
 import { elevenlabs1 } from "./elevenlabs-1";
 import { magic1 } from "./magic-1";
