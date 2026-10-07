@@ -275,11 +275,3 @@ export const LEAD_FORMS: readonly LeadForm[] = [
     submitLabel: "Apply",
   },
 ];
-
-export const LOCALES = [
-  { code: "en", label: "English" },
-  { code: "zh", label: "中文" },
-  { code: "ko", label: "한국어" },
-  { code: "es", label: "Español" },
-  { code: "ja", label: "日本語" },
-] as const;
