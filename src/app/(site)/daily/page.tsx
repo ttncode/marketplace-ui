@@ -3,7 +3,7 @@ import { SERVER_SNAPSHOTS } from "@/components/sites/mcpmarket-com-1a9fdbee/dail
 import { DailyPage } from "@/components/sites/mcpmarket-com-1a9fdbee/daily-8ad2b380/DailyPage";
 
 export const metadata: Metadata = {
-  title: "Daily MCP Snapshot Archive | MCP Market",
+  title: "Daily MCP Snapshot Archive",
   description: "Browse daily rankings of the most popular MCP servers and discover new integrations.",
 };
 

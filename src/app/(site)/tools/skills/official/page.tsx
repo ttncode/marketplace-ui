@@ -10,7 +10,7 @@ import {
 } from "@/components/sites/mcpmarket-com-1a9fdbee/tools-skills-official-c4dc80e5/official-data";
 
 export const metadata: Metadata = {
-  title: "Official Agent Skills | MCP Market",
+  title: "Official Agent Skills",
   description: "Browse first-party Agent Skills published by official brands and teams.",
 };
 

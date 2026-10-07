@@ -20,7 +20,7 @@ import {
 import type { SkillCard } from "@/components/sites/mcpmarket-com-1a9fdbee/tools-skills-cb22ba36/types";
 
 export const metadata: Metadata = {
-  title: "Agent Skills Directory & Marketplace for Claude, ChatGPT & Codex | MCP Market",
+  title: "Agent Skills Directory & Marketplace for Claude, ChatGPT & Codex",
   description:
     "The Agent Skills marketplace for Claude.ai, Claude Code, Codex and ChatGPT — discover, install, and sell skills that give your AI agents new capabilities.",
 };

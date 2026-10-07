@@ -3,7 +3,7 @@ import { CategoryIndex } from "@/components/blocks/category-index";
 import { SKILL_CATEGORIES } from "@/components/sites/mcpmarket-com-1a9fdbee/categories-f91e624d/categories-data";
 
 export const metadata: Metadata = {
-  title: "Skill Categories | MCP Market",
+  title: "Skill Categories",
   description: "Browse Agent Skills by category to find the tools you need.",
 };
 

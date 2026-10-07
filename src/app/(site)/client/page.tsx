@@ -9,7 +9,7 @@ const DESCRIPTION = "Explore our complete collection of MCP clients that connect
 const PAGE_LINKS = [{ href: "/client?page=1", label: "Page 1" }] as const;
 
 export const metadata: Metadata = {
-  title: "Browse All MCP Clients | MCP Market",
+  title: "Browse All MCP Clients",
   description: DESCRIPTION,
 };
 

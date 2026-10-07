@@ -17,7 +17,7 @@ export async function generateMetadata({ searchParams }: SearchPageProps): Promi
   const results = query ? ` Search results for "${query}"` : "";
   const scope = categorySlug ? ` in ${categorySlug}` : "";
   return {
-    title: `Search${results}${scope} | MCP Market`,
+    title: `Search${results}${scope}`,
     description: "Browse all MCP servers to connect your AI agents with powerful tools and services.",
   };
 }
