@@ -6,6 +6,7 @@ import { test } from "node:test";
 import { routeExists, type KnownRoutes } from "../lib/routes.ts";
 import { site } from "../site.config.ts";
 import { CATEGORIES } from "./categories.ts";
+import { PLATFORMS, VIDEOS } from "./dashboard.ts";
 import { HOME_SECTIONS } from "./home.ts";
 import { LISTINGS } from "./listings.ts";
 
@@ -89,4 +90,16 @@ test("home sections reference existing listings and routes", () => {
 
 test("item route exists for every listing", () => {
   deepStrictEqual(LISTINGS.filter((l) => !routeExists(`/item/${l.slug}`, known)).map((l) => l.slug), []);
+});
+
+test("video ids are unique and platforms are known", () => {
+  const ids = VIDEOS.map((video) => video.id);
+  deepStrictEqual(ids, [...new Set(ids)]);
+  const known = new Set(PLATFORMS.map((platform) => platform.id));
+  deepStrictEqual(VIDEOS.flatMap((video) => video.platforms.filter((p) => !known.has(p))), []);
+});
+
+test("only drafts have no schedule time, and schedule times parse", () => {
+  deepStrictEqual(VIDEOS.filter((v) => (v.scheduledAt === null) !== (v.status === "draft")).map((v) => v.id), []);
+  deepStrictEqual(VIDEOS.filter((v) => v.scheduledAt !== null && Number.isNaN(Date.parse(v.scheduledAt))).map((v) => v.id), []);
 });
