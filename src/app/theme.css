@@ -78,14 +78,18 @@
   --design-success: #10b981;
   --design-overlay: rgb(10 10 10 / 0.8);
 
+  /* Brand color. shadcn's --accent is a hover background, not this. */
+  --design-accent: #0a0a0a;
+  --design-accent-foreground: #ffffff;
+
   --background: #fbfbfb;
   --foreground: #0a0a0a;
   --card: #ffffff;
   --card-foreground: #0a0a0a;
   --popover: #ffffff;
   --popover-foreground: #0a0a0a;
-  --primary: #0a0a0a;
-  --primary-foreground: #ffffff;
+  --primary: var(--design-accent);
+  --primary-foreground: var(--design-accent-foreground);
   --secondary: #f5f5f5;
   --secondary-foreground: #0a0a0a;
   --muted: #f5f5f5;
@@ -95,7 +99,7 @@
   --destructive: hsl(0 84.2% 60.2%);
   --border: #dbdbdb;
   --input: #d6d6d6;
-  --ring: #0a0a0a;
+  --ring: var(--design-accent);
   --radius: var(--design-radius-md);
 }
 
@@ -174,14 +178,17 @@
   --design-success: #34d399;
   --design-overlay: rgb(10 10 10 / 0.8);
 
+  --design-accent: #f5f5f5;
+  --design-accent-foreground: #0a0a0a;
+
   --background: #0b0b0b;
   --foreground: #f5f5f5;
   --card: #141414;
   --card-foreground: #f5f5f5;
   --popover: #141414;
   --popover-foreground: #f5f5f5;
-  --primary: #f5f5f5;
-  --primary-foreground: #0a0a0a;
+  --primary: var(--design-accent);
+  --primary-foreground: var(--design-accent-foreground);
   --secondary: #1a1a1a;
   --secondary-foreground: #f5f5f5;
   --muted: #1a1a1a;
@@ -191,5 +198,5 @@
   --destructive: hsl(0 72% 58%);
   --border: #2a2a2a;
   --input: #2e2e2e;
-  --ring: #f5f5f5;
+  --ring: var(--design-accent);
 }
