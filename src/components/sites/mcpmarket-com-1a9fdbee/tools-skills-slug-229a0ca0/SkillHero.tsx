@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
-import { ChevronRightIcon, GithubIcon, HomeIcon, StarIcon } from "./icons";
+import { ChevronRightIcon, GithubIcon, HomeIcon, StarIcon } from "@/components/icons/breadcrumb-icons";
 import { SharePopover } from "./SharePopover";
 import type { SkillDetail } from "./types";
 

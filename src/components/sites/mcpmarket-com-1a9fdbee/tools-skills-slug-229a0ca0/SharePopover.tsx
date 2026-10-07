@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
-import { ShareIcon } from "./icons";
+import { ShareIcon } from "@/components/icons/breadcrumb-icons";
 
 interface ShareTarget {
   readonly label: string;
