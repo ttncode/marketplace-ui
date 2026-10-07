@@ -12,8 +12,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 A Next.js starter for directory sites and management dashboards. Static data, no backend.
 
-- `npm run check` runs lint, typecheck, tests and build. Run it before committing.
+- `npm run check` runs lint, typecheck, tests and build, and the build also builds the registry (via `prebuild`). Run it before committing.
 - TypeScript strict, no `any`. Tailwind utilities, no inline styles. Named exports.
+- New or changed files in `ui/`, `blocks/`, `layout/`, `icons/` or shared `lib/` files need a `registry.json` entry; `src/lib/registry.test.ts` fails otherwise.
+- Authentication is simulated: forms and OAuth buttons navigate to `/app`. There is no backend.
 
 ## Where things live
 
