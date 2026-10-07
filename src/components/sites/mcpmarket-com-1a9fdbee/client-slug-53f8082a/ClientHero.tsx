@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
-import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import type { McpClient } from "./types";
 
 const CRUMB_LINK =
@@ -88,7 +87,7 @@ export function ClientHero({ client }: { readonly client: McpClient }) {
               <div className="mt-2 flex items-center gap-3 text-sm">
                 <div className="flex items-center gap-1.5">
                   <span className="text-muted-foreground">by</span>
-                  <a href={toSiteHref(client.owner.href)} className="font-medium text-foreground transition-colors hover:text-primary">
+                  <a href={client.owner.href} className="font-medium text-foreground transition-colors hover:text-primary">
                     {client.owner.name}
                   </a>
                 </div>

@@ -9,7 +9,7 @@ export function TermsContent({ siteName, contactEmail }: TermsContentProps) {
   return (
     <>
       <p>
-        <strong>Template text — replace it with your own reviewed terms of service.</strong>
+        <strong>Template text — replace it with your own reviewed terms of service. This is not legal advice.</strong>
       </p>
       <p>These terms govern your use of {siteName}. By using the site you agree to them.</p>
       <hr />
@@ -26,7 +26,7 @@ export function TermsContent({ siteName, contactEmail }: TermsContentProps) {
       <p>The service is provided as is, without warranties of any kind, and we are not liable for losses arising from its use to the extent the law allows.</p>
       <hr />
       <h2>Contact for terms</h2>
-      <p>Questions about these terms can be sent to {contactEmail}.</p>
+      <p>Questions about these terms can be sent to <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.</p>
     </>
   );
 }

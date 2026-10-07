@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ExternalLinkIcon } from "@/components/icons/detail-icons";
-import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import { CalendarIcon } from "@/components/icons/news-icons";
 import type { NewsItem } from "@/components/sites/mcpmarket-com-1a9fdbee/news-f46b16ed/news-data";
 
@@ -25,7 +24,7 @@ export function NewsCard({ item }: { readonly item: NewsItem }) {
             </div>
           </div>
           <Link
-            href={toSiteHref(item.url)}
+            href={item.url}
             aria-label={`Read full article: ${item.title}`}
             className="relative z-20 flex items-center gap-1 pt-3 text-primary transition-colors hover:text-primary/80"
           >

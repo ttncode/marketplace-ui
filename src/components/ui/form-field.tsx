@@ -1,13 +1,9 @@
 import { Check } from "lucide-react";
 import type { ReactNode, SVGProps } from "react";
-import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import { cn } from "@/lib/utils";
 
 /** The source waits on its API here; the clone pauses so the loading state is visible. */
 export const SIMULATED_LATENCY_MS = 700;
-
-/** A valid paid submission leaves for Stripe checkout, another website, so the clone lands on the 404. */
-export const CHECKOUT_HREF = toSiteHref("https://checkout.stripe.com/");
 
 export const wait = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 

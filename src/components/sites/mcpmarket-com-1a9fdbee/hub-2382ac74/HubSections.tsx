@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { ArrowRight, CircleCheck } from "lucide-react";
 import { LogoMarkIcon } from "@/components/icons/nav-icons";
-import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import {
   PRIMARY_FACE,
   PRIMARY_SHELL,
@@ -25,7 +24,7 @@ const GLASS_BUTTON =
 
 function GetStartedButton() {
   return (
-    <Link href={toSiteHref(SIGNUP_URL)} className={cn(PRIMARY_SHELL, "h-12 w-fit")}>
+    <Link href={SIGNUP_URL} className={cn(PRIMARY_SHELL, "h-12 w-fit")}>
       <span className={cn(PRIMARY_FACE, "text-base leading-[24px]")}>
         Get started
         <ArrowRight aria-hidden="true" className="ml-2 h-4 w-4" strokeWidth={1.5} />
@@ -250,11 +249,11 @@ export function PricingSection() {
                 ))}
               </ul>
               {plan.featured ? (
-                <Link href={toSiteHref(SIGNUP_URL)} className={cn(SECONDARY_SHELL, "mt-6 h-11")}>
+                <Link href={SIGNUP_URL} className={cn(SECONDARY_SHELL, "mt-6 h-11")}>
                   <span className={cn(SECONDARY_FACE, "text-sm leading-[20px]")}>{plan.cta}</span>
                 </Link>
               ) : (
-                <Link href={toSiteHref(SIGNUP_URL)} className={GLASS_BUTTON}>
+                <Link href={SIGNUP_URL} className={GLASS_BUTTON}>
                   {plan.cta}
                 </Link>
               )}

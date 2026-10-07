@@ -3,7 +3,6 @@
 import { LoaderCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import { AuthButton } from "@/components/ui/auth-controls";
 
 const PROVIDERS = {
@@ -44,7 +43,7 @@ export function OAuthButtons() {
 
   const start = (provider: Provider) => {
     setPending(provider);
-    router.push(toSiteHref(PROVIDERS[provider].href));
+    router.push(PROVIDERS[provider].href);
   };
 
   return (

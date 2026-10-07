@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import {
   PRIMARY_FACE,
   PRIMARY_SHELL,
@@ -62,7 +61,7 @@ function PlatformCardView({ platform }: { readonly platform: PlatformCard }) {
         ))}
       </ul>
       <Link
-        href={toSiteHref(platform.guide.href)}
+        href={platform.guide.href}
         className={cn(
           PRIMARY_SHELL,
           "transition-all duration-300",

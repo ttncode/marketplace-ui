@@ -37,11 +37,6 @@ export function AuthHeading({ children }: { readonly children: React.ReactNode }
   );
 }
 
-export function AuthError({ message }: { readonly message: string | null }) {
-  if (!message) return null;
-  return <div className="mb-6 rounded-[5px] bg-destructive/10 p-3 text-sm text-destructive">{message}</div>;
-}
-
 export function OrDivider() {
   return (
     <div className="relative">

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowRight, Store } from "lucide-react";
-import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import {
   PRIMARY_FACE,
   PRIMARY_SHELL,
@@ -15,7 +14,7 @@ const HERO_MASK =
 
 function StartSellingButton() {
   return (
-    <Link href={toSiteHref(SELL_URL)} className={cn(PRIMARY_SHELL, "mt-8 h-12 w-fit rounded-lg")}>
+    <Link href={SELL_URL} className={cn(PRIMARY_SHELL, "mt-8 h-12 w-fit rounded-lg")}>
       <span className={cn(PRIMARY_FACE, "text-base leading-[24px]")}>
         Start selling
         <ArrowRight aria-hidden="true" className="ml-2 h-4 w-4" strokeWidth={1.5} />

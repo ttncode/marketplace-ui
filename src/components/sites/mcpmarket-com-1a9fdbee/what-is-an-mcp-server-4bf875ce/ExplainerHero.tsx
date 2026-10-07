@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import { ChevronRightIcon, HomeIcon } from "@/components/icons/breadcrumb-icons";
 import {
   PRIMARY_FACE,
@@ -52,10 +51,10 @@ function HeroActions({ actions }: Pick<HeroContent, "actions">) {
   if (!actions) return null;
   return (
     <div className="mt-8 flex flex-wrap gap-3">
-      <Link href={toSiteHref(actions.primary.href)} className={cn(PRIMARY_SHELL, "w-fit")}>
+      <Link href={actions.primary.href} className={cn(PRIMARY_SHELL, "w-fit")}>
         <span className={cn(PRIMARY_FACE, "text-base")}>{actions.primary.label}</span>
       </Link>
-      <Link href={toSiteHref(actions.secondary.href)} className={cn(SECONDARY_SHELL, "w-fit")}>
+      <Link href={actions.secondary.href} className={cn(SECONDARY_SHELL, "w-fit")}>
         <span className={cn(SECONDARY_FACE, "text-base")}>{actions.secondary.label}</span>
       </Link>
     </div>

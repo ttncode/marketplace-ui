@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import { InstallCard } from "./InstallCard";
 import type { RelatedItem, SkillDetail } from "./types";
 
@@ -79,7 +78,7 @@ export function SkillSidebar({ skill }: { readonly skill: SkillDetail }) {
         <div aria-label="Sponsored" className="mx-auto w-full max-w-[240px]">
           <div className="relative">
             <Link
-              href={toSiteHref(AD.href)}
+              href={AD.href}
               className="relative block overflow-hidden rounded-lg border border-border transition-colors hover:border-foreground/30"
             >
               <Image src={AD.src} alt={AD.alt} width={1080} height={1920} sizes="240px" className="h-auto w-full" />

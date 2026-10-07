@@ -5,10 +5,10 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { LoaderCircle, Mail, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { NOT_FOUND_HREF } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import { GithubMarkIcon, GoogleIcon, ShieldAlertIcon, ShieldIcon } from "@/components/icons/breadcrumb-icons";
 import { PRIMARY_FACE, PRIMARY_SHELL } from "@/components/ui/texture-button";
 
+const NOT_FOUND_HREF = "/not-found";
 const EXIT_DURATION_MS = 300;
 // ponytail: stands in for the Supabase sign-up and scan round-trips the clone has no backend for.
 const MOCK_REQUEST_MS = 1200;
