@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ListingHero } from "@/components/blocks/listing-hero";
 import { ListingResults } from "@/components/blocks/listing-results";
+import { toListingCard } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/card-listing";
 import { CATEGORY_LINKS } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
 import {
   SERVER_CARDS,
@@ -26,7 +27,7 @@ export default function ServersPage() {
           categoryLinks={CATEGORY_LINKS}
         />
         <ListingResults
-          cards={SERVER_CARDS}
+          listings={SERVER_CARDS.map(toListingCard)}
           status="more"
           pageLinks={paginationLinks("/server", SERVER_PAGE_COUNT)}
         />

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ListingHero } from "@/components/blocks/listing-hero";
 import { ListingResults } from "@/components/blocks/listing-results";
+import { toListingCard } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/card-listing";
 import { CATEGORY_LINKS } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
 import { CLIENT_CARDS } from "@/components/sites/mcpmarket-com-1a9fdbee/categories-slug-c9486983/listing-data";
 
@@ -25,7 +26,7 @@ export default function ClientsPage() {
           searchPlaceholder="Search for MCP servers..."
           categoryLinks={CATEGORY_LINKS}
         />
-        <ListingResults cards={CLIENT_CARDS} status="all" pageLinks={PAGE_LINKS} />
+        <ListingResults listings={CLIENT_CARDS.map(toListingCard)} status="all" pageLinks={PAGE_LINKS} />
       </div>
     </main>
   );

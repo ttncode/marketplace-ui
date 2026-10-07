@@ -6,6 +6,7 @@ import { test } from "node:test";
 import { routeExists, type KnownRoutes } from "../lib/routes.ts";
 import { site } from "../site.config.ts";
 import { CATEGORIES } from "./categories.ts";
+import { LISTINGS } from "./listings.ts";
 
 const APP_DIR = new URL("../app", import.meta.url).pathname;
 
@@ -46,6 +47,8 @@ test("category slugs are unique", () => {
 });
 
 test("every internal link in the site config resolves to a route", () => {
+  ok(known.routes.length > 0);
+  ok(siteHrefs().length > 0);
   const broken = siteHrefs().filter((href) => !routeExists(href, known));
   deepStrictEqual(broken, []);
 });
@@ -57,4 +60,19 @@ test("routeExists matches static and dynamic routes", () => {
   ok(routeExists("/categories/design?page=2#top", sample));
   ok(!routeExists("/categories/missing", sample));
   ok(!routeExists("/nowhere", sample));
+});
+
+test("listing slugs are unique", () => {
+  const slugs = LISTINGS.map((listing) => listing.slug);
+  deepStrictEqual(slugs, [...new Set(slugs)]);
+});
+
+test("every listing belongs to an existing category", () => {
+  const categories = new Set(CATEGORIES.map((category) => category.slug));
+  deepStrictEqual(LISTINGS.filter((listing) => !categories.has(listing.category)).map((l) => l.slug), []);
+});
+
+test("every category has at least one listing", () => {
+  const used = new Set(LISTINGS.map((listing) => listing.category));
+  deepStrictEqual(CATEGORIES.filter((category) => !used.has(category.slug)).map((c) => c.slug), []);
 });

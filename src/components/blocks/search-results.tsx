@@ -3,8 +3,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { LoaderCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ListingCard } from "@/components/blocks/listing-card-compact";
+import { ListingCard } from "@/components/blocks/listing-card";
 import styles from "@/components/blocks/listing-card.module.css";
+import { toListingCard } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/card-listing";
 import type { DirectoryCard } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
 import { SECONDARY_FACE, SECONDARY_SHELL } from "@/components/ui/texture-button";
 
@@ -142,7 +143,7 @@ export function SearchResults({ cards, query, loadMode }: SearchResultsProps) {
     <div>
       <div className="grid gap-[14px] sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {shown.map((card) => (
-          <ListingCard key={card.href} card={card} />
+          <ListingCard key={card.href} listing={toListingCard(card)} />
         ))}
         {loading &&
           Array.from({ length: NEXT_PAGE_SKELETONS }, (_, index) => <NextPageSkeleton key={index} />)}
