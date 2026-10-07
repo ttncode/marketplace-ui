@@ -55,6 +55,8 @@
   --design-success-line: rgb(187 247 208 / 0.6);
   --design-success-surface: rgb(240 253 244 / 0.3);
   --design-success-ink: #166534;
+  --design-warning-ink: #92400e;
+  --design-info-ink: #1d4ed8;
   --design-prose-body: #374151;
   --design-prose-heading: #111827;
   --design-prose-rule: #e5e7eb;
@@ -158,6 +160,8 @@
   --design-success-line: rgb(74 222 128 / 0.35);
   --design-success-surface: rgb(20 83 45 / 0.25);
   --design-success-ink: #86efac;
+  --design-warning-ink: #fcd34d;
+  --design-info-ink: #93c5fd;
   --design-prose-body: #d1d5db;
   --design-prose-heading: #f3f4f6;
   --design-prose-rule: #374151;

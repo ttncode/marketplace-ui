@@ -5,7 +5,7 @@ const VARIANTS = {
   primary: "bg-primary text-primary-foreground hover:bg-primary/90",
   secondary: "border border-border bg-surface text-ink hover:bg-accent",
   ghost: "text-ink-secondary hover:bg-accent hover:text-ink",
-  destructive: "bg-destructive/10 text-destructive hover:bg-destructive/15",
+  destructive: "bg-destructive/10 text-error-ink hover:bg-destructive/15",
 } as const;
 
 const SIZES = {
@@ -19,7 +19,7 @@ export type ButtonSize = keyof typeof SIZES;
 
 export function buttonVariants({ variant = "primary", size = "md" }: { readonly variant?: ButtonVariant; readonly size?: ButtonSize } = {}) {
   return cn(
-    "inline-flex shrink-0 items-center justify-center gap-2 rounded-[var(--design-radius-md)] font-medium whitespace-nowrap transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring/40 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
+    "inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-[var(--design-radius-md)] font-medium whitespace-nowrap transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring/40 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
     VARIANTS[variant],
     SIZES[size],
   );

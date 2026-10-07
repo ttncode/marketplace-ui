@@ -41,6 +41,8 @@
   --color-success-line: var(--design-success-line);
   --color-success-surface: var(--design-success-surface);
   --color-success-ink: var(--design-success-ink);
+  --color-warning-ink: var(--design-warning-ink);
+  --color-info-ink: var(--design-info-ink);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
