@@ -3,11 +3,11 @@
 import { useOptimistic, useTransition, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import type { DirectoryCard } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
-import { CategoryRail } from "./CategoryRail";
-import { SearchBar, SearchBreadcrumbs, SearchTabs } from "./SearchHeader";
-import { ResultsSkeleton, SearchResults } from "./SearchResults";
-import { SEARCH_CATEGORIES } from "./search-data";
-import type { SearchParams } from "./search-index";
+import { CategoryRail } from "./search-category-rail";
+import { SearchBar, SearchBreadcrumbs, SearchTabs } from "./search-header";
+import { ResultsSkeleton, SearchResults } from "./search-results";
+import { SEARCH_CATEGORIES } from "@/components/sites/mcpmarket-com-1a9fdbee/search-6fb5b778/search-data";
+import type { SearchParams } from "@/lib/search-index";
 
 const PLACEHOLDERS = { mcp: "Search for MCP servers...", skills: "Search for Agent Skills..." } as const;
 

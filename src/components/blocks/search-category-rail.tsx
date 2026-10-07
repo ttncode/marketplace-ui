@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { SEARCH_CATEGORIES } from "./search-data";
+import { SEARCH_CATEGORIES } from "@/components/sites/mcpmarket-com-1a9fdbee/search-6fb5b778/search-data";
 
 const VISIBLE_CHIPS = 5;
 const CHIPS = SEARCH_CATEGORIES.slice(0, VISIBLE_CHIPS);

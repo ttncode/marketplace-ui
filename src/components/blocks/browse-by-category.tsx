@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { BrowseCategoryIcon } from "@/components/icons/search-icons";
-import { BROWSE_CATEGORIES } from "./search-data";
+import { BROWSE_CATEGORIES } from "@/components/sites/mcpmarket-com-1a9fdbee/search-6fb5b778/search-data";
 
 export function BrowseByCategory() {
   return (
