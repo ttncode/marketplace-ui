@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
-import { GithubIcon, PackageIcon, ShareIcon } from "./icons";
+import { GithubIcon, PackageIcon, ShareIcon } from "@/components/icons/detail-icons";
 import { SHARE_TARGETS } from "./share-targets";
 
 const ICON_BUTTON =

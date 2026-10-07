@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import styles from "./detail.module.css";
-import { ExternalLinkIcon, RocketIcon } from "./icons";
+import { ExternalLinkIcon, RocketIcon } from "@/components/icons/detail-icons";
 import type { PrimaryActions, RelatedList } from "./types";
 
 /** The one sponsor the source rotates into every server page. */
