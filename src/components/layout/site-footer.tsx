@@ -1,10 +1,10 @@
 import { LogoMarkIcon } from "@/components/icons/nav-icons";
 
-import { LanguageSwitcher } from "./LanguageSwitcher";
-import { toSiteHref } from "./links";
+import { LanguageSwitcher } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/LanguageSwitcher";
+import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import { OverlayTrigger } from "@/components/blocks/lead-dialog";
-import { FOOTER, FOOTER_COLUMNS } from "./site-data";
-import type { FooterColumn, FooterLink } from "./types";
+import { FOOTER, FOOTER_COLUMNS } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
+import type { FooterColumn, FooterLink } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
 
 const LINK_CLASS = "font-sans text-sm leading-5 text-[#616161] transition-colors duration-150 hover:text-[#0a0a0a]";
 

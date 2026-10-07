@@ -1,6 +1,6 @@
 import { AnnouncementBar } from "@/components/blocks/announcement-bar";
 import { NewsletterToast } from "@/components/blocks/newsletter-toast";
-import { SiteFooter } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/SiteFooter";
+import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteOverlays } from "@/components/blocks/lead-dialog";
 
