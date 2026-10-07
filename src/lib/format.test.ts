@@ -15,6 +15,15 @@ test("formatBytes picks a readable unit", () => {
   strictEqual(formatBytes(12 * 1024 * 1024), "12.0 MB");
 });
 
+test("formatBytes handles unit boundaries and bad input", () => {
+  strictEqual(formatBytes(1023), "1023 B");
+  strictEqual(formatBytes(1024), "1.0 KB");
+  strictEqual(formatBytes(1048575), "1.0 MB");
+  strictEqual(formatBytes(5 * 1024 ** 4), "5.0 TB");
+  strictEqual(formatBytes(-1), "—");
+  strictEqual(formatBytes(NaN), "—");
+});
+
 test("formatNumber groups thousands", () => {
   strictEqual(formatNumber(12400), "12,400");
 });

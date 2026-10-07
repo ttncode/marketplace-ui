@@ -14,12 +14,14 @@ export function formatDateTime(iso: string | null): string {
   return Number.isNaN(time) ? "—" : `${DATE_TIME.format(time)} UTC`;
 }
 
-const UNITS = ["B", "KB", "MB", "GB"] as const;
+const UNITS = ["B", "KB", "MB", "GB", "TB"] as const;
 
 export function formatBytes(bytes: number): string {
+  if (!Number.isFinite(bytes) || bytes < 0) return "—";
   let value = bytes;
   let unit = 0;
-  while (value >= 1024 && unit < UNITS.length - 1) {
+  // Compare the rounded value so 1048575 B becomes 1.0 MB, not 1024.0 KB.
+  while (Math.round(value * 10) / 10 >= 1024 && unit < UNITS.length - 1) {
     value /= 1024;
     unit += 1;
   }
