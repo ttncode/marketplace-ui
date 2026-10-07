@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { CATEGORY_LINKS } from "./site-data";
+import { CATEGORY_LINKS } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
 
 const EDGE_THRESHOLD_PX = 5;
 
