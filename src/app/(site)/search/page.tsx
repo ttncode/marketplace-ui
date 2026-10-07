@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { BrowseByCategory } from "@/components/sites/mcpmarket-com-1a9fdbee/search-6fb5b778/BrowseByCategory";
-import { SearchView } from "@/components/sites/mcpmarket-com-1a9fdbee/search-6fb5b778/SearchView";
+import { BrowseByCategory } from "@/components/blocks/browse-by-category";
+import { SearchView } from "@/components/blocks/search-view";
 import {
   parseSearchParams,
   searchCards,
   type RawSearchParams,
-} from "@/components/sites/mcpmarket-com-1a9fdbee/search-6fb5b778/search-index";
+} from "@/lib/search-index";
 
 interface SearchPageProps {
   readonly searchParams: Promise<RawSearchParams>;

@@ -1,5 +1,5 @@
 import { permanentRedirect } from "next/navigation";
-import type { RawSearchParams } from "@/components/sites/mcpmarket-com-1a9fdbee/search-6fb5b778/search-index";
+import type { RawSearchParams } from "@/lib/search-index";
 
 interface SkillsSearchPageProps {
   readonly searchParams: Promise<RawSearchParams>;
