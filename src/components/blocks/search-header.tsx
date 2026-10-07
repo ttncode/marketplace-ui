@@ -1,12 +1,9 @@
 "use client";
 
-import { useRef, useState, type KeyboardEvent } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Search, X } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { ChevronRightIcon, HomeIcon } from "@/components/icons/breadcrumb-icons";
-import { PlugIcon, SparklesIcon } from "@/components/icons/search-icons";
-import type { SearchType } from "@/lib/search-index";
 
 export function SearchBreadcrumbs({ query }: { readonly query: string }) {
   return (
@@ -32,71 +29,6 @@ export function SearchBreadcrumbs({ query }: { readonly query: string }) {
         </li>
       </ol>
     </nav>
-  );
-}
-
-const TABS = [
-  { type: "mcp", label: "MCP Servers", Icon: PlugIcon },
-  { type: "skills", label: "Agent Skills", Icon: SparklesIcon },
-] as const;
-
-interface SearchTabsProps {
-  readonly active: SearchType;
-  readonly onChange: (type: SearchType) => void;
-}
-
-/** Radix-style tablist: arrow keys, Home and End move focus and activate. */
-export function SearchTabs({ active, onChange }: SearchTabsProps) {
-  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
-
-  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    const current = TABS.findIndex((tab) => tab.type === active);
-    const last = TABS.length - 1;
-    const target =
-      event.key === "ArrowRight" ? (current + 1) % TABS.length
-      : event.key === "ArrowLeft" ? (current + last) % TABS.length
-      : event.key === "Home" ? 0
-      : event.key === "End" ? last
-      : -1;
-    if (target < 0) return;
-    event.preventDefault();
-    tabRefs.current[target]?.focus();
-    onChange(TABS[target].type);
-  };
-
-  return (
-    <div className="flex items-center">
-      <div
-        role="tablist"
-        aria-orientation="horizontal"
-        onKeyDown={handleKeyDown}
-        className="inline-flex h-auto items-end justify-center gap-1 overflow-y-hidden border-b border-[#dbdbdb] bg-[rgba(245,245,245,0.5)] p-1 text-[#616161]"
-      >
-        {TABS.map(({ type, label, Icon }, index) => {
-          const selected = type === active;
-          return (
-            <button
-              key={type}
-              ref={(node) => {
-                tabRefs.current[index] = node;
-              }}
-              type="button"
-              role="tab"
-              aria-selected={selected}
-              tabIndex={selected ? 0 : -1}
-              onClick={() => !selected && onChange(type)}
-              className={cn(
-                "-mb-px flex items-center justify-center gap-2 border-b-2 border-transparent px-4 py-2 font-sans text-sm leading-5 font-medium whitespace-nowrap ring-offset-[#fbfbfb] transition-[border-color,color] focus-visible:ring-2 focus-visible:ring-[rgba(10,10,10,0.3)] focus-visible:ring-offset-2 focus-visible:outline-none",
-                selected && "border-[#0a0a0a] bg-[#fbfbfb] text-[#0a0a0a]",
-              )}
-            >
-              <Icon className="h-4 w-4" />
-              <span>{label}</span>
-            </button>
-          );
-        })}
-      </div>
-    </div>
   );
 }
 
