@@ -4,8 +4,7 @@ import { useCallback, useEffect, useRef, useState, type FormEvent } from "react"
 import { Dialog } from "@base-ui/react/dialog";
 import { CircleCheck, LoaderCircle, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { LEAD_FORMS } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
-import type { LeadForm, LeadFormField, OverlayEvent } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
+import type { LeadForm, LeadFormField, OverlayEvent } from "@/lib/types";
 
 // ponytail: no backend, so a submit only waits this long before showing success.
 const SUBMIT_LATENCY_MS = 800;
@@ -36,7 +35,7 @@ function isValidEmail(value: FormDataEntryValue | null): boolean {
 }
 
 export function OverlayTrigger({ event, ariaLabel, className, children }: {
-  readonly event: OverlayEvent | import("@/lib/types").OverlayEvent;
+  readonly event: OverlayEvent;
   readonly ariaLabel: string;
   readonly className: string;
   readonly children: React.ReactNode;
@@ -253,7 +252,7 @@ function useBodyScrollLock(locked: boolean): void {
   }, [locked]);
 }
 
-export function SiteOverlays() {
+export function SiteOverlays({ forms }: { readonly forms: readonly LeadForm[] }) {
   const [openEvent, setOpenEvent] = useState<OverlayEvent | null>(null);
   const [scrollLocked, setScrollLocked] = useState(false);
   const [toast, setToast] = useState<{ readonly id: number; readonly message: string } | null>(null);
@@ -262,16 +261,15 @@ export function SiteOverlays() {
 
   useEffect(() => {
     const controller = new AbortController();
-    for (const form of LEAD_FORMS) {
+    for (const form of forms) {
       const open = () => {
         setOpenEvent(form.event);
         setScrollLocked(true);
       };
       window.addEventListener(form.event, open, { signal: controller.signal });
-      window.addEventListener(form.aliasEvent, open, { signal: controller.signal });
     }
     return () => controller.abort();
-  }, []);
+  }, [forms]);
 
   const showError = useCallback((message: string) => setToast({ id: Date.now(), message }), []);
   const clearToast = useCallback(() => setToast(null), []);
@@ -280,7 +278,7 @@ export function SiteOverlays() {
 
   return (
     <>
-      {LEAD_FORMS.map((form) => (
+      {forms.map((form) => (
         <LeadDialog
           key={form.event}
           form={form}
