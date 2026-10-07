@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Check, Copy } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import { DownloadIcon, ShieldIcon, TerminalIcon } from "@/components/icons/breadcrumb-icons";
 import { SecurityScanSheet } from "./SecurityScanSheet";
 import { PRIMARY_FACE, PRIMARY_SHELL, SECONDARY_FACE, SECONDARY_SHELL } from "@/components/ui/texture-button";
@@ -26,7 +25,7 @@ function DownloadPanel({ href }: { readonly href: string }) {
         <strong className="font-semibold text-foreground">Claude Code</strong>,{" "}
         <strong className="font-semibold text-foreground">Codex</strong>, and more.
       </p>
-      <Link href={toSiteHref(href)} className={cn(PRIMARY_SHELL, "gap-2 text-sm")}>
+      <Link href={href} className={cn(PRIMARY_SHELL, "gap-2 text-sm")}>
         <span className={cn(PRIMARY_FACE, "text-sm")}>
           <DownloadIcon className="h-4 w-4" />
           Download skill

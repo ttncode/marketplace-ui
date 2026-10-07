@@ -14,7 +14,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import { CATEGORY_STATS, TOP_SKILLS } from "./skills-landing-data";
 import type { CategoryIconName } from "./types";
 import { BRAND_FAVICONS } from "@/components/icons/nav-icons";
@@ -183,7 +182,7 @@ export function HubPromo() {
               </span>
             </Link>
             <Link
-              href={toSiteHref("https://app.mcpmarket.com/signup")}
+              href={"https://app.mcpmarket.com/signup"}
               className="inline-flex h-12 items-center justify-center rounded-[12px] border border-transparent px-8 font-sans text-sm leading-5 font-normal tracking-[-0.01em] whitespace-nowrap text-[#616161] transition-[background-color,border-color,color,box-shadow,transform,translate,scale,rotate] duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:bg-[#f2f2f2] hover:text-[#0a0a0a]"
             >
               Get Started

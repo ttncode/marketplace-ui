@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import type { LinkRef } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
 import {
   PRIMARY_FACE,
@@ -80,7 +79,7 @@ export function InlineCode({ children }: { readonly children: ReactNode }) {
 
 export function TextLink({ href, children }: { readonly href: string; readonly children: ReactNode }) {
   return (
-    <Link href={toSiteHref(href)} className="font-medium text-foreground hover:underline">
+    <Link href={href} className="font-medium text-foreground hover:underline">
       {children}
     </Link>
   );
@@ -88,7 +87,7 @@ export function TextLink({ href, children }: { readonly href: string; readonly c
 
 export function ArrowLink({ link, icon: Icon }: { readonly link: LinkRef; readonly icon: IconComponent }) {
   return (
-    <Link href={toSiteHref(link.href)} className="inline-flex items-center gap-2 font-medium text-foreground hover:underline">
+    <Link href={link.href} className="inline-flex items-center gap-2 font-medium text-foreground hover:underline">
       {link.label}
       <Icon className="h-4 w-4" />
     </Link>
@@ -234,7 +233,7 @@ export function ComparisonCard({ columns, footer }: ComparisonCardProps) {
 export function PrimaryButton({ link, className }: { readonly link: LinkRef; readonly className?: string }) {
   return (
     <Link
-      href={toSiteHref(link.href)}
+      href={link.href}
       className={cn(PRIMARY_SHELL, "w-fit bg-primary text-primary-foreground transition-colors hover:bg-primary/90", className)}
     >
       <span className={cn(PRIMARY_FACE, "text-base")}>{link.label}</span>
@@ -245,7 +244,7 @@ export function PrimaryButton({ link, className }: { readonly link: LinkRef; rea
 export function SecondaryButton({ link }: { readonly link: LinkRef }) {
   return (
     <Link
-      href={toSiteHref(link.href)}
+      href={link.href}
       className={cn(SECONDARY_SHELL, "w-fit border-border text-muted-foreground transition-colors hover:bg-muted")}
     >
       <span className={cn(SECONDARY_FACE, "text-base")}>{link.label}</span>

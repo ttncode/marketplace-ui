@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import { ChevronRightIcon, GithubIcon, HomeIcon, StarIcon } from "@/components/icons/breadcrumb-icons";
 import { SharePopover } from "./SharePopover";
 import type { SkillDetail } from "./types";
@@ -51,7 +50,7 @@ function MetaRow({ skill }: { readonly skill: SkillDetail }) {
           className="rounded-full object-cover opacity-60 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
         />
         <span className="text-muted-foreground">by</span>
-        <Link href={toSiteHref(skill.author.href)} className="font-medium text-foreground transition-colors hover:text-primary">
+        <Link href={skill.author.href} className="font-medium text-foreground transition-colors hover:text-primary">
           {skill.author.name}
         </Link>
       </div>
@@ -63,7 +62,7 @@ function MetaRow({ skill }: { readonly skill: SkillDetail }) {
       <span className="text-muted-foreground">•</span>
       <div className="flex items-center gap-1">
         <Link
-          href={toSiteHref(skill.repoHref)}
+          href={skill.repoHref}
           title="GitHub"
           className="inline-flex h-7 w-7 items-center justify-center rounded-lg border border-transparent text-muted-foreground transition-colors duration-200 hover:bg-accent hover:text-foreground"
         >

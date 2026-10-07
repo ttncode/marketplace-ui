@@ -9,7 +9,7 @@ export function PrivacyContent({ siteName, contactEmail }: PrivacyContentProps) 
   return (
     <>
       <p>
-        <strong>Template text — replace it with your own reviewed privacy policy.</strong>
+        <strong>Template text — replace it with your own reviewed privacy policy. This is not legal advice.</strong>
       </p>
       <p>This policy describes how {siteName} handles information when you use the site.</p>
       <hr />
@@ -26,7 +26,7 @@ export function PrivacyContent({ siteName, contactEmail }: PrivacyContentProps) 
       <p>You can ask to access, correct or delete your information at any time by contacting us.</p>
       <hr />
       <h2>Contact for privacy</h2>
-      <p>Questions about this policy can be sent to {contactEmail}.</p>
+      <p>Questions about this policy can be sent to <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.</p>
     </>
   );
 }

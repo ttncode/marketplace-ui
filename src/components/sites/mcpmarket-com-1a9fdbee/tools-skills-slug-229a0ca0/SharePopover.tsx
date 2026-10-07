@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import { ShareIcon } from "@/components/icons/breadcrumb-icons";
 
 interface ShareTarget {
@@ -92,7 +91,7 @@ export function SharePopover({ url, name }: { readonly url: string; readonly nam
             {TARGETS.map((target) => (
               <a
                 key={target.label}
-                href={toSiteHref(target.href(url, title))}
+                href={target.href(url, title)}
                 title={target.label === REDDIT ? REDDIT : undefined}
                 aria-label={target.label}
                 className={
