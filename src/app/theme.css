@@ -1,4 +1,4 @@
-/* Light theme values; dark theme is not defined yet. */
+/* Light theme values; `.dark` below redefines every themed token. */
 :root {
   --design-canvas: #fbfbfb;
   --design-surface: #ffffff;
@@ -95,4 +95,97 @@
   --input: #d6d6d6;
   --ring: #0a0a0a;
   --radius: var(--design-radius-md);
+}
+
+.dark {
+  color-scheme: dark;
+  --design-canvas: #0b0b0b;
+  --design-surface: #141414;
+  --design-surface-muted: #1a1a1a;
+  --design-surface-subtle: #111111;
+  --design-ink: #f5f5f5;
+  --design-ink-secondary: #c7c7c7;
+  --design-ink-muted: #9a9a9a;
+  --design-ink-soft: #e0e0e0;
+  --design-line: rgb(245 245 245 / 0.14);
+  --design-line-strong: rgb(245 245 245 / 0.28);
+  --design-glass: rgb(20 20 20 / 0.78);
+  --design-glass-focus: rgb(20 20 20 / 0.9);
+  --design-surface-glass: rgb(20 20 20 / 0.72);
+  --design-surface-glass-hover: rgb(28 28 28 / 0.88);
+  --design-surface-glass-line: rgb(255 255 255 / 0.08);
+  --design-surface-glass-line-hover: rgb(255 255 255 / 0.14);
+  --design-shadow-glass-card: 0 16px 38px -28px rgb(0 0 0 / 0.8);
+  --design-shadow-glass-card-hover: 0 22px 46px -30px rgb(0 0 0 / 0.9);
+  --design-navigation-glass: linear-gradient(180deg, rgb(24 24 24 / 0.82), rgb(16 16 16 / 0.64));
+  --design-navigation-panel: linear-gradient(180deg, #181818, #111111);
+  --design-navigation-line: rgb(255 255 255 / 0.1);
+  --design-shadow-card: 0 12px 34px rgb(0 0 0 / 0.4);
+  --design-shadow-inset: inset 0 1px 0 rgb(255 255 255 / 0.06);
+  --design-shadow-field: 0 18px 42px rgb(0 0 0 / 0.5), inset 0 1px 0 rgb(255 255 255 / 0.06);
+  --design-shadow-floating: 0 0 0 1px rgb(255 255 255 / 0.06), 0 18px 40px rgb(0 0 0 / 0.5), 0 38px 72px rgb(0 0 0 / 0.4);
+  --design-shadow-navigation: 0 1px 2px rgb(0 0 0 / 0.4), 0 18px 42px -12px rgb(0 0 0 / 0.6), inset 0 1px 0 rgb(255 255 255 / 0.06);
+  --design-gradient-dark-card: linear-gradient(145deg, rgb(32 32 28), rgb(21 21 18) 48%, rgb(12 12 11));
+  --design-shadow-dark-card: 0 10px 24px rgb(0 0 0 / 0.4), inset 0 1px 0 rgb(255 255 255 / 0.14), inset 0 -1px 0 rgb(0 0 0 / 0.45);
+  --design-mask-hero-fade: linear-gradient(to bottom, rgb(0 0 0 / 0.34) 0%, rgb(0 0 0 / 0.28) 20%, rgb(0 0 0 / 0.32) 38%, rgb(0 0 0 / 0.38) 56%, rgb(0 0 0 / 0.46) 70%, rgb(0 0 0 / 0.4) 78%, rgb(0 0 0 / 0.28) 86%, rgb(0 0 0 / 0.12) 94%, transparent 100%);
+  --design-hero-halo: radial-gradient(82% 84% at 50% 48%, rgb(11 11 11 / 0.46) 0, rgb(11 11 11 / 0.34) 46%, rgb(11 11 11 / 0.16) 68%, transparent 90%);
+  --design-hero-halo-mobile: radial-gradient(82% 86% at 50% 48%, rgb(11 11 11 / 0.5) 0, rgb(11 11 11 / 0.36) 48%, rgb(11 11 11 / 0.16) 70%, transparent 92%);
+  --design-hero-halo-tablet: radial-gradient(84% 84% at 50% 48%, rgb(11 11 11 / 0.48) 0, rgb(11 11 11 / 0.35) 48%, rgb(11 11 11 / 0.16) 70%, transparent 92%);
+  --design-shadow-hero-chip: -4px -4px 10px rgb(255 255 255 / 0.05), 5px 5px 12px rgb(0 0 0 / 0.5), inset 0 1px 0 rgb(255 255 255 / 0.08);
+  --design-shadow-hero-search: 0 18px 42px rgb(0 0 0 / 0.5), inset 0 1px 0 rgb(255 255 255 / 0.06), inset 0 -1px 0 rgb(0 0 0 / 0.3);
+  --design-shadow-hero-search-focus: 0 20px 46px rgb(0 0 0 / 0.6), inset 0 1px 0 rgb(255 255 255 / 0.08), inset 0 -1px 0 rgb(0 0 0 / 0.35);
+  --design-dither-dot: rgb(245 245 245 / 0.16);
+  --design-dither-dot-strong: rgb(245 245 245 / 0.16);
+  --design-dither-sheen: linear-gradient(112deg, rgb(255 255 255 / 0.06), transparent 28%, rgb(255 255 255 / 0.03) 54%, transparent 78%);
+  --design-dither-back: #141414;
+  --design-dither-front: #bdbdbd40;
+  --design-shadow-card-hover: 0 16px 36px rgb(0 0 0 / 0.5);
+  --design-surface-sunken: #262626;
+  --design-surface-pressed: #333333;
+  --design-error-line: rgb(248 113 113 / 0.35);
+  --design-error-surface: rgb(127 29 29 / 0.25);
+  --design-error-ink: #fca5a5;
+  --design-success-line: rgb(74 222 128 / 0.35);
+  --design-success-surface: rgb(20 83 45 / 0.25);
+  --design-success-ink: #86efac;
+  --design-prose-body: #d1d5db;
+  --design-prose-heading: #f3f4f6;
+  --design-prose-rule: #374151;
+  --design-prose-marker: #6b7280;
+  --design-bevel-highlight: #ffffff2e;
+  --design-bevel-shade: #00000080;
+  --design-bevel-drop: #00000066;
+  --design-bevel-rim-hover: #ffffffd9;
+  --design-bevel-highlight-soft: var(--design-surface);
+  --design-bevel-shade-soft: #00000040;
+  --design-bevel-grad-from: color-mix(in oklab, var(--design-ink), white 10%);
+  --design-bevel-grad-to: color-mix(in oklab, var(--design-ink), black 12%);
+  --design-bevel-grad-active-from: color-mix(in oklab, var(--design-ink), black 12%);
+  --design-bevel-grad-active-to: color-mix(in oklab, var(--design-ink), black 4%);
+  --design-brand-google-blue: #4285f4;
+  --design-brand-google-green: #34a853;
+  --design-brand-google-yellow: #fbbc05;
+  --design-brand-google-red: #ea4335;
+  --design-ink-raised: #e5e5e5;
+  --design-ink-raised-hover: #f5f5f4;
+  --design-success: #34d399;
+
+  --background: #0b0b0b;
+  --foreground: #f5f5f5;
+  --card: #141414;
+  --card-foreground: #f5f5f5;
+  --popover: #141414;
+  --popover-foreground: #f5f5f5;
+  --primary: #f5f5f5;
+  --primary-foreground: #0a0a0a;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #f5f5f5;
+  --muted: #1a1a1a;
+  --muted-foreground: #9a9a9a;
+  --accent: #1f1f1f;
+  --accent-foreground: #f5f5f5;
+  --destructive: hsl(0 72% 58%);
+  --border: #2a2a2a;
+  --input: #2e2e2e;
+  --ring: #f5f5f5;
 }
