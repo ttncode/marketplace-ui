@@ -1,4 +1,4 @@
-import type { ServerDetail } from "../types";
+import type { ServerDetail } from "@/components/blocks/item-types";
 
 export const elevenlabs1: ServerDetail = {
   "slug": "elevenlabs-1",

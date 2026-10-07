@@ -2,9 +2,9 @@
 
 import { useId, useRef, useState, type KeyboardEvent } from "react";
 import { cn } from "@/lib/utils";
-import styles from "./detail.module.css";
-import { ToolsPanel } from "./ToolsPanel";
-import type { ServerTabsData } from "./types";
+import styles from "./item-detail.module.css";
+import { ToolsPanel } from "./item-tools-panel";
+import type { ServerTabsData } from "./item-types";
 
 /** Sanitised GitHub READMEs, fetched on first open like the source's /api/readme. */
 const README_ROOT = "/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/readme";

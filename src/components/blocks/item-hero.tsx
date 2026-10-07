@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
-import styles from "./detail.module.css";
-import { HeaderActions } from "./HeaderActions";
+import styles from "./item-detail.module.css";
+import { HeaderActions } from "./item-header-actions";
 import { ChevronRightIcon, HomeIcon, StarIcon } from "@/components/icons/detail-icons";
-import type { ServerDetail } from "./types";
+import type { ServerDetail } from "./item-types";
 
 const CRUMB_LINK = "rounded-md px-1 py-1 transition-colors hover:bg-black/[0.04] hover:text-[var(--design-ink)]";
 

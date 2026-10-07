@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SERVER_DETAILS } from "@/components/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/data";
-import styles from "@/components/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/detail.module.css";
-import { ServerDetailHero } from "@/components/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/ServerDetailHero";
-import { ServerSidebar } from "@/components/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/ServerSidebar";
-import { ServerTabs } from "@/components/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/ServerTabs";
+import styles from "@/components/blocks/item-detail.module.css";
+import { ServerDetailHero } from "@/components/blocks/item-hero";
+import { ServerSidebar } from "@/components/blocks/item-sidebar";
+import { ServerTabs } from "@/components/blocks/item-tabs";
 
 interface ServerPageProps {
   readonly params: Promise<{ slug: string }>;

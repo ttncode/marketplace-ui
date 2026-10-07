@@ -1,4 +1,4 @@
-import type { ServerDetail } from "../types";
+import type { ServerDetail } from "@/components/blocks/item-types";
 
 export const cal2: ServerDetail = {
   "slug": "cal-2",

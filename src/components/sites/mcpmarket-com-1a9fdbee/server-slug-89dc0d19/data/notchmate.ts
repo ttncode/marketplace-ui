@@ -1,4 +1,4 @@
-import type { ServerDetail } from "../types";
+import type { ServerDetail } from "@/components/blocks/item-types";
 
 export const notchmate: ServerDetail = {
   "slug": "notchmate",
