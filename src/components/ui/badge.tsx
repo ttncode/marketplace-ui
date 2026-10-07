@@ -3,10 +3,10 @@ import { cn } from "@/lib/utils";
 
 const TONES = {
   neutral: "border-border bg-surface-muted text-ink-secondary",
-  success: "border-success/30 bg-success/10 text-success",
-  warning: "border-warning/30 bg-warning/10 text-warning",
-  danger: "border-destructive/30 bg-destructive/10 text-destructive",
-  info: "border-info/30 bg-info/10 text-info",
+  success: "border-success/30 bg-success/10 text-success-ink",
+  warning: "border-warning/30 bg-warning/10 text-warning-ink",
+  danger: "border-destructive/30 bg-destructive/10 text-error-ink",
+  info: "border-info/30 bg-info/10 text-info-ink",
 } as const;
 
 export type BadgeTone = keyof typeof TONES;
