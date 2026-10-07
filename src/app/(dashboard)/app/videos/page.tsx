@@ -42,7 +42,7 @@ export default async function VideosPage({ searchParams }: VideosPageProps) {
         searchKeys={["title"]}
         searchPlaceholder="Search videos"
         filter={{ key: "status", label: "Statuses", options: STATUS_OPTIONS }}
-        actions={[{ label: "Edit", href: "/app/videos/new?from={id}" }]}
+        actions={[{ label: "Duplicate", href: "/app/videos/new?from={id}" }]}
         badgeTones={{ draft: "neutral", scheduled: "info", published: "success", failed: "danger" }}
         emptyMessage="No videos match your search."
         initialQuery={typeof q === "string" ? q : ""}

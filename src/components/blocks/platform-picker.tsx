@@ -5,11 +5,13 @@ interface PlatformPickerProps {
   readonly name: string;
   readonly options: readonly PlatformOption[];
   readonly defaultValue?: readonly string[];
+  readonly describedBy?: string;
+  readonly invalid?: boolean;
 }
 
-export function PlatformPicker({ name, options, defaultValue = [] }: PlatformPickerProps) {
+export function PlatformPicker({ name, options, defaultValue = [], describedBy, invalid }: PlatformPickerProps) {
   return (
-    <fieldset className="grid gap-2 sm:grid-cols-3">
+    <fieldset aria-describedby={describedBy} aria-invalid={invalid || undefined} className="grid gap-2 sm:grid-cols-3">
       <legend className="sr-only">Platforms</legend>
       {options.map((option) => (
         <label
