@@ -4,8 +4,8 @@ import { useCallback, useEffect, useRef, useState, type FormEvent } from "react"
 import { Dialog } from "@base-ui/react/dialog";
 import { CircleCheck, LoaderCircle, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { LEAD_FORMS } from "./site-data";
-import type { LeadForm, LeadFormField, OverlayEvent } from "./types";
+import { LEAD_FORMS } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
+import type { LeadForm, LeadFormField, OverlayEvent } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
 
 // ponytail: no backend, so a submit only waits this long before showing success.
 const SUBMIT_LATENCY_MS = 800;

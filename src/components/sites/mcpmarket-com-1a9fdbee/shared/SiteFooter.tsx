@@ -2,7 +2,7 @@ import { LogoMarkIcon } from "@/components/icons/nav-icons";
 
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { toSiteHref } from "./links";
-import { OverlayTrigger } from "./SiteOverlays";
+import { OverlayTrigger } from "@/components/blocks/lead-dialog";
 import { FOOTER, FOOTER_COLUMNS } from "./site-data";
 import type { FooterColumn, FooterLink } from "./types";
 
