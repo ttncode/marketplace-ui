@@ -5,13 +5,13 @@ import { HeaderActions } from "./item-header-actions";
 import { ChevronRightIcon, HomeIcon, StarIcon } from "@/components/icons/detail-icons";
 import type { LinkRef, Listing } from "@/lib/types";
 
-const CRUMB_LINK = "rounded-md px-1 py-1 transition-colors hover:bg-black/[0.04] hover:text-[var(--design-ink)]";
+const CRUMB_LINK = "rounded-md px-1 py-1 transition-colors hover:bg-ink/[0.04] hover:text-[var(--design-ink)]";
 
 function Breadcrumbs({ category, name }: { readonly category: LinkRef; readonly name: string }) {
   return (
     <nav
       aria-label="Breadcrumb"
-      className="mb-5 inline-flex w-fit max-w-full self-start overflow-x-auto whitespace-nowrap rounded-full border border-[rgba(0,0,0,0.08)] bg-[rgba(255,255,255,0.72)] px-2.5 py-[5px] font-sans text-[9px] leading-[1.2] font-medium tracking-[0.045em] text-[var(--design-ink-muted)] uppercase backdrop-blur-md [scrollbar-width:none] md:mb-6 [&::-webkit-scrollbar]:hidden [&_svg]:h-3 [&_svg]:w-3"
+      className="mb-5 inline-flex w-fit max-w-full self-start overflow-x-auto whitespace-nowrap rounded-full border border-ink/8 bg-surface/72 px-2.5 py-[5px] font-sans text-[9px] leading-[1.2] font-medium tracking-[0.045em] text-[var(--design-ink-muted)] uppercase backdrop-blur-md [scrollbar-width:none] md:mb-6 [&::-webkit-scrollbar]:hidden [&_svg]:h-3 [&_svg]:w-3"
     >
       <ol className="flex w-max min-w-0 items-center gap-1.5">
         <li className="flex items-center">
