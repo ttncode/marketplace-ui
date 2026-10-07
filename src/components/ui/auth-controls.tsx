@@ -27,8 +27,6 @@ export function AuthButton({ variant, className, ...buttonProps }: AuthButtonPro
   return <button data-slot="button" className={cn(BUTTON_VARIANTS[variant], className)} {...buttonProps} />;
 }
 
-export const SIMULATED_REQUEST_MS = 900;
-
 export function AuthHeading({ children }: { readonly children: React.ReactNode }) {
   return (
     <div className="mb-8 text-center">

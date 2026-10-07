@@ -7,9 +7,9 @@ import {
   AuthHeading,
   Field,
   OrDivider,
-  SIMULATED_REQUEST_MS,
   SwitchLink,
 } from "@/components/ui/auth-controls";
+import { SIMULATED_REQUEST_MS } from "@/lib/simulate";
 import { OAuthButtons } from "@/components/blocks/oauth-buttons";
 
 function EmailSignupForm() {

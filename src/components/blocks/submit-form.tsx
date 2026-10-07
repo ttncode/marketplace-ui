@@ -2,7 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { cn } from "@/lib/utils";
-import { SIMULATED_REQUEST_MS } from "@/components/ui/auth-controls";
+import { SIMULATED_REQUEST_MS } from "@/lib/simulate";
 import { FieldLabel, INPUT, OUTLINE_BUTTON, RequiredMark, TEXTAREA } from "@/components/ui/form-field";
 import type { Category, SubmitContent } from "@/lib/types";
 

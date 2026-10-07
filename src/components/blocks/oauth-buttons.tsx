@@ -3,7 +3,8 @@
 import { LoaderCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { AuthButton, SIMULATED_REQUEST_MS } from "@/components/ui/auth-controls";
+import { AuthButton } from "@/components/ui/auth-controls";
+import { SIMULATED_REQUEST_MS } from "@/lib/simulate";
 
 const PROVIDERS = {
   github: { label: "Continue with GitHub" },

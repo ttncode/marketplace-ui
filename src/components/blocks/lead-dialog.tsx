@@ -3,11 +3,10 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 import { Dialog } from "@base-ui/react/dialog";
 import { CircleCheck, LoaderCircle, X } from "lucide-react";
+import { SIMULATED_REQUEST_MS } from "@/lib/simulate";
 import { cn } from "@/lib/utils";
 import type { LeadForm, LeadFormField, OverlayEvent } from "@/lib/types";
 
-// ponytail: no backend, so a submit only waits this long before showing success.
-const SUBMIT_LATENCY_MS = 800;
 const SUCCESS_CLOSE_MS = 2_000;
 const TOAST_DURATION_MS = 4_000;
 const TOAST_UNMOUNT_DELAY_MS = 200;
@@ -114,7 +113,7 @@ function LeadDialog({ form, open, onClose, onClosed, onError }: {
       return;
     }
     setStatus("submitting");
-    await new Promise((resolve) => setTimeout(resolve, SUBMIT_LATENCY_MS));
+    await new Promise((resolve) => setTimeout(resolve, SIMULATED_REQUEST_MS));
     setStatus("success");
     closeTimer.current = setTimeout(close, SUCCESS_CLOSE_MS);
   };

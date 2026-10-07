@@ -131,6 +131,18 @@
       ]
     },
     {
+      "name": "simulate",
+      "type": "registry:lib",
+      "title": "Simulated request delay",
+      "description": "How long simulated requests wait, since the template has no backend.",
+      "files": [
+        {
+          "path": "src/lib/simulate.ts",
+          "type": "registry:lib"
+        }
+      ]
+    },
+    {
       "name": "accordion-region",
       "type": "registry:ui",
       "title": "Accordion region",
@@ -796,6 +808,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
+        "@ttn/simulate",
         "@ttn/types",
         "@ttn/utils"
       ],
@@ -905,7 +918,8 @@
       "description": "Sign-in form with simulated authentication.",
       "registryDependencies": [
         "@ttn/auth-controls",
-        "@ttn/oauth-buttons"
+        "@ttn/oauth-buttons",
+        "@ttn/simulate"
       ],
       "files": [
         {
@@ -963,7 +977,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "@ttn/auth-controls"
+        "@ttn/auth-controls",
+        "@ttn/simulate"
       ],
       "files": [
         {
@@ -1143,6 +1158,7 @@
       "registryDependencies": [
         "@ttn/button",
         "@ttn/input",
+        "@ttn/simulate",
         "@ttn/types"
       ],
       "files": [
@@ -1159,7 +1175,8 @@
       "description": "Sign-up form with simulated authentication.",
       "registryDependencies": [
         "@ttn/auth-controls",
-        "@ttn/oauth-buttons"
+        "@ttn/oauth-buttons",
+        "@ttn/simulate"
       ],
       "files": [
         {
@@ -1195,6 +1212,7 @@
       "registryDependencies": [
         "@ttn/auth-controls",
         "@ttn/form-field",
+        "@ttn/simulate",
         "@ttn/types",
         "@ttn/utils"
       ],
@@ -1285,6 +1303,7 @@
         "@ttn/input",
         "@ttn/platform-picker",
         "@ttn/schedule-field",
+        "@ttn/simulate",
         "@ttn/types",
         "@ttn/upload-dropzone"
       ],

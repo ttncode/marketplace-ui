@@ -7,9 +7,8 @@ import { ScheduleField } from "@/components/blocks/schedule-field";
 import { UploadDropzone } from "@/components/blocks/upload-dropzone";
 import { Button } from "@/components/ui/button";
 import { Input, Textarea } from "@/components/ui/input";
+import { SIMULATED_REQUEST_MS } from "@/lib/simulate";
 import type { PlatformOption } from "@/lib/types";
-
-const SIMULATED_REQUEST_MS = 900;
 
 interface VideoComposeFormProps {
   readonly platforms: readonly PlatformOption[];

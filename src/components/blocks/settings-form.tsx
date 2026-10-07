@@ -3,9 +3,9 @@
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { SIMULATED_REQUEST_MS } from "@/lib/simulate";
 import type { DashboardUser } from "@/lib/types";
 
-const SIMULATED_REQUEST_MS = 900;
 const SAVED_VISIBLE_MS = 2000;
 
 const NOTIFICATIONS = [
