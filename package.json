@@ -13,6 +13,8 @@
   },
   "scripts": {
     "dev": "next dev",
+    "registry:build": "shadcn build registry.json --output public/r",
+    "prebuild": "npm run registry:build",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
