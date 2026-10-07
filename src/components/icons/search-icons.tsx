@@ -1,5 +1,5 @@
 import type { ReactNode, SVGProps } from "react";
-import type { BrowseIcon } from "./search-data";
+import type { BrowseIcon } from "@/components/sites/mcpmarket-com-1a9fdbee/search-6fb5b778/search-data";
 
 type IconProps = SVGProps<SVGSVGElement>;
 

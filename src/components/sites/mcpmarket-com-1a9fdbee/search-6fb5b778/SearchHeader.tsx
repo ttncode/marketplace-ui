@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Search, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ChevronRightIcon, HomeIcon } from "@/components/icons/breadcrumb-icons";
-import { PlugIcon, SparklesIcon } from "./icons";
+import { PlugIcon, SparklesIcon } from "@/components/icons/search-icons";
 import type { SearchType } from "./search-index";
 
 export function SearchBreadcrumbs({ query }: { readonly query: string }) {
