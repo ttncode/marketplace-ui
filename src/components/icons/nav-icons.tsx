@@ -1,26 +1,9 @@
-import type { SVGProps } from "react";
 import { BookOpen, Download, Plus, Trophy, type LucideIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
 import styles from "./animated-icons.module.css";
-import { MCPMARKET_LOGO_PATHS } from "./logo-paths";
 import type { NavIconName } from "@/lib/types";
-
-type IconProps = SVGProps<SVGSVGElement> & { readonly size?: number };
-
-/** The MCP Market logo mark (currentColor fill), exactly as the source renders it. */
-export function LogoMarkIcon({ size = 36, ...props }: IconProps) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 1024 1024" fill="currentColor" aria-hidden="true" {...props}>
-      <g transform="translate(0,1024) scale(0.1,-0.1)">
-        {MCPMARKET_LOGO_PATHS.map((d, index) => (
-          <path key={index} d={d} />
-        ))}
-      </g>
-    </svg>
-  );
-}
 
 /** Lucide's former `github` icon (removed from lucide 1.x); the source still ships it. */
 export function GithubIcon({ className, strokeWidth = 2 }: { readonly className?: string; readonly strokeWidth?: number }) {
@@ -31,20 +14,6 @@ export function GithubIcon({ className, strokeWidth = 2 }: { readonly className?
     </svg>
   );
 }
-
-const FAVICON_ROOT = "/sites/mcpmarket-com-1a9fdbee/shared/favicons";
-
-/** Third-party favicons the source pulls from Google's favicon service, stored locally. */
-export const BRAND_FAVICONS = {
-  Claude: `${FAVICON_ROOT}/claude.png`,
-  Codex: `${FAVICON_ROOT}/openai.png`,
-  Notion: `${FAVICON_ROOT}/notion.png`,
-  Gmail: `${FAVICON_ROOT}/gmail.png`,
-  Sentry: `${FAVICON_ROOT}/sentry.png`,
-  Cursor: `${FAVICON_ROOT}/cursor.png`,
-} as const;
-
-export type BrandName = keyof typeof BRAND_FAVICONS;
 
 function strokeSvgProps(size: number, strokeWidth: number) {
   return {
