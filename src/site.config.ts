@@ -5,12 +5,12 @@ export const site: SiteConfig = {
   url: "https://example.com",
   description: "A curated directory of tools, with a dashboard to manage your own.",
   logo: { light: "/brand/logo.svg", dark: "/brand/logo-dark.svg" },
-  announcement: { badge: "New", label: "Acme Studio", href: "/categories", description: "Browse the directory by category" },
+  announcement: { badge: "New", label: "Acme Studio", href: "/app", description: "Manage and schedule your content in one place" },
   nav: [
     {
       label: "Browse",
       icon: "folderOpen",
-      hero: { title: "Browse categories", description: "Manage, create and schedule your content.", href: "/categories", image: "/brand/nav/app.svg" },
+      hero: { title: "Open the app", description: "Manage, create and schedule your content.", href: "/app", image: "/brand/nav/app.svg" },
       features: [
         { title: "Categories", description: "Browse listings by category.", href: "/categories", image: "/brand/nav/categories.svg" },
         { title: "Submit", description: "Add your tool to the directory.", href: "/submit", image: "/brand/nav/submit.svg" },
@@ -31,8 +31,8 @@ export const site: SiteConfig = {
       ],
     },
   ],
-  headerActions: { secondary: { label: "Submit", href: "/submit" }, primary: { label: "Browse", href: "/categories" } },
-  dashboardNav: [],
+  headerActions: { secondary: { label: "Submit", href: "/submit" }, primary: { label: "Open app", href: "/app" } },
+  dashboardNav: [{ label: "Overview", href: "/app", icon: "home" }],
   footer: {
     description: "Acme Directory lists the best tools for your workflow.",
     columns: [
