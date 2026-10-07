@@ -2,8 +2,8 @@ import Link from "next/link";
 import cardStyles from "@/components/blocks/listing-card.module.css";
 import type { LinkRef } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
 import { cn } from "@/lib/utils";
-import type { CategoryTile } from "./categories-data";
-import { CategoryIcon, ICON_HOVER_SCOPE } from "./CategoryIcon";
+import type { CategoryTile } from "@/components/sites/mcpmarket-com-1a9fdbee/categories-f91e624d/categories-data";
+import { CategoryIcon, ICON_HOVER_SCOPE } from "@/components/blocks/category-icon";
 import { HeroDitherShader } from "@/components/blocks/dither-background";
 
 const HERO_MASK =

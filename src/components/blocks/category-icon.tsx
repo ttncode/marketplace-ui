@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import styles from "./CategoryIcon.module.css";
+import styles from "./category-icon.module.css";
 
 /** The class the card link needs so its hover starts the icon animations. */
 export const ICON_HOVER_SCOPE = styles.tile;
