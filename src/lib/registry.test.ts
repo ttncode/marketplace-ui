@@ -1,6 +1,6 @@
 import { deepStrictEqual } from "node:assert";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
-import { dirname, join, relative, resolve } from "node:path";
+import { dirname, join, posix, relative, resolve } from "node:path";
 import { test } from "node:test";
 import { fileURLToPath } from "node:url";
 
@@ -8,7 +8,7 @@ interface RegistryItem {
   readonly name: string;
   readonly dependencies?: readonly string[];
   readonly registryDependencies?: readonly string[];
-  readonly files: readonly { readonly path: string }[];
+  readonly files: readonly { readonly path: string; readonly type?: string; readonly target?: string }[];
 }
 
 const ROOT = fileURLToPath(new URL("../..", import.meta.url));
@@ -96,6 +96,33 @@ test("every import is satisfied by the item, its registry dependencies, or its n
           if (!PROVIDED.has(pkg) && !(item.dependencies ?? []).includes(pkg)) problems.push(`${item.name}: needs npm dependency ${pkg}`);
         }
       }
+    }
+  }
+  deepStrictEqual(problems, []);
+});
+
+/** Where `shadcn add` writes a file in the consuming app, relative to its src (or root) folder. */
+function installPath(file: { readonly path: string; readonly type?: string; readonly target?: string }): string {
+  if (file.target) return file.target;
+  const dir = file.type === "registry:lib" ? "lib" : file.type === "registry:ui" ? "components/ui" : "components";
+  const segments = file.path.split("/");
+  const at = segments.indexOf(dir.split("/").at(-1) ?? dir);
+  return `${dir}/${at === -1 ? segments.at(-1) : segments.slice(at + 1).join("/")}`;
+}
+
+test("every local import still resolves after shadcn installs the files", () => {
+  const installed = new Map(items.flatMap((item) => item.files.map((file) => [file.path, installPath(file)] as const)));
+  const strip = (path: string) => path.replace(/\.tsx?$/, "");
+  const problems: string[] = [];
+  for (const [path, at] of installed) {
+    if (!/\.tsx?$/.test(path)) continue;
+    for (const match of readFileSync(join(ROOT, path), "utf8").matchAll(/(?:\bfrom|\bimport)\s*\(?\s*["']([^"']+)["']/g)) {
+      const specifier = match[1];
+      if (!specifier || !(specifier.startsWith("@/") || specifier.startsWith("."))) continue;
+      const target = resolveImport(path, specifier);
+      const expected = specifier.startsWith("@/") ? specifier.slice(2) : posix.join(posix.dirname(at), specifier);
+      const actual = target ? installed.get(target) : undefined;
+      if (!actual || strip(actual) !== strip(expected)) problems.push(`${path} imports ${specifier} -> installs at ${actual ?? "nowhere"}`);
     }
   }
   deepStrictEqual(problems, []);

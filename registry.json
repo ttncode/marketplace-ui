@@ -299,19 +299,19 @@
     },
     {
       "name": "article-types",
-      "type": "registry:lib",
+      "type": "registry:component",
       "title": "Article types",
       "description": "Article content types shared by blocks.",
       "files": [
         {
           "path": "src/components/blocks/article-types.ts",
-          "type": "registry:lib"
+          "type": "registry:component"
         }
       ]
     },
     {
       "name": "item-types",
-      "type": "registry:lib",
+      "type": "registry:component",
       "title": "Item types",
       "description": "Item content types shared by blocks.",
       "registryDependencies": [
@@ -320,25 +320,25 @@
       "files": [
         {
           "path": "src/components/blocks/item-types.ts",
-          "type": "registry:lib"
+          "type": "registry:component"
         }
       ]
     },
     {
       "name": "listing-types",
-      "type": "registry:lib",
+      "type": "registry:component",
       "title": "Listing types",
       "description": "Listing content types shared by blocks.",
       "files": [
         {
           "path": "src/components/blocks/listing-types.ts",
-          "type": "registry:lib"
+          "type": "registry:component"
         }
       ]
     },
     {
       "name": "ranked-types",
-      "type": "registry:lib",
+      "type": "registry:component",
       "title": "Ranked list types",
       "description": "Ranked list content types shared by blocks.",
       "registryDependencies": [
@@ -347,49 +347,49 @@
       "files": [
         {
           "path": "src/components/blocks/ranked-types.ts",
-          "type": "registry:lib"
+          "type": "registry:component"
         }
       ]
     },
     {
       "name": "breadcrumb-icons",
-      "type": "registry:ui",
+      "type": "registry:component",
       "title": "Breadcrumb icons",
       "description": "Inline SVG icons for breadcrumbs.",
       "files": [
         {
           "path": "src/components/icons/breadcrumb-icons.tsx",
-          "type": "registry:ui"
+          "type": "registry:component"
         }
       ]
     },
     {
       "name": "detail-icons",
-      "type": "registry:ui",
+      "type": "registry:component",
       "title": "Detail icons",
       "description": "Inline SVG icons for item detail pages.",
       "files": [
         {
           "path": "src/components/icons/detail-icons.tsx",
-          "type": "registry:ui"
+          "type": "registry:component"
         }
       ]
     },
     {
       "name": "news-icons",
-      "type": "registry:ui",
+      "type": "registry:component",
       "title": "News icons",
       "description": "Inline SVG icons for article cards.",
       "files": [
         {
           "path": "src/components/icons/news-icons.tsx",
-          "type": "registry:ui"
+          "type": "registry:component"
         }
       ]
     },
     {
       "name": "nav-icons",
-      "type": "registry:ui",
+      "type": "registry:component",
       "title": "Nav icons",
       "description": "Animated navigation icons.",
       "dependencies": [
@@ -402,11 +402,11 @@
       "files": [
         {
           "path": "src/components/icons/nav-icons.tsx",
-          "type": "registry:ui"
+          "type": "registry:component"
         },
         {
           "path": "src/components/icons/animated-icons.module.css",
-          "type": "registry:ui"
+          "type": "registry:component"
         }
       ]
     },
