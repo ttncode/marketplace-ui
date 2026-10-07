@@ -24,7 +24,7 @@ const initials = (name: string) =>
 export function AppTopbar({ user, onMenu, searchAction = "/app/videos" }: AppTopbarProps) {
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-border bg-canvas/80 px-4 backdrop-blur md:px-8">
-      <button type="button" onClick={onMenu} aria-label="Open navigation" className="rounded-md p-2 text-ink-secondary hover:bg-accent md:hidden">
+      <button type="button" onClick={onMenu} aria-label="Open navigation" className="rounded-md p-2 text-ink-secondary outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring/40 md:hidden">
         <MenuIcon aria-hidden className="size-5" />
       </button>
       <form action={searchAction} role="search" className="relative max-w-sm flex-1">
@@ -34,15 +34,15 @@ export function AppTopbar({ user, onMenu, searchAction = "/app/videos" }: AppTop
       <div className="ml-auto flex items-center gap-1">
         <ThemeToggle />
         <Menu.Root>
-          <Menu.Trigger aria-label="Account" className="flex size-9 items-center justify-center rounded-full bg-ink text-xs font-semibold text-canvas">
+          <Menu.Trigger aria-label="Account" className="flex size-9 items-center justify-center rounded-full bg-ink text-xs font-semibold text-canvas outline-none focus-visible:ring-2 focus-visible:ring-ring/40">
             {initials(user.name)}
           </Menu.Trigger>
           <Menu.Portal>
             <Menu.Positioner sideOffset={8} align="end" className="z-[60]">
               <Menu.Popup className="min-w-52 rounded-[12px] border border-border bg-popover p-1 text-sm text-popover-foreground shadow-[var(--design-shadow-floating)]">
-                <div className="px-2 py-1.5">
-                  <p className="font-medium text-ink">{user.name}</p>
-                  <p className="text-xs text-ink-muted">{user.email}</p>
+                <div className="max-w-56 min-w-0 px-2 py-1.5">
+                  <p className="truncate font-medium text-ink">{user.name}</p>
+                  <p className="truncate text-xs text-ink-muted">{user.email}</p>
                 </div>
                 <Menu.Separator className="my-1 h-px bg-border" />
                 <Menu.Item render={<Link href="/app/settings" />} className="flex items-center gap-2 rounded-[8px] px-2 py-1.5 outline-none data-[highlighted]:bg-accent">
