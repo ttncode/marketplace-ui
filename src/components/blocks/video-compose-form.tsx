@@ -34,7 +34,14 @@ export function VideoComposeForm({ platforms, defaultTitle = "", defaultPlatform
   };
 
   return (
-    <form onSubmit={onSubmit} className="space-y-8">
+    <form
+      onSubmit={onSubmit}
+      onChange={(event) => {
+        const target = event.target;
+        if (target instanceof HTMLInputElement && target.type === "checkbox" && target.name === "platforms" && target.checked) setError(null);
+      }}
+      className="space-y-8"
+    >
       <div className="space-y-2">
         <label htmlFor="title" className="text-sm font-medium text-ink">Title</label>
         <Input id="title" name="title" defaultValue={defaultTitle} required maxLength={100} placeholder="Behind the scenes" />
@@ -49,8 +56,8 @@ export function VideoComposeForm({ platforms, defaultTitle = "", defaultPlatform
       </div>
       <div className="space-y-2">
         <p className="text-sm font-medium text-ink">Platforms</p>
-        <PlatformPicker name="platforms" options={platforms} defaultValue={defaultPlatforms} />
-        {error && <p role="alert" className="text-sm text-destructive">{error}</p>}
+        <PlatformPicker name="platforms" options={platforms} defaultValue={defaultPlatforms} describedBy={error ? "platforms-error" : undefined} invalid={error !== null} />
+        {error && <p id="platforms-error" role="alert" className="text-sm text-destructive">{error}</p>}
       </div>
       <div className="space-y-2">
         <p className="text-sm font-medium text-ink">Schedule</p>

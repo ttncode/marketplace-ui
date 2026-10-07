@@ -14,7 +14,7 @@ export default async function NewVideoPage({ searchParams }: NewVideoPageProps) 
   return (
     <div className="mx-auto max-w-3xl space-y-6">
       <h1 className="font-display text-2xl tracking-[-0.03em]">New video</h1>
-      <VideoComposeForm platforms={PLATFORMS} defaultTitle={source?.title} defaultPlatforms={source?.platforms} />
+      <VideoComposeForm key={source?.id ?? "new"} platforms={PLATFORMS} defaultTitle={source?.title} defaultPlatforms={source?.platforms} />
     </div>
   );
 }
