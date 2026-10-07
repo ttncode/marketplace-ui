@@ -3,7 +3,7 @@
 import { useId, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { FAQ_ITEMS } from "./directory-data";
+import { FAQ_ITEMS } from "@/components/sites/mcpmarket-com-1a9fdbee/root-8a5edab2/directory-data";
 import type { FaqItem } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
 import { AccordionRegion } from "@/components/ui/accordion-region";
 
