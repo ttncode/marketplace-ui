@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import { Plus, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { LogoMarkIcon, NavIcon } from "@/components/icons/nav-icons";
-import { MOBILE_NAV_FOOTER_LINKS, MOBILE_NAV_GROUPS } from "./site-data";
+import { MOBILE_NAV_FOOTER_LINKS, MOBILE_NAV_GROUPS } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
 
 const EXIT_DURATION_MS = 300;
 

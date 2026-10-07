@@ -7,8 +7,8 @@ import { Menu, Plug } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { LogoMarkIcon } from "@/components/icons/nav-icons";
 
-import { MobileNavSheet } from "./MobileNavSheet";
-import { NavMegaMenu } from "./NavMegaMenu";
+import { MobileNavSheet } from "@/components/layout/mobile-nav-sheet";
+import { NavMegaMenu } from "@/components/blocks/mega-menu";
 
 const EASE_OUT = "duration-300 ease-[cubic-bezier(0,0,0.2,1)]";
 
