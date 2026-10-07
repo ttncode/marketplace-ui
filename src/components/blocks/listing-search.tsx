@@ -26,12 +26,12 @@ export function ListingSearch({ placeholder }: { readonly placeholder: string })
           onChange={(event) => setQuery(event.target.value)}
           placeholder={placeholder}
           aria-label={placeholder}
-          className="flex h-[52px] w-full rounded-[10px] border-0 bg-transparent px-12 py-2 font-sans text-sm leading-5 tracking-[-0.14px] text-ink shadow-none outline-none placeholder:text-ink/48"
+          className="flex h-[52px] w-full rounded-[10px] border-0 bg-transparent px-12 py-2 font-sans text-sm leading-5 tracking-[-0.14px] text-ink shadow-none outline-none placeholder:text-ink-soft/48"
         />
         <Search
           aria-hidden="true"
           strokeWidth={2}
-          className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-ink/58"
+          className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-ink-soft/58"
         />
         {query ? (
           <button

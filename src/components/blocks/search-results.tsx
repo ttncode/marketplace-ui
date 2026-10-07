@@ -27,8 +27,8 @@ function Spinner({ label, className }: { readonly label: string; readonly classN
 /** Placeholder appended to the grid while the next page loads. */
 function NextPageSkeleton() {
   return (
-    <div aria-hidden className="h-full overflow-hidden rounded-[12px] border border-ink/18 bg-surface shadow-[var(--design-shadow-card)]">
-      <span className={cn("block h-[6px] border-b border-ink/14 bg-surface-muted bg-[length:4px_4px,100%_100%] opacity-[0.72]", styles.dither)} />
+    <div aria-hidden className="h-full overflow-hidden rounded-[12px] border border-ink-soft/18 bg-surface shadow-[var(--design-shadow-card)]">
+      <span className={cn("block h-[6px] border-b border-ink-soft/14 bg-surface-muted bg-[length:4px_4px,100%_100%] opacity-[0.72]", styles.dither)} />
       <div className="px-[19px] pt-[18px] pb-[17px]">
         <div className="mb-3 flex items-center justify-between">
           <div className={cn(BAR, "h-4 w-32")} />
