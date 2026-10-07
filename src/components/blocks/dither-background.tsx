@@ -14,12 +14,13 @@ const DitheringField = dynamic(
   () =>
     import("@paper-design/shaders-react").then(({ Dithering }) => {
       function HeroDitheringField() {
+        const tokens = getComputedStyle(document.documentElement);
         return (
           <Dithering
             minPixelRatio={0.5}
             maxPixelCount={750_000}
-            colorBack="#f5f5f5"
-            colorFront="#5f5f5f52"
+            colorBack={tokens.getPropertyValue("--design-dither-back").trim()}
+            colorFront={tokens.getPropertyValue("--design-dither-front").trim()}
             shape="simplex"
             type="4x4"
             size={2}
