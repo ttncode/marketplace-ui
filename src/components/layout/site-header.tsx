@@ -10,6 +10,7 @@ import type { MobileNavGroup, NavMenu, SiteConfig } from "@/lib/types";
 
 import { MobileNavSheet } from "@/components/layout/mobile-nav-sheet";
 import { NavMegaMenu } from "@/components/blocks/mega-menu";
+import { ThemeToggle } from "@/components/blocks/theme-toggle";
 
 const EASE_OUT = "duration-300 ease-[cubic-bezier(0,0,0.2,1)]";
 
@@ -83,6 +84,7 @@ export function SiteHeader({
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <ThemeToggle />
             {actions.secondary && (
               <a
                 href={actions.secondary.href}
