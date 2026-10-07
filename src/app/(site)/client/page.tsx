@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { ListingHero } from "@/components/sites/mcpmarket-com-1a9fdbee/categories-slug-c9486983/ListingHero";
-import { ListingResults } from "@/components/sites/mcpmarket-com-1a9fdbee/categories-slug-c9486983/ListingResults";
+import { ListingHero } from "@/components/blocks/listing-hero";
+import { ListingResults } from "@/components/blocks/listing-results";
 import { CLIENT_CARDS } from "@/components/sites/mcpmarket-com-1a9fdbee/categories-slug-c9486983/listing-data";
 
 const DESCRIPTION = "Explore our complete collection of MCP clients that connect AI tools to Claude and Cursor.";

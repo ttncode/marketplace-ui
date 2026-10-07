@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { CategoryRail } from "@/components/blocks/category-rail";
-import { ListingSearch } from "./ListingSearch";
+import { ListingSearch } from "@/components/blocks/listing-search";
 import { HeroDitherShader } from "@/components/blocks/dither-background";
 
 const HERO_MASK =

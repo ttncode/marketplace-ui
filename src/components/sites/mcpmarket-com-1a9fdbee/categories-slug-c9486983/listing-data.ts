@@ -1,5 +1,5 @@
 import type { DirectoryCard } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
-import type { CategoryListing } from "./types";
+import type { CategoryListing } from "@/components/blocks/listing-types";
 
 // Page-1 items captured from mcpmarket.com on 2026-09-24.
 export const SERVER_PAGE_COUNT = 100;
