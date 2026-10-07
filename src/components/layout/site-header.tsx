@@ -100,7 +100,7 @@ export function SiteHeader({
               href={actions.primary.href}
               className="inline-flex h-10 shrink-0 items-stretch rounded-[12px] border border-ink/10 bg-linear-to-b from-ink/70 to-ink p-px transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
             >
-              <span className="flex size-full items-center justify-center gap-2 rounded-[10px] bg-linear-to-b from-ink/85 to-ink px-4 py-2 font-sans text-[14px] leading-5 font-normal tracking-[-0.14px] whitespace-nowrap text-primary-foreground/90 transition-[background-image,color] duration-200 ease-[cubic-bezier(0,0,0.2,1)] hover:from-ink/85 hover:to-ink/70 active:from-ink active:to-ink">
+              <span className="flex size-full items-center justify-center gap-2 rounded-[10px] bg-linear-to-b from-ink-raised to-ink px-4 py-2 font-sans text-[14px] leading-5 font-normal tracking-[-0.14px] whitespace-nowrap text-primary-foreground/90 transition-[background-image,color] duration-200 ease-[cubic-bezier(0,0,0.2,1)] hover:from-ink-raised-hover hover:to-ink-raised/70 active:from-ink active:to-ink">
                 <Plug
                   size={14}
                   strokeWidth={1.5}
