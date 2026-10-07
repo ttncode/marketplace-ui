@@ -13,12 +13,24 @@ export function nextSort(current: SortState | null, key: string): SortState | nu
 }
 
 const isEmpty = (value: CellValue | undefined) =>
-  value === undefined || value === null || value === "" || (Array.isArray(value) && value.length === 0);
+  value === undefined ||
+  value === null ||
+  value === "" ||
+  (typeof value === "number" && Number.isNaN(value)) ||
+  (Array.isArray(value) && value.length === 0);
 
 const asText = (value: CellValue | undefined) => (Array.isArray(value) ? value.join(", ") : String(value ?? ""));
 
+function asNumber(value: CellValue | undefined): number {
+  if (typeof value === "number") return value;
+  if (typeof value !== "string" || !value.trim()) return NaN;
+  return Number(value.replace(/[,\s]/g, ""));
+}
+
 function compare(a: CellValue | undefined, b: CellValue | undefined): number {
-  if (typeof a === "number" && typeof b === "number") return a - b;
+  const x = asNumber(a);
+  const y = asNumber(b);
+  if (Number.isFinite(x) && Number.isFinite(y)) return x - y;
   return asText(a).localeCompare(asText(b), "en", { numeric: true, sensitivity: "base" });
 }
 

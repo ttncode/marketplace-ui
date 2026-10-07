@@ -46,3 +46,23 @@ test("filterByValue matches exact values and list membership", () => {
   deepStrictEqual(ids(filterByValue(rows, "platforms", "youtube")), ["a", "c"]);
   deepStrictEqual(ids(filterByValue(rows, "status", null)), ["a", "b", "c", "d"]);
 });
+
+test("numeric strings compare as numbers alongside real numbers", () => {
+  const mixed: TableRow[] = [
+    { id: "a", n: 900 },
+    { id: "b", n: "1,000" },
+    { id: "c", n: "50" },
+  ];
+  deepStrictEqual(ids(sortRows(mixed, { key: "n", direction: "asc" })), ["c", "a", "b"]);
+});
+
+test("NaN and empty-list cells sort last in both directions", () => {
+  const odd: TableRow[] = [
+    { id: "a", n: NaN },
+    { id: "b", n: 5 },
+    { id: "c", n: [] },
+    { id: "d", n: 1 },
+  ];
+  deepStrictEqual(ids(sortRows(odd, { key: "n", direction: "asc" })), ["d", "b", "a", "c"]);
+  deepStrictEqual(ids(sortRows(odd, { key: "n", direction: "desc" })), ["b", "d", "a", "c"]);
+});
