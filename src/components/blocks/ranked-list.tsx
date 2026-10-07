@@ -98,7 +98,7 @@ interface RankedListProps {
 
 export function RankedList({ rows, variant }: RankedListProps) {
   return (
-    <main className="flex-1 bg-[var(--design-canvas)] py-8 md:py-12">
+    <div className="flex-1 bg-[var(--design-canvas)] py-8 md:py-12">
       <div className="mx-auto max-w-[1280px] px-6 md:px-8">
         <div className="grid gap-[14px] md:grid-cols-2 lg:grid-cols-3">
           {rows.map((row) => (
@@ -106,6 +106,6 @@ export function RankedList({ rows, variant }: RankedListProps) {
           ))}
         </div>
       </div>
-    </main>
+    </div>
   );
 }

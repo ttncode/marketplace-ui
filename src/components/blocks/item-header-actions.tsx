@@ -58,6 +58,7 @@ export function HeaderActions({ entityName, shareUrl, githubUrl, npmUrl }: Heade
                   key={target.label}
                   href={target.buildHref({ url: shareUrl, name: entityName })}
                   title={target.label}
+                  aria-label={target.label}
                   className={target.isLink ? "flex h-8 w-8 items-center justify-center rounded-lg transition-opacity hover:opacity-90" : "cursor-pointer"}
                 >
                   <svg viewBox="0 0 64 64" width="25" height="25" aria-hidden="true">

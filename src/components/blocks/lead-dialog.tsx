@@ -184,7 +184,7 @@ function LeadDialog({ form, open, onClose, onClosed, onError }: {
               </div>
             </form>
           )}
-          <Dialog.Close className="absolute top-4 right-4 rounded-sm opacity-70 ring-offset-canvas transition-opacity hover:opacity-100 focus:ring-2 focus:ring-ink focus:ring-offset-2 focus:outline-none disabled:pointer-events-none">
+          <Dialog.Close className="absolute top-4 right-4 rounded-sm opacity-70 ring-offset-canvas transition-opacity hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none">
             <X className="size-4" aria-hidden="true" />
             <span className="sr-only">Close</span>
           </Dialog.Close>

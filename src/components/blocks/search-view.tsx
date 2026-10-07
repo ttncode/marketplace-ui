@@ -94,7 +94,7 @@ export function SearchView({ params, listings, categories, browse }: SearchViewP
           </div>
         </section>
       </header>
-      <main className="relative">
+      <div className="relative">
         <div className="py-8 md:py-12">
           <div className="mx-auto max-w-[1280px] px-6 md:px-8">
             <div className="mb-8">
@@ -111,7 +111,7 @@ export function SearchView({ params, listings, categories, browse }: SearchViewP
             {!params.query && !shown.categorySlug && browse}
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

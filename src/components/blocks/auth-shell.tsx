@@ -22,7 +22,7 @@ export function AuthShell({ name, logo, children }: AuthShellProps) {
           </Link>
         </div>
         <div className="flex flex-1 items-center justify-center">
-          <div className="w-full max-w-sm">{children}</div>
+          <main className="w-full max-w-sm">{children}</main>
         </div>
       </div>
       <div className="relative hidden overflow-hidden border-l border-border bg-background/50 lg:block">
