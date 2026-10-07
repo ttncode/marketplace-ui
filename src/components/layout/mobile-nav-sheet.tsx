@@ -11,9 +11,9 @@ import { NavIcon } from "@/components/icons/nav-icons";
 const EXIT_DURATION_MS = 300;
 
 const ITEM_CLASS =
-  "flex items-center gap-2 rounded-[12px] px-3 py-2.5 font-mono text-[14px]/[20px] font-medium transition-colors duration-150 hover:bg-[#f2f2f2]";
-const MUTED_ITEM_CLASS = cn(ITEM_CLASS, "text-[#616161] hover:text-[#0a0a0a]");
-const HEADING_CLASS = "px-3 py-2 text-[12px]/[16px] font-semibold tracking-[0.6px] text-[#616161] uppercase";
+  "flex items-center gap-2 rounded-[12px] px-3 py-2.5 font-mono text-[14px]/[20px] font-medium transition-colors duration-150 hover:bg-accent";
+const MUTED_ITEM_CLASS = cn(ITEM_CLASS, "text-ink-muted hover:text-ink");
+const HEADING_CLASS = "px-3 py-2 text-[12px]/[16px] font-semibold tracking-[0.6px] text-ink-muted uppercase";
 
 const subscribeNoop = () => () => {};
 
@@ -68,7 +68,7 @@ export function MobileNavSheet({ open, onOpenChange, name, logo, groups, actions
         aria-hidden="true"
         onClick={close}
         className={cn(
-          "fixed inset-0 z-50 bg-black/80",
+          "fixed inset-0 z-50 bg-ink/80",
           open ? "animate-in fade-in-0 duration-500" : "animate-out fade-out-0 fill-mode-forwards duration-300",
         )}
       />
@@ -77,7 +77,7 @@ export function MobileNavSheet({ open, onOpenChange, name, logo, groups, actions
         aria-modal="true"
         aria-label="Navigation"
         className={cn(
-          "fixed inset-y-0 left-0 z-50 h-full w-[300px] overflow-y-auto border-r border-[#dbdbdb] bg-[#fbfbfb] py-6 pl-6 font-sans text-[16px]/[24px] text-[#0a0a0a] ease-in-out sm:w-[400px] sm:max-w-[384px]",
+          "fixed inset-y-0 left-0 z-50 h-full w-[300px] overflow-y-auto border-r border-border bg-canvas py-6 pl-6 font-sans text-[16px]/[24px] text-ink ease-in-out sm:w-[400px] sm:max-w-[384px]",
           open ? "animate-in slide-in-from-left duration-500" : "animate-out slide-out-to-left fill-mode-forwards duration-300",
         )}
       >
@@ -91,12 +91,12 @@ export function MobileNavSheet({ open, onOpenChange, name, logo, groups, actions
             </div>,
             ...group.items.map((item) => (
               <a key={item.href} href={item.href} onClick={close} className={ITEM_CLASS}>
-                <NavIcon name={item.icon} size={16} className="text-[#616161]" />
+                <NavIcon name={item.icon} size={16} className="text-ink-muted" />
                 {item.label}
               </a>
             )),
           ])}
-          <div className="mx-3 h-px bg-[#dbdbdb]" />
+          <div className="mx-3 h-px bg-border" />
           {actions.secondary && (
             <a href={actions.secondary.href} onClick={close} className={MUTED_ITEM_CLASS}>
               {actions.secondary.label}
@@ -110,7 +110,7 @@ export function MobileNavSheet({ open, onOpenChange, name, logo, groups, actions
           ref={closeButtonRef}
           type="button"
           onClick={close}
-          className="absolute top-4 right-4 rounded-[12px] text-[#0a0a0a] opacity-70 transition-opacity duration-150 hover:opacity-100 focus-visible:ring-2 focus-visible:ring-[#0a0a0a] focus-visible:ring-offset-2 focus-visible:outline-none"
+          className="absolute top-4 right-4 rounded-[12px] text-ink opacity-70 transition-opacity duration-150 hover:opacity-100 focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2 focus-visible:outline-none"
         >
           <X size={16} strokeWidth={2} aria-hidden="true" />
           <span className="sr-only">Close</span>
