@@ -1,15 +1,12 @@
 import { HeroDitherShader } from "@/components/blocks/dither-background";
 
-const HERO_MASK =
-  "var(--design-mask-hero-fade)";
-
 export function SubmitHero({ title, description }: { readonly title: string; readonly description: string }) {
   return (
     <section className="design-hero-under-navigation relative overflow-hidden bg-[var(--design-canvas)]">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
-        style={{ maskImage: HERO_MASK, WebkitMaskImage: HERO_MASK }}
+        style={{ maskImage: "var(--design-mask-hero-fade)", WebkitMaskImage: "var(--design-mask-hero-fade)" }}
       >
         <div className="design-dither-static absolute inset-0" />
         <HeroDitherShader />

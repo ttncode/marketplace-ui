@@ -10,9 +10,6 @@ import { cn } from "@/lib/utils";
 import type { LeaderboardHeroContent } from "./ranked-types";
 import { HeroDitherShader } from "@/components/blocks/dither-background";
 
-const HERO_MASK =
-  "var(--design-mask-hero-fade)";
-
 const CRUMB_LINK = "rounded-md px-1 py-1 transition-colors hover:bg-ink/[0.04] hover:text-[var(--design-ink)]";
 
 function Breadcrumbs({ crumbs, current }: Pick<LeaderboardHeroContent, "crumbs" | "current">) {
@@ -54,7 +51,7 @@ export function LeaderboardHero({ hero }: { readonly hero: LeaderboardHeroConten
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
-        style={{ maskImage: HERO_MASK, WebkitMaskImage: HERO_MASK }}
+        style={{ maskImage: "var(--design-mask-hero-fade)", WebkitMaskImage: "var(--design-mask-hero-fade)" }}
       >
         <div className="design-dither-static absolute inset-0" />
         <HeroDitherShader />

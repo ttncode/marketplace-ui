@@ -6,7 +6,7 @@ import type { LinkRef } from "@/lib/types";
 const TONE_BACKGROUND = { canvas: "bg-canvas", subtle: "bg-surface-subtle" } as const;
 
 const PILL_LINK =
-  "rounded-full border border-ink/14 bg-surface/42 font-sans text-[11px] tracking-[0.02em] text-ink-muted transition-colors duration-150 ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-ink/40 hover:bg-surface-subtle hover:text-ink motion-reduce:transition-none";
+  "rounded-full border border-ink/14 bg-surface/42 font-sans text-[11px] tracking-[0.02em] text-ink-muted transition-colors duration-150 ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-ink-soft/40 hover:bg-surface-subtle hover:text-ink motion-reduce:transition-none";
 
 const TITLE =
   "font-display text-[clamp(24px,2.3vw,34px)] leading-[28px] font-normal tracking-[-0.045em] text-ink md:leading-[32px]";

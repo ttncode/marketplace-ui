@@ -11,9 +11,6 @@ const HOLD_MS = 2000;
 const DELETE_MS = 50;
 const TYPE_MS = 80;
 
-const HERO_MASK =
-  "var(--design-mask-hero-fade)";
-
 function useTypewriter(words: readonly string[]): string {
   const [wordIndex, setWordIndex] = useState(0);
   const [text, setText] = useState<string>(words[0]);
@@ -61,7 +58,7 @@ export function HeroSection({
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
-        style={{ maskImage: HERO_MASK, WebkitMaskImage: HERO_MASK }}
+        style={{ maskImage: "var(--design-mask-hero-fade)", WebkitMaskImage: "var(--design-mask-hero-fade)" }}
       >
         <div className="design-dither-static absolute inset-0" />
         <HeroDitherShader />
@@ -70,7 +67,7 @@ export function HeroSection({
         <div className="grid min-h-[440px] grid-cols-[minmax(0,1fr)] grid-rows-[minmax(350px,1fr)_auto] items-center pt-[18px] pb-2 text-center text-ink max-md:min-h-[590px] max-md:grid-rows-[minmax(430px,1fr)_auto] max-md:pt-[58px] max-md:pb-[18px] md:max-[899px]:min-h-[620px] md:max-[899px]:grid-rows-[minmax(480px,1fr)_auto] md:max-[899px]:pt-[52px]">
           <div className="z-[2] flex w-[min(100%,1180px)] min-w-0 flex-col items-center justify-self-center">
             <div className="mb-[14px] inline-flex self-center">
-              <div className="inline-flex items-center gap-3 rounded-[999px] border border-ink/12 bg-surface-muted px-3 py-1.5 font-sans text-[10px] font-medium uppercase leading-none tracking-[0.8px] text-ink/68 shadow-[var(--design-shadow-hero-chip)]">
+              <div className="inline-flex items-center gap-3 rounded-[999px] border border-ink-soft/12 bg-surface-muted px-3 py-1.5 font-sans text-[10px] font-medium uppercase leading-none tracking-[0.8px] text-ink/68 shadow-[var(--design-shadow-hero-chip)]">
                 <span className="flex items-center gap-2">
                   <span className="size-1.5 animate-pulse rounded-full bg-ink [animation-duration:3.4s]" />
                   <span>
@@ -104,12 +101,12 @@ export function HeroSection({
                   autoComplete="off"
                   placeholder={hero.searchPlaceholder}
                   aria-label={hero.searchPlaceholder}
-                  className="flex h-[52px] w-full rounded-[10px] border-0 bg-transparent px-12 py-2 font-sans text-sm leading-5 tracking-[-0.14px] text-ink shadow-none outline-none placeholder:text-ink/48"
+                  className="flex h-[52px] w-full rounded-[10px] border-0 bg-transparent px-12 py-2 font-sans text-sm leading-5 tracking-[-0.14px] text-ink shadow-none outline-none placeholder:text-ink-soft/48"
                 />
                 <Search
                   aria-hidden="true"
                   strokeWidth={2}
-                  className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-ink/58"
+                  className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-ink-soft/58"
                 />
                 <button type="submit" className="sr-only">
                   Search

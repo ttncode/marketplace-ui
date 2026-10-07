@@ -24,7 +24,7 @@ function RankChip({ rank }: { readonly rank: number }) {
         "inline-flex h-[22px] min-w-[30px] shrink-0 items-center justify-center rounded-[999px] border px-[7px] font-sans text-[9px] leading-none font-semibold tracking-[0.02em] tabular-nums",
         rank <= TOP_RANKS
           ? "border-[var(--design-ink)] bg-[var(--design-ink)] text-[var(--design-surface)]"
-          : "border-ink/16 bg-surface-subtle/90 text-[var(--design-ink-muted)]",
+          : "border-ink-soft/16 bg-surface-subtle/90 text-[var(--design-ink-muted)]",
       )}
     >
       #{rank}
@@ -39,14 +39,14 @@ function LeaderboardCard({ row, variant }: { readonly row: LeaderboardRow; reado
     <Link id={row.id} href={row.href} className={cn("group block h-full", styles.link)}>
       <div
         className={cn(
-          "relative h-full overflow-hidden rounded-[12px] border border-ink/18 bg-surface shadow-[var(--design-shadow-card)] transition-[transform,translate,scale,rotate,border-color,box-shadow] duration-[180ms] ease-[ease] group-hover:-translate-y-px group-hover:border-ink/34 group-hover:bg-accent/94 group-hover:shadow-[var(--design-shadow-card-hover)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0",
+          "relative h-full overflow-hidden rounded-[12px] border border-ink-soft/18 bg-surface shadow-[var(--design-shadow-card)] transition-[transform,translate,scale,rotate,border-color,box-shadow] duration-[180ms] ease-[ease] group-hover:-translate-y-px group-hover:border-ink-soft/34 group-hover:bg-accent/94 group-hover:shadow-[var(--design-shadow-card-hover)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0",
           layout.card,
         )}
       >
         <span
           aria-hidden="true"
           className={cn(
-            "block h-[6px] border-b border-ink/14 bg-surface-muted bg-[length:4px_4px,100%_100%] bg-[position:0_0,0_0] opacity-[0.72]",
+            "block h-[6px] border-b border-ink-soft/14 bg-surface-muted bg-[length:4px_4px,100%_100%] bg-[position:0_0,0_0] opacity-[0.72]",
             styles.dither,
           )}
         />
@@ -69,14 +69,14 @@ function LeaderboardCard({ row, variant }: { readonly row: LeaderboardRow; reado
             </div>
             <ArrowUpRight
               aria-hidden
-              className="mt-0.5 size-4 shrink-0 text-ink/38 transition-[color,transform,translate,scale,rotate] duration-[180ms] ease-[ease] group-hover:translate-x-px group-hover:-translate-y-px group-hover:text-ink motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-hover:translate-y-0"
+              className="mt-0.5 size-4 shrink-0 text-ink-soft/38 transition-[color,transform,translate,scale,rotate] duration-[180ms] ease-[ease] group-hover:translate-x-px group-hover:-translate-y-px group-hover:text-ink motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-hover:translate-y-0"
               strokeWidth={2}
             />
           </div>
           <p className={cn("mb-4 line-clamp-2 font-sans text-[13px] leading-[1.55] text-ink-muted", layout.description)}>{row.description}</p>
           <div className="mt-auto flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center rounded-full border border-ink/18 bg-surface/50 px-2.5 py-0.5 font-sans text-[9px] leading-[1.7] font-semibold tracking-[0.055em] text-ink-muted uppercase">
+              <span className="inline-flex items-center rounded-full border border-ink-soft/18 bg-surface/50 px-2.5 py-0.5 font-sans text-[9px] leading-[1.7] font-semibold tracking-[0.055em] text-ink-muted uppercase">
                 {row.category}
               </span>
             </div>

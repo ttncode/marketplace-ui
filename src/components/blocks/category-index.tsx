@@ -5,9 +5,6 @@ import { cn } from "@/lib/utils";
 import { CategoryIcon, ICON_HOVER_SCOPE } from "@/components/blocks/category-icon";
 import { HeroDitherShader } from "@/components/blocks/dither-background";
 
-const HERO_MASK =
-  "var(--design-mask-hero-fade)";
-
 const CRUMB_LINK = "rounded-md px-1 py-1 transition-colors hover:bg-ink/[0.04] hover:text-[var(--design-ink)]";
 
 const CRUMB_SVG = {
@@ -73,11 +70,11 @@ export interface CategoryTile {
 function CategoryCard({ tile, unit }: { readonly tile: CategoryTile; readonly unit: string }) {
   return (
     <Link href={tile.href} className={cn("group block", cardStyles.link, ICON_HOVER_SCOPE)}>
-      <div className="relative h-full overflow-hidden rounded-[12px] border border-ink/18 bg-surface shadow-[var(--design-shadow-card)] transition-[translate,border-color,box-shadow] duration-[180ms] ease-[ease] group-hover:-translate-y-px group-hover:border-ink/34 group-hover:bg-accent/94 group-hover:shadow-[var(--design-shadow-card-hover)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
+      <div className="relative h-full overflow-hidden rounded-[12px] border border-ink-soft/18 bg-surface shadow-[var(--design-shadow-card)] transition-[translate,border-color,box-shadow] duration-[180ms] ease-[ease] group-hover:-translate-y-px group-hover:border-ink-soft/34 group-hover:bg-accent/94 group-hover:shadow-[var(--design-shadow-card-hover)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
         <span
           aria-hidden="true"
           className={cn(
-            "block h-[6px] border-b border-ink/14 bg-surface-muted bg-[length:4px_4px,100%_100%] bg-[position:0_0,0_0] opacity-[0.72]",
+            "block h-[6px] border-b border-ink-soft/14 bg-surface-muted bg-[length:4px_4px,100%_100%] bg-[position:0_0,0_0] opacity-[0.72]",
             cardStyles.dither,
           )}
         />
@@ -119,7 +116,7 @@ export function CategoryIndex({ trail, title, description, tiles, unit }: Catego
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0"
-            style={{ maskImage: HERO_MASK, WebkitMaskImage: HERO_MASK }}
+            style={{ maskImage: "var(--design-mask-hero-fade)", WebkitMaskImage: "var(--design-mask-hero-fade)" }}
           >
             <div className="design-dither-static absolute inset-0" />
             <HeroDitherShader />
