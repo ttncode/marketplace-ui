@@ -24,7 +24,7 @@ function RankChip({ rank }: { readonly rank: number }) {
         "inline-flex h-[22px] min-w-[30px] shrink-0 items-center justify-center rounded-[999px] border px-[7px] font-sans text-[9px] leading-none font-semibold tracking-[0.02em] tabular-nums",
         rank <= TOP_RANKS
           ? "border-[var(--design-ink)] bg-[var(--design-ink)] text-[var(--design-surface)]"
-          : "border-[rgba(34,34,34,0.16)] bg-[rgba(247,247,247,0.9)] text-[var(--design-ink-muted)]",
+          : "border-ink/16 bg-surface-subtle/90 text-[var(--design-ink-muted)]",
       )}
     >
       #{rank}
@@ -39,14 +39,14 @@ function LeaderboardCard({ row, variant }: { readonly row: LeaderboardRow; reado
     <Link id={row.id} href={row.href} className={cn("group block h-full", styles.link)}>
       <div
         className={cn(
-          "relative h-full overflow-hidden rounded-[12px] border border-[rgba(34,34,34,0.18)] bg-white shadow-[0_12px_34px_rgba(10,10,10,0.04)] transition-[transform,translate,scale,rotate,border-color,box-shadow] duration-[180ms] ease-[ease] group-hover:-translate-y-px group-hover:border-[rgba(34,34,34,0.34)] group-hover:bg-[rgba(242,242,242,0.94)] group-hover:shadow-[0_16px_36px_rgba(34,34,34,0.07)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0",
+          "relative h-full overflow-hidden rounded-[12px] border border-ink/18 bg-surface shadow-[var(--design-shadow-card)] transition-[transform,translate,scale,rotate,border-color,box-shadow] duration-[180ms] ease-[ease] group-hover:-translate-y-px group-hover:border-ink/34 group-hover:bg-accent/94 group-hover:shadow-[var(--design-shadow-card-hover)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0",
           layout.card,
         )}
       >
         <span
           aria-hidden="true"
           className={cn(
-            "block h-[6px] border-b border-[rgba(34,34,34,0.14)] bg-[#f5f5f5] bg-[length:4px_4px,100%_100%] bg-[position:0_0,0_0] opacity-[0.72]",
+            "block h-[6px] border-b border-ink/14 bg-surface-muted bg-[length:4px_4px,100%_100%] bg-[position:0_0,0_0] opacity-[0.72]",
             styles.dither,
           )}
         />
@@ -63,25 +63,25 @@ function LeaderboardCard({ row, variant }: { readonly row: LeaderboardRow; reado
                 loading="lazy"
                 className="size-5 shrink-0 rounded-full object-cover opacity-[0.72] grayscale transition-[filter,opacity] duration-[180ms] ease-[ease] group-hover:opacity-100 group-hover:grayscale-[0.3] motion-reduce:transition-none"
               />
-              <h3 className="line-clamp-1 font-display text-[16px] leading-[24px] font-semibold tracking-[-0.025em] text-[#0a0a0a]">
+              <h3 className="line-clamp-1 font-display text-[16px] leading-[24px] font-semibold tracking-[-0.025em] text-ink">
                 {row.title}
               </h3>
             </div>
             <ArrowUpRight
               aria-hidden
-              className="mt-0.5 size-4 shrink-0 text-[rgba(34,34,34,0.38)] transition-[color,transform,translate,scale,rotate] duration-[180ms] ease-[ease] group-hover:translate-x-px group-hover:-translate-y-px group-hover:text-[#0a0a0a] motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-hover:translate-y-0"
+              className="mt-0.5 size-4 shrink-0 text-ink/38 transition-[color,transform,translate,scale,rotate] duration-[180ms] ease-[ease] group-hover:translate-x-px group-hover:-translate-y-px group-hover:text-ink motion-reduce:transition-none motion-reduce:group-hover:translate-x-0 motion-reduce:group-hover:translate-y-0"
               strokeWidth={2}
             />
           </div>
-          <p className={cn("mb-4 line-clamp-2 font-sans text-[13px] leading-[1.55] text-[#626262]", layout.description)}>{row.description}</p>
+          <p className={cn("mb-4 line-clamp-2 font-sans text-[13px] leading-[1.55] text-ink-muted", layout.description)}>{row.description}</p>
           <div className="mt-auto flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center rounded-full border border-[rgba(34,34,34,0.18)] bg-[rgba(255,255,255,0.5)] px-2.5 py-0.5 font-sans text-[9px] leading-[1.7] font-semibold tracking-[0.055em] text-[#626262] uppercase">
+              <span className="inline-flex items-center rounded-full border border-ink/18 bg-surface/50 px-2.5 py-0.5 font-sans text-[9px] leading-[1.7] font-semibold tracking-[0.055em] text-ink-muted uppercase">
                 {row.category}
               </span>
             </div>
-            <div className="flex items-center font-sans text-[12px] leading-[16px] text-[#626262]">
-              <Star aria-hidden className="mr-1 size-3 fill-[rgba(97,97,97,0.3)] text-[#616161]" strokeWidth={2} />
+            <div className="flex items-center font-sans text-[12px] leading-[16px] text-ink-muted">
+              <Star aria-hidden className="mr-1 size-3 fill-ink-muted/30 text-ink-muted" strokeWidth={2} />
               {row.stars}
             </div>
           </div>

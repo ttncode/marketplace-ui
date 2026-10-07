@@ -11,9 +11,9 @@ import type { LeaderboardHeroContent } from "./ranked-types";
 import { HeroDitherShader } from "@/components/blocks/dither-background";
 
 const HERO_MASK =
-  "linear-gradient(to bottom, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0.28) 20%, rgba(0,0,0,0.32) 38%, rgba(0,0,0,0.38) 56%, rgba(0,0,0,0.46) 70%, rgba(0,0,0,0.4) 78%, rgba(0,0,0,0.28) 86%, rgba(0,0,0,0.12) 94%, transparent 100%)";
+  "var(--design-mask-hero-fade)";
 
-const CRUMB_LINK = "rounded-md px-1 py-1 transition-colors hover:bg-black/[0.04] hover:text-[var(--design-ink)]";
+const CRUMB_LINK = "rounded-md px-1 py-1 transition-colors hover:bg-ink/[0.04] hover:text-[var(--design-ink)]";
 
 function Breadcrumbs({ crumbs, current }: Pick<LeaderboardHeroContent, "crumbs" | "current">) {
   const [home, ...rest] = crumbs;

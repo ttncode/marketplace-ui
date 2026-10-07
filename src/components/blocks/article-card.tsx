@@ -9,7 +9,7 @@ export function ArticleCard({ article }: { readonly article: Article }) {
     <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--design-surface-glass-line)] bg-[var(--design-surface-glass)] text-card-foreground backdrop-blur-md transition-[transform,translate,scale,rotate,border-color,background-color] duration-200 hover:-translate-y-0.5 hover:border-[var(--design-surface-glass-line-hover)] hover:bg-[var(--design-surface-glass-hover)]">
       <div className="relative z-10 flex flex-1 flex-col p-6">
         <Link href={article.href} className="group/title relative z-10 block">
-          <h3 className="mb-3 line-clamp-2 font-display text-xl leading-7 font-medium tracking-[-0.025em] text-foreground transition-colors group-hover/title:text-black/65">
+          <h3 className="mb-3 line-clamp-2 font-display text-xl leading-7 font-medium tracking-[-0.025em] text-foreground transition-colors group-hover/title:text-ink/65">
             {article.title}
           </h3>
         </Link>
