@@ -1,8 +1,8 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
-import { ContentPageHero } from "./ContentPageHero";
-import styles from "./LegalProse.module.css";
+import { ContentPageHero } from "./content-page-hero";
+import styles from "./legal-prose.module.css";
 
 interface LegalPageProps {
   readonly title: string;

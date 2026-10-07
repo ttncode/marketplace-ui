@@ -1,4 +1,4 @@
-import { ProseLink } from "@/components/sites/mcpmarket-com-1a9fdbee/privacy-0ece7f7c/LegalPage";
+import { ProseLink } from "@/components/blocks/legal-page";
 
 // Verbatim from the source (captured 2026-09-24).
 export function TermsContent() {
