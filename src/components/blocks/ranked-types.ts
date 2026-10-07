@@ -1,4 +1,4 @@
-import type { ImageRef, LinkRef } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
+import type { ImageRef, LinkRef } from "@/lib/types";
 
 export interface LeaderboardRow {
   /** The source's anchor id (`tool-card-<slug>` / `skill-card-<slug>`). */

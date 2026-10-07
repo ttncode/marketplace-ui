@@ -1,6 +1,6 @@
 import Link from "next/link";
 import cardStyles from "@/components/blocks/listing-card.module.css";
-import type { LinkRef } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
+import type { LinkRef } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { CategoryIcon, ICON_HOVER_SCOPE } from "@/components/blocks/category-icon";
 import { HeroDitherShader } from "@/components/blocks/dither-background";

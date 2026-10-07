@@ -1,4 +1,4 @@
-import type { LinkRef } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
+import type { LinkRef } from "@/lib/types";
 
 /** Mirrors the source's hidden page list: page 1 is the base path, page n is `<base>/page/n`. */
 export function paginationLinks(basePath: string, pageCount: number): readonly LinkRef[] {
