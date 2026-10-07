@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ExternalLinkIcon } from "@/components/sites/mcpmarket-com-1a9fdbee/server-slug-89dc0d19/icons";
+import { ExternalLinkIcon } from "@/components/icons/detail-icons";
 import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import { CalendarIcon } from "./icons";
 import type { NewsItem } from "./news-data";
