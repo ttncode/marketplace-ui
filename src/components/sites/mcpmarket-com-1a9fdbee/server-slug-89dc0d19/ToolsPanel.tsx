@@ -4,7 +4,7 @@ import { useId, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { McpTool, ToolParam } from "./types";
-import { AccordionRegion } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/AccordionRegion";
+import { AccordionRegion } from "@/components/ui/accordion-region";
 
 const DESCRIPTION_LIMIT = 200;
 const VISIBLE_PARAMS = 5;

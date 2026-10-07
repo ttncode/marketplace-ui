@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { FaqItem } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
 import { HUB_FAQ } from "./hub-data";
-import { AccordionRegion } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/AccordionRegion";
+import { AccordionRegion } from "@/components/ui/accordion-region";
 
 interface ItemProps {
   readonly item: FaqItem;
