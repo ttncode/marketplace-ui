@@ -34,7 +34,7 @@ The `(dashboard)` layout is planned; today the repository ships `(site)` and `(a
 
 - Brand: edit `src/site.config.ts` (name, url, logo, navigation, footer).
 - Copy and demo data: replace the files in `src/content/` (categories, listings, home, FAQ, submit, legal).
-- Look and feel: edit the design tokens in `src/app/globals.css` and the fonts in `src/app/layout.tsx`.
+- Look and feel: edit the design tokens in `src/app/theme.css` and the fonts in `src/app/layout.tsx`.
 - Logo and favicons: replace the files in `public/brand/`.
 
 ## Docker
