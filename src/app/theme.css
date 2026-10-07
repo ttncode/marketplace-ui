@@ -45,6 +45,18 @@
   --design-dither-back: #f5f5f5;
   --design-dither-front: #5f5f5f52;
   --design-shadow-card-hover: 0 16px 36px rgb(34 34 34 / 0.07);
+  --design-surface-sunken: #e5e5e5;
+  --design-surface-pressed: #d4d4d4;
+  --design-error-line: rgb(254 202 202 / 0.6);
+  --design-error-surface: rgb(254 242 242 / 0.3);
+  --design-error-ink: #991b1b;
+  --design-success-line: rgb(187 247 208 / 0.6);
+  --design-success-surface: rgb(240 253 244 / 0.3);
+  --design-success-ink: #166534;
+  --design-prose-body: #374151;
+  --design-prose-heading: #111827;
+  --design-prose-rule: #e5e7eb;
+  --design-prose-marker: #d1d5db;
   --design-success: #10b981;
 
   --background: #fbfbfb;

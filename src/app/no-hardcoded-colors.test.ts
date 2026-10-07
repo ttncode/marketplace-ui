@@ -10,15 +10,10 @@ const COLOR = /#[0-9a-fA-F]{3,8}\b|\b(?:rgba?|hsla?)\(|-(?:white|black)\b/;
 const PENDING = new Set<string>([
   "components/blocks/article-card.tsx",
   "components/blocks/auth.module.css",
-  "components/blocks/content-page-hero.tsx",
-  "components/blocks/legal-prose.module.css",
   "components/blocks/oauth-buttons.tsx",
   "components/blocks/ranked-hero.tsx",
   "components/blocks/ranked-list.tsx",
-  "components/blocks/submit-hero.tsx",
   "components/icons/breadcrumb-icons.tsx",
-  "components/ui/form-field.tsx",
-  "components/ui/texture-button.ts",
 ]);
 
 function files(dir: string): string[] {

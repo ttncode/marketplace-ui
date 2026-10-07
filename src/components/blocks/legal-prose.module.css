@@ -1,6 +1,6 @@
 /* Hand-written equivalent of Tailwind Typography `prose`; no typography plugin is installed. */
 .prose {
-  color: #374151;
+  color: var(--design-prose-body);
   font-size: 16px;
   line-height: 28px;
 }
@@ -12,19 +12,19 @@
 }
 
 .prose strong {
-  color: #111827;
+  color: var(--design-prose-heading);
   font-weight: 600;
 }
 
 .prose a {
-  color: #111827;
+  color: var(--design-prose-heading);
   font-weight: 500;
   text-decoration: underline;
 }
 
 .prose hr {
   margin: 48px 0;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--design-prose-rule);
 }
 
 .prose h2 {
@@ -59,7 +59,7 @@
 }
 
 .prose li::marker {
-  color: #d1d5db;
+  color: var(--design-prose-marker);
 }
 
 .prose hr + *,

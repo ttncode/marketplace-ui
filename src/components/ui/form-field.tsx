@@ -58,8 +58,8 @@ export function parseGithubRepo(value: string): string | null {
 }
 
 const ALERT_TONES = {
-  error: "border-[rgba(254,202,202,0.6)] bg-[rgba(254,242,242,0.3)] text-[#991b1b]",
-  success: "border-[rgba(187,247,208,0.6)] bg-[rgba(240,253,244,0.3)] text-[#166534]",
+  error: "border-error-line bg-error-surface text-error-ink",
+  success: "border-success-line bg-success-surface text-success-ink",
 } as const;
 
 export type AlertTone = keyof typeof ALERT_TONES;
@@ -90,7 +90,7 @@ export function OfficialBadge() {
 }
 
 export function RequiredMark() {
-  return <span className="text-[#ef4444]">*</span>;
+  return <span className="text-destructive">*</span>;
 }
 
 export function FieldLabel({ htmlFor, children }: { readonly htmlFor?: string; readonly children: ReactNode }) {
