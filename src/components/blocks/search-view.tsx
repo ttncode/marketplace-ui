@@ -58,9 +58,9 @@ export function SearchView({ params, listings, categories, browse }: SearchViewP
   };
 
   return (
-    <div className="relative min-h-screen bg-[#fbfbfb] font-sans text-[#0a0a0a] antialiased selection:bg-[rgba(10,10,10,0.1)] selection:text-[#0a0a0a]">
-      <header className="sticky top-14 z-40 border-b border-[rgba(219,219,219,0.4)] bg-[rgba(251,251,251,0.9)] backdrop-blur-md md:top-16">
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgba(219,219,219,0.5)_1px,transparent_1px),linear-gradient(to_bottom,rgba(219,219,219,0.5)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:linear-gradient(to_bottom,white_60%,transparent)]" />
+    <div className="relative min-h-screen bg-canvas font-sans text-ink antialiased selection:bg-ink/10 selection:text-ink">
+      <header className="sticky top-14 z-40 border-b border-border/40 bg-canvas/90 backdrop-blur-md md:top-16">
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,color-mix(in_oklab,var(--border)_50%,transparent)_1px,transparent_1px),linear-gradient(to_bottom,color-mix(in_oklab,var(--border)_50%,transparent)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:linear-gradient(to_bottom,white_60%,transparent)]" />
         <section className="py-4">
           <div className="mx-auto max-w-[1280px] px-6 md:px-8">
             <div className="flex flex-col gap-4">
@@ -75,17 +75,17 @@ export function SearchView({ params, listings, categories, browse }: SearchViewP
             </div>
           </div>
         </section>
-        <section className="border-t border-[rgba(219,219,219,0.4)] py-3">
+        <section className="border-t border-border/40 py-3">
           <div className="mx-auto max-w-[1280px] px-6 md:px-8">
             <div className="flex flex-col gap-3">
               <CategoryRail categories={categories} selectedSlug={shown.categorySlug} onSelect={selectCategory} />
               {params.query && (
-                <div className="text-sm leading-5 text-[#616161]">
-                  Search results for <span className="font-medium text-[#0a0a0a]">&quot;{params.query}&quot;</span>
+                <div className="text-sm leading-5 text-ink-muted">
+                  Search results for <span className="font-medium text-ink">&quot;{params.query}&quot;</span>
                   {category && (
                     <span>
                       {" "}
-                      in <span className="font-medium text-[#0a0a0a]">{category.name}</span>
+                      in <span className="font-medium text-ink">{category.name}</span>
                     </span>
                   )}
                 </div>

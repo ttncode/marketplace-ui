@@ -15,7 +15,7 @@ export function SearchBreadcrumbs({ query }: { readonly query: string }) {
         <li className="flex items-center">
           <Link
             href="/"
-            className="-ml-1 inline-flex items-center gap-1 rounded-[10px] px-1 py-1 transition-colors hover:bg-black/[0.04] hover:text-[var(--design-ink)]"
+            className="-ml-1 inline-flex items-center gap-1 rounded-[10px] px-1 py-1 transition-colors hover:bg-ink/[0.04] hover:text-[var(--design-ink)]"
           >
             <HomeIcon className="h-3 w-3" />
             <span className="hidden sm:inline">Home</span>
@@ -59,12 +59,12 @@ export function SearchBar({ initialQuery, placeholder, onSubmit, onClear }: Sear
             onChange={(event) => setValue(event.target.value)}
             placeholder={placeholder}
             aria-label={placeholder}
-            className="flex h-11 w-full rounded-[12px] border border-[#dbdbdb] bg-white px-12 py-2 font-geist-mono text-sm leading-5 text-[#0a0a0a] ring-offset-[#fbfbfb] backdrop-blur-xl transition-all duration-200 placeholder:text-[rgba(97,97,97,0.5)] hover:border-[rgba(10,10,10,0.2)] focus:border-[rgba(10,10,10,0.3)] focus:ring-1 focus:ring-[rgba(10,10,10,0.1)] focus-visible:border-[rgba(10,10,10,0.25)] focus-visible:bg-[var(--design-glass-focus)] focus-visible:ring-2 focus-visible:ring-[rgba(10,10,10,0.2)] focus-visible:ring-offset-2 focus-visible:outline-none"
+            className="flex h-11 w-full rounded-[12px] border border-border bg-surface px-12 py-2 font-geist-mono text-sm leading-5 text-ink ring-offset-canvas backdrop-blur-xl transition-all duration-200 placeholder:text-ink-muted/50 hover:border-ink/20 focus:border-ink/30 focus:ring-1 focus:ring-ink/10 focus-visible:border-ink/25 focus-visible:bg-[var(--design-glass-focus)] focus-visible:ring-2 focus-visible:ring-ink/20 focus-visible:ring-offset-2 focus-visible:outline-none"
           />
           <Search
             aria-hidden
             strokeWidth={2}
-            className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-[#616161] transition-colors duration-200 group-focus-within:text-[#0a0a0a] group-hover:text-[#0a0a0a]"
+            className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-ink-muted transition-colors duration-200 group-focus-within:text-ink group-hover:text-ink"
           />
           {value && (
             <button
@@ -74,7 +74,7 @@ export function SearchBar({ initialQuery, placeholder, onSubmit, onClear }: Sear
                 setValue("");
                 onClear();
               }}
-              className="absolute top-1/2 right-4 -translate-y-1/2 rounded-[12px] p-1 text-[#616161] transition-colors hover:bg-[#f5f5f5] hover:text-[#0a0a0a]"
+              className="absolute top-1/2 right-4 -translate-y-1/2 rounded-[12px] p-1 text-ink-muted transition-colors hover:bg-surface-muted hover:text-ink"
             >
               <X aria-hidden strokeWidth={2} className="size-4" />
             </button>

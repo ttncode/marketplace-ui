@@ -23,8 +23,8 @@ export function CategoryRail({ categories, selectedSlug, onSelect }: CategoryRai
               className={cn(
                 "flex shrink-0 items-center gap-2 rounded-[12px] border px-4 py-2 font-sans text-sm leading-5 font-normal tracking-[-0.01em] whitespace-nowrap transition-all duration-200",
                 selected
-                  ? "border-[#0a0a0a] bg-[#0a0a0a] text-white"
-                  : "border-[#dbdbdb] bg-white text-[#616161] hover:text-[#0a0a0a]",
+                  ? "border-ink bg-ink text-primary-foreground"
+                  : "border-border bg-surface text-ink-muted hover:text-ink",
               )}
             >
               <span className="truncate">{category.name}</span>
