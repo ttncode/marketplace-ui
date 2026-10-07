@@ -39,7 +39,7 @@
   --animate-accordion-up: accordion-up 0.2s ease-out;
 }
 
-/* Values measured on mcpmarket.com (light theme, the only theme it ships on /). */
+/* Light theme values; dark theme is not defined yet. */
 :root {
   --design-canvas: #fbfbfb;
   --design-surface: #ffffff;

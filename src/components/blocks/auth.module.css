@@ -1,4 +1,4 @@
-/* app.mcpmarket.com design tokens (its :root), scoped to the auth pages so the marketing theme stays untouched. */
+/* Auth page design tokens, scoped to the auth pages so the marketing theme stays untouched. */
 .theme {
   --bg-canvas: #fafafa;
   --bg-surface: #fff;
