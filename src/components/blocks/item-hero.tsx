@@ -1,14 +1,13 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { toSiteHref } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/links";
 import styles from "./item-detail.module.css";
 import { HeaderActions } from "./item-header-actions";
 import { ChevronRightIcon, HomeIcon, StarIcon } from "@/components/icons/detail-icons";
-import type { ServerDetail } from "./item-types";
+import type { LinkRef, Listing } from "@/lib/types";
 
 const CRUMB_LINK = "rounded-md px-1 py-1 transition-colors hover:bg-black/[0.04] hover:text-[var(--design-ink)]";
 
-function Breadcrumbs({ name }: { readonly name: string }) {
+function Breadcrumbs({ category, name }: { readonly category: LinkRef; readonly name: string }) {
   return (
     <nav
       aria-label="Breadcrumb"
@@ -23,8 +22,8 @@ function Breadcrumbs({ name }: { readonly name: string }) {
         </li>
         <li className="flex min-w-0 items-center gap-1.5">
           <ChevronRightIcon className="h-3 w-3 shrink-0" />
-          <Link href="/server" className={CRUMB_LINK}>
-            Servers
+          <Link href={category.href} className={CRUMB_LINK}>
+            {category.label}
           </Link>
         </li>
         <li className="flex min-w-0 items-center gap-1.5">
@@ -38,48 +37,37 @@ function Breadcrumbs({ name }: { readonly name: string }) {
   );
 }
 
-function MetaRow({ server }: { readonly server: ServerDetail }) {
+function MetaRow({ listing, shareUrl }: { readonly listing: Listing; readonly shareUrl: string }) {
   return (
     <div data-server-detail-meta className="mt-3 flex flex-wrap items-center gap-3 text-sm">
       <div className="flex items-center gap-1.5">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={server.author.avatar.src}
-          alt={server.author.avatar.alt}
-          width={20}
-          height={20}
-          loading="lazy"
-          className="rounded-full object-cover opacity-60 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
-        />
         <span className="text-muted-foreground">by</span>
-        <Link
-          href={toSiteHref(server.author.href)}
-          className="font-medium text-foreground transition-colors hover:text-primary"
-        >
-          {server.author.name}
+        <Link href={listing.author.href} className="font-medium text-foreground transition-colors hover:text-primary">
+          {listing.author.label}
         </Link>
       </div>
       <span className="text-muted-foreground">•</span>
-      {server.stars && (
+      {listing.stars && (
         <>
           <div className="flex items-center gap-1.5 rounded-full border border-border bg-muted px-2.5 py-1">
             <StarIcon className="h-3.5 w-3.5 text-muted-foreground" />
-            <span className="font-geist-mono text-xs font-medium text-primary">{server.stars}</span>
+            <span className="font-geist-mono text-xs font-medium text-primary">{listing.stars}</span>
           </div>
           <span className="text-muted-foreground">•</span>
         </>
       )}
-      <HeaderActions
-        entityName={server.name}
-        shareUrl={server.links.share}
-        githubUrl={server.links.github}
-        npmUrl={server.links.npm}
-      />
+      <HeaderActions entityName={listing.name} shareUrl={shareUrl} githubUrl={null} npmUrl={null} />
     </div>
   );
 }
 
-export function ServerDetailHero({ server }: { readonly server: ServerDetail }) {
+interface ItemHeroProps {
+  readonly listing: Listing;
+  readonly categoryName: string;
+  readonly shareUrl: string;
+}
+
+export function ItemHero({ listing, categoryName, shareUrl }: ItemHeroProps) {
   return (
     <section className="design-hero-under-navigation relative overflow-hidden bg-background">
       <div
@@ -94,7 +82,7 @@ export function ServerDetailHero({ server }: { readonly server: ServerDetail }) 
       <div className="relative z-10 container mx-auto max-w-7xl px-6 md:px-8">
         <div className={styles.hero}>
           <header data-server-detail-header className="mb-0">
-            <Breadcrumbs name={server.name} />
+            <Breadcrumbs category={{ label: categoryName, href: `/categories/${listing.category}` }} name={listing.name} />
             <div className="flex flex-col gap-6 md:flex-row md:items-start md:gap-8">
               <div className="min-w-0 flex-1">
                 <div className="mb-6">
@@ -105,25 +93,21 @@ export function ServerDetailHero({ server }: { readonly server: ServerDetail }) 
                           data-server-detail-title
                           className="min-w-0 pb-1 font-sans text-4xl leading-none font-normal tracking-[-0.055em] break-words text-foreground sm:text-5xl md:text-6xl lg:text-7xl"
                         >
-                          {server.name}
+                          {listing.name}
                         </h1>
                       </div>
-                      <MetaRow server={server} />
+                      <MetaRow listing={listing} shareUrl={shareUrl} />
                     </div>
                   </div>
                 </div>
                 <div data-server-detail-categories className="mb-5 flex flex-wrap items-center gap-2">
-                  {server.categories.map((category) => (
-                    <Link
-                      key={category.href}
-                      href={category.href}
-                      title={`View all tools in ${category.label} category`}
-                      className="group no-underline"
+                  {listing.tags.map((tag) => (
+                    <div
+                      key={tag}
+                      className="inline-flex items-center rounded-full border border-border bg-muted px-3 py-1 font-sans text-[10px] font-semibold tracking-[0.06em] text-muted-foreground uppercase"
                     >
-                      <div className="inline-flex items-center rounded-full border border-border bg-muted px-3 py-1 font-sans text-[10px] font-semibold tracking-[0.06em] text-muted-foreground uppercase transition-colors hover:bg-accent focus:ring-2 focus:ring-ring/30 focus:ring-offset-2 focus:outline-none">
-                        {category.label}
-                      </div>
-                    </Link>
+                      {tag}
+                    </div>
                   ))}
                 </div>
                 <div className="flex flex-col md:flex-row md:items-center md:gap-4">
@@ -131,7 +115,7 @@ export function ServerDetailHero({ server }: { readonly server: ServerDetail }) 
                     data-server-detail-description
                     className="max-w-3xl font-sans text-base leading-relaxed font-normal text-muted-foreground md:text-lg md:leading-7 lg:text-xl lg:leading-7"
                   >
-                    {server.description}
+                    {listing.summary}
                   </p>
                 </div>
               </div>
