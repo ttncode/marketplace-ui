@@ -5,7 +5,7 @@ const FACE =
   "flex h-full w-full items-center justify-center gap-2 rounded-[10px] bg-linear-to-b px-4 py-2 font-sans font-normal tracking-[-0.01em] whitespace-nowrap transition-[background-image,color] duration-200 ease-out motion-reduce:transition-none";
 
 export const PRIMARY_SHELL = `${SHELL} border-ink/10 bg-linear-to-b from-ink/70 to-ink`;
-export const PRIMARY_FACE = `${FACE} from-ink/85 to-ink text-primary-foreground/90 hover:from-ink/85 hover:to-ink/70 active:from-ink active:to-ink`;
+export const PRIMARY_FACE = `${FACE} from-ink-raised to-ink text-primary-foreground/90 hover:from-ink-raised-hover hover:to-ink-raised/70 active:from-ink active:to-ink`;
 
 export const SECONDARY_SHELL = `${SHELL} border-ink/20 bg-surface/50`;
 export const SECONDARY_FACE = `${FACE} from-surface-muted/80 to-surface-sunken/50 text-ink-secondary hover:from-surface-sunken/40 hover:to-surface-pressed/60 active:from-surface-sunken/60 active:to-surface-pressed/70`;

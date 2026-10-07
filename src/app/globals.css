@@ -22,6 +22,8 @@
   --color-ink-secondary: var(--design-ink-secondary);
   --color-ink-muted: var(--design-ink-muted);
   --color-success: var(--design-success);
+  --color-ink-raised: var(--design-ink-raised);
+  --color-ink-raised-hover: var(--design-ink-raised-hover);
   --color-brand-google-blue: var(--design-brand-google-blue);
   --color-brand-google-green: var(--design-brand-google-green);
   --color-brand-google-yellow: var(--design-brand-google-yellow);
