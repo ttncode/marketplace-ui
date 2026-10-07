@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { HeroDitherShader } from "@/components/blocks/dither-background";
 
 const HERO_MASK =
-  "linear-gradient(to bottom, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0.28) 20%, rgba(0,0,0,0.32) 38%, rgba(0,0,0,0.38) 56%, rgba(0,0,0,0.46) 70%, rgba(0,0,0,0.4) 78%, rgba(0,0,0,0.28) 86%, rgba(0,0,0,0.12) 94%, transparent 100%)";
+  "var(--design-mask-hero-fade)";
 
 // Content-page hero comes in two layouts: left-aligned (legal pages) and centered (listings).
 const LAYOUTS = {
@@ -56,7 +56,7 @@ export function ContentPageHero({ crumb, title, subtitle, align }: ContentPageHe
               <li className="flex items-center">
                 <Link
                   href="/"
-                  className="-ml-1 inline-flex items-center gap-1 rounded-md px-1 py-1 transition-colors hover:bg-black/[0.04] hover:text-[var(--design-ink)]"
+                  className="-ml-1 inline-flex items-center gap-1 rounded-md px-1 py-1 transition-colors hover:bg-ink/[0.04] hover:text-[var(--design-ink)]"
                 >
                   <HomeIcon className="h-3 w-3" />
                   <span className="hidden sm:inline">Home</span>

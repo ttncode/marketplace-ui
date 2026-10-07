@@ -22,6 +22,14 @@
   --color-ink-secondary: var(--design-ink-secondary);
   --color-ink-muted: var(--design-ink-muted);
   --color-success: var(--design-success);
+  --color-surface-sunken: var(--design-surface-sunken);
+  --color-surface-pressed: var(--design-surface-pressed);
+  --color-error-line: var(--design-error-line);
+  --color-error-surface: var(--design-error-surface);
+  --color-error-ink: var(--design-error-ink);
+  --color-success-line: var(--design-success-line);
+  --color-success-surface: var(--design-success-surface);
+  --color-success-ink: var(--design-success-ink);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
