@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ContentPageHero } from "@/components/blocks/content-page-hero";
 import { ChevronLeftIcon, ChevronRightIcon, EllipsisIcon } from "@/components/icons/news-icons";
-import { NewsCard } from "./NewsCard";
+import { NewsCard } from "@/components/blocks/article-card";
 import { NEWS_ITEMS, NEWS_PAGE_COUNT, NEWS_TOTAL } from "./news-data";
 
 const PAGE_BUTTON_BASE =
