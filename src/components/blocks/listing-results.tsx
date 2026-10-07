@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { DirectoryCard, LinkRef } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
-import { ListingCard } from "./ListingCard";
-import type { ResultsStatus } from "./types";
+import { ListingCard } from "@/components/blocks/listing-card-compact";
+import type { ResultsStatus } from "@/components/blocks/listing-types";
 
 const STATUS_TEXT = "text-sm text-[#616161]";
 
