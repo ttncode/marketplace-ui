@@ -7,8 +7,7 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { NavIcon } from "@/components/icons/nav-icons";
 
-import { NAV_MENUS } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/site-data";
-import type { NavFeatureCard, NavListItem, NavMenu } from "@/components/sites/mcpmarket-com-1a9fdbee/shared/types";
+import type { NavFeatureCard, NavListItem, NavMenu } from "@/lib/types";
 
 const CLOSE_DELAY_MS = 150;
 
@@ -35,7 +34,7 @@ function nextPanelOnOpen(panel: PanelState | null, index: number): PanelState {
   return { index, closing: false, outgoing: { index: panel.index, toEnd: index > panel.index } };
 }
 
-export function NavMegaMenu() {
+export function NavMegaMenu({ menus }: { readonly menus: readonly NavMenu[] }) {
   const [panel, setPanel] = useState<PanelState | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const openIndex = panel && !panel.closing ? panel.index : null;
@@ -63,7 +62,7 @@ export function NavMegaMenu() {
     // The panel is a DOM child of this nav so one pointerleave covers triggers + panel.
     <nav aria-label="Main" className="flex items-center" onPointerEnter={cancelClose} onPointerLeave={scheduleClose}>
       <ul className="flex items-center gap-1">
-        {NAV_MENUS.map((menu, index) => (
+        {menus.map((menu, index) => (
           <li key={menu.label}>
             <NavTrigger
               menu={menu}
@@ -77,6 +76,7 @@ export function NavMegaMenu() {
       {panel && (
         <NavPanel
           panel={panel}
+          menus={menus}
           onExited={() => setPanel((current) => (current?.closing ? null : current))}
           onContentSwapped={() => setPanel((current) => (current ? { ...current, outgoing: null } : null))}
         />
@@ -125,10 +125,12 @@ function NavTrigger({
 
 function NavPanel({
   panel,
+  menus,
   onExited,
   onContentSwapped,
 }: {
   readonly panel: PanelState;
+  readonly menus: readonly NavMenu[];
   readonly onExited: () => void;
   readonly onContentSwapped: () => void;
 }) {
@@ -148,13 +150,13 @@ function NavPanel({
       >
         <NavPanelContent
           key={panel.index}
-          menu={NAV_MENUS[panel.index]}
+          menu={menus[panel.index]}
           className={cn(outgoing && (outgoing.toEnd ? "animate-in fade-in slide-in-from-right-52" : "animate-in fade-in slide-in-from-left-52"))}
         />
         {outgoing && (
           <NavPanelContent
             key={`out-${outgoing.index}`}
-            menu={NAV_MENUS[outgoing.index]}
+            menu={menus[outgoing.index]}
             onAnimationEnd={onContentSwapped}
             className={cn(
               "pointer-events-none absolute inset-y-0 left-0 fill-mode-forwards",
