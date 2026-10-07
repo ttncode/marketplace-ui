@@ -7,10 +7,10 @@ const EDGE_THRESHOLD_PX = 5;
 
 function maskFor(canScrollLeft: boolean, canScrollRight: boolean): string {
   if (canScrollLeft && canScrollRight) {
-    return "linear-gradient(90deg, transparent 0, #000 88px, #000 calc(100% - 88px), transparent)";
+    return "linear-gradient(90deg, transparent 0, var(--design-ink) 88px, var(--design-ink) calc(100% - 88px), transparent)";
   }
-  if (canScrollRight) return "linear-gradient(90deg, #000 0, #000 calc(100% - 88px), transparent)";
-  if (canScrollLeft) return "linear-gradient(90deg, transparent 0, #000 88px, #000)";
+  if (canScrollRight) return "linear-gradient(90deg, var(--design-ink) 0, var(--design-ink) calc(100% - 88px), transparent)";
+  if (canScrollLeft) return "linear-gradient(90deg, transparent 0, var(--design-ink) 88px, var(--design-ink))";
   return "none";
 }
 
@@ -53,7 +53,7 @@ export function CategoryRail({ links }: { readonly links: readonly LinkRef[] }) 
             key={link.href}
             href={link.href}
             data-active={index === 0 ? "true" : undefined}
-            className="h-[26px] shrink-0 whitespace-nowrap rounded-[999px] border border-[rgba(34,34,34,0.16)] bg-[rgba(250,250,250,0.78)] px-3 py-1 font-sans text-[10px] font-medium uppercase leading-4 tracking-[0.055em] text-[rgba(34,34,34,0.72)] transition-[border-color,background-color,color] duration-[160ms] ease-[ease] hover:border-[rgba(34,34,34,0.44)] hover:bg-[#0a0a0a] hover:text-white data-[active=true]:border-[rgba(34,34,34,0.44)] data-[active=true]:bg-[#0a0a0a] data-[active=true]:text-white motion-reduce:transition-none"
+            className="h-[26px] shrink-0 whitespace-nowrap rounded-[999px] border border-ink/16 bg-canvas/78 px-3 py-1 font-sans text-[10px] font-medium uppercase leading-4 tracking-[0.055em] text-ink/72 transition-[border-color,background-color,color] duration-[160ms] ease-[ease] hover:border-ink/44 hover:bg-ink hover:text-primary-foreground data-[active=true]:border-ink/44 data-[active=true]:bg-ink data-[active=true]:text-primary-foreground motion-reduce:transition-none"
           >
             {link.label}
           </a>

@@ -90,7 +90,7 @@ export function SiteHeader({
                   "hidden h-[38px] items-center gap-1.5 rounded-[12px] border px-4 py-2 font-sans text-[14px] leading-5 font-normal transition-all duration-200 ease-[cubic-bezier(0.4,0,0.2,1)] hover:text-ink md:inline-flex",
                   scrolled
                     ? "border-transparent bg-transparent text-ink-muted shadow-none hover:bg-accent/50"
-                    : "border-ink/14 bg-surface/78 text-ink-secondary shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] hover:border-ink/28 hover:bg-surface-subtle",
+                    : "border-ink/14 bg-surface/78 text-ink-secondary shadow-[var(--design-shadow-inset)] hover:border-ink/28 hover:bg-surface-subtle",
                 )}
               >
                 {actions.secondary.label}

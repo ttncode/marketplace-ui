@@ -3,13 +3,13 @@ import { cn } from "@/lib/utils";
 import { ListingCard, type ListingCardData } from "@/components/blocks/listing-card";
 import type { LinkRef } from "@/lib/types";
 
-const TONE_BACKGROUND = { canvas: "bg-[#fbfbfb]", subtle: "bg-[#f7f7f7]" } as const;
+const TONE_BACKGROUND = { canvas: "bg-canvas", subtle: "bg-surface-subtle" } as const;
 
 const PILL_LINK =
-  "rounded-full border border-[rgba(10,10,10,0.14)] bg-[rgba(255,255,255,0.42)] font-sans text-[11px] tracking-[0.02em] text-[#626262] transition-colors duration-150 ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-[rgba(34,34,34,0.4)] hover:bg-[#f7f7f7] hover:text-[#0a0a0a] motion-reduce:transition-none";
+  "rounded-full border border-ink/14 bg-surface/42 font-sans text-[11px] tracking-[0.02em] text-ink-muted transition-colors duration-150 ease-[cubic-bezier(0.4,0,0.2,1)] hover:border-ink/40 hover:bg-surface-subtle hover:text-ink motion-reduce:transition-none";
 
 const TITLE =
-  "font-display text-[clamp(24px,2.3vw,34px)] leading-[28px] font-normal tracking-[-0.045em] text-[#0a0a0a] md:leading-[32px]";
+  "font-display text-[clamp(24px,2.3vw,34px)] leading-[28px] font-normal tracking-[-0.045em] text-ink md:leading-[32px]";
 
 export function DirectorySection({
   title,
@@ -27,7 +27,7 @@ export function DirectorySection({
   return (
     <section
       className={cn(
-        "border-b border-[rgba(10,10,10,0.14)] py-8 font-sans text-[#0a0a0a] md:py-12",
+        "border-b border-ink/14 py-8 font-sans text-ink md:py-12",
         TONE_BACKGROUND[tone],
       )}
     >

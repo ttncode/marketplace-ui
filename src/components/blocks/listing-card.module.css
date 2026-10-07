@@ -1,17 +1,17 @@
 .dither {
   background-image:
-    radial-gradient(circle, rgba(34, 34, 34, 0.72) 0, rgba(34, 34, 34, 0.72) 0.65px, transparent 0.95px),
-    linear-gradient(112deg, rgba(255, 255, 255, 0.12), rgba(94, 94, 94, 0.04));
+    radial-gradient(circle, color-mix(in oklab, var(--design-ink) 72%, transparent) 0, color-mix(in oklab, var(--design-ink) 72%, transparent) 0.65px, transparent 0.95px),
+    linear-gradient(112deg, color-mix(in oklab, var(--design-surface) 12%, transparent), color-mix(in oklab, var(--design-ink-muted) 4%, transparent));
 }
 
 .link:nth-child(3n + 2) .dither {
   background-image:
-    radial-gradient(circle, rgba(34, 34, 34, 0.66) 0, rgba(34, 34, 34, 0.66) 0.65px, transparent 0.95px),
-    linear-gradient(72deg, rgba(255, 255, 255, 0.14), rgba(94, 94, 94, 0.05));
+    radial-gradient(circle, color-mix(in oklab, var(--design-ink) 66%, transparent) 0, color-mix(in oklab, var(--design-ink) 66%, transparent) 0.65px, transparent 0.95px),
+    linear-gradient(72deg, color-mix(in oklab, var(--design-surface) 14%, transparent), color-mix(in oklab, var(--design-ink-muted) 5%, transparent));
 }
 
 .link:nth-child(3n) .dither {
   background-image:
-    radial-gradient(circle, rgba(34, 34, 34, 0.62) 0, rgba(34, 34, 34, 0.62) 0.65px, transparent 0.95px),
-    linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(94, 94, 94, 0.06));
+    radial-gradient(circle, color-mix(in oklab, var(--design-ink) 62%, transparent) 0, color-mix(in oklab, var(--design-ink) 62%, transparent) 0.65px, transparent 0.95px),
+    linear-gradient(145deg, color-mix(in oklab, var(--design-surface) 11%, transparent), color-mix(in oklab, var(--design-ink-muted) 6%, transparent));
 }
