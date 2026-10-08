@@ -1,7 +1,7 @@
 import type { SiteConfig } from "./lib/types.ts";
 
 export const site: SiteConfig = {
-  name: "Acme Directory",
+  name: "MCPMarket",
   url: "https://example.com",
   description: "A curated directory of tools, with a dashboard to manage your own.",
   contactEmail: "contact@example.com",
@@ -35,7 +35,7 @@ export const site: SiteConfig = {
   headerActions: { secondary: { label: "Submit", href: "/submit" }, primary: { label: "Open app", href: "/app" } },
   dashboardNav: [{ label: "Overview", href: "/app", icon: "home" }, { label: "Videos", href: "/app/videos", icon: "video" }, { label: "New video", href: "/app/videos/new", icon: "plus" }, { label: "Settings", href: "/app/settings", icon: "settings" }],
   footer: {
-    description: "Acme Directory lists the best tools for your workflow.",
+    description: "MCPMarket lists the best tools for your workflow.",
     columns: [
       {
         heading: "Browse",
